@@ -25,6 +25,7 @@ public class InternalClassLoad {
         try {
             URL url = file.toURL();
             internalClassLoader = new InternalURLClassLoader(new URL[]{url});
+            Thread.currentThread().setContextClassLoader(internalClassLoader);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -93,10 +94,10 @@ public class InternalClassLoad {
             synchronized (this.getClassLoadingLock(name)) {
                 Class<?> c = this.findLoadedClass(name);
                 if (c == null) {
-                    if (!name.startsWith("org.apache.dubbo")) {
-                        c = this.getParent().loadClass(name);
-                    } else {
+                    if (name.startsWith("org.apache.dubbo") || name.startsWith("com.alibaba.dubbo")) {
                         c = findClass(name);
+                    } else {
+                        c = super.loadClass(name);
                     }
                 }
 

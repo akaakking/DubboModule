@@ -6,7 +6,7 @@ package org.xulinux;
  * @Author wfh
  * @Date 2022/7/31 下午8:09
  */
-public class DemoImplment implements DemoInterface{
+public class DemoServiceImpl implements DemoService {
     @Override
     public String sayHello() {
         System.out.println("hello");

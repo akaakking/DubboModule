@@ -18,8 +18,8 @@ import java.util.concurrent.CountDownLatch;
 public class Test {
     public static void main(String[] args) throws InterruptedException {
         ServiceConfig serviceConfig = new ServiceConfig();
-        serviceConfig.setInterface(DemoInterface.class);
-        serviceConfig.setRef(new DemoImplment());
+        serviceConfig.setInterface(DemoService.class);
+        serviceConfig.setRef(new DemoServiceImpl());
         serviceConfig.setApplication(new ApplicationConfig("dubbo-demo-api-provider"));
         serviceConfig.setRegistry(new RegistryConfig("zookeeper://127.0.0.1:2181"));
         serviceConfig.setMetadataReportConfig(new MetadataReportConfig("zookeeper://127.0.0.1:2181"));
