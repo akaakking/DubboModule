@@ -52,7 +52,7 @@ interface的话随便放，为了方便我们就把他统一放在Interface这�
 
 ### 3. 类加载器设计
 
-​	  只需要注意一点，org.apache.dubbo 包名开头的一律走自定义类加载器（除了org.apache.dubbo.common.bytecode这个包)，其他的没啥，接口设置的友好一些方便以后的使用。
+​	  只需要注意一点，org.apache.dubbo 包名开头的一律走自定义类加载器（除了org.apache.dubbo.common.bytecode,和org.apache.dubbo.Interface这两个个包)，其他的没啥，接口设置的友好一些方便以后的使用。
 
 # 2. 目前遇到的问题
 

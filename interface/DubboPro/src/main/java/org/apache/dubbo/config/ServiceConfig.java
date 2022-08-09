@@ -1,7 +1,7 @@
 package org.apache.dubbo.config;
 
+import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.ServiceConfigInterface;
-import org.apache.dubbo.InternalClassLoad;
 
 /**
  * //TODO add class commment here
@@ -10,20 +10,7 @@ import org.apache.dubbo.InternalClassLoad;
  * @Date 2022/8/9 上午11:33
  */
 public class ServiceConfig<T> implements ServiceConfigInterface<T> {
-    private ServiceConfigInterface instance;
-
-    {
-        try {
-            instance = InternalClassLoad.getInstance(ServiceConfigInterface.class);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-    }
-
+    private ServiceConfigInterface instance = DubboClassLoader.getInstance(ServiceConfigInterface.class);
 
     @Override
     public void setInterface(Class<?> klass) {

@@ -1,7 +1,8 @@
 package org.apache.dubbo.config;
 
+import org.apache.dubbo.DubboClassLoader;
+import org.apache.dubbo.Interface.ApplicationConfigInterface;
 import org.apache.dubbo.Interface.MetadataReportConfigInterface;
-import org.apache.dubbo.InternalClassLoad;
 
 /**
  * //TODO add class commment here
@@ -13,15 +14,7 @@ public class MetadataReportConfig implements MetadataReportConfigInterface {
     private MetadataReportConfigInterface instance;
 
     public MetadataReportConfig(String arg) {
-        try {
-            instance = InternalClassLoad.getInstance(MetadataReportConfigInterface.class,arg);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        instance = DubboClassLoader.getInstance(MetadataReportConfigInterface.class,arg);
     }
 
     MetadataReportConfigInterface getInstance() {

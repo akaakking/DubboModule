@@ -1,7 +1,7 @@
 package org.apache.dubbo.config;
 
+import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.ApplicationConfigInterface;
-import org.apache.dubbo.InternalClassLoad;
 
 /**
  * //TODO add class commment here
@@ -13,15 +13,7 @@ public class ApplicationConfig implements ApplicationConfigInterface {
     private ApplicationConfigInterface instance;
 
     public ApplicationConfig(String arg) {
-        try {
-            instance = InternalClassLoad.getInstance(ApplicationConfigInterface.class,arg);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+            instance = DubboClassLoader.getInstance(ApplicationConfigInterface.class,arg);
     }
 
     ApplicationConfigInterface getInstance() {

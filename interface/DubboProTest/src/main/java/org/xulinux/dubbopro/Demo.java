@@ -1,12 +1,9 @@
-package org.xulinux;
-
-
+package org.xulinux.dubbopro;
 
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.MetadataReportConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.ServiceConfig;
-import org.xulinux.dubbopro.DemoServiceImpl;
 import org.xulinux.dubbopro.demo.DemoService;
 
 import java.util.concurrent.CountDownLatch;
@@ -15,9 +12,9 @@ import java.util.concurrent.CountDownLatch;
  * //TODO add class commment here
  *
  * @Author wfh
- * @Date 2022/7/31 下午8:08
+ * @Date 2022/8/9 下午6:25
  */
-public class Test {
+public class Demo {
     public static void main(String[] args) throws InterruptedException {
         ServiceConfig serviceConfig = new ServiceConfig();
         serviceConfig.setInterface(DemoService.class);

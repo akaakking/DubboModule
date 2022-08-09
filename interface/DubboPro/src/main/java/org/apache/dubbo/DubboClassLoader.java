@@ -9,39 +9,62 @@ import java.net.URLClassLoader;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class InternalClassLoad {
+/**
+ * //TODO add class commment here
+ *
+ * @Author wfh
+ * @Date 2022/8/9 下午4:45
+ */
+public class DubboClassLoader {
     private static final String INTERNAL_JAR_NAME_PREFIX = "dubboInternal";
     private static final String INTERNAL_JAR_NAME_SUFFIX = ".jar";
     private static final String INTERNAL_JAR_NAME = INTERNAL_JAR_NAME_PREFIX + INTERNAL_JAR_NAME_SUFFIX;
 
-    private static InternalURLClassLoader  internalClassLoader;
-
-    private InternalClassLoad() {
-    }
+    private static InternalURLClassLoader classLoader;
 
     static {
         File file = UnZipJAR();
         try {
             URL url = file.toURL();
-            internalClassLoader = new InternalURLClassLoader(new URL[]{url});
-            Thread.currentThread().setContextClassLoader(internalClassLoader);
+            classLoader = new InternalURLClassLoader(new URL[]{url});
+            Thread.currentThread().setContextClassLoader(classLoader);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
 
-    public static <T> T getInstance(Class<T> clazz) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Class klass = internalClassLoader.loadClass(clazz.getName().replace("Interface",""));
-        return  (T) klass.newInstance();
+    //TODO 异常处理没处理
+    public static <T> T getInstance(Class<T> clazz) {
+        Class klass = null;
+        try {
+            klass = classLoader.loadClass(clazz.getName().replace("Interface",""));
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            return  (T) klass.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
-    public static <T> T getInstance(Class<T> clazz,String args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Class klass = internalClassLoader.loadClass(clazz.getName());
+    // 字符串操作会成为慢操作，到时候看看能不能优化一下 todo
+    public static <T> T getInstance(Class<T> clazz,String args)  {
+        Class klass = null;
+        try {
+            klass = classLoader.loadClass(clazz.getName().replace("Interface",""));
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         try {
             Constructor constructor = klass.getConstructor(String.class);
             return (T) constructor.newInstance(args);
-        } catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
@@ -49,36 +72,56 @@ public class InternalClassLoad {
         return null;
     }
 
-    public static Class getKlass(Class clazz) throws ClassNotFoundException {
-        return internalClassLoader.loadClass(clazz.getName());
-    }
-
-    // 将嵌套的jar文件解压到本地成为一个临时文件，为类加载做准备。
     private static File UnZipJAR() {
-        URL url = InternalClassLoad.class.getResource("/" + INTERNAL_JAR_NAME);
+        URL url = DubboClassLoader.class.getResource("/" + INTERNAL_JAR_NAME);
         String path = url.getPath();
-        // 得到 ApiModule.jar位置
         String jarpath = path.substring(0,path.lastIndexOf("!")).replace("file:","");
 
 
-
+        InputStream is = null;
+        OutputStream out = null;
         try {
             JarFile jarFile = new JarFile(jarpath);
             JarEntry jarEntry = jarFile.getJarEntry(INTERNAL_JAR_NAME);
-            InputStream is = jarFile.getInputStream(jarEntry);
+            is = jarFile.getInputStream(jarEntry);
 
             File tempFile = File.createTempFile(INTERNAL_JAR_NAME_PREFIX,INTERNAL_JAR_NAME_SUFFIX);
             tempFile.deleteOnExit();
 
-            OutputStream outputStream = new FileOutputStream(tempFile);
-            is.transferTo(outputStream);
+            out = new FileOutputStream(tempFile);
+            transferTo(is,out);
 
             return tempFile;
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         return null;
+    }
+
+    private DubboClassLoader() {
+    }
+
+    private static void transferTo(InputStream is,OutputStream out) throws IOException {
+        for (byte[] buffer = new byte[1 << 13]; is.read(buffer) > 0;  ) {
+            out.write(buffer);
+        }
     }
 
     private static class InternalURLClassLoader extends URLClassLoader {
@@ -105,8 +148,4 @@ public class InternalClassLoad {
             }
         }
     }
-
 }
-
-
-//
