@@ -4,17 +4,17 @@
 
 ## 1.1 前期工作
 
-我先根据demo-api启动一个服务的例子，用反射搭了个demo,证明了我们目前的思路确实可行，唯一会有冲突的是javassit的问题不过目前也已经解决掉了。(demo被我删了不好意思，不过精华都提取到目前这个方案了)
+从贴合用户的角度，用反射做了个demo,证明了我们目前的思路确实可行，唯一会有冲突的是javassit的问题不过目前也已经解决掉了。(demo被我删了，很难受，不过精华都提取到目前这个方案了)
 
-## 1.2目前总体思路：
+##  1.2 目前总体思路：
 
- 1.    先用接口实现启动一个服务，解决出现的问题（听起来挺简单的，但细节是魔鬼啊，一个小泛型搞的我就很难受）；
+ 1.    先用接口实现启动一个服务，解决出现的问题（细节是魔鬼）；
 
  2.    解决代码生成的问题。这个不会太难，在手写了一些样板代码后，我发现这个其实很好搞的。因为大多数都是很相似的。
 
        
 
-## 1.3具体方案阐述
+## 1.3  具体方案阐述
 
 首先要声明的是为减少前期开发复杂度，我会先另起一个项目叫DubboPro进行开发，之后在考虑代码生成的阶段，再将这个项目作为dubbo的一个模块（dubbo-module）进行合并开发。
 
@@ -24,23 +24,23 @@
 
 |-DubboPro
 
-​		|- internal.jar
+------|- internal.jar
 
-​		|-org
+------|-org
 
-​			|-apache
+----------|-apache
 
-​				 |-dubbo
+--------------|-dubbo
 
-​						|- config
+------------------|- config
 
-​								|- ServiceConfig.class
+-----------------------|- ServiceConfig.class
 
-​						|- Interface
+------------------|- Interface
 
-​								|-ServiceConfigInterface.class
+-----------------------|-ServiceConfigInterface.class
 
-​								|-RegistryConfigInterface.class
+-----------------------|-RegistryConfigInterface.class
 
 由于用户签名不能改变，所以我们暴露给用户的类所在包的报名不能发生改变，就保持原样，比如说上图中的ServiceConfig.class,原本是在org.apache.dubbo.config包下，他就还得在这个包下。
 
