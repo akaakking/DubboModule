@@ -14,7 +14,7 @@ public class MetadataReportConfig implements MetadataReportConfigInterface {
     private MetadataReportConfigInterface instance;
 
     public MetadataReportConfig(String arg) {
-        instance = DubboClassLoader.getInstance(MetadataReportConfigInterface.class,arg);
+        instance = (MetadataReportConfigInterface) DubboClassLoader.getInstance(MetadataReportConfig.class,arg);
     }
 
     MetadataReportConfigInterface getInstance() {

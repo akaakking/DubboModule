@@ -13,7 +13,7 @@ public class RegistryConfig implements RegistryConfigInterface {
     private RegistryConfigInterface instance;
 
     public RegistryConfig(String arg) {
-        instance = DubboClassLoader.getInstance(RegistryConfigInterface.class,arg);
+        instance = (RegistryConfigInterface) DubboClassLoader.getInstance(RegistryConfig.class,arg);
     }
 
     RegistryConfigInterface getInstance() {

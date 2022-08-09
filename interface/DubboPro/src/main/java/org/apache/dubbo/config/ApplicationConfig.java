@@ -13,7 +13,7 @@ public class ApplicationConfig implements ApplicationConfigInterface {
     private ApplicationConfigInterface instance;
 
     public ApplicationConfig(String arg) {
-            instance = DubboClassLoader.getInstance(ApplicationConfigInterface.class,arg);
+            instance = (ApplicationConfigInterface) DubboClassLoader.getInstance(ApplicationConfig.class,arg);
     }
 
     ApplicationConfigInterface getInstance() {

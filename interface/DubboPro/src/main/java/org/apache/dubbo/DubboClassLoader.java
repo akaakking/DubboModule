@@ -34,16 +34,16 @@ public class DubboClassLoader {
     }
 
 
-    //TODO 异常处理没处理
-    public static <T> T getInstance(Class<T> clazz) {
+    //TODO 异常没处理好
+    public static Object getInstance(Class<?> clazz) {
         Class klass = null;
         try {
-            klass = classLoader.loadClass(clazz.getName().replace("Interface",""));
+            klass = classLoader.loadClass(clazz.getName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            return  (T) klass.newInstance();
+            return  klass.newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -54,16 +54,16 @@ public class DubboClassLoader {
     }
 
     // 字符串操作会成为慢操作，到时候看看能不能优化一下 todo
-    public static <T> T getInstance(Class<T> clazz,String args)  {
+    public static Object getInstance(Class<?> clazz,String args)  {
         Class klass = null;
         try {
-            klass = classLoader.loadClass(clazz.getName().replace("Interface",""));
+            klass = classLoader.loadClass(clazz.getName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         try {
             Constructor constructor = klass.getConstructor(String.class);
-            return (T) constructor.newInstance(args);
+            return constructor.newInstance(args);
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -119,8 +119,10 @@ public class DubboClassLoader {
     }
 
     private static void transferTo(InputStream is,OutputStream out) throws IOException {
-        for (byte[] buffer = new byte[1 << 13]; is.read(buffer) > 0;  ) {
-            out.write(buffer);
+        int read;
+        byte[] buffer = new byte[1 << 13];
+        while ((read = is.read(buffer)) >= 0) {
+            out.write(buffer,0,read);
         }
     }
 
