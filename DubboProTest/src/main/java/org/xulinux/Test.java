@@ -6,6 +6,8 @@ import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.MetadataReportConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.ServiceConfig;
+import org.xulinux.dubbopro.DemoServiceImpl;
+import org.xulinux.dubbopro.demo.DemoService;
 
 import java.util.concurrent.CountDownLatch;
 

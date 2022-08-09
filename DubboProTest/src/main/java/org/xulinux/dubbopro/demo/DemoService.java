@@ -1,4 +1,4 @@
-package org.xulinux;
+package org.xulinux.dubbopro.demo;
 
 /**
  * //TODO add interface commment here
@@ -7,5 +7,5 @@ package org.xulinux;
  * @Date 2022/7/31 下午8:09
  */
 public interface DemoService {
-    String sayHello();
+    String sayHello(String name);
 }

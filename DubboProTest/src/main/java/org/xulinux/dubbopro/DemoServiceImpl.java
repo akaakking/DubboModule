@@ -1,4 +1,6 @@
-package org.xulinux;
+package org.xulinux.dubbopro;
+
+import org.xulinux.dubbopro.demo.DemoService;
 
 /**
  * //TODO add class commment here
@@ -8,8 +10,8 @@ package org.xulinux;
  */
 public class DemoServiceImpl implements DemoService {
     @Override
-    public String sayHello() {
-        System.out.println("hello");
+    public String sayHello(String name) {
+        System.out.println("hello" + name);
         return "hello";
     }
 }

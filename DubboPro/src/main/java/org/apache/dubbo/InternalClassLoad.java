@@ -6,6 +6,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -15,12 +18,17 @@ public class InternalClassLoad {
     private static final String INTERNAL_JAR_NAME_SUFFIX = ".jar";
     private static final String INTERNAL_JAR_NAME = INTERNAL_JAR_NAME_PREFIX + INTERNAL_JAR_NAME_SUFFIX;
 
+    private static final HashSet<String> exportSet = new HashSet<>();
+
+
     private static InternalURLClassLoader  internalClassLoader;
 
     private InternalClassLoad() {
     }
 
     static {
+        exportSet.add("org.apache.dubbo.common.bytecode");
+
         File file = UnZipJAR();
         try {
             URL url = file.toURL();
@@ -94,7 +102,7 @@ public class InternalClassLoad {
             synchronized (this.getClassLoadingLock(name)) {
                 Class<?> c = this.findLoadedClass(name);
                 if (c == null) {
-                    if (name.startsWith("org.apache.dubbo") || name.startsWith("com.alibaba.dubbo")) {
+                    if (!exportSet.contains(getPackagePrefix(name)) && (name.startsWith("org.apache.dubbo") || name.startsWith("com.alibaba.dubbo"))) {
                         c = findClass(name);
                     } else {
                         c = super.loadClass(name);
@@ -104,6 +112,10 @@ public class InternalClassLoad {
                 return c;
             }
         }
+    }
+
+    private static String getPackagePrefix(String name) {
+        return name.substring(0,name.lastIndexOf("."));
     }
 }
 
