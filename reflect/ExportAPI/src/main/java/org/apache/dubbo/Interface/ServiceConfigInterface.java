@@ -10,9 +10,9 @@ import org.apache.dubbo.config.RegistryConfig;
  * @Author wfh
  * @Date 2022/8/9 上午11:29
  */
-public interface ServiceConfigInterface {
+public interface ServiceConfigInterface<T> {
     void setInterface(Class<?> klass);
-    void setRef(Object object);
+    void setRef(T ref);
     void setApplication(ApplicationConfig application);
     void setRegistry(RegistryConfig registry);
     void setMetadataReportConfig(MetadataReportConfig metadataReportConfig);
