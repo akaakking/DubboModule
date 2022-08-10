@@ -58,3 +58,4 @@ interface的话随便放，为了方便我们就把他统一放在Interface这�
 
 
 
+现在终于不用对着异常一点点猜了，可以debug了，yahu～

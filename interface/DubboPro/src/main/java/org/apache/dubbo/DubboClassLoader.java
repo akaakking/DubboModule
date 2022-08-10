@@ -37,6 +37,8 @@ public class DubboClassLoader {
     //TODO 异常没处理好
     public static Object getInstance(Class<?> clazz) {
         Class klass = null;
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
         try {
             klass = classLoader.loadClass(clazz.getName());
         } catch (ClassNotFoundException e) {
@@ -56,6 +58,7 @@ public class DubboClassLoader {
     // 字符串操作会成为慢操作，到时候看看能不能优化一下 todo
     public static Object getInstance(Class<?> clazz,String args)  {
         Class klass = null;
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         try {
             klass = classLoader.loadClass(clazz.getName());
         } catch (ClassNotFoundException e) {
