@@ -1,5 +1,6 @@
 package org.xulinux.dubbopro;
 
+import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.MetadataReportConfig;
 import org.apache.dubbo.config.RegistryConfig;
@@ -17,12 +18,13 @@ import java.util.concurrent.CountDownLatch;
 public class Demo {
     public static void main(String[] args) throws InterruptedException {
         try {
+            Class.forName(ServiceConfig.class.getName());
             Class.forName(ApplicationConfig.class.getName());
             Class.forName(RegistryConfig.class.getName());
-            Class.forName(MetadataReportConfig.class.getName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
 
         ServiceConfig serviceConfig = new ServiceConfig();
         serviceConfig.setInterface(DemoService.class);
