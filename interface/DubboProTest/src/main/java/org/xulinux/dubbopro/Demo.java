@@ -1,5 +1,6 @@
 package org.xulinux.dubbopro;
 
+import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.MetadataReportConfig;
 import org.apache.dubbo.config.RegistryConfig;
@@ -19,6 +20,7 @@ public class Demo {
         ServiceConfig serviceConfig = new ServiceConfig();
         serviceConfig.setInterface(DemoService.class);
         serviceConfig.setRef(new DemoServiceImpl());
+//        ApplicationConfig.class.getClassLoader();
         serviceConfig.setApplication(new ApplicationConfig("dubbo-demo-api-provider"));
         serviceConfig.setRegistry(new RegistryConfig("zookeeper://127.0.0.1:2181"));
         serviceConfig.setMetadataReportConfig(new MetadataReportConfig("zookeeper://127.0.0.1:2181"));
@@ -28,3 +30,8 @@ public class Demo {
         new CountDownLatch(1).await();
     }
 }
+
+/**
+ * 代码生成是说手写一个maven插件？
+ * config包下所有的吗？还是说config.spring不用
+ */

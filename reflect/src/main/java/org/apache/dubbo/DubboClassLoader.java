@@ -50,6 +50,16 @@ public class DubboClassLoader {
         return null;
     }
 
+    public static Object getInstance(String name) {
+        try {
+            Class klass = internalClassLoader.loadClass(name);
+            return klass.newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static Class getKlass(Class<?> clazz) throws ClassNotFoundException {
         return internalClassLoader.loadClass(clazz.getName());
     }

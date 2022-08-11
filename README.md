@@ -4,7 +4,7 @@
 
 ## 1.1 前期工作
 
-从贴合用户的角度，用反射做了个demo,证明了我们目前的思路确实可行，唯一会有冲突的是javassit的问题不过目前也已经解决掉了。(demo被我删了，很难受，不过精华都提取到目前这个方案了)
+从贴合用户的角度，用反射做了个demo,证明了我们目前的思路确实可行，唯一会有冲突的是javassit的问题不过目前也已经解决掉了。
 
 ##  1.2 目前总体思路：
 
@@ -99,3 +99,20 @@ loader constraint violation: loader 'app' wants to load class org.apache.dubbo.c
 
 1.   类加载器那块得降版本
 2.   找一下ApplicationConfig.class这个东西应该是有个什么cache之类的，有没有办法取消掉
+
+
+
+现在恢复了反射版本，和现有版本进行比较发现了，好像并不是版本引起的错误，现在考虑让矛盾凸显在一个点上，看能不能解决。
+
+反射版本现在也是通过java8构建的，但是就没有那么多约束。
+
+为什么呢？
+
+serviceConfig.setApplicationConfig(ApplicationConfig config);
+
+这个config为什么不会出现问题，这个就没有说有两个相同类不能做转换cast。
+
+```java
+loader constraint violation in interface itable initialization for class org.apache.dubbo.config.ServiceConfig: when selecting method 'void org.apache.dubbo.Interface.ServiceConfigInterface.setApplication(org.apache.dubbo.config.ApplicationConfig)' the class loader 'app' for super interface org.apache.dubbo.Interface.ServiceConfigInterface, and the class loader org.apache.dubbo.DubboClassLoader$InternalURLClassLoader @5700d6b1 of the selected method's abstract class, org.apache.dubbo.config.AbstractInterfaceConfig have different Class objects for the type org.apache.dubbo.config.ApplicationConfig used in the signature (org.apache.dubbo.Interface.ServiceConfigInterface is in unnamed module of loader 'app'; org.apache.dubbo.config.AbstractInterfaceConfig is in unnamed module of loader org.apache.dubbo.DubboClassLoader$InternalURLClassLoader @5700d6b1, parent loader 'app')
+```
+

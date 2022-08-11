@@ -4,7 +4,6 @@ import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.ApplicationConfigInterface;
 
 /**
- * //TODO add class commment here
  *
  * @Author wfh
  * @Date 2022/8/9 上午11:32

@@ -129,6 +129,18 @@ public class DubboClassLoader {
         }
     }
 
+    public static Object getInstance(String name) {
+        Object object = null;
+        try {
+            Class klass = classLoader.loadClass(name);
+            object = klass.newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        return object;
+    }
+
     private static class InternalURLClassLoader extends URLClassLoader {
 
         public InternalURLClassLoader(URL[] urls) {

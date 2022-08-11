@@ -13,9 +13,9 @@ import org.apache.dubbo.config.RegistryConfig;
 public interface ServiceConfigInterface<T> {
     void setInterface(Class<?> klass);
     void setRef(T ref);
-    void setApplication(ApplicationConfig application);
-    void setRegistry(RegistryConfig registry);
-    void setMetadataReportConfig(MetadataReportConfig metadataReportConfig);
+    void setApplication(ApplicationConfigInterface application);
+    void setRegistry(RegistryConfigInterface registry);
+    void setMetadataReportConfig(MetadataReportConfigInterface metadataReportConfig);
     void export();
 }
 // 等会不行把参数名字该全

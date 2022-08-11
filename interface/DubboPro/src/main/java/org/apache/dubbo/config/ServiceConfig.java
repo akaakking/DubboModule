@@ -1,6 +1,9 @@
 package org.apache.dubbo.config;
 
 import org.apache.dubbo.DubboClassLoader;
+import org.apache.dubbo.Interface.ApplicationConfigInterface;
+import org.apache.dubbo.Interface.MetadataReportConfigInterface;
+import org.apache.dubbo.Interface.RegistryConfigInterface;
 import org.apache.dubbo.Interface.ServiceConfigInterface;
 
 /**
@@ -11,6 +14,7 @@ import org.apache.dubbo.Interface.ServiceConfigInterface;
  */
 public class ServiceConfig<T> implements ServiceConfigInterface<T> {
     private ServiceConfigInterface instance = (ServiceConfigInterface) DubboClassLoader.getInstance(ServiceConfig.class);
+
 
     @Override
     public void setInterface(Class<?> klass) {
@@ -23,18 +27,18 @@ public class ServiceConfig<T> implements ServiceConfigInterface<T> {
     }
 
     @Override
-    public void setApplication(ApplicationConfig application) {
-        instance.setApplication((ApplicationConfig) (application.getInstance()));
+    public void setApplication(ApplicationConfigInterface application) {
+        instance.setApplication(((ApplicationConfig)application).getInstance());
     }
 
     @Override
-    public void setRegistry(RegistryConfig registry) {
-        instance.setRegistry((RegistryConfig) registry.getInstance());
+    public void setRegistry(RegistryConfigInterface registry) {
+        instance.setRegistry(((RegistryConfig) registry).getInstance());
     }
 
     @Override
-    public void setMetadataReportConfig(MetadataReportConfig metadataReportConfig) {
-        instance.setMetadataReportConfig((MetadataReportConfig) metadataReportConfig.getInstance());
+    public void setMetadataReportConfig(MetadataReportConfigInterface metadataReportConfig) {
+        instance.setMetadataReportConfig(((MetadataReportConfig) metadataReportConfig).getInstance());
     }
 
     @Override
