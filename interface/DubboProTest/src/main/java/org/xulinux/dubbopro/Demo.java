@@ -17,10 +17,10 @@ import java.util.concurrent.CountDownLatch;
  */
 public class Demo {
     public static void main(String[] args) throws InterruptedException {
-        ServiceConfig serviceConfig = new ServiceConfig();
+        ServiceConfig<DemoServiceImpl> serviceConfig = new ServiceConfig();
         serviceConfig.setInterface(DemoService.class);
         serviceConfig.setRef(new DemoServiceImpl());
-//        ApplicationConfig.class.getClassLoader();
+        System.out.println(ApplicationConfig.class.getClassLoader());
         serviceConfig.setApplication(new ApplicationConfig("dubbo-demo-api-provider"));
         serviceConfig.setRegistry(new RegistryConfig("zookeeper://127.0.0.1:2181"));
         serviceConfig.setMetadataReportConfig(new MetadataReportConfig("zookeeper://127.0.0.1:2181"));
