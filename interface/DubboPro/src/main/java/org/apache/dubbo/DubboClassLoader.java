@@ -80,7 +80,6 @@ public class DubboClassLoader {
         String path = url.getPath();
         String jarpath = path.substring(0,path.lastIndexOf("!")).replace("file:","");
 
-
         InputStream is = null;
         OutputStream out = null;
         try {
