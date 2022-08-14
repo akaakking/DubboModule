@@ -2,8 +2,10 @@ package org.apache.dubbo.compiler;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.Visitable;
 import com.github.javaparser.ast.visitor.VoidVisitor;
@@ -11,7 +13,6 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /**
@@ -24,48 +25,44 @@ import java.io.FileNotFoundException;
 public class JavaParserLearn {
 
     @Test
-    public void ModifierVisitorTest() {
+    public void gene() {
         try {
-            CompilationUnit cu = StaticJavaParser.parse(new File("/home/wfh/DubboModule/compiler/src/main/java/org/apache/dubbo/compiler/Parameter.java"));
-            ModifierVisitor visitor = new MethodModefile();
-            visitor.visit(cu,null);
+            CompilationUnit cu = StaticJavaParser.parse(new File("/home/wfh/DubboModule/dubbo/dubbo-common/src/main/java/org/apache/dubbo/config/RegistryConfig.java"));
+            cu.setPackageDeclaration("org.apache.dubbo.Interface");
+
+            RemoveFileds removeFileds = new RemoveFileds();
+            InterfaceMethod interfaceMethod = new InterfaceMethod();
+            removeFileds.visit(cu,null);
+            interfaceMethod.visit(cu,null);
             System.out.println(cu);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
-    @Test
-    public void MethodNamePrinterTest() {
-        try {
-            CompilationUnit cu = StaticJavaParser.parse(new File("/home/wfh/DubboModule/dubbo/dubbo-remoting/dubbo-remoting-api/src/main/java/org/apache/dubbo/remoting/zookeeper/AbstractZookeeperClient.java"));
-
-            VoidVisitor visitor = new MethodNamePrinter();
-            visitor.visit(cu,null);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private class MethodNamePrinter extends VoidVisitorAdapter<Void> {
+    private class RemoveFileds extends ModifierVisitor<Void> {
         @Override
-        public void visit(MethodDeclaration n, Void arg) {
+        public Visitable visit(FieldDeclaration n, Void arg) {
             super.visit(n, arg);
-            System.out.println(n.getName());
-        }
-    }
-
-    private class MethodModefile extends ModifierVisitor<Void> {
-
-        @Override
-        public Visitable visit(MethodDeclaration n, Void arg) {
-            super.visit(n, arg);
-//            return n.removeBody();
             n.remove();
             return n;
         }
     }
 
+    private class InterfaceMethod extends ModifierVisitor<Void> {
+
+        @Override
+        public Visitable visit(MethodDeclaration n, Void arg) {
+            super.visit(n, arg);
+            if (n.isPublic()) {
+                n.removeBody();
+            } else {
+                n.remove();
+            }
+            return n;
+        }
+    }
+
 }
+
+// 今天看能不能重新做一下，顺便把class也一搞，生成代码用模板，实在不是个好办法。

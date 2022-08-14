@@ -1,7 +1,7 @@
-package org.apache.dubbo.Interface
+package org.apache.dubbo.Interface;
 
 <#list importPackages as package>
-import ${package}
+import ${package};
 </#list>
 
 public interface ${className}Interface<#if isGenerics == true ><T></#if>{

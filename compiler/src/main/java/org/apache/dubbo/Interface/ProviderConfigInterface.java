@@ -1,0 +1,64 @@
+package org.apache.dubbo.Interface;
+
+import java.lang;
+
+public interface ProviderConfigInterface{
+    void setProtocol(String protocol);
+    String getHost();
+    void setHost(String host);
+    Integer getPort();
+    void setPort(Integer port);
+    String getPath();
+    void setPath(String path);
+    String getContextpath();
+    void setContextpath(String contextpath);
+    String getThreadpool();
+    void setThreadpool(String threadpool);
+    String getThreadname();
+    void setThreadname(String threadname);
+    Integer getThreads();
+    void setThreads(Integer threads);
+    Integer getIothreads();
+    void setIothreads(Integer iothreads);
+    Integer getAlive();
+    void setAlive(Integer alive);
+    Integer getQueues();
+    void setQueues(Integer queues);
+    Integer getAccepts();
+    void setAccepts(Integer accepts);
+    String getCodec();
+    void setCodec(String codec);
+    String getCharset();
+    void setCharset(String charset);
+    Integer getPayload();
+    void setPayload(Integer payload);
+    Integer getBuffer();
+    void setBuffer(Integer buffer);
+    String getServer();
+    void setServer(String server);
+    String getClient();
+    void setClient(String client);
+    String getTelnet();
+    void setTelnet(String telnet);
+    String getPrompt();
+    void setPrompt(String prompt);
+    String getStatus();
+    void setStatus(String status);
+    String getTransporter();
+    void setTransporter(String transporter);
+    String getExchanger();
+    void setExchanger(String exchanger);
+    String getDispather();
+    void setDispather(String dispather);
+    String getDispatcher();
+    void setDispatcher(String dispatcher);
+    String getNetworker();
+    void setNetworker(String networker);
+    Integer getWait();
+    void setWait(Integer wait);
+    Integer getExportThreadNum();
+    void setExportThreadNum(Integer exportThreadNum);
+    Boolean getExportBackground();
+    void setExportBackground(Boolean exportBackground);
+
+}
