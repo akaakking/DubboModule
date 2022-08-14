@@ -23,7 +23,67 @@ public class Main {
     private static String InterfaceBaseDir = "/home/wfh/DubboModule/compiler/src/main/java/org/apache/dubbo/Interface/";
     private static String DirectExportBaseDir = "/home/wfh/DubboModule/compiler/src/main/resources";
 
+    @Test
+    public void testForInOrNot() {
+        inOrNot(new File("/home/wfh/DubboModule/dubbo"));
+        JavaProjectBuilder javaProjectBuilder = new JavaProjectBuilder();
+        for (File f : list) {
+            javaProjectBuilder.addSourceTree(f);
+        }
 
+        JavaClass javaClass = javaProjectBuilder.getClassByName("org.apache.dubbo.config.ServiceConfig");
+        for (JavaMethod method : javaClass.getMethods()) {
+            System.out.println(method);
+        }
+    }
+// 先解决list ，的问题，再解决javaparser
+    @Test
+    public void testForReturns() {
+        JavaProjectBuilder javaProjectBuilder = new JavaProjectBuilder();
+        try {
+            javaProjectBuilder.addSource(new File("/home/wfh/DubboModule/dubbo/dubbo-config/dubbo-config-api/src/main/java/org/apache/dubbo/config/deploy/DefaultApplicationDeployer.java"));
+            javaProjectBuilder.addSource(new File("/home/wfh/DubboModule/dubbo/dubbo-common/src/main/java/org/apache/dubbo/common/deploy/ApplicationDeployer.java"));
+            for (JavaClass aClass : javaProjectBuilder.getClasses()) {
+                for (JavaMethod method : aClass.getMethods()) {
+                    if (method.isPublic()) {
+                        System.out.println(method.getReturnType(false).getFullyQualifiedName());
+                    }
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void DataModelTest() {
+        inOrNot(new File("/home/wfh/DubboModule/dubbo"));
+        JavaProjectBuilder javaProjectBuilder = new JavaProjectBuilder();
+
+        for (File f : list) {
+            javaProjectBuilder.addSourceTree(f);
+        }
+
+        try {
+            JavaClass javaClass = javaProjectBuilder.getClassByName("org.apache.dubbo.remoting.zookeeper.AbstractZookeeperClient");
+            List<JavaMethod> method = javaClass.getMethods();
+            Object root = getDataModel(javaClass);
+
+            Template template = FreeMarkerUtil.getTemplate("Interface.ftl");
+            File file = new File("/home/wfh/DubboModule/compiler/src/main/resources/ApplicationConfig.java");
+            file.createNewFile();
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+
+            template.process(root,new OutputStreamWriter(fileOutputStream));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public static Object getDataModel(JavaClass javaClass) {
         Map<String,Object> root = new HashMap<>();
@@ -55,7 +115,6 @@ public class Main {
             m.setParameters(parameters);
             methods.add(m);
 
-
             if (!isInConfigPack(method.getReturns()) && !method.getReturns().isPrimitive()) {
                 importPackages.add(method.getReturns().getPackageName());
             }
@@ -67,14 +126,48 @@ public class Main {
 
                 parameters.add(p);
 
-
                 if (!isInConfigPack(parameter.getJavaClass()) && !parameter.getJavaClass().isPrimitive()) {
                     importPackages.add(parameter.getJavaClass().getPackageName());
                 }
             }
-
         }
         return root;
+    }
+
+    public static void inOrNot(File file) {
+        // 过滤一部分
+        if (file.isFile()) {
+            return;
+        }
+
+        if (file.getName().startsWith("dubbo")
+                || file.getName().equals("src")
+                || file.getName().equals("main")) {
+            for (File f : file.listFiles()) {
+                inOrNot(f);
+            }
+        }
+
+        if (file.getName().equals("java")) {
+            list.add(file);
+            return;
+        }
+
+//        if (file.getName().startsWith("dubbo")
+//                || file.getName().equals("src")
+//                || file.getName().equals("java")
+//                || file.getName().equals("main" )
+//                || file.getName().equals("org")
+//                || file.getName().equals("apache")) {
+//            for (File f : file.listFiles()) {
+//                inOrNot(f);
+//            }
+//        }
+//
+//        if (file.getName().equals("apache")) {
+//            list.add(file);
+//            return;
+//        }
     }
 
     // 在包下 或者没有那么长 但没有那么长也不一定是
@@ -100,13 +193,13 @@ public class Main {
         try {
             javaProjectBuilder.addSource(new File("/home/wfh/DubboModule/interface/DubboPro/src/main/java/org/apache/dubbo/Interface/ServiceConfigInterface.java"));
             for (JavaClass aClass : javaProjectBuilder.getClasses()) {
-                System.out.println(aClass.getFullyQualifiedName());
+//                System.out.println(aClass.getFullyQualifiedName());
                 for (JavaMethod method : aClass.getMethods()) {
 //                    System.out.println(method.getReturnType());
 //                    System.out.println(method.getName());
                     for (JavaParameter parameter : method.getParameters()) {
 //                        System.out.println(parameter.getType());
-                        System.out.println(parameter.getJavaClass().getFullyQualifiedName());
+                        System.out.println(parameter.getJavaClass().getSimpleName());
                     }
                 }
             }
@@ -116,29 +209,6 @@ public class Main {
 
     }
 
-    @Test
-    public void ServiceConfigTest() {
-        JavaProjectBuilder javaProjectBuilder = new JavaProjectBuilder();
-        try {
-            javaProjectBuilder.addSource((new File("/home/wfh/DubboModule/dubbo/dubbo-config/dubbo-config-api/src/main/java/org/apache/dubbo/config/ServiceConfig.java")));
-            Collection<JavaClass> javaClasses = javaProjectBuilder.getClasses();
-            for (JavaClass javaClass : javaClasses) {
-                Object root = getDataModel(javaClass);
-
-                Template template = FreeMarkerUtil.getTemplate("Interface.ftl");
-                File file = new File("/home/wfh/DubboModule/compiler/src/main/resources/ServiceConfig.java");
-                file.createNewFile();
-                FileOutputStream fileOutputStream = new FileOutputStream(file);
-
-                template.process(root,new OutputStreamWriter(fileOutputStream));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
-
-    }
 
 
     @Test
@@ -160,11 +230,9 @@ public class Main {
             e.printStackTrace();
         }
     }
-
-
 }
-/*
 
+/*
 
 //    public static void main(String[] args) {
 //

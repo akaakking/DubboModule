@@ -12,8 +12,8 @@ import org.apache.dubbo.config.RegistryConfig;
  */
 public interface ServiceConfigInterface<T> {
     void setInterface(Class<?> klass);
-    boolean setRef(T ref);
-    void setApplication(ApplicationConfigInterface application,boolean is);
+    void setRef(T ref);
+    void setApplication(ApplicationConfigInterface application);
     void setRegistry(RegistryConfigInterface registry);
     void setMetadataReportConfig(MetadataReportConfigInterface metadataReportConfig);
     void export();

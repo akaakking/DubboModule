@@ -1,6 +1,5 @@
 package org.xulinux.dubbopro;
 
-import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.MetadataReportConfig;
 import org.apache.dubbo.config.RegistryConfig;
