@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.Map;
 
-public interface MonitorBuilderInterface {
+public interface MonitorBuilderInterface extends AbstractBuilder{
     MonitorBuilderInterface protocol(String protocol);
     MonitorBuilderInterface address(String address);
     MonitorBuilderInterface username(String username);

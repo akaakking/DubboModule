@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.Map;
 
-public interface ProtocolBuilderInterface {
+public interface ProtocolBuilderInterface extends AbstractBuilder{
     ProtocolBuilderInterface newBuilder();
     ProtocolBuilderInterface id(String id);
     ProtocolBuilderInterface name(String name);

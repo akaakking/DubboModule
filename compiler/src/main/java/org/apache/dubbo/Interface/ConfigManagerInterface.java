@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface ConfigManagerInterface {
+public interface ConfigManagerInterface extends AbstractConfigManager, ApplicationExt{
     void setApplication(ApplicationConfigInterface application);
     Optional getApplication();
     ApplicationConfigInterface getApplicationOrElseThrow();

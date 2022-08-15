@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import org.apache.dubbo.rpc.model.ApplicationModel;
 
-public interface ExporterDeployListenerInterface {
+public interface ExporterDeployListenerInterface extends Object, ApplicationDeployListener, Prioritized{
     void onStarting(ApplicationModel scopeModel);
     void onStarted(ApplicationModel applicationModel);
     void onStopping(ApplicationModel scopeModel);

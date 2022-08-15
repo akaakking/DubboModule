@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.List;
 
-public interface AbstractServiceBuilderInterface<T><B> {
+public interface AbstractServiceBuilderInterface<T><B> extends AbstractInterfaceBuilder{
     B version(String version);
     B group(String group);
     B deprecated(Boolean deprecated);

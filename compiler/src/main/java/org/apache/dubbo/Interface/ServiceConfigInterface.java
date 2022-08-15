@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.concurrent.Callable;
 
-public interface ServiceConfigInterface<T> {
+public interface ServiceConfigInterface<T> extends ServiceConfigBase, org.apache.dubbo.Interface.ServiceConfigInterface{
     boolean isExported();
     boolean isUnexported();
     void unexport();

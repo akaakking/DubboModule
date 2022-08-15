@@ -3,7 +3,7 @@ package org.apache.dubbo.Interface;
 import java.util.List;
 import org.apache.dubbo.rpc.model.AsyncMethodInfo;
 
-public interface MethodConfigInterface {
+public interface MethodConfigInterface extends AbstractMethodConfig{
     List constructMethodConfig(MethodInterface methods);
     List getPrefixes();
     AsyncMethodInfo convertMethodConfig2AsyncInfo();

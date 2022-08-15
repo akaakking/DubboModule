@@ -1,7 +1,7 @@
 package org.apache.dubbo.Interface;
 
 
-public interface ServicePackagesHolderInterface {
+public interface ServicePackagesHolderInterface extends Object{
     void addScannedPackage(String apackage);
     boolean isPackageScanned(String packageName);
     void addScannedClass(String className);

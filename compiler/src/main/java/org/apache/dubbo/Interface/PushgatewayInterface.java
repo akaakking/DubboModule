@@ -1,7 +1,7 @@
 package org.apache.dubbo.Interface;
 
 
-public interface PushgatewayInterface {
+public interface PushgatewayInterface extends Object{
     Boolean getEnabled();
     void setEnabled(Boolean enabled);
     String getBaseUrl();

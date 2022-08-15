@@ -4,7 +4,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import java.util.Map;
 import java.util.SortedMap;
 
-public interface EnvironmentUtilsInterface {
+public interface EnvironmentUtilsInterface extends Object{
     Map extractProperties(ConfigurableEnvironment environment);
     SortedMap filterDubboProperties(ConfigurableEnvironment environment);
 }

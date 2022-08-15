@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.List;
 
-public interface ReferenceBuilderInterface<T> {
+public interface ReferenceBuilderInterface<T> extends AbstractReferenceBuilder{
     ReferenceBuilderInterface<T> newBuilder();
     ReferenceBuilderInterface<T> id(String id);
     ReferenceBuilderInterface<T> interfaceName(String interfaceName);

@@ -3,7 +3,7 @@ package org.apache.dubbo.Interface;
 import org.apache.dubbo.common.URL;
 import java.util.Map;
 
-public interface MetadataReportConfigInterface {
+public interface MetadataReportConfigInterface extends AbstractConfig, org.apache.dubbo.Interface.MetadataReportConfigInterface{
     URL toUrl();
     String getProtocol();
     void setProtocol(String protocol);

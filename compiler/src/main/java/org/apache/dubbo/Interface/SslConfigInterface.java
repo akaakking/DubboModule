@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.io.InputStream;
 
-public interface SslConfigInterface {
+public interface SslConfigInterface extends AbstractConfig{
     String getServerKeyCertChainPath();
     void setServerKeyCertChainPath(String serverKeyCertChainPath);
     String getServerPrivateKeyPath();

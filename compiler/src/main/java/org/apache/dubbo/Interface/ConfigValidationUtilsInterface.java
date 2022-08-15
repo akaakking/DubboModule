@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import org.apache.dubbo.rpc.model.ScopeModel;
 
-public interface ConfigValidationUtilsInterface {
+public interface ConfigValidationUtilsInterface extends Object{
     List loadRegistries(AbstractInterfaceConfigInterface interfaceConfig, boolean provider);
     URL loadMonitor(AbstractInterfaceConfigInterface interfaceConfig, URL registryURL);
     void checkMock(Class interfaceClass, AbstractInterfaceConfigInterface config);

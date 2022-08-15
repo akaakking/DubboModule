@@ -1,7 +1,7 @@
 package org.apache.dubbo.Interface;
 
 
-public interface AbstractReferenceBuilderInterface<T><B> {
+public interface AbstractReferenceBuilderInterface<T><B> extends AbstractInterfaceBuilder{
     B check(Boolean check);
     B init(Boolean init);
     B generic(String generic);

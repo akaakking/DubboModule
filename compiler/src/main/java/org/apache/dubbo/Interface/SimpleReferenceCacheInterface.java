@@ -3,7 +3,7 @@ package org.apache.dubbo.Interface;
 import java.util.List;
 import java.util.Map;
 
-public interface SimpleReferenceCacheInterface {
+public interface SimpleReferenceCacheInterface extends Object, ReferenceCache{
     SimpleReferenceCacheInterface getCache();
     SimpleReferenceCacheInterface newCache();
     SimpleReferenceCacheInterface getCache(String name);

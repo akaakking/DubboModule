@@ -7,7 +7,7 @@ import java.util.Map;
 import org.apache.dubbo.Interface.ApplicationConfigInterface;
 import org.apache.dubbo.Interface.RegistryConfigInterface;
 
-public interface AbstractInterfaceConfigInterface {
+public interface AbstractInterfaceConfigInterface extends AbstractMethodConfig{
     List getExportedUrls();
     URL toUrl();
     List toUrls();

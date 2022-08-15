@@ -4,7 +4,7 @@ import java.util.Map;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.context.ApplicationContext;
 
-public interface ReferenceBeanInterface<T> {
+public interface ReferenceBeanInterface<T> extends Object, org.springframework.beans.factory.FactoryBean, org.springframework.context.ApplicationContextAware, org.springframework.beans.factory.BeanClassLoaderAware, org.springframework.beans.factory.BeanNameAware, org.springframework.beans.factory.InitializingBean, org.springframework.beans.factory.DisposableBean{
     void setApplicationContext(ApplicationContext applicationContext);
     void setBeanClassLoader(ClassLoader classLoader);
     void setBeanName(String name);

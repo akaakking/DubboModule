@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * 现在解决
  * 2. 返回值，参数，泛型相关
- * 3. 接口之间继承关系 
+ * 3. 接口之间继承关系
  *
  * @Author wfh
  * @Date 2022/8/14 下午6:16
@@ -34,17 +34,18 @@ public class InterfaceMaker {
     private List<File> sourceFile = new ArrayList<>();
     private static JavaProjectBuilder jpb;
 
-
     @Test
-    public void methodGene() {
-        String path = "/home/wfh/DubboModule/dubbo/dubbo-config/dubbo-config-api/src/main/java/org/apache/dubbo/config/bootstrap/builders/AbstractServiceBuilder.java";
-
+    public void testForgetClassTypeName() {
         initEnvirenment();
+        String path = "org.apache.dubbo.config.deploy.DefaultModuleDeployer";
+        JavaClass javaClass = jpb.getClassByName(path);
 
-        JavaClass javaClass = jpb.getClassByName("org.apache.dubbo.config.bootstrap.builders.AbstractServiceBuilder");
-        for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : javaClass.getTypeParameters()) {
-            System.out.println(typeParameter.getBounds());
-        }
+        System.out.println(getClassTypeName(javaClass));
+
+        System.out.println(getClassTypeName(javaClass.getSuperJavaClass()));
+
+        System.out.println(getClassTypeName(javaClass.getInterfaces().get(0)));
+
     }
 
     @Test
@@ -105,6 +106,7 @@ public class InterfaceMaker {
 |---root(class)
             methods
                 method1
+                    methodName
                     parameters
                         parameter1
                             Type
@@ -117,23 +119,26 @@ public class InterfaceMaker {
                 package2
                 package3
             className
-            typeParameters
+            GenericString
  */
     public Map<String, Object> getDataModel(JavaClass javaClass) {
         Map<String,Object> root = new HashMap<>();
 
-        String className = javaClass.getName();
         List<Method> methods = new ArrayList<>();
         Set<String> importPackages = new HashSet<>();
-        List<String> typeParameters = new ArrayList<>();
+        List<String> parents = new ArrayList<>();
+        String classTypeName = getClassTypeName(javaClass);
 
-        for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : javaClass.getTypeParameters()) {
-            typeParameters.add("<" + shortName(typeParameter.getName()) + ">");
+        JavaClass superClass = javaClass.getSuperJavaClass();
+        List<JavaClass> interfaces = javaClass.getInterfaces();
+
+        if (superClass != null) {
+            parents.add(getClassTypeName(superClass));
         }
-        root.put("className",className);
-        root.put("methods",methods);
-        root.put("importPackages",importPackages);
-        root.put("typeParameters",typeParameters);
+
+        for (JavaClass anInterface : interfaces) {
+            parents.add(getClassTypeName(anInterface));
+        }
 
         for (JavaMethod method : javaClass.getMethods()) {
             if (!method.isPublic()) {
@@ -141,10 +146,10 @@ public class InterfaceMaker {
             }
 
             Method m = new Method();
-            List<Parameter> parameters = new ArrayList<>();
             m.setName(method.getName());
+            List<Parameter> parameters = new ArrayList<>();
 
-            m.setReturnType(getType(method.getReturns()));
+            m.setReturnType(getClassTypeName(method.getReturns()));
             m.setParameters(parameters);
             methods.add(m);
 
@@ -154,33 +159,70 @@ public class InterfaceMaker {
                 Parameter p = new Parameter();
                 p.setName(parameter.getName());
 
-                p.setType(getType(parameter.getJavaClass()));
+                p.setType(getClassTypeName(parameter.getJavaClass()));
 
                 parameters.add(p);
                 addImport(importPackages,parameter.getJavaClass());
             }
         }
+
+        root.put("methods",methods);
+        root.put("importPackages",importPackages);
+        root.put("parents",parents);
+        root.put("hasSuper",!parents.isEmpty());
+        root.put("GenericString", classTypeName);
+
         return root;
     }
 
-    private String getType(JavaClass javaClass) {
-        String old = javaClass.getName();
-        if (isInConfigPack(javaClass)) {
-            old =  old + "Interface";
+    // javaclass -> className+ 泛型相关
+    private String getClassTypeName(JavaClass javaClass) {
+        StringBuffer sb = new StringBuffer(addInterface(javaClass.getName()));
+
+        if (javaClass.getTypeParameters() != null && !javaClass.getTypeParameters().isEmpty()) {
+            sb.append("<");
+
+            for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : javaClass.getTypeParameters()) {
+                sb.append(typeParameter.toString());
+                if (typeParameter.getBounds() != null && !typeParameter.getBounds().isEmpty()) {
+                    sb.append(" extends ");
+                    sb.append(addInterface(typeParameter.getBounds().get(0).toString()));
+                }
+                sb.append(",");
+            }
+
+            sb.substring(0,sb.length() - 2);
+
+            sb.append(">");
         }
 
-        if (javaClass.isPrimitive()) {
-            return javaClass.getName();
-        }
-
-        old = shortName(old);
-
-        for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : javaClass.getTypeParameters()) {
-            old = old + "<" + typeParameter.getName() + ">";
-        }
-
-        return old;
+        return sb.toString();
     }
+
+    // todo 不在config包下，但在dubbo内
+    private String addInterface(String s) {
+        if (!s.startsWith("org.apache.dubbo")) {
+            return shortName(s);
+        }
+
+        if (isPrimitive(s)) {
+            return s;
+        }
+
+        if (s.length() == 1) {
+            return s;
+        }
+
+        return shortName(s) + "Interface";
+    }
+
+    private boolean isPrimitive(String name)
+    {
+        return "void".equals( name ) || "boolean".equals( name ) || "byte".equals( name ) || "char".equals( name )
+                || "short".equals( name ) || "int".equals( name ) || "long".equals( name ) || "float".equals( name )
+                || "double".equals( name );
+    }
+
 
     private void addImport(Set<String> importPackages, JavaClass javaClass) {
         if (isInConfigPack(javaClass)) {
@@ -240,9 +282,14 @@ public class InterfaceMaker {
             return false;
         }
 
+        if (javaClass.getFullyQualifiedName().length() == 1) {
+            return false;
+        }
+
         if (!javaClass.getFullyQualifiedName().contains(".")) {
             return true;
         }
+
         return false;
     }
 

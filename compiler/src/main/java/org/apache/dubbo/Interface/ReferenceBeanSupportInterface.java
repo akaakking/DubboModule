@@ -5,7 +5,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.context.ApplicationContext;
 
-public interface ReferenceBeanSupportInterface {
+public interface ReferenceBeanSupportInterface extends Object{
     void convertReferenceProps(Map attributes, Class defaultInterfaceClass);
     String generateReferenceKey(Map attributes, ApplicationContext applicationContext);
     Map convertPropertyValues(MutablePropertyValues propertyValues);

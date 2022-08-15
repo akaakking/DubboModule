@@ -1,5 +1,5 @@
 package org.apache.dubbo.Interface;
 
 
-public interface SingleInterface {
+public interface SingleInterface extends Object{
 }

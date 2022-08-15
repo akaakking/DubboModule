@@ -7,7 +7,7 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
-public interface DubboSpringInitContextInterface {
+public interface DubboSpringInitContextInterface extends Object{
     void markAsBound();
     BeanDefinitionRegistry getRegistry();
     ConfigurableListableBeanFactory getBeanFactory();

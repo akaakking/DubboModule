@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 import org.apache.dubbo.rpc.model.ServiceMetadata;
 
-public interface ServiceConfigBaseInterface<T> {
+public interface ServiceConfigBaseInterface<T> extends AbstractServiceConfig{
     boolean shouldExport();
     Boolean getExport();
     boolean shouldDelay();

@@ -125,3 +125,21 @@ interface的话随便放，为了方便我们就把他统一放在Interface这�
 
 我们需要判断参数是否是接口，是否属于dubbo？
 
+
+
+![image-20220815144501024](/home/wfh/.config/Typora/typora-user-images/image-20220815144501024.png)
+
+ 
+
+现在来总结一下
+
+继承的话是这
+
+如果不是在config内部，直接不继承，先这样弄吧
+
+
+
+1.   先解决getType的问题
+2.   解决继承的问题。
+
+ 

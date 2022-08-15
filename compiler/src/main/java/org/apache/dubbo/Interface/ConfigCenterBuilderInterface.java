@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.Map;
 
-public interface ConfigCenterBuilderInterface {
+public interface ConfigCenterBuilderInterface extends AbstractBuilder{
     ConfigCenterBuilderInterface protocol(String protocol);
     ConfigCenterBuilderInterface address(String address);
     ConfigCenterBuilderInterface cluster(String cluster);

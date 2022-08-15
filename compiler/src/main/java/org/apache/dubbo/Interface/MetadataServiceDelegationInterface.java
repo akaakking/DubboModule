@@ -8,7 +8,7 @@ import org.apache.dubbo.metadata.InstanceMetadataChangedListener;
 import java.util.Map;
 import java.util.Set;
 
-public interface MetadataServiceDelegationInterface {
+public interface MetadataServiceDelegationInterface extends Object, MetadataService, Disposable{
     String serviceName();
     URL getMetadataURL();
     void setMetadataURL(URL url);

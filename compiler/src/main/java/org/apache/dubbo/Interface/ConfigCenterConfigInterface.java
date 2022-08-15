@@ -3,7 +3,7 @@ package org.apache.dubbo.Interface;
 import org.apache.dubbo.common.URL;
 import java.util.Map;
 
-public interface ConfigCenterConfigInterface {
+public interface ConfigCenterConfigInterface extends AbstractConfig{
     URL toUrl();
     boolean checkOrUpdateInitialized(boolean update);
     void setInitialized(boolean val);

@@ -1,7 +1,7 @@
 package org.apache.dubbo.Interface;
 
 
-public interface AbstractReferenceConfigInterface {
+public interface AbstractReferenceConfigInterface extends AbstractInterfaceConfig{
     Boolean isCheck();
     void setCheck(Boolean check);
     Boolean isInit();

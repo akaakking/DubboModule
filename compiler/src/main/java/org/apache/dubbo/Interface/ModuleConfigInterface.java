@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.List;
 
-public interface ModuleConfigInterface {
+public interface ModuleConfigInterface extends AbstractConfig{
     String getName();
     void setName(String name);
     String getVersion();

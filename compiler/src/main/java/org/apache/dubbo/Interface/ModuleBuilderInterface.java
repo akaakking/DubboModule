@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.List;
 
-public interface ModuleBuilderInterface {
+public interface ModuleBuilderInterface extends AbstractBuilder{
     ModuleBuilderInterface name(String name);
     ModuleBuilderInterface version(String version);
     ModuleBuilderInterface owner(String owner);

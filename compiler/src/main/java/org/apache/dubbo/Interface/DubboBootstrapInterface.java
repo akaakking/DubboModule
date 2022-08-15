@@ -8,7 +8,7 @@ import org.apache.dubbo.rpc.model.FrameworkModel;
 import org.apache.dubbo.rpc.model.ModuleModel;
 import org.apache.dubbo.common.config.ReferenceCache;
 
-public interface DubboBootstrapInterface {
+public interface DubboBootstrapInterface extends Object{
     DubboBootstrapInterface getInstance();
     DubboBootstrapInterface getInstance(ApplicationModel applicationModel);
     DubboBootstrapInterface newInstance();

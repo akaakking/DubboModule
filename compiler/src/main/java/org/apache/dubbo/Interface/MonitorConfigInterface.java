@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.Map;
 
-public interface MonitorConfigInterface {
+public interface MonitorConfigInterface extends AbstractConfig{
     String getAddress();
     void setAddress(String address);
     String getProtocol();

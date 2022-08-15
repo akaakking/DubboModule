@@ -4,7 +4,7 @@ import org.springframework.beans.PropertyValue;
 import org.springframework.beans.PropertyValue[];
 import org.springframework.beans.PropertyValues;
 
-public interface AnnotationPropertyValuesAdapterInterface {
+public interface AnnotationPropertyValuesAdapterInterface extends Object, org.springframework.beans.PropertyValues{
     PropertyValue getPropertyValues();
     PropertyValue getPropertyValue(String propertyName);
     PropertyValues changesSince(PropertyValues old);

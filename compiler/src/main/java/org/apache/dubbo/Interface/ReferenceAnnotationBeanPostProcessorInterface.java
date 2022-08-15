@@ -8,7 +8,7 @@ import org.springframework.beans.PropertyValues;
 import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
-public interface ReferenceAnnotationBeanPostProcessorInterface {
+public interface ReferenceAnnotationBeanPostProcessorInterface extends AbstractAnnotationBeanPostProcessor, org.springframework.context.ApplicationContextAware, org.springframework.beans.factory.config.BeanFactoryPostProcessor{
     void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory);
     void postProcessMergedBeanDefinition(RootBeanDefinition beanDefinition, Class beanType, String beanName);
     PropertyValues postProcessPropertyValues(PropertyValues pvs, PropertyDescriptor pds, Object bean, String beanName);

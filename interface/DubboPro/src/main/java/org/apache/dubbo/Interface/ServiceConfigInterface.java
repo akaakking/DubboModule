@@ -37,4 +37,5 @@ public interface ServiceConfigInterface<T> {
                 package3
             className
             typeParameters
+            只用内部没有继承只有实现接口，继承是只继承了spring的一些东西。
  */

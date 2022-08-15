@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 import java.util.List;
 import org.apache.dubbo.rpc.model.ModuleModel;
 
-public interface ModuleInterface<S> {
+public interface ModuleInterface<S> extends Object{
     DubboBootstrapInterface endModule();
     ModuleModel getModuleModel();
     ModuleInterface<S> config(ModuleConfigInterface moduleConfig);

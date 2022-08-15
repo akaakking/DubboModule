@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.List;
 
-public interface CompositeReferenceCacheInterface {
+public interface CompositeReferenceCacheInterface extends Object, ReferenceCache{
     T get(ReferenceConfigBaseInterface<T> referenceConfig);
     T get(String key, Class type);
     T get(String key);

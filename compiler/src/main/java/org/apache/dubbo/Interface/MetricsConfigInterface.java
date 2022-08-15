@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import org.apache.dubbo.common.URL;
 
-public interface MetricsConfigInterface {
+public interface MetricsConfigInterface extends AbstractConfig{
     URL toUrl();
     String getProtocol();
     void setProtocol(String protocol);

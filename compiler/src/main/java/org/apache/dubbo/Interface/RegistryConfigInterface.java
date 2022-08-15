@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.Map;
 
-public interface RegistryConfigInterface {
+public interface RegistryConfigInterface extends AbstractConfig, org.apache.dubbo.Interface.RegistryConfigInterface{
     String getId();
     String getProtocol();
     void setProtocol(String protocol);

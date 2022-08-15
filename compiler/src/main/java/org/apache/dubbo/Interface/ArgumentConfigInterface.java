@@ -1,7 +1,7 @@
 package org.apache.dubbo.Interface;
 
 
-public interface ArgumentConfigInterface {
+public interface ArgumentConfigInterface extends Object, Serializable{
     Integer getIndex();
     void setIndex(Integer index);
     String getType();

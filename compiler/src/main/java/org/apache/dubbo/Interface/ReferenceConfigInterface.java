@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import org.apache.dubbo.rpc.Invoker;
 
-public interface ReferenceConfigInterface<T> {
+public interface ReferenceConfigInterface<T> extends ReferenceConfigBase{
     String getServices();
     Set getSubscribedServices();
     void setServices(String services);

@@ -3,7 +3,7 @@ package org.apache.dubbo.Interface;
 import org.springframework.core.env.Environment;
 import org.springframework.context.ApplicationContext;
 
-public interface ConfigCenterBeanInterface {
+public interface ConfigCenterBeanInterface extends ConfigCenterConfig, org.springframework.context.ApplicationContextAware, org.springframework.beans.factory.DisposableBean, org.springframework.context.EnvironmentAware{
     void setApplicationContext(ApplicationContext applicationContext);
     void destroy();
     void setEnvironment(Environment environment);

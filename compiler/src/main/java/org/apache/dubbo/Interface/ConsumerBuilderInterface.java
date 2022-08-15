@@ -1,7 +1,7 @@
 package org.apache.dubbo.Interface;
 
 
-public interface ConsumerBuilderInterface {
+public interface ConsumerBuilderInterface extends AbstractReferenceBuilder{
     ConsumerBuilderInterface isDefault(Boolean isDefault);
     ConsumerBuilderInterface client(String client);
     ConsumerBuilderInterface threadPool(String threadPool);

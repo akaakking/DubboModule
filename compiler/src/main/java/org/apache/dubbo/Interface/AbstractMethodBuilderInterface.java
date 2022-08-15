@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.Map;
 
-public interface AbstractMethodBuilderInterface<T><B> {
+public interface AbstractMethodBuilderInterface<T><B> extends AbstractBuilder{
     B timeout(Integer timeout);
     B retries(Integer retries);
     B actives(Integer actives);

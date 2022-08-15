@@ -1,7 +1,7 @@
 package org.apache.dubbo.Interface;
 
 
-public interface ProviderBuilderInterface {
+public interface ProviderBuilderInterface extends AbstractServiceBuilder{
     ProviderBuilderInterface host(String host);
     ProviderBuilderInterface port(Integer port);
     ProviderBuilderInterface contextPath(String contextPath);

@@ -8,7 +8,7 @@ import org.apache.dubbo.rpc.model.ScopeModel;
 import org.apache.dubbo.common.deploy.DeployState;
 import org.apache.dubbo.common.deploy.ApplicationDeployer;
 
-public interface DefaultApplicationDeployerInterface {
+public interface DefaultApplicationDeployerInterface extends AbstractDeployer, ApplicationDeployer{
     ApplicationDeployer get(ScopeModel moduleOrApplicationModel);
     ApplicationModel getApplicationModel();
     ReferenceCache getReferenceCache();

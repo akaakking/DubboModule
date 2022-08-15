@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.dubbo.rpc.model.ServiceMetadata;
 
-public interface ReferenceConfigBaseInterface<T> {
+public interface ReferenceConfigBaseInterface<T> extends AbstractReferenceConfig{
     boolean shouldCheck();
     boolean shouldInit();
     List getPrefixes();

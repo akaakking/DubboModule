@@ -3,7 +3,7 @@ package org.apache.dubbo.Interface;
 import java.util.List;
 import java.util.Map;
 
-public interface ReferenceBeanBuilderInterface {
+public interface ReferenceBeanBuilderInterface extends Object{
     ReferenceBeanInterface<T> build();
     ReferenceBeanBuilderInterface setServices(String services);
     ReferenceBeanBuilderInterface setInterface(String interfaceName);

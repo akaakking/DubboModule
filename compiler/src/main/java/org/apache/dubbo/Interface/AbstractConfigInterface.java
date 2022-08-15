@@ -5,7 +5,7 @@ import org.apache.dubbo.rpc.model.ApplicationModel;
 import java.util.Map;
 import org.apache.dubbo.rpc.model.ScopeModel;
 
-public interface AbstractConfigInterface {
+public interface AbstractConfigInterface extends Object, Serializable{
     String getTagName(Class cls);
     String getPluralTagName(Class cls);
     void appendParameters(Map parameters, Object config);

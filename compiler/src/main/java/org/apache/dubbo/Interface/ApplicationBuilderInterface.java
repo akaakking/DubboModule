@@ -3,7 +3,7 @@ package org.apache.dubbo.Interface;
 import java.util.List;
 import java.util.Map;
 
-public interface ApplicationBuilderInterface {
+public interface ApplicationBuilderInterface extends AbstractBuilder{
     ApplicationBuilderInterface newBuilder();
     ApplicationBuilderInterface name(String name);
     ApplicationBuilderInterface metadata(String metadata);

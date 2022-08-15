@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 
-public interface ModuleConfigManagerInterface {
+public interface ModuleConfigManagerInterface extends AbstractConfigManager, ModuleExt{
     void setModule(ModuleConfigInterface module);
     Optional getModule();
     void addService(ServiceConfigBaseInterface<T> serviceConfig);

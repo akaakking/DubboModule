@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.List;
 
-public interface AbstractInterfaceBuilderInterface<T><B> {
+public interface AbstractInterfaceBuilderInterface<T><B> extends AbstractMethodBuilder{
     B local(String local);
     B local(Boolean local);
     B stub(String stub);

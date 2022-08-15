@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.Map;
 
-public interface ProtocolConfigInterface {
+public interface ProtocolConfigInterface extends AbstractConfig{
     String getName();
     void setName(String name);
     String getHost();

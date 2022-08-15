@@ -6,7 +6,7 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
-public interface ServiceAnnotationPostProcessorInterface {
+public interface ServiceAnnotationPostProcessorInterface extends Object, org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor, org.springframework.context.EnvironmentAware, org.springframework.context.ResourceLoaderAware, org.springframework.beans.factory.BeanClassLoaderAware, org.springframework.context.ApplicationContextAware, org.springframework.beans.factory.InitializingBean{
     void afterPropertiesSet();
     void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry);
     void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory);

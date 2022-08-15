@@ -3,7 +3,7 @@ package org.apache.dubbo.Interface;
 import org.apache.dubbo.common.extension.ExtensionAccessor;
 import org.springframework.context.ApplicationContext;
 
-public interface SpringExtensionInjectorInterface {
+public interface SpringExtensionInjectorInterface extends Object, ExtensionInjector{
     void addApplicationContext(ApplicationContext context);
     SpringExtensionInjectorInterface get(ExtensionAccessor extensionAccessor);
     ApplicationContext getContext();

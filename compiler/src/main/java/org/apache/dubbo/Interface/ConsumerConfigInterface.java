@@ -1,7 +1,7 @@
 package org.apache.dubbo.Interface;
 
 
-public interface ConsumerConfigInterface {
+public interface ConsumerConfigInterface extends AbstractReferenceConfig{
     void setTimeout(Integer timeout);
     String getClient();
     void setClient(String client);

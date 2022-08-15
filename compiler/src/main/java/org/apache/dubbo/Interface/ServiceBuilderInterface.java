@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.List;
 
-public interface ServiceBuilderInterface<U> {
+public interface ServiceBuilderInterface<U> extends AbstractServiceBuilder{
     ServiceBuilderInterface<U> newBuilder();
     ServiceBuilderInterface<U> id(String id);
     ServiceBuilderInterface<U> interfaceName(String interfaceName);

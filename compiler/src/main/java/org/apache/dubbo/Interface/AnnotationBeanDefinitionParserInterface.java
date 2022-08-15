@@ -1,5 +1,5 @@
 package org.apache.dubbo.Interface;
 
 
-public interface AnnotationBeanDefinitionParserInterface {
+public interface AnnotationBeanDefinitionParserInterface extends org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser{
 }

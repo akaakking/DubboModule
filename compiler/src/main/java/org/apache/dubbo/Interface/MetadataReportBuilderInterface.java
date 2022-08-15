@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.Map;
 
-public interface MetadataReportBuilderInterface {
+public interface MetadataReportBuilderInterface extends AbstractBuilder{
     MetadataReportBuilderInterface newBuilder();
     MetadataReportBuilderInterface address(String address);
     MetadataReportBuilderInterface username(String username);

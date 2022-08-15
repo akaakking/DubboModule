@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface AbstractConfigManagerInterface {
+public interface AbstractConfigManagerInterface extends LifecycleAdapter{
     void initialize();
     T addConfig(AbstractConfigInterface config);
     Map getConfigsMap(Class cls);

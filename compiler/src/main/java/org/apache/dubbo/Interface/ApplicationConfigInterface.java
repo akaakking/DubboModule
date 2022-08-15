@@ -3,7 +3,7 @@ package org.apache.dubbo.Interface;
 import java.util.List;
 import java.util.Map;
 
-public interface ApplicationConfigInterface {
+public interface ApplicationConfigInterface extends AbstractConfig, org.apache.dubbo.Interface.ApplicationConfigInterface{
     String getName();
     void setName(String name);
     String getVersion();

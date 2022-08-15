@@ -1,5 +1,5 @@
 package org.apache.dubbo.Interface;
 
 
-public interface BootstrapTakeoverModeInterface {
+public interface BootstrapTakeoverModeInterface extends Enum{
 }

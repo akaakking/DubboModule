@@ -3,7 +3,7 @@ package org.apache.dubbo.Interface;
 import java.util.Map;
 import org.apache.dubbo.rpc.model.ModuleModel;
 
-public interface AbstractMethodConfigInterface {
+public interface AbstractMethodConfigInterface extends AbstractConfig{
     ModuleModel getScopeModel();
     Integer getForks();
     void setForks(Integer forks);

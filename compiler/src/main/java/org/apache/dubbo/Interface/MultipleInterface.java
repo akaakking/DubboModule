@@ -1,5 +1,5 @@
 package org.apache.dubbo.Interface;
 
 
-public interface MultipleInterface {
+public interface MultipleInterface extends Object{
 }

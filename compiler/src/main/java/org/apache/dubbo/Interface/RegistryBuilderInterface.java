@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.Map;
 
-public interface RegistryBuilderInterface {
+public interface RegistryBuilderInterface extends AbstractBuilder{
     RegistryBuilderInterface newBuilder();
     RegistryBuilderInterface id(String id);
     RegistryBuilderInterface address(String address);

@@ -1,7 +1,7 @@
 package org.apache.dubbo.Interface;
 
 
-public interface ProviderConfigInterface {
+public interface ProviderConfigInterface extends AbstractServiceConfig{
     void setProtocol(String protocol);
     String getHost();
     void setHost(String host);

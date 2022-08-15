@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.List;
 
-public interface AbstractServiceConfigInterface {
+public interface AbstractServiceConfigInterface extends AbstractInterfaceConfig{
     String getVersion();
     void setVersion(String version);
     String getGroup();

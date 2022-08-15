@@ -3,7 +3,7 @@ package org.apache.dubbo.Interface;
 import java.util.concurrent.Future;
 import org.apache.dubbo.common.config.ReferenceCache;
 
-public interface DefaultModuleDeployerInterface {
+public interface DefaultModuleDeployerInterface extends AbstractDeployer, ModuleDeployer{
     void initialize();
     Future start();
     Future getStartFuture();

@@ -4,7 +4,7 @@ import org.apache.dubbo.common.URL;
 import org.apache.dubbo.rpc.Invocation;
 import org.apache.dubbo.rpc.Result;
 
-public interface DelegateProviderMetaDataInvokerInterface<T> {
+public interface DelegateProviderMetaDataInvokerInterface<T> extends Object, Invoker{
     Class getInterface();
     URL getUrl();
     boolean isAvailable();

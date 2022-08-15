@@ -2,7 +2,7 @@ package org.apache.dubbo.Interface;
 
 import java.util.List;
 
-public interface MethodBuilderInterface {
+public interface MethodBuilderInterface extends AbstractMethodBuilder{
     MethodBuilderInterface name(String name);
     MethodBuilderInterface stat(Integer stat);
     MethodBuilderInterface retry(Boolean retry);
