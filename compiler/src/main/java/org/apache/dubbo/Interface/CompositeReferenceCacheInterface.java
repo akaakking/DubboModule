@@ -1,17 +1,15 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.List;
 
-public interface CompositeReferenceCacheInterface{
-    TInterface get(ReferenceConfigBaseInterface referenceConfig);
-    TInterface get(String key, Class type);
-    TInterface get(String key);
+public interface CompositeReferenceCacheInterface {
+    T get(ReferenceConfigBaseInterface<T> referenceConfig);
+    T get(String key, Class type);
+    T get(String key);
     List getAll(Class type);
-    TInterface get(Class type);
+    T get(Class type);
     void destroy(String key, Class type);
     void destroy(Class type);
-    void destroy(ReferenceConfigBaseInterface referenceConfig);
+    void destroy(ReferenceConfigBaseInterface<T> referenceConfig);
     void destroyAll();
-
 }

@@ -1,19 +1,21 @@
 package org.apache.dubbo.Interface;
 
-import java.util;
-import java.lang;
+import java.util.List;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Optional;
 
-public interface ModuleConfigManagerInterface{
+public interface ModuleConfigManagerInterface {
     void setModule(ModuleConfigInterface module);
     Optional getModule();
-    void addService(ServiceConfigBaseInterface serviceConfig);
+    void addService(ServiceConfigBaseInterface<T> serviceConfig);
     void addServices(Iterable serviceConfigs);
     Collection getServices();
-    ServiceConfigBaseInterface getService(String id);
-    void addReference(ReferenceConfigBaseInterface referenceConfig);
+    ServiceConfigBaseInterface<T> getService(String id);
+    void addReference(ReferenceConfigBaseInterface<T> referenceConfig);
     void addReferences(Iterable referenceConfigs);
     Collection getReferences();
-    ReferenceConfigBaseInterface getReference(String id);
+    ReferenceConfigBaseInterface<T> getReference(String id);
     void addProvider(ProviderConfigInterface providerConfig);
     void addProviders(Iterable providerConfigs);
     Optional getProvider(String id);
@@ -47,5 +49,4 @@ public interface ModuleConfigManagerInterface{
     Optional getRegistry(String id);
     List getDefaultRegistries();
     Collection getRegistries();
-
 }

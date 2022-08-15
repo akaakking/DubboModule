@@ -1,15 +1,14 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.lang;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationContext;
 
-public interface ServiceBeanInterface<T>{
-    void setApplicationContext(org.springframework.context.ApplicationContext applicationContext);
+public interface ServiceBeanInterface<T> {
+    void setApplicationContext(ApplicationContext applicationContext);
     void setBeanName(String name);
     ServiceInterface getService();
     void afterPropertiesSet();
     String getBeanName();
     void destroy();
-    void setApplicationEventPublisher(org.springframework.context.ApplicationEventPublisher applicationEventPublisher);
-
+    void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher);
 }

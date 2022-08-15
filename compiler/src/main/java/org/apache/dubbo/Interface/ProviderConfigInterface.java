@@ -1,8 +1,7 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
 
-public interface ProviderConfigInterface{
+public interface ProviderConfigInterface {
     void setProtocol(String protocol);
     String getHost();
     void setHost(String host);
@@ -60,5 +59,4 @@ public interface ProviderConfigInterface{
     void setExportThreadNum(Integer exportThreadNum);
     Boolean getExportBackground();
     void setExportBackground(Boolean exportBackground);
-
 }

@@ -1,11 +1,13 @@
 package org.apache.dubbo.Interface;
 
-import java.util;
-import java.lang;
+import java.util.List;
+import java.util.Map;
+import java.util.Collection;
+import java.util.Optional;
 
-public interface AbstractConfigManagerInterface{
+public interface AbstractConfigManagerInterface {
     void initialize();
-    TInterface addConfig(AbstractConfigInterface config);
+    T addConfig(AbstractConfigInterface config);
     Map getConfigsMap(Class cls);
     Collection getConfigs(Class configType);
     Optional getConfig(Class cls, String idOrName);
@@ -17,5 +19,4 @@ public interface AbstractConfigManagerInterface{
     void destroy();
     void clear();
     boolean isInitialized();
-
 }

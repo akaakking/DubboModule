@@ -1,8 +1,7 @@
 package org.apache.dubbo.Interface;
 
 
-public interface ServiceListenerInterface{
-    void exported(ServiceConfigInterface sc);
-    void unexported(ServiceConfigInterface sc);
-
+public interface ServiceListenerInterface {
+    void exported(ServiceConfigInterface<T> sc);
+    void unexported(ServiceConfigInterface<T> sc);
 }

@@ -1,10 +1,9 @@
 package org.apache.dubbo.Interface;
 
-import java.util;
-import java.lang;
-import org.apache.dubbo.common;
+import org.apache.dubbo.common.URL;
+import java.util.Map;
 
-public interface ConfigCenterConfigInterface{
+public interface ConfigCenterConfigInterface {
     URL toUrl();
     boolean checkOrUpdateInitialized(boolean update);
     void setInitialized(boolean val);
@@ -42,5 +41,4 @@ public interface ConfigCenterConfigInterface{
     void setParameters(Map parameters);
     boolean isValid();
     void updateParameters(Map parameters);
-
 }

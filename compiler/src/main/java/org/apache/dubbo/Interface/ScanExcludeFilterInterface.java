@@ -1,9 +1,9 @@
 package org.apache.dubbo.Interface;
 
-import ;
+import org.springframework.core.type.classreading.MetadataReaderFactory;
+import org.springframework.core.type.classreading.MetadataReader;
 
-public interface ScanExcludeFilterInterface{
-    boolean match(org.springframework.core.type.classreading.MetadataReader metadataReader, org.springframework.core.type.classreading.MetadataReaderFactory metadataReaderFactory);
+public interface ScanExcludeFilterInterface {
+    boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory);
     int getExcludedCount();
-
 }

@@ -1,23 +1,21 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.Map;
 
-public interface AbstractMethodBuilderInterface<T>{
-    BInterface timeout(Integer timeout);
-    BInterface retries(Integer retries);
-    BInterface actives(Integer actives);
-    BInterface loadbalance(String loadbalance);
-    BInterface async(Boolean async);
-    BInterface sent(Boolean sent);
-    BInterface mock(String mock);
-    BInterface mock(Boolean mock);
-    BInterface merger(String merger);
-    BInterface cache(String cache);
-    BInterface validation(String validation);
-    BInterface appendParameters(Map appendParameters);
-    BInterface appendParameter(String key, String value);
-    BInterface forks(Integer forks);
-    void build(TInterface instance);
-
+public interface AbstractMethodBuilderInterface<T><B> {
+    B timeout(Integer timeout);
+    B retries(Integer retries);
+    B actives(Integer actives);
+    B loadbalance(String loadbalance);
+    B async(Boolean async);
+    B sent(Boolean sent);
+    B mock(String mock);
+    B mock(Boolean mock);
+    B merger(String merger);
+    B cache(String cache);
+    B validation(String validation);
+    B appendParameters(Map appendParameters);
+    B appendParameter(String key, String value);
+    B forks(Integer forks);
+    void build(T instance);
 }

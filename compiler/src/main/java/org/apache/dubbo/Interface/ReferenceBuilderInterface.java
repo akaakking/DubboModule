@@ -1,20 +1,18 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.List;
 
-public interface ReferenceBuilderInterface<T>{
-    ReferenceBuilderInterface newBuilder();
-    ReferenceBuilderInterface id(String id);
-    ReferenceBuilderInterface interfaceName(String interfaceName);
-    ReferenceBuilderInterface interfaceClass(Class interfaceClass);
-    ReferenceBuilderInterface client(String client);
-    ReferenceBuilderInterface url(String url);
-    ReferenceBuilderInterface addMethods(List methods);
-    ReferenceBuilderInterface addMethod(MethodConfigInterface method);
-    ReferenceBuilderInterface consumer(ConsumerConfigInterface consumer);
-    ReferenceBuilderInterface protocol(String protocol);
-    ReferenceBuilderInterface services(String service, String otherServices);
-    ReferenceConfigInterface build();
-
+public interface ReferenceBuilderInterface<T> {
+    ReferenceBuilderInterface<T> newBuilder();
+    ReferenceBuilderInterface<T> id(String id);
+    ReferenceBuilderInterface<T> interfaceName(String interfaceName);
+    ReferenceBuilderInterface<T> interfaceClass(Class interfaceClass);
+    ReferenceBuilderInterface<T> client(String client);
+    ReferenceBuilderInterface<T> url(String url);
+    ReferenceBuilderInterface<T> addMethods(List methods);
+    ReferenceBuilderInterface<T> addMethod(MethodConfigInterface method);
+    ReferenceBuilderInterface<T> consumer(ConsumerConfigInterface consumer);
+    ReferenceBuilderInterface<T> protocol(String protocol);
+    ReferenceBuilderInterface<T> services(String service, String otherServices);
+    ReferenceConfigInterface<T> build();
 }

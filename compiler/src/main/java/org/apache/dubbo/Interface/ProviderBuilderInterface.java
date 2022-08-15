@@ -1,8 +1,7 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
 
-public interface ProviderBuilderInterface{
+public interface ProviderBuilderInterface {
     ProviderBuilderInterface host(String host);
     ProviderBuilderInterface port(Integer port);
     ProviderBuilderInterface contextPath(String contextPath);
@@ -27,5 +26,4 @@ public interface ProviderBuilderInterface{
     ProviderBuilderInterface wait(Integer wait);
     ProviderBuilderInterface isDefault(Boolean isDefault);
     ProviderConfigInterface build();
-
 }

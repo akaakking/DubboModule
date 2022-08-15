@@ -1,14 +1,14 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.lang;
-import java.util;
+import java.util.Map;
+import org.springframework.beans.MutablePropertyValues;
+import org.springframework.context.ApplicationContext;
 
-public interface ReferenceBeanInterface<T>{
-    void setApplicationContext(org.springframework.context.ApplicationContext applicationContext);
+public interface ReferenceBeanInterface<T> {
+    void setApplicationContext(ApplicationContext applicationContext);
     void setBeanClassLoader(ClassLoader classLoader);
     void setBeanName(String name);
-    TInterface getObject();
+    T getObject();
     Class getObjectType();
     boolean isSingleton();
     void afterPropertiesSet();
@@ -21,8 +21,7 @@ public interface ReferenceBeanInterface<T>{
     String getVersion();
     String getKey();
     Map getReferenceProps();
-    org.springframework.beans.MutablePropertyValues getPropertyValues();
-    ReferenceConfigInterface getReferenceConfig();
-    void setKeyAndReferenceConfig(String key, ReferenceConfigInterface referenceConfig);
-
+    MutablePropertyValues getPropertyValues();
+    ReferenceConfigInterface<T> getReferenceConfig();
+    void setKeyAndReferenceConfig(String key, ReferenceConfigInterface<T> referenceConfig);
 }

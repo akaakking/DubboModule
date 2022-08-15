@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import org.apache.dubbo.common;
+import org.apache.dubbo.common.URL;
 
-public interface MetricsConfigInterface{
+public interface MetricsConfigInterface {
     URL toUrl();
     String getProtocol();
     void setProtocol(String protocol);
@@ -13,5 +12,4 @@ public interface MetricsConfigInterface{
     void setPrometheus(PrometheusConfigInterface prometheus);
     AggregationConfigInterface getAggregation();
     void setAggregation(AggregationConfigInterface aggregation);
-
 }

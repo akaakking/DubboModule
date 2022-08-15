@@ -1,10 +1,9 @@
 package org.apache.dubbo.Interface;
 
-import java.util;
-import java.lang;
-import org.apache.dubbo.rpc.model;
+import java.util.List;
+import org.apache.dubbo.rpc.model.AsyncMethodInfo;
 
-public interface MethodConfigInterface{
+public interface MethodConfigInterface {
     List constructMethodConfig(MethodInterface methods);
     List getPrefixes();
     AsyncMethodInfo convertMethodConfig2AsyncInfo();
@@ -45,5 +44,4 @@ public interface MethodConfigInterface{
     void setParentPrefix(String parentPrefix);
     String getParentPrefix();
     void addArgument(ArgumentConfigInterface argumentConfig);
-
 }

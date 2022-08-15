@@ -1,16 +1,15 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.lang;
-import java.util;
+import java.util.List;
+import java.util.Collection;
+import org.springframework.context.ApplicationContext;
 
-public interface ReferenceBeanManagerInterface{
-    void addReference(ReferenceBeanInterface referenceBean);
+public interface ReferenceBeanManagerInterface {
+    void addReference(ReferenceBeanInterface<T> referenceBean);
     void registerReferenceKeyAndBeanName(String referenceKey, String referenceBeanNameOrAlias);
-    ReferenceBeanInterface getById(String referenceBeanNameOrAlias);
+    ReferenceBeanInterface<T> getById(String referenceBeanNameOrAlias);
     List getBeanNamesByKey(String key);
     Collection getReferences();
-    void setApplicationContext(org.springframework.context.ApplicationContext applicationContext);
+    void setApplicationContext(ApplicationContext applicationContext);
     void prepareReferenceBeans();
-
 }

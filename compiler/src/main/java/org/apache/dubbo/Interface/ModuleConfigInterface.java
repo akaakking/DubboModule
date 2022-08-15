@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.List;
 
-public interface ModuleConfigInterface{
+public interface ModuleConfigInterface {
     String getName();
     void setName(String name);
     String getVersion();
@@ -29,5 +28,4 @@ public interface ModuleConfigInterface{
     void setReferAsync(Boolean referAsync);
     Boolean getExportAsync();
     void setExportAsync(Boolean exportAsync);
-
 }

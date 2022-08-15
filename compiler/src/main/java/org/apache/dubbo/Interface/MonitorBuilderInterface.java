@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.Map;
 
-public interface MonitorBuilderInterface{
+public interface MonitorBuilderInterface {
     MonitorBuilderInterface protocol(String protocol);
     MonitorBuilderInterface address(String address);
     MonitorBuilderInterface username(String username);
@@ -15,5 +14,4 @@ public interface MonitorBuilderInterface{
     MonitorBuilderInterface appendParameter(String key, String value);
     MonitorBuilderInterface appendParameters(Map appendParameters);
     MonitorConfigInterface build();
-
 }

@@ -1,6 +1,5 @@
 package org.apache.dubbo.Interface;
 
 
-public interface ConfigModeInterface{
-
+public interface ConfigModeInterface {
 }

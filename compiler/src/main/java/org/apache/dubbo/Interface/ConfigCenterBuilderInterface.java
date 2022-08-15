@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.Map;
 
-public interface ConfigCenterBuilderInterface{
+public interface ConfigCenterBuilderInterface {
     ConfigCenterBuilderInterface protocol(String protocol);
     ConfigCenterBuilderInterface address(String address);
     ConfigCenterBuilderInterface cluster(String cluster);
@@ -19,5 +18,4 @@ public interface ConfigCenterBuilderInterface{
     ConfigCenterBuilderInterface appendParameters(Map appendParameters);
     ConfigCenterBuilderInterface appendParameter(String key, String value);
     ConfigCenterConfigInterface build();
-
 }

@@ -1,16 +1,15 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.lang;
+import org.springframework.core.env.Environment;
+import org.springframework.core.annotation.AnnotationAttributes;
 
-public interface ServiceBeanNameBuilderInterface{
-    ServiceBeanNameBuilderInterface create(org.springframework.core.annotation.AnnotationAttributes attributes, Class defaultInterfaceClass, org.springframework.core.env.Environment environment);
-    ServiceBeanNameBuilderInterface create(Class interfaceClass, org.springframework.core.env.Environment environment);
-    ServiceBeanNameBuilderInterface create(String interfaceClass, org.springframework.core.env.Environment environment);
-    ServiceBeanNameBuilderInterface create(ServiceInterface service, Class interfaceClass, org.springframework.core.env.Environment environment);
-    ServiceBeanNameBuilderInterface create(ReferenceInterface reference, Class interfaceClass, org.springframework.core.env.Environment environment);
+public interface ServiceBeanNameBuilderInterface {
+    ServiceBeanNameBuilderInterface create(AnnotationAttributes attributes, Class defaultInterfaceClass, Environment environment);
+    ServiceBeanNameBuilderInterface create(Class interfaceClass, Environment environment);
+    ServiceBeanNameBuilderInterface create(String interfaceClass, Environment environment);
+    ServiceBeanNameBuilderInterface create(ServiceInterface service, Class interfaceClass, Environment environment);
+    ServiceBeanNameBuilderInterface create(ReferenceInterface reference, Class interfaceClass, Environment environment);
     ServiceBeanNameBuilderInterface group(String group);
     ServiceBeanNameBuilderInterface version(String version);
     String build();
-
 }

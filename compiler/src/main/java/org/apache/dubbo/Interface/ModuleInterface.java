@@ -1,29 +1,27 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
-import org.apache.dubbo.rpc.model;
-import java.util.function;
+import java.util.function.Consumer;
+import java.util.List;
+import org.apache.dubbo.rpc.model.ModuleModel;
 
-public interface ModuleInterface<T>{
+public interface ModuleInterface<S> {
     DubboBootstrapInterface endModule();
     ModuleModel getModuleModel();
-    ModuleInterface config(ModuleConfigInterface moduleConfig);
-    ModuleInterface service(Consumer consumerBuilder);
-    ModuleInterface service(String id, Consumer consumerBuilder);
-    ModuleInterface services(List serviceConfigs);
-    ModuleInterface service(ServiceConfigInterface serviceConfig);
-    ModuleInterface reference(Consumer consumerBuilder);
-    ModuleInterface reference(String id, Consumer consumerBuilder);
-    ModuleInterface reference(ReferenceConfigInterface referenceConfig);
-    ModuleInterface references(List referenceConfigs);
-    ModuleInterface provider(Consumer builderConsumer);
-    ModuleInterface provider(String id, Consumer builderConsumer);
-    ModuleInterface provider(ProviderConfigInterface providerConfig);
-    ModuleInterface providers(List providerConfigs);
-    ModuleInterface consumer(Consumer builderConsumer);
-    ModuleInterface consumer(String id, Consumer builderConsumer);
-    ModuleInterface consumer(ConsumerConfigInterface consumerConfig);
-    ModuleInterface consumers(List consumerConfigs);
-
+    ModuleInterface<S> config(ModuleConfigInterface moduleConfig);
+    ModuleInterface<S> service(Consumer consumerBuilder);
+    ModuleInterface<S> service(String id, Consumer consumerBuilder);
+    ModuleInterface<S> services(List serviceConfigs);
+    ModuleInterface<S> service(ServiceConfigInterface<T> serviceConfig);
+    ModuleInterface<S> reference(Consumer consumerBuilder);
+    ModuleInterface<S> reference(String id, Consumer consumerBuilder);
+    ModuleInterface<S> reference(ReferenceConfigInterface<T> referenceConfig);
+    ModuleInterface<S> references(List referenceConfigs);
+    ModuleInterface<S> provider(Consumer builderConsumer);
+    ModuleInterface<S> provider(String id, Consumer builderConsumer);
+    ModuleInterface<S> provider(ProviderConfigInterface providerConfig);
+    ModuleInterface<S> providers(List providerConfigs);
+    ModuleInterface<S> consumer(Consumer builderConsumer);
+    ModuleInterface<S> consumer(String id, Consumer builderConsumer);
+    ModuleInterface<S> consumer(ConsumerConfigInterface consumerConfig);
+    ModuleInterface<S> consumers(List consumerConfigs);
 }

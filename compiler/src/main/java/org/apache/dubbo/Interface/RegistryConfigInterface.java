@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.Map;
 
-public interface RegistryConfigInterface{
+public interface RegistryConfigInterface {
     String getId();
     String getProtocol();
     void setProtocol(String protocol);
@@ -69,5 +68,4 @@ public interface RegistryConfigInterface{
     Boolean getEnableEmptyProtection();
     void setEnableEmptyProtection(Boolean enableEmptyProtection);
     boolean isValid();
-
 }

@@ -1,7 +1,6 @@
 package org.apache.dubbo.Interface;
 
 
-public interface ConfigValidatorInterface{
+public interface ConfigValidatorInterface {
     void validate(AbstractConfigInterface config);
-
 }

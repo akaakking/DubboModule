@@ -1,9 +1,9 @@
 package org.apache.dubbo.Interface;
 
-import java.util.concurrent;
-import org.apache.dubbo.common.config;
+import java.util.concurrent.Future;
+import org.apache.dubbo.common.config.ReferenceCache;
 
-public interface DefaultModuleDeployerInterface{
+public interface DefaultModuleDeployerInterface {
     void initialize();
     Future start();
     Future getStartFuture();
@@ -13,5 +13,4 @@ public interface DefaultModuleDeployerInterface{
     boolean isBackground();
     ReferenceCache getReferenceCache();
     void prepare();
-
 }

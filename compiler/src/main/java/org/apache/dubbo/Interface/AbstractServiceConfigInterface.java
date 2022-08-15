@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.List;
 
-public interface AbstractServiceConfigInterface{
+public interface AbstractServiceConfigInterface {
     String getVersion();
     void setVersion(String version);
     String getGroup();
@@ -45,5 +44,4 @@ public interface AbstractServiceConfigInterface{
     void setSerialization(String serialization);
     Boolean getExportAsync();
     void setExportAsync(Boolean exportAsync);
-
 }

@@ -1,9 +1,9 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.List;
+import java.util.Map;
 
-public interface ApplicationBuilderInterface{
+public interface ApplicationBuilderInterface {
     ApplicationBuilderInterface newBuilder();
     ApplicationBuilderInterface name(String name);
     ApplicationBuilderInterface metadata(String metadata);
@@ -32,5 +32,4 @@ public interface ApplicationBuilderInterface{
     ApplicationBuilderInterface readinessProbe(String readinessProbe);
     ApplicationBuilderInterface startupProbe(String startupProbe);
     ApplicationConfigInterface build();
-
 }

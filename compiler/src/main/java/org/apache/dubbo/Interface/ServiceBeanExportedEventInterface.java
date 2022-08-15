@@ -1,7 +1,6 @@
 package org.apache.dubbo.Interface;
 
 
-public interface ServiceBeanExportedEventInterface{
-    ServiceBeanInterface getServiceBean();
-
+public interface ServiceBeanExportedEventInterface {
+    ServiceBeanInterface<T> getServiceBean();
 }

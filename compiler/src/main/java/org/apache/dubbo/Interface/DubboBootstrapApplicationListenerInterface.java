@@ -1,11 +1,11 @@
 package org.apache.dubbo.Interface;
 
-import ;
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationContext;
 
-public interface DubboBootstrapApplicationListenerInterface{
-    void onApplicationEvent(org.springframework.context.ApplicationEvent event);
+public interface DubboBootstrapApplicationListenerInterface {
+    void onApplicationEvent(ApplicationEvent event);
     int getOrder();
-    void setApplicationContext(org.springframework.context.ApplicationContext applicationContext);
-    org.springframework.context.ApplicationContext getApplicationContext();
-
+    void setApplicationContext(ApplicationContext applicationContext);
+    ApplicationContext getApplicationContext();
 }

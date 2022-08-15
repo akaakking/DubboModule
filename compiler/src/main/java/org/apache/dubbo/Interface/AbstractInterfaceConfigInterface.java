@@ -1,11 +1,13 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.util;
-import java.lang;
-import org.apache.dubbo.common;
+import java.util.List;
+import org.apache.dubbo.common.URL;
+import org.apache.dubbo.Interface.MetadataReportConfigInterface;
+import java.util.Map;
+import org.apache.dubbo.Interface.ApplicationConfigInterface;
+import org.apache.dubbo.Interface.RegistryConfigInterface;
 
-public interface AbstractInterfaceConfigInterface{
+public interface AbstractInterfaceConfigInterface {
     List getExportedUrls();
     URL toUrl();
     List toUrls();
@@ -29,11 +31,11 @@ public interface AbstractInterfaceConfigInterface{
     String getLayer();
     void setLayer(String layer);
     ApplicationConfigInterface getApplication();
-    void setApplication(org.apache.dubbo.Interface.ApplicationConfigInterface application);
+    void setApplication(ApplicationConfigInterface application);
     ModuleConfigInterface getModule();
     void setModule(ModuleConfigInterface module);
     RegistryConfigInterface getRegistry();
-    void setRegistry(org.apache.dubbo.Interface.RegistryConfigInterface registry);
+    void setRegistry(RegistryConfigInterface registry);
     List getRegistries();
     void setRegistries(List registries);
     String getRegistryIds();
@@ -57,7 +59,7 @@ public interface AbstractInterfaceConfigInterface{
     String getScope();
     void setScope(String scope);
     MetadataReportConfigInterface getMetadataReportConfig();
-    void setMetadataReportConfig(org.apache.dubbo.Interface.MetadataReportConfigInterface metadataReportConfig);
+    void setMetadataReportConfig(MetadataReportConfigInterface metadataReportConfig);
     String getTag();
     void setTag(String tag);
     Boolean getAuth();
@@ -75,5 +77,4 @@ public interface AbstractInterfaceConfigInterface{
     void setInterface(String interfaceName);
     ClassLoader getInterfaceClassLoader();
     void setInterfaceClassLoader(ClassLoader interfaceClassLoader);
-
 }

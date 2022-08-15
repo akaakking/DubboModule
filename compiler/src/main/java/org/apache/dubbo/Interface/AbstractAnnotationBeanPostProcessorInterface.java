@@ -1,13 +1,12 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.lang;
+import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.BeanFactory;
 
-public interface AbstractAnnotationBeanPostProcessorInterface{
+public interface AbstractAnnotationBeanPostProcessorInterface {
     Class getAnnotationType();
-    void setBeanFactory(org.springframework.beans.factory.BeanFactory beanFactory);
+    void setBeanFactory(BeanFactory beanFactory);
     void destroy();
     void setBeanClassLoader(ClassLoader classLoader);
-    void setEnvironment(org.springframework.core.env.Environment environment);
-
+    void setEnvironment(Environment environment);
 }

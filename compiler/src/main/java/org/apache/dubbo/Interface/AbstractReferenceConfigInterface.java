@@ -1,8 +1,7 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
 
-public interface AbstractReferenceConfigInterface{
+public interface AbstractReferenceConfigInterface {
     Boolean isCheck();
     void setCheck(Boolean check);
     Boolean isInit();
@@ -31,5 +30,4 @@ public interface AbstractReferenceConfigInterface{
     void setRouter(String router);
     Boolean getReferAsync();
     void setReferAsync(Boolean referAsync);
-
 }

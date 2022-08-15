@@ -1,8 +1,7 @@
 package org.apache.dubbo.Interface;
 
-import ;
+import org.springframework.context.ApplicationContext;
 
-public interface DubboConfigInitEventInterface{
-    org.springframework.context.ApplicationContext getApplicationContext();
-
+public interface DubboConfigInitEventInterface {
+    ApplicationContext getApplicationContext();
 }

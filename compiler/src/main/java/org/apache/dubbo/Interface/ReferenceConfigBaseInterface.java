@@ -1,10 +1,10 @@
 package org.apache.dubbo.Interface;
 
-import java.util;
-import java.lang;
-import org.apache.dubbo.rpc.model;
+import java.util.List;
+import java.util.Map;
+import org.apache.dubbo.rpc.model.ServiceMetadata;
 
-public interface ReferenceConfigBaseInterface<T>{
+public interface ReferenceConfigBaseInterface<T> {
     boolean shouldCheck();
     boolean shouldInit();
     List getPrefixes();
@@ -27,7 +27,6 @@ public interface ReferenceConfigBaseInterface<T>{
     String getVersion();
     String getGroup();
     Boolean shouldReferAsync();
-    TInterface get();
+    T get();
     void destroy();
-
 }

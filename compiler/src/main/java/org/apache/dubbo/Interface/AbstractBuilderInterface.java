@@ -1,9 +1,7 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
 
-public interface AbstractBuilderInterface<T>{
-    BInterface id(String id);
-    CInterface build();
-
+public interface AbstractBuilderInterface<C><B> {
+    B id(String id);
+    C build();
 }

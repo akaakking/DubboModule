@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.List;
 
-public interface MethodBuilderInterface{
+public interface MethodBuilderInterface {
     MethodBuilderInterface name(String name);
     MethodBuilderInterface stat(Integer stat);
     MethodBuilderInterface retry(Boolean retry);
@@ -23,5 +22,4 @@ public interface MethodBuilderInterface{
     MethodBuilderInterface service(String service);
     MethodBuilderInterface serviceId(String serviceId);
     MethodConfigInterface build();
-
 }

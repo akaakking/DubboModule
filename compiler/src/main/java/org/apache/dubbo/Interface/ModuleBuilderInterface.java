@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.List;
 
-public interface ModuleBuilderInterface{
+public interface ModuleBuilderInterface {
     ModuleBuilderInterface name(String name);
     ModuleBuilderInterface version(String version);
     ModuleBuilderInterface owner(String owner);
@@ -13,5 +12,4 @@ public interface ModuleBuilderInterface{
     ModuleBuilderInterface monitor(MonitorConfigInterface monitor);
     ModuleBuilderInterface isDefault(Boolean isDefault);
     ModuleConfigInterface build();
-
 }

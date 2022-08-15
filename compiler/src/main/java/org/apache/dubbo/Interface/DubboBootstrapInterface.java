@@ -1,13 +1,14 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
-import java.util.concurrent;
-import org.apache.dubbo.rpc.model;
-import org.apache.dubbo.common.config;
-import java.util.function;
+import java.util.function.Consumer;
+import java.util.concurrent.Future;
+import java.util.List;
+import org.apache.dubbo.rpc.model.ApplicationModel;
+import org.apache.dubbo.rpc.model.FrameworkModel;
+import org.apache.dubbo.rpc.model.ModuleModel;
+import org.apache.dubbo.common.config.ReferenceCache;
 
-public interface DubboBootstrapInterface{
+public interface DubboBootstrapInterface {
     DubboBootstrapInterface getInstance();
     DubboBootstrapInterface getInstance(ApplicationModel applicationModel);
     DubboBootstrapInterface newInstance();
@@ -52,13 +53,13 @@ public interface DubboBootstrapInterface{
     DubboBootstrapInterface service(Consumer consumerBuilder);
     DubboBootstrapInterface service(String id, Consumer consumerBuilder);
     DubboBootstrapInterface services(List serviceConfigs);
-    DubboBootstrapInterface service(ServiceConfigInterface serviceConfig);
-    DubboBootstrapInterface service(ServiceConfigInterface serviceConfig, ModuleModel moduleModel);
+    DubboBootstrapInterface service(ServiceConfigInterface<T> serviceConfig);
+    DubboBootstrapInterface service(ServiceConfigInterface<T> serviceConfig, ModuleModel moduleModel);
     DubboBootstrapInterface reference(Consumer consumerBuilder);
     DubboBootstrapInterface reference(String id, Consumer consumerBuilder);
     DubboBootstrapInterface references(List referenceConfigs);
-    DubboBootstrapInterface reference(ReferenceConfigInterface referenceConfig);
-    DubboBootstrapInterface reference(ReferenceConfigInterface referenceConfig, ModuleModel moduleModel);
+    DubboBootstrapInterface reference(ReferenceConfigInterface<T> referenceConfig);
+    DubboBootstrapInterface reference(ReferenceConfigInterface<T> referenceConfig, ModuleModel moduleModel);
     DubboBootstrapInterface provider(Consumer builderConsumer);
     DubboBootstrapInterface provider(String id, Consumer builderConsumer);
     DubboBootstrapInterface provider(ProviderConfigInterface providerConfig);
@@ -78,8 +79,7 @@ public interface DubboBootstrapInterface{
     DubboBootstrapInterface monitor(MonitorConfigInterface monitor);
     DubboBootstrapInterface metrics(MetricsConfigInterface metrics);
     DubboBootstrapInterface ssl(SslConfigInterface sslConfig);
-    ModuleInterface newModule();
-    ModuleInterface newModule(ModuleConfigInterface moduleConfig);
+    ModuleInterface<S> newModule();
+    ModuleInterface<S> newModule(ModuleConfigInterface moduleConfig);
     DubboBootstrapInterface endModule();
-
 }

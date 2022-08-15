@@ -1,8 +1,7 @@
 package org.apache.dubbo.Interface;
 
 
-public interface ConfigPostProcessorInterface{
-    void postProcessReferConfig(ReferenceConfigInterface referenceConfig);
-    void postProcessServiceConfig(ServiceConfigInterface serviceConfig);
-
+public interface ConfigPostProcessorInterface {
+    void postProcessReferConfig(ReferenceConfigInterface<T> referenceConfig);
+    void postProcessServiceConfig(ServiceConfigInterface<T> serviceConfig);
 }

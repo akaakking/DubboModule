@@ -1,12 +1,10 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.util;
-import java.lang;
+import java.util.Map;
+import org.springframework.context.ApplicationContext;
 
-public interface ReferenceCreatorInterface{
-    ReferenceConfigInterface build();
-    ReferenceCreatorInterface create(Map attributes, org.springframework.context.ApplicationContext applicationContext);
+public interface ReferenceCreatorInterface {
+    ReferenceConfigInterface<T> build();
+    ReferenceCreatorInterface create(Map attributes, ApplicationContext applicationContext);
     ReferenceCreatorInterface defaultInterfaceClass(Class interfaceClass);
-
 }

@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import org.apache.dubbo.rpc.model;
+import org.apache.dubbo.rpc.model.ApplicationModel;
 
-public interface ExporterDeployListenerInterface{
+public interface ExporterDeployListenerInterface {
     void onStarting(ApplicationModel scopeModel);
     void onStarted(ApplicationModel applicationModel);
     void onStopping(ApplicationModel scopeModel);
@@ -13,5 +12,4 @@ public interface ExporterDeployListenerInterface{
     void onStopped(ApplicationModel scopeModel);
     void onFailure(ApplicationModel scopeModel, Throwable cause);
     int getPriority();
-
 }

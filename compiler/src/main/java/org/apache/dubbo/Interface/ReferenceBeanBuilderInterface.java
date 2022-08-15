@@ -1,10 +1,10 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.List;
+import java.util.Map;
 
-public interface ReferenceBeanBuilderInterface{
-    ReferenceBeanInterface build();
+public interface ReferenceBeanBuilderInterface {
+    ReferenceBeanInterface<T> build();
     ReferenceBeanBuilderInterface setServices(String services);
     ReferenceBeanBuilderInterface setInterface(String interfaceName);
     ReferenceBeanBuilderInterface setInterface(Class interfaceClass);
@@ -53,5 +53,4 @@ public interface ReferenceBeanBuilderInterface{
     ReferenceBeanBuilderInterface setCache(String cache);
     ReferenceBeanBuilderInterface setValidation(String validation);
     ReferenceBeanBuilderInterface setParameters(Map parameters);
-
 }

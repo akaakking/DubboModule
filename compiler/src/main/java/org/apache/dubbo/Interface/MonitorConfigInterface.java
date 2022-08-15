@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.Map;
 
-public interface MonitorConfigInterface{
+public interface MonitorConfigInterface {
     String getAddress();
     void setAddress(String address);
     String getProtocol();
@@ -21,5 +20,4 @@ public interface MonitorConfigInterface{
     String getInterval();
     void setInterval(String interval);
     boolean isValid();
-
 }

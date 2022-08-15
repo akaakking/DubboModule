@@ -1,9 +1,9 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.List;
+import java.util.Map;
 
-public interface ApplicationConfigInterface{
+public interface ApplicationConfigInterface {
     String getName();
     void setName(String name);
     String getVersion();
@@ -78,5 +78,4 @@ public interface ApplicationConfigInterface{
     String getStartupProbe();
     void setStartupProbe(String startupProbe);
     void refresh();
-
 }

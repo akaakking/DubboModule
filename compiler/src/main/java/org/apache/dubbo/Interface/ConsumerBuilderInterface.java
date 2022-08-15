@@ -1,8 +1,7 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
 
-public interface ConsumerBuilderInterface{
+public interface ConsumerBuilderInterface {
     ConsumerBuilderInterface isDefault(Boolean isDefault);
     ConsumerBuilderInterface client(String client);
     ConsumerBuilderInterface threadPool(String threadPool);
@@ -12,5 +11,4 @@ public interface ConsumerBuilderInterface{
     ConsumerBuilderInterface shareConnections(Integer shareConnections);
     ConsumerBuilderInterface urlMergeProcessor(String urlMergeProcessor);
     ConsumerConfigInterface build();
-
 }

@@ -1,8 +1,7 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
 
-public interface ExporterInterface{
+public interface ExporterInterface {
     Boolean getEnabled();
     void setEnabled(Boolean enabled);
     Boolean getEnableHttpServiceDiscovery();
@@ -13,5 +12,4 @@ public interface ExporterInterface{
     void setMetricsPort(Integer metricsPort);
     String getMetricsPath();
     void setMetricsPath(String metricsPath);
-
 }

@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.io;
+import java.io.InputStream;
 
-public interface SslConfigInterface{
+public interface SslConfigInterface {
     String getServerKeyCertChainPath();
     void setServerKeyCertChainPath(String serverKeyCertChainPath);
     String getServerPrivateKeyPath();
@@ -32,5 +31,4 @@ public interface SslConfigInterface{
     void setClientPrivateKeyPathStream(InputStream clientPrivateKeyPathStream);
     InputStream getClientTrustCertCollectionPathStream();
     void setClientTrustCertCollectionPathStream(InputStream clientTrustCertCollectionPathStream);
-
 }

@@ -1,10 +1,10 @@
 package org.apache.dubbo.Interface;
 
-import ;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.context.ApplicationContext;
 
-public interface DubboSpringInitializerInterface{
-    void initialize(org.springframework.beans.factory.support.BeanDefinitionRegistry registry);
-    boolean remove(org.springframework.beans.factory.support.BeanDefinitionRegistry registry);
-    boolean remove(org.springframework.context.ApplicationContext springContext);
-
+public interface DubboSpringInitializerInterface {
+    void initialize(BeanDefinitionRegistry registry);
+    boolean remove(BeanDefinitionRegistry registry);
+    boolean remove(ApplicationContext springContext);
 }

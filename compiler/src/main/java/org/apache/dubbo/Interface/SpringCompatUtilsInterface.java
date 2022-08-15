@@ -1,13 +1,13 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.lang;
+import org.springframework.core.type.MethodMetadata;
+import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
+import org.springframework.beans.PropertyValues;
 
-public interface SpringCompatUtilsInterface{
-    TInterface getPropertyValue(org.springframework.beans.PropertyValues pvs, String propertyName);
+public interface SpringCompatUtilsInterface {
+    T getPropertyValue(PropertyValues pvs, String propertyName);
     boolean isFactoryMethodMetadataEnabled();
-    String getFactoryMethodReturnType(org.springframework.beans.factory.annotation.AnnotatedBeanDefinition annotatedBeanDefinition);
-    org.springframework.core.type.MethodMetadata getFactoryMethodMetadata(org.springframework.beans.factory.annotation.AnnotatedBeanDefinition annotatedBeanDefinition);
-    Class getGenericTypeOfReturnType(org.springframework.core.type.MethodMetadata factoryMethodMetadata);
-
+    String getFactoryMethodReturnType(AnnotatedBeanDefinition annotatedBeanDefinition);
+    MethodMetadata getFactoryMethodMetadata(AnnotatedBeanDefinition annotatedBeanDefinition);
+    Class getGenericTypeOfReturnType(MethodMetadata factoryMethodMetadata);
 }

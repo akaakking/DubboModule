@@ -1,17 +1,15 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
-import org.apache.dubbo.rpc;
-import java.util.concurrent;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import org.apache.dubbo.rpc.Invoker;
 
-public interface ReferenceConfigInterface<T>{
+public interface ReferenceConfigInterface<T> {
     String getServices();
     Set getSubscribedServices();
     void setServices(String services);
-    TInterface get();
+    T get();
     void destroy();
-    Invoker getInvoker();
+    Invoker<T> getInvoker();
     Callable getDestroyRunner();
-
 }

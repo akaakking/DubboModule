@@ -1,7 +1,6 @@
 package org.apache.dubbo.Interface;
 
 
-public interface DubboSpringInitCustomizerInterface{
+public interface DubboSpringInitCustomizerInterface {
     void customize(DubboSpringInitContextInterface context);
-
 }

@@ -1,18 +1,18 @@
 package org.apache.dubbo.Interface;
 
-import java.util;
-import java.lang;
-import java.util.regex;
-import org.apache.dubbo.rpc.model;
-import org.apache.dubbo.common;
+import java.util.List;
+import org.apache.dubbo.common.URL;
+import java.util.Map;
+import java.util.regex.Pattern;
+import org.apache.dubbo.rpc.model.ScopeModel;
 
-public interface ConfigValidationUtilsInterface{
+public interface ConfigValidationUtilsInterface {
     List loadRegistries(AbstractInterfaceConfigInterface interfaceConfig, boolean provider);
     URL loadMonitor(AbstractInterfaceConfigInterface interfaceConfig, URL registryURL);
     void checkMock(Class interfaceClass, AbstractInterfaceConfigInterface config);
     void validateAbstractInterfaceConfig(AbstractInterfaceConfigInterface config);
-    void validateServiceConfig(ServiceConfigInterface config);
-    void validateReferenceConfig(ReferenceConfigInterface config);
+    void validateServiceConfig(ServiceConfigInterface<T> config);
+    void validateReferenceConfig(ReferenceConfigInterface<T> config);
     void validateConfigCenterConfig(ConfigCenterConfigInterface config);
     void validateApplicationConfig(ApplicationConfigInterface config);
     void validateModuleConfig(ModuleConfigInterface config);
@@ -39,5 +39,4 @@ public interface ConfigValidationUtilsInterface{
     void checkMethodName(String property, String value);
     void checkParameterName(Map parameters);
     void checkProperty(String property, String value, int maxlength, Pattern pattern);
-
 }

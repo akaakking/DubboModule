@@ -1,13 +1,13 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.lang;
+import org.springframework.beans.PropertyValue;
+import org.springframework.beans.PropertyValue[];
+import org.springframework.beans.PropertyValues;
 
-public interface AnnotationPropertyValuesAdapterInterface{
-    org.springframework.beans.PropertyValue getPropertyValues();
-    org.springframework.beans.PropertyValue getPropertyValue(String propertyName);
-    org.springframework.beans.PropertyValues changesSince(org.springframework.beans.PropertyValues old);
+public interface AnnotationPropertyValuesAdapterInterface {
+    PropertyValue getPropertyValues();
+    PropertyValue getPropertyValue(String propertyName);
+    PropertyValues changesSince(PropertyValues old);
     boolean contains(String propertyName);
     boolean isEmpty();
-
 }

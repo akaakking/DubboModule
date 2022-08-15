@@ -1,8 +1,7 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
 
-public interface ConsumerConfigInterface{
+public interface ConsumerConfigInterface {
     void setTimeout(Integer timeout);
     String getClient();
     void setClient(String client);
@@ -22,5 +21,4 @@ public interface ConsumerConfigInterface{
     void setReferThreadNum(Integer referThreadNum);
     Boolean getReferBackground();
     void setReferBackground(Boolean referBackground);
-
 }

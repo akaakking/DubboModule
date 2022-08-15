@@ -1,9 +1,10 @@
 package org.apache.dubbo.Interface;
 
-import java.util;
-import java.lang;
+import java.util.List;
+import java.util.Collection;
+import java.util.Optional;
 
-public interface ConfigManagerInterface{
+public interface ConfigManagerInterface {
     void setApplication(ApplicationConfigInterface application);
     Optional getApplication();
     ApplicationConfigInterface getApplicationOrElseThrow();
@@ -36,5 +37,4 @@ public interface ConfigManagerInterface{
     void refreshAll();
     void loadConfigs();
     ConfigModeInterface getConfigMode();
-
 }

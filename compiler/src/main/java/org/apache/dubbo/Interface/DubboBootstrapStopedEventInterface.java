@@ -1,7 +1,6 @@
 package org.apache.dubbo.Interface;
 
 
-public interface DubboBootstrapStopedEventInterface{
+public interface DubboBootstrapStopedEventInterface {
     DubboBootstrapInterface getDubboBootstrap();
-
 }

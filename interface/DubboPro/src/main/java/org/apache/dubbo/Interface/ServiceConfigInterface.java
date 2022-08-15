@@ -36,5 +36,5 @@ public interface ServiceConfigInterface<T> {
                 package2
                 package3
             className
-            isGenerics
+            typeParameters
  */

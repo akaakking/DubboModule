@@ -1,8 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.util.concurrent;
+import java.util.concurrent.Callable;
 
-public interface ServiceConfigInterface<T>{
+public interface ServiceConfigInterface<T> {
     boolean isExported();
     boolean isUnexported();
     void unexport();
@@ -10,5 +10,4 @@ public interface ServiceConfigInterface<T>{
     void export();
     void addServiceListener(ServiceListenerInterface listener);
     Callable getDestroyRunner();
-
 }

@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import ;
+import org.springframework.beans.factory.BeanFactory;
 
-public interface DubboConfigBeanInitializerInterface{
-    void setBeanFactory(org.springframework.beans.factory.BeanFactory beanFactory);
+public interface DubboConfigBeanInitializerInterface {
+    void setBeanFactory(BeanFactory beanFactory);
     void afterPropertiesSet();
-
 }

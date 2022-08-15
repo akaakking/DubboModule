@@ -1,11 +1,14 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
-import org.apache.dubbo.metadata;
-import org.apache.dubbo.common;
+import org.apache.dubbo.common.URL;
+import java.util.List;
+import java.util.SortedSet;
+import org.apache.dubbo.metadata.MetadataInfo;
+import org.apache.dubbo.metadata.InstanceMetadataChangedListener;
+import java.util.Map;
+import java.util.Set;
 
-public interface MetadataServiceDelegationInterface{
+public interface MetadataServiceDelegationInterface {
     String serviceName();
     URL getMetadataURL();
     void setMetadataURL(URL url);
@@ -20,5 +23,4 @@ public interface MetadataServiceDelegationInterface{
     Map getInstanceMetadataChangedListenerMap();
     String getAndListenInstanceMetadata(String consumerId, InstanceMetadataChangedListener listener);
     void destroy();
-
 }

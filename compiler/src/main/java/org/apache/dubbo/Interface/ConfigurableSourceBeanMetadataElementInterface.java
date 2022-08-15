@@ -1,8 +1,7 @@
 package org.apache.dubbo.Interface;
 
-import ;
+import org.springframework.beans.BeanMetadataElement;
 
-public interface ConfigurableSourceBeanMetadataElementInterface{
-    void setSource(org.springframework.beans.BeanMetadataElement beanMetadataElement);
-
+public interface ConfigurableSourceBeanMetadataElementInterface {
+    void setSource(BeanMetadataElement beanMetadataElement);
 }

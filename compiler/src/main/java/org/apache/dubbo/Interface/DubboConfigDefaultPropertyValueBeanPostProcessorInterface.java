@@ -1,10 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.lang;
+import org.springframework.beans.factory.support.RootBeanDefinition;
 
-public interface DubboConfigDefaultPropertyValueBeanPostProcessorInterface{
-    void postProcessMergedBeanDefinition(org.springframework.beans.factory.support.RootBeanDefinition beanDefinition, Class beanType, String beanName);
+public interface DubboConfigDefaultPropertyValueBeanPostProcessorInterface {
+    void postProcessMergedBeanDefinition(RootBeanDefinition beanDefinition, Class beanType, String beanName);
     int getOrder();
-
 }

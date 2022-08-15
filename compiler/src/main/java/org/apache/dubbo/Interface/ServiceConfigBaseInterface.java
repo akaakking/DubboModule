@@ -1,10 +1,11 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
-import org.apache.dubbo.rpc.model;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import org.apache.dubbo.rpc.model.ServiceMetadata;
 
-public interface ServiceConfigBaseInterface<T>{
+public interface ServiceConfigBaseInterface<T> {
     boolean shouldExport();
     Boolean getExport();
     boolean shouldDelay();
@@ -14,8 +15,8 @@ public interface ServiceConfigBaseInterface<T>{
     Class getInterfaceClass();
     void setInterfaceClass(Class interfaceClass);
     void setInterface(Class interfaceClass);
-    TInterface getRef();
-    void setRef(TInterface ref);
+    T getRef();
+    void setRef(T ref);
     String getPath();
     void setPath(String path);
     ProviderConfigInterface getProvider();
@@ -34,5 +35,4 @@ public interface ServiceConfigBaseInterface<T>{
     void unexport();
     boolean isExported();
     boolean isUnexported();
-
 }

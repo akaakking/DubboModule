@@ -1,20 +1,18 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.List;
 
-public interface ServiceBuilderInterface<T>{
-    ServiceBuilderInterface newBuilder();
-    ServiceBuilderInterface id(String id);
-    ServiceBuilderInterface interfaceName(String interfaceName);
-    ServiceBuilderInterface interfaceClass(Class interfaceClass);
-    ServiceBuilderInterface ref(UInterface ref);
-    ServiceBuilderInterface path(String path);
-    ServiceBuilderInterface addMethod(MethodConfigInterface method);
-    ServiceBuilderInterface addMethods(List methods);
-    ServiceBuilderInterface provider(ProviderConfigInterface provider);
-    ServiceBuilderInterface providerIds(String providerIds);
-    ServiceBuilderInterface generic(String generic);
-    ServiceConfigInterface build();
-
+public interface ServiceBuilderInterface<U> {
+    ServiceBuilderInterface<U> newBuilder();
+    ServiceBuilderInterface<U> id(String id);
+    ServiceBuilderInterface<U> interfaceName(String interfaceName);
+    ServiceBuilderInterface<U> interfaceClass(Class interfaceClass);
+    ServiceBuilderInterface<U> ref(U ref);
+    ServiceBuilderInterface<U> path(String path);
+    ServiceBuilderInterface<U> addMethod(MethodConfigInterface method);
+    ServiceBuilderInterface<U> addMethods(List methods);
+    ServiceBuilderInterface<U> provider(ProviderConfigInterface provider);
+    ServiceBuilderInterface<U> providerIds(String providerIds);
+    ServiceBuilderInterface<U> generic(String generic);
+    ServiceConfigInterface<T> build();
 }

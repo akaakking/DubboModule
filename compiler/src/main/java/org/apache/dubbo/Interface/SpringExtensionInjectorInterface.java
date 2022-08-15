@@ -1,14 +1,12 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import org.apache.dubbo.common.extension;
-import java.lang;
+import org.apache.dubbo.common.extension.ExtensionAccessor;
+import org.springframework.context.ApplicationContext;
 
-public interface SpringExtensionInjectorInterface{
-    void addApplicationContext(org.springframework.context.ApplicationContext context);
+public interface SpringExtensionInjectorInterface {
+    void addApplicationContext(ApplicationContext context);
     SpringExtensionInjectorInterface get(ExtensionAccessor extensionAccessor);
-    org.springframework.context.ApplicationContext getContext();
-    void init(org.springframework.context.ApplicationContext context);
-    TInterface getInstance(Class type, String name);
-
+    ApplicationContext getContext();
+    void init(ApplicationContext context);
+    T getInstance(Class type, String name);
 }

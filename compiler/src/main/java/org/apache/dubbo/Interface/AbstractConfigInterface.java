@@ -1,10 +1,11 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
-import org.apache.dubbo.rpc.model;
+import java.util.List;
+import org.apache.dubbo.rpc.model.ApplicationModel;
+import java.util.Map;
+import org.apache.dubbo.rpc.model.ScopeModel;
 
-public interface AbstractConfigInterface{
+public interface AbstractConfigInterface {
     String getTagName(Class cls);
     String getPluralTagName(Class cls);
     void appendParameters(Map parameters, Object config);
@@ -28,5 +29,4 @@ public interface AbstractConfigInterface{
     String toString();
     boolean equals(Object obj);
     int hashCode();
-
 }

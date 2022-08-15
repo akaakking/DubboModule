@@ -1,10 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.Map;
 
-public interface ConfigConfigurationAdapterInterface{
+public interface ConfigConfigurationAdapterInterface {
     Object getInternalProperty(String key);
     Map getProperties();
-
 }

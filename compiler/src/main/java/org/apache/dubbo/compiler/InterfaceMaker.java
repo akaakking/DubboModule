@@ -1,10 +1,7 @@
 package org.apache.dubbo.compiler;
 
 import com.thoughtworks.qdox.JavaProjectBuilder;
-import com.thoughtworks.qdox.model.JavaClass;
-import com.thoughtworks.qdox.model.JavaMethod;
-import com.thoughtworks.qdox.model.JavaPackage;
-import com.thoughtworks.qdox.model.JavaParameter;
+import com.thoughtworks.qdox.model.*;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.junit.Test;
@@ -14,9 +11,8 @@ import java.util.*;
 
 /**
  * 现在解决
- * 1. import 为空，全限定引入
  * 2. 返回值，参数，泛型相关
- * 3. 接口之间继承关系
+ * 3. 接口之间继承关系 
  *
  * @Author wfh
  * @Date 2022/8/14 下午6:16
@@ -38,6 +34,19 @@ public class InterfaceMaker {
     private List<File> sourceFile = new ArrayList<>();
     private static JavaProjectBuilder jpb;
 
+
+    @Test
+    public void methodGene() {
+        String path = "/home/wfh/DubboModule/dubbo/dubbo-config/dubbo-config-api/src/main/java/org/apache/dubbo/config/bootstrap/builders/AbstractServiceBuilder.java";
+
+        initEnvirenment();
+
+        JavaClass javaClass = jpb.getClassByName("org.apache.dubbo.config.bootstrap.builders.AbstractServiceBuilder");
+        for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : javaClass.getTypeParameters()) {
+            System.out.println(typeParameter.getBounds());
+        }
+    }
+
     @Test
     public void makeTest() {
        make();
@@ -58,49 +67,73 @@ public class InterfaceMaker {
             List<JavaClass> javaClasses = new LinkedList<>(javaClasses0);
 
             for (JavaClass javaClass : javaClasses) {
+                Map<String,Object> root = getDataModel(javaClass);
+                generateInterface(root,template);
+            }
+        }
+    }
 
-                Object root = getDataModel(javaClass);
+    private void generateInterface(Map<String,Object> root,Template interfaceIemplate) {
 
-                File file = new File(this.outputDir + javaClass.getName() + "Interface.java");
+        File file = new File(this.outputDir + root.get("className") + "Interface.java");
 
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        OutputStream os = null;
+
+        try {
+            os = new FileOutputStream(file);
+            interfaceIemplate.process(root,new OutputStreamWriter(os));
+        } catch (TemplateException | IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (os != null) {
                 try {
-                    file.createNewFile();
+                    os.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
-
-                OutputStream os = null;
-
-                try {
-                    os = new FileOutputStream(file);
-                    template.process(root,new OutputStreamWriter(os));
-                } catch (TemplateException | IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (os != null) {
-                        try {
-                            os.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
                 }
             }
         }
     }
 
-    public Object getDataModel(JavaClass javaClass) {
+    /*
+|---root(class)
+            methods
+                method1
+                    parameters
+                        parameter1
+                            Type
+                            name
+                        parameter2
+                method2
+                method3
+            importPackages
+                package1
+                package2
+                package3
+            className
+            typeParameters
+ */
+    public Map<String, Object> getDataModel(JavaClass javaClass) {
         Map<String,Object> root = new HashMap<>();
 
         String className = javaClass.getName();
-        boolean isGenerics = !javaClass.getTypeParameters().isEmpty();
         List<Method> methods = new ArrayList<>();
         Set<String> importPackages = new HashSet<>();
+        List<String> typeParameters = new ArrayList<>();
 
+        for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : javaClass.getTypeParameters()) {
+            typeParameters.add("<" + shortName(typeParameter.getName()) + ">");
+        }
         root.put("className",className);
-        root.put("isGenerics",isGenerics);
         root.put("methods",methods);
         root.put("importPackages",importPackages);
+        root.put("typeParameters",typeParameters);
 
         for (JavaMethod method : javaClass.getMethods()) {
             if (!method.isPublic()) {
@@ -111,36 +144,71 @@ public class InterfaceMaker {
             List<Parameter> parameters = new ArrayList<>();
             m.setName(method.getName());
 
-            if (!isInConfigPack(method.getReturns())) {
-                m.setReturnType(method.getReturns().getName());
-            } else {
-                m.setReturnType(method.getReturns().getName() + "Interface");
-            }
+            m.setReturnType(getType(method.getReturns()));
             m.setParameters(parameters);
             methods.add(m);
 
-            if (!isInConfigPack(method.getReturns()) && !method.getReturns().isPrimitive()) {
-                importPackages.add(method.getReturns().getPackageName());
-            }
+            addImport(importPackages,method.getReturns());
 
             for (JavaParameter parameter : method.getParameters()) {
                 Parameter p = new Parameter();
                 p.setName(parameter.getName());
 
-                if (isInConfigPack(parameter.getJavaClass())) {
-                    p.setType(parameter.getJavaClass().getName() + "Interface");
-                } else {
-                    p.setType(parameter.getJavaClass().getName());
-                }
+                p.setType(getType(parameter.getJavaClass()));
 
                 parameters.add(p);
-
-                if (!isInConfigPack(parameter.getJavaClass()) && !parameter.getJavaClass().isPrimitive()) {
-                    importPackages.add(parameter.getJavaClass().getPackageName());
-                }
+                addImport(importPackages,parameter.getJavaClass());
             }
         }
         return root;
+    }
+
+    private String getType(JavaClass javaClass) {
+        String old = javaClass.getName();
+        if (isInConfigPack(javaClass)) {
+            old =  old + "Interface";
+        }
+
+        if (javaClass.isPrimitive()) {
+            return javaClass.getName();
+        }
+
+        old = shortName(old);
+
+        for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : javaClass.getTypeParameters()) {
+            old = old + "<" + typeParameter.getName() + ">";
+        }
+
+        return old;
+    }
+
+    private void addImport(Set<String> importPackages, JavaClass javaClass) {
+        if (isInConfigPack(javaClass)) {
+            return;
+        }
+
+        if (javaClass.isPrimitive()) {
+            return;
+        }
+
+        if (javaClass.getFullyQualifiedName().startsWith("java.lang")) {
+            return;
+        }
+
+        if (javaClass.getName().length() == 1) {
+            return;
+        }
+
+        importPackages.add(javaClass.getFullyQualifiedName());
+    }
+
+    private String shortName(String oldName) {
+
+        if (!oldName.contains(".")) {
+            return oldName;
+        }
+
+        return oldName.substring(oldName.lastIndexOf(".") + 1);
     }
 
     private boolean isInConfigPack(JavaClass javaClass) {
@@ -149,6 +217,10 @@ public class InterfaceMaker {
         }
 
         if (javaClass.isPrimitive()) {
+            return false;
+        }
+
+        if (javaClass.getName().length() == 1) {
             return false;
         }
 

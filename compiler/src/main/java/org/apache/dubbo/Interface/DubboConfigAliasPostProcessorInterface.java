@@ -1,12 +1,11 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.lang;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
-public interface DubboConfigAliasPostProcessorInterface{
-    void postProcessBeanDefinitionRegistry(org.springframework.beans.factory.support.BeanDefinitionRegistry registry);
-    void postProcessBeanFactory(org.springframework.beans.factory.config.ConfigurableListableBeanFactory beanFactory);
+public interface DubboConfigAliasPostProcessorInterface {
+    void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry);
+    void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory);
     Object postProcessBeforeInitialization(Object bean, String beanName);
     Object postProcessAfterInitialization(Object bean, String beanName);
-
 }

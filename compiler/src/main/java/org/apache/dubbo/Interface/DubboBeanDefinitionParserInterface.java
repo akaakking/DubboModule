@@ -1,9 +1,9 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import org.w3c.dom;
+import org.w3c.dom.Element;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.beans.factory.config.BeanDefinition;
 
-public interface DubboBeanDefinitionParserInterface{
-    org.springframework.beans.factory.config.BeanDefinition parse(Element element, org.springframework.beans.factory.xml.ParserContext parserContext);
-
+public interface DubboBeanDefinitionParserInterface {
+    BeanDefinition parse(Element element, ParserContext parserContext);
 }

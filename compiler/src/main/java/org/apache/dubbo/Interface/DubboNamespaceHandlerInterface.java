@@ -1,10 +1,10 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import org.w3c.dom;
+import org.w3c.dom.Element;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.beans.factory.config.BeanDefinition;
 
-public interface DubboNamespaceHandlerInterface{
+public interface DubboNamespaceHandlerInterface {
     void init();
-    org.springframework.beans.factory.config.BeanDefinition parse(Element element, org.springframework.beans.factory.xml.ParserContext parserContext);
-
+    BeanDefinition parse(Element element, ParserContext parserContext);
 }

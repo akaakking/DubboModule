@@ -1,10 +1,9 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
-import org.apache.dubbo.rpc.model;
+import java.util.Map;
+import org.apache.dubbo.rpc.model.ModuleModel;
 
-public interface AbstractMethodConfigInterface{
+public interface AbstractMethodConfigInterface {
     ModuleModel getScopeModel();
     Integer getForks();
     void setForks(Integer forks);
@@ -31,5 +30,4 @@ public interface AbstractMethodConfigInterface{
     void setValidation(String validation);
     Map getParameters();
     void setParameters(Map parameters);
-
 }

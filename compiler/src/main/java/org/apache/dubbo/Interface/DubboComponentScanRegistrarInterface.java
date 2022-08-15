@@ -1,8 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import ;
+import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
-public interface DubboComponentScanRegistrarInterface{
-    void registerBeanDefinitions(org.springframework.core.type.AnnotationMetadata importingClassMetadata, org.springframework.beans.factory.support.BeanDefinitionRegistry registry);
-
+public interface DubboComponentScanRegistrarInterface {
+    void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry);
 }

@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.Map;
 
-public interface MetadataReportBuilderInterface{
+public interface MetadataReportBuilderInterface {
     MetadataReportBuilderInterface newBuilder();
     MetadataReportBuilderInterface address(String address);
     MetadataReportBuilderInterface username(String username);
@@ -18,5 +17,4 @@ public interface MetadataReportBuilderInterface{
     MetadataReportBuilderInterface syncReport(Boolean syncReport);
     MetadataReportBuilderInterface check(Boolean check);
     MetadataReportConfigInterface build();
-
 }

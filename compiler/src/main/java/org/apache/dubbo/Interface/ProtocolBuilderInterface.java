@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.Map;
 
-public interface ProtocolBuilderInterface{
+public interface ProtocolBuilderInterface {
     ProtocolBuilderInterface newBuilder();
     ProtocolBuilderInterface id(String id);
     ProtocolBuilderInterface name(String name);
@@ -42,5 +41,4 @@ public interface ProtocolBuilderInterface{
     ProtocolBuilderInterface appendParameters(Map appendParameters);
     ProtocolBuilderInterface isDefault(Boolean isDefault);
     ProtocolConfigInterface build();
-
 }

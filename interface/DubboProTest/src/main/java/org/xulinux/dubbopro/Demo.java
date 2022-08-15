@@ -29,8 +29,3 @@ public class Demo {
         new CountDownLatch(1).await();
     }
 }
-
-/**
- * 代码生成是说手写一个maven插件？
- * config包下所有的吗？还是说config.spring不用
- */

@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.Map;
 
-public interface ProtocolConfigInterface{
+public interface ProtocolConfigInterface {
     String getName();
     void setName(String name);
     String getHost();
@@ -77,5 +76,4 @@ public interface ProtocolConfigInterface{
     String getExtension();
     void setExtension(String extension);
     boolean isValid();
-
 }

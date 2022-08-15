@@ -1,9 +1,7 @@
 package org.apache.dubbo.Interface;
 
-import java.util;
-import java.lang;
+import java.util.Set;
 
-public interface DubboClassPathBeanDefinitionScannerInterface{
+public interface DubboClassPathBeanDefinitionScannerInterface {
     Set findCandidateComponents(String basePackage);
-
 }

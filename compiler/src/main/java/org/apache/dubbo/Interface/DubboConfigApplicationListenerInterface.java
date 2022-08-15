@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import ;
+import org.springframework.context.ApplicationContext;
 
-public interface DubboConfigApplicationListenerInterface{
-    void setApplicationContext(org.springframework.context.ApplicationContext applicationContext);
+public interface DubboConfigApplicationListenerInterface {
+    void setApplicationContext(ApplicationContext applicationContext);
     void onApplicationEvent(DubboConfigInitEventInterface event);
-
 }

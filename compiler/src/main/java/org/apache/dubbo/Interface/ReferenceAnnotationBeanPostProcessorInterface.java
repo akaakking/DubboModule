@@ -1,20 +1,21 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.lang.reflect;
-import java.lang;
-import java.util;
-import java.beans;
+import org.springframework.beans.factory.support.RootBeanDefinition;
+import java.beans.PropertyDescriptor[];
+import java.util.Map;
+import java.util.Collection;
+import org.springframework.beans.PropertyValues;
+import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
-public interface ReferenceAnnotationBeanPostProcessorInterface{
-    void postProcessBeanFactory(org.springframework.beans.factory.config.ConfigurableListableBeanFactory beanFactory);
-    void postProcessMergedBeanDefinition(org.springframework.beans.factory.support.RootBeanDefinition beanDefinition, Class beanType, String beanName);
-    org.springframework.beans.PropertyValues postProcessPropertyValues(org.springframework.beans.PropertyValues pvs, PropertyDescriptor pds, Object bean, String beanName);
+public interface ReferenceAnnotationBeanPostProcessorInterface {
+    void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory);
+    void postProcessMergedBeanDefinition(RootBeanDefinition beanDefinition, Class beanType, String beanName);
+    PropertyValues postProcessPropertyValues(PropertyValues pvs, PropertyDescriptor pds, Object bean, String beanName);
     String registerReferenceBean(String propertyName, Class injectedType, Map attributes, Member member);
-    void setApplicationContext(org.springframework.context.ApplicationContext applicationContext);
+    void setApplicationContext(ApplicationContext applicationContext);
     void destroy();
     Collection getReferenceBeans();
     Map getInjectedFieldReferenceBeanMap();
     Map getInjectedMethodReferenceBeanMap();
-
 }

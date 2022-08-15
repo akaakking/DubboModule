@@ -1,34 +1,32 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.List;
 
-public interface AbstractInterfaceBuilderInterface<T>{
-    BInterface local(String local);
-    BInterface local(Boolean local);
-    BInterface stub(String stub);
-    BInterface stub(Boolean stub);
-    BInterface monitor(MonitorConfigInterface monitor);
-    BInterface monitor(String monitor);
-    BInterface proxy(String proxy);
-    BInterface cluster(String cluster);
-    BInterface filter(String filter);
-    BInterface listener(String listener);
-    BInterface owner(String owner);
-    BInterface connections(Integer connections);
-    BInterface layer(String layer);
-    BInterface application(ApplicationConfigInterface application);
-    BInterface module(ModuleConfigInterface module);
-    BInterface addRegistries(List registries);
-    BInterface addRegistry(RegistryConfigInterface registry);
-    BInterface registryIds(String registryIds);
-    BInterface onconnect(String onconnect);
-    BInterface ondisconnect(String ondisconnect);
-    BInterface metadataReportConfig(MetadataReportConfigInterface metadataReportConfig);
-    BInterface configCenter(ConfigCenterConfigInterface configCenter);
-    BInterface callbacks(Integer callbacks);
-    BInterface scope(String scope);
-    BInterface tag(String tag);
-    void build(TInterface instance);
-
+public interface AbstractInterfaceBuilderInterface<T><B> {
+    B local(String local);
+    B local(Boolean local);
+    B stub(String stub);
+    B stub(Boolean stub);
+    B monitor(MonitorConfigInterface monitor);
+    B monitor(String monitor);
+    B proxy(String proxy);
+    B cluster(String cluster);
+    B filter(String filter);
+    B listener(String listener);
+    B owner(String owner);
+    B connections(Integer connections);
+    B layer(String layer);
+    B application(ApplicationConfigInterface application);
+    B module(ModuleConfigInterface module);
+    B addRegistries(List registries);
+    B addRegistry(RegistryConfigInterface registry);
+    B registryIds(String registryIds);
+    B onconnect(String onconnect);
+    B ondisconnect(String ondisconnect);
+    B metadataReportConfig(MetadataReportConfigInterface metadataReportConfig);
+    B configCenter(ConfigCenterConfigInterface configCenter);
+    B callbacks(Integer callbacks);
+    B scope(String scope);
+    B tag(String tag);
+    void build(T instance);
 }

@@ -1,10 +1,9 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
-import org.apache.dubbo.common;
+import org.apache.dubbo.common.URL;
+import java.util.Map;
 
-public interface MetadataReportConfigInterface{
+public interface MetadataReportConfigInterface {
     URL toUrl();
     String getProtocol();
     void setProtocol(String protocol);
@@ -44,5 +43,4 @@ public interface MetadataReportConfigInterface{
     void setReportMetadata(Boolean reportMetadata);
     Boolean getReportDefinition();
     void setReportDefinition(Boolean reportDefinition);
-
 }

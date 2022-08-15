@@ -1,9 +1,8 @@
 package org.apache.dubbo.Interface;
 
-import java.lang;
-import java.util;
+import java.util.Map;
 
-public interface RegistryBuilderInterface{
+public interface RegistryBuilderInterface {
     RegistryBuilderInterface newBuilder();
     RegistryBuilderInterface id(String id);
     RegistryBuilderInterface address(String address);
@@ -38,5 +37,4 @@ public interface RegistryBuilderInterface{
     RegistryBuilderInterface accepts(String accepts);
     RegistryBuilderInterface weight(Integer weight);
     RegistryConfigInterface build();
-
 }

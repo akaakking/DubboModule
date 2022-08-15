@@ -1,14 +1,13 @@
 package org.apache.dubbo.Interface;
 
-import ;
-import java.lang;
+import org.springframework.core.env.Environment;
+import org.springframework.context.ApplicationContext;
 
-public interface ConfigCenterBeanInterface{
-    void setApplicationContext(org.springframework.context.ApplicationContext applicationContext);
+public interface ConfigCenterBeanInterface {
+    void setApplicationContext(ApplicationContext applicationContext);
     void destroy();
-    void setEnvironment(org.springframework.core.env.Environment environment);
-    org.springframework.context.ApplicationContext getApplicationContext();
+    void setEnvironment(Environment environment);
+    ApplicationContext getApplicationContext();
     Boolean getIncludeSpringEnv();
     void setIncludeSpringEnv(Boolean includeSpringEnv);
-
 }
