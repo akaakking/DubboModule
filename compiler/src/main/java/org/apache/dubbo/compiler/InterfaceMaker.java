@@ -1,5 +1,6 @@
 package org.apache.dubbo.compiler;
 
+import com.google.common.collect.Sets;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.*;
 import freemarker.template.Template;
@@ -23,30 +24,22 @@ public class InterfaceMaker {
     private final static String PROJECT_BASE_PATH    = "/home/wfh/DubboModule/dubbo";
     private final static String TEMPLATE_NAME        = "Interface.ftl";
     private final static String OUTPUT_DIR           = "/home/wfh/DubboModule/compiler/src/main/java";
-
+    private final static String EXTRA_EXPORT_INFO_DIR           = "/home/wfh/DubboModule/compiler/src/main/resources/extraExportInfo.txt";
 
     private String templateSourthPath = TEMPLATE_SOURTH_PATH;
     private String templateName = TEMPLATE_NAME;
     private String exportInfoPath = EXPORT_INFO_PATH;
     private String projectBasePath = PROJECT_BASE_PATH;
     private String outputDir = OUTPUT_DIR;
+    // 所谓额外暴露可以理解为牵连着暴露的。即不再我们的sourthfile里边的东西，那么现在这个定位就很准确了
+    private String extraExportInfoDir = EXTRA_EXPORT_INFO_DIR;
 
-    private List<File> sourceFile = new ArrayList<>();
+    private final List<File> sourceFile = new ArrayList<>();
+    private final Set<String> extraExport = new HashSet<>();
+    private  Set<String> exportClasses;
+    private Template template;
     private static JavaProjectBuilder jpb;
 
-    @Test
-    public void testForgetClassTypeName() {
-        initEnvirenment();
-        String path = "org.apache.dubbo.config.deploy.DefaultModuleDeployer";
-        JavaClass javaClass = jpb.getClassByName(path);
-
-        System.out.println(getClassTypeName(javaClass));
-
-        System.out.println(getClassTypeName(javaClass.getSuperJavaClass()));
-
-        System.out.println(getClassTypeName(javaClass.getInterfaces().get(0)));
-
-    }
 
     @Test
     public void makeTest() {
@@ -56,9 +49,7 @@ public class InterfaceMaker {
     public void make() {
         initEnvirenment();
 
-        Template template = FreeMarkerUtil.getTemplate(TEMPLATE_NAME);
-
-        List<String> exportPackages = getExportPackages();
+        Set<String> exportPackages = getExportPackages();
 
         for (String exportPackage : exportPackages) {
             JavaPackage javaPackage = jpb.getPackageByName(exportPackage);
@@ -68,11 +59,104 @@ public class InterfaceMaker {
             List<JavaClass> javaClasses = new LinkedList<>(javaClasses0);
 
             for (JavaClass javaClass : javaClasses) {
+                if (!javaClass.isPublic()) {
+                    continue;
+                }
+
+                if (javaClass.isInner()) {
+                    // dealInner
+                    continue;
+                }
+
+                if (javaClass.isEnum()) {
+                    // dealEnum
+                    continue;
+                }
+
+                if (javaClass.isAnnotation()) {
+                    // dealAnnotation
+                    continue;
+                }
+
+                // dealInterfaceOrClass
                 Map<String,Object> root = getDataModel(javaClass);
                 generateInterface(root,template);
+
             }
         }
+        dealExtraExport();
     }
+
+    private Set<String> getExportClasses(Set<String> exportPackages) {
+        Set<String> exportClasses = new HashSet<>();
+        for (String exportPackage : exportPackages) {
+            JavaPackage javaPackage = jpb.getPackageByName(exportPackage);
+            for (JavaClass aClass : javaPackage.getClasses()) {
+                exportClasses.add(aClass.getFullyQualifiedName());
+            }
+        }
+
+        return exportClasses;
+    }
+
+    private void dealExtraExport() {
+        if (extraExport.isEmpty()) {
+            return;
+        }
+
+        Set<String> s1;
+        Set<String> s2 = new HashSet<>();
+
+        while (!(s1 = Sets.difference(extraExport,s2)).isEmpty()) {
+            s2 = new HashSet<>(extraExport);
+            s1 = new HashSet<>(s1);
+            for (String s : s1) {
+                JavaClass javaClass = jpb.getClassByName(s);
+                generateInterface(getDataModel(javaClass),template);
+            }
+        }
+
+        File file = new File(extraExportInfoDir);
+
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        PrintStream ps = null;
+
+        try {
+            ps = new PrintStream(file);
+            for (String s : extraExport) {
+                ps.println(s);
+            }
+            ps.println(extraExport.size());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+        }
+
+
+    }
+
+    @Test
+    public void testForSet() {
+        Set<Integer> integers = new HashSet<>();
+        integers.add(1);
+        integers.add(2);
+        integers.add(3);
+        Set<Integer> integers1 = new HashSet<>();
+        integers1.add(2);
+        integers1.add(4);
+        integers1.add(5);
+        System.out.println(Sets.difference(integers1, integers));
+    }
+
+
 
     private void generateInterface(Map<String,Object> root,Template interfaceIemplate) {
 
@@ -126,19 +210,9 @@ public class InterfaceMaker {
 
         List<Method> methods = new ArrayList<>();
         Set<String> importPackages = new HashSet<>();
-        List<String> parents = new ArrayList<>();
+        List<String> parents = getParents(javaClass);
         String classTypeName = getClassTypeName(javaClass);
 
-        JavaClass superClass = javaClass.getSuperJavaClass();
-        List<JavaClass> interfaces = javaClass.getInterfaces();
-
-        if (superClass != null) {
-            parents.add(getClassTypeName(superClass));
-        }
-
-        for (JavaClass anInterface : interfaces) {
-            parents.add(getClassTypeName(anInterface));
-        }
 
         for (JavaMethod method : javaClass.getMethods()) {
             if (!method.isPublic()) {
@@ -167,17 +241,38 @@ public class InterfaceMaker {
         }
 
         root.put("methods",methods);
+        root.put("className",javaClass.getName());
         root.put("importPackages",importPackages);
         root.put("parents",parents);
         root.put("hasSuper",!parents.isEmpty());
-        root.put("GenericString", classTypeName);
+        root.put("classTypeName", classTypeName);
 
         return root;
     }
 
+    private List<String> getParents(JavaClass javaClass) {
+        List<String> parents = new ArrayList<>();
+
+        JavaClass superClass = javaClass.getSuperJavaClass();
+
+        if (superClass != null && !superClass.getFullyQualifiedName().startsWith("java.lang.Object")
+                                && !superClass.getFullyQualifiedName().startsWith("java.lang.Enum")
+                                   && !superClass.getFullyQualifiedName().startsWith("org.apache.dubbo.Interface")) {
+            parents.add(getClassTypeName(superClass));
+        }
+
+        for (JavaClass anInterface : javaClass.getInterfaces()) {
+            if (!anInterface.getFullyQualifiedName().startsWith("org.apache.dubbo.Interface")) {
+                parents.add(getClassTypeName(anInterface));
+            }
+        }
+
+        return parents;
+    }
+
     // javaclass -> className+ 泛型相关
     private String getClassTypeName(JavaClass javaClass) {
-        StringBuffer sb = new StringBuffer(addInterface(javaClass.getName()));
+        StringBuffer sb = new StringBuffer(addInterface(javaClass.getFullyQualifiedName()));
 
         if (javaClass.getTypeParameters() != null && !javaClass.getTypeParameters().isEmpty()) {
             sb.append("<");
@@ -191,7 +286,7 @@ public class InterfaceMaker {
                 sb.append(",");
             }
 
-            sb.substring(0,sb.length() - 2);
+            sb.delete(sb.length() -1 , sb.length());
 
             sb.append(">");
         }
@@ -213,8 +308,14 @@ public class InterfaceMaker {
             return s;
         }
 
+        if (!exportClasses.contains(s)) {
+            extraExport.add(s);
+        }
+
         return shortName(s) + "Interface";
     }
+
+
 
     private boolean isPrimitive(String name)
     {
@@ -297,6 +398,7 @@ public class InterfaceMaker {
     private void initEnvirenment() {
         initJavaProjectBuilder();
         creatInterfaceDir();
+        template = FreeMarkerUtil.getTemplate(templateName);
     }
 
     private void creatInterfaceDir() {
@@ -314,8 +416,8 @@ public class InterfaceMaker {
     }
 
 
-    public List<String> getExportPackages() {
-        List<String> exportPackages = new ArrayList<>();
+    public Set<String> getExportPackages() {
+        Set<String> exportPackages = new HashSet<>();
 
         File file = new File(exportInfoPath);
 
@@ -342,6 +444,8 @@ public class InterfaceMaker {
                 }
             }
         }
+
+        exportClasses = getExportClasses(exportPackages);
 
         return exportPackages;
     }

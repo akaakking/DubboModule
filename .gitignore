@@ -8,6 +8,9 @@ target/
 *.tar.gz
 .flattened-pom.xml
 
+./compiler/src/main/java/org/apache/dubbo/Interface/
+
+
 # eclipse ignore
 .settings/
 .project
