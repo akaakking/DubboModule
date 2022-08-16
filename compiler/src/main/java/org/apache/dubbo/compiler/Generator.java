@@ -1,9 +1,19 @@
 package org.apache.dubbo.compiler;
 
 
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.Parameter;
+import com.github.javaparser.ast.body.TypeDeclaration;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.github.javaparser.ast.visitor.ModifierVisitor;
+import com.github.javaparser.ast.visitor.Visitable;
 import com.thoughtworks.qdox.JavaProjectBuilder;
-import com.thoughtworks.qdox.model.JavaClass;
-import com.thoughtworks.qdox.model.JavaPackage;
+import com.thoughtworks.qdox.model.*;
+import com.thoughtworks.qdox.model.impl.DefaultJavaParameterizedType;
 import org.junit.Test;
 
 import java.io.*;
@@ -29,6 +39,7 @@ public class Generator {
 
 
     private  Set<String> exportClasses;
+    private Set<String> extraExports = new HashSet<>();
     private Set<File> sourceFile = new HashSet<>();
     private Map<String,String> name2path = new HashMap<>();
 
@@ -39,8 +50,23 @@ public class Generator {
 
     @Test
     public void testGen() {
-        generate();
+//        try {
+//            CompilationUnit cu = StaticJavaParser.parse(new File("/home/wfh/DubboModule/dubbo/dubbo-config/dubbo-config-api/src/main/java/org/apache/dubbo/config/ConfigScopeModelInitializer.java"));
+//
+//            ClassOrInterfaceDeclaration cid = new ClassOrInterfaceDeclaration();
+//
+//            JavaClass javaClass;
+//            javaClass.getMethodBySignature();
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        generate();
     }
+
+    // 先找办法不行的话就依托javaclass的数据用javaparser生成
+
+
 
     public void generate() {
         initEnvirenment();
@@ -120,6 +146,14 @@ public class Generator {
         exportClasses = getExportClasses(exportPackages);
 
         return exportPackages;
+    }
+
+    public Set<String> getExportClasses() {
+        return exportClasses;
+    }
+
+    public Set<String> getExtraExports() {
+        return extraExports;
     }
 
     private Set<String> getExportClasses(Set<String> exportPackages) {

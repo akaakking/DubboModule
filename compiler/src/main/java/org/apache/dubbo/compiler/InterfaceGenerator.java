@@ -5,17 +5,18 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.body.Parameter;
-import com.github.javaparser.ast.observer.ObservableProperty;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.Visitable;
-import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaType;
 import org.junit.Test;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * //TODO add class commment here
@@ -42,15 +43,20 @@ public class InterfaceGenerator {
         creatInterfaceDir();
     }
 
-    void generateInterface(JavaClass javaClass) {
+    CompilationUnit generateInterface(JavaClass javaClass) {
+        CompilationUnit cu = null;
 
         try {
-            CompilationUnit cu = StaticJavaParser.parse(new File(this.name2path.get(javaClass.getFullyQualifiedName())));
+            cu = StaticJavaParser.parse(new File(this.name2path.get(javaClass.getFullyQualifiedName())));
             visit(cu,javaClass);
             save(cu,javaClass);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        importPackages.clear();
+
+        return cu;
     }
 
     private void visit(CompilationUnit cu,JavaClass javaClass) {
@@ -63,6 +69,62 @@ public class InterfaceGenerator {
         this.InterfaceDir = this.outputDir + "org/apache/dubbo/Interface/";
         File outputDir = new File(this.InterfaceDir);
         outputDir.mkdirs();
+    }
+
+    private void addImport(Set<String> importPackages, JavaClass javaClass) {
+        if (javaClass.getFullyQualifiedName().startsWith("org.apache.dubbo")) {
+            importPackages.add("org.apache.dubbo.Interface." + javaClass.getName() + "Interface");
+        }
+
+        if (javaClass.isPrimitive()) {
+            return;
+        }
+
+        if (javaClass.getFullyQualifiedName().startsWith("java.lang")) {
+            return;
+        }
+
+        if (javaClass.getName().length() == 1) {
+            return;
+        }
+
+        importPackages.add(javaClass.getFullyQualifiedName());
+    }
+
+    private String addInterface(String s) {
+        if (!s.startsWith("org.apache.dubbo")) {
+            return shortName(s);
+        }
+
+        if (isPrimitive(s)) {
+            return s;
+        }
+
+        if (s.length() == 1) {
+            return s;
+        }
+
+        if (!this.generator.getExportClasses().contains(s)) {
+            this.generator.getExtraExports().add(s);
+        }
+
+        return shortName(s) + "Interface";
+    }
+
+    boolean isPrimitive(String name)
+    {
+        return "void".equals( name ) || "boolean".equals( name ) || "byte".equals( name ) || "char".equals( name )
+                || "short".equals( name ) || "int".equals( name ) || "long".equals( name ) || "float".equals( name )
+                || "double".equals( name );
+    }
+
+    String shortName(String oldName) {
+
+        if (!oldName.contains(".")) {
+            return oldName;
+        }
+
+        return oldName.substring(oldName.lastIndexOf(".") + 1);
     }
 
     private class FiedsModifier extends ModifierVisitor<JavaClass> {
@@ -88,6 +150,8 @@ public class InterfaceGenerator {
             }
 
             n.removeBody();
+            n.setAbstract(false);
+
 
             return n;
         }
@@ -99,6 +163,16 @@ public class InterfaceGenerator {
             return n;
         }
 
+        @Override
+        public Visitable visit(ClassOrInterfaceDeclaration n, JavaClass arg) {
+            super.visit(n, arg);
+            n.setInterface(true);
+            n.setName(n.getName() + "Interface");
+            n.setAbstract(false);
+
+            // TODO
+            return n;
+        }
 
         @Override
         public Visitable visit(InitializerDeclaration n, JavaClass arg) {
@@ -142,17 +216,13 @@ public class InterfaceGenerator {
         }
     }
 
-
-//    private class ParamterModifier extends ModifierVisitor {
-//        @Override
-//        public Visitable visit(Parameter n, Object arg) {
-//            System.out.println(n.getName());
-//            return super.visit(n, arg);
-//        }
-//    }
-//
-//    private class MethodModifier extends ModifierVisitor {
-//
-//    }
+    String getFullyName() {
+        return null;
+    }
 
 }
+
+/*
+1. 用javaclass做数据支撑，用javaparser生成相关
+2.
+ */
