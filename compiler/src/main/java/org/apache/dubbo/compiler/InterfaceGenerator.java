@@ -28,7 +28,6 @@ import java.util.Set;
  */
 public class InterfaceGenerator {
     private Generator generator;
-    // TODO 未清空
     private List<String> importList = new ArrayList<>();
     private String interfaceDir;
 

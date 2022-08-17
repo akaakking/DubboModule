@@ -15,15 +15,16 @@ import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.TypeParameter;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.Visitable;
+import com.google.common.collect.Sets;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.*;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * 最多看到5点注意搞清楚一件事
@@ -33,6 +34,34 @@ import java.util.Optional;
  * @Date 2022/8/14 下午2:43
  */
 public class JavaParserLearn {
+
+    @Test
+    public void tesgg() {
+        Set<String> set = new HashSet<>();
+        Set<String> set1 = new HashSet<>();
+        File file = new File("/home/wfh/DubboModule/compiler/src/main/resources/extraExportInfos");
+        File file1 = new File("/home/wfh/DubboModule/compiler/src/main/resources/extraExportInfo.txt");
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            BufferedReader bufferedReader1 = new BufferedReader(new FileReader(file1));
+            String str = null;
+            do {
+                str = bufferedReader.readLine();
+                set.add(str);
+            } while (str != null);
+
+            do {
+                str = bufferedReader1.readLine();
+                set1.add(str);
+            } while (str != null);
+
+            System.out.println(Sets.difference(set, set1));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void fds() {

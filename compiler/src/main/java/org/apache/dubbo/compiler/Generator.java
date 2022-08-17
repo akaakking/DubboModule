@@ -3,6 +3,7 @@ package org.apache.dubbo.compiler;
 
 
 import com.github.javaparser.ast.CompilationUnit;
+import com.google.common.collect.Sets;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.*;
 import org.junit.Test;
@@ -22,16 +23,23 @@ public class Generator {
     private final static String PROJECT_BASE_PATH    = "/home/wfh/DubboModule/dubbo";
     private final static String OUTPUT_DIR           = "/home/wfh/DubboModule/compiler/src/main/java/";
     private final static String EXPORT_INFO_PATH     = "/home/wfh/DubboModule/compiler/src/main/resources/exportpackage";
+    private final static String EXTRA_EXPORT_INFO_PATH = "/home/wfh/DubboModule/compiler/src/main/resources/extraExportInfos";
+    private final static String DIRECT_EXPORT_CLASS_PATH = "/home/wfh/DubboModule/compiler/src/main/resources/directExportClasses";
 
 
     private String projectBasePath = PROJECT_BASE_PATH;
     private String outputDir = OUTPUT_DIR;
     private String exportInfoPath = EXPORT_INFO_PATH;
-
+    private String extraExportInfoPath = EXTRA_EXPORT_INFO_PATH;
+    private String directExportClassPath = DIRECT_EXPORT_CLASS_PATH;
 
     private  Set<String> exportClasses;
     private Set<String> extraExports = new HashSet<>();
     private Set<File> sourceFile = new HashSet<>();
+    private Map<String,String> name2path = new HashMap<>();
+    private Set<String> directExportclasses = new HashSet<>();
+    private InterfaceGenerator interfaceGenerator;
+    private ClassGenerator classGenerator;
 
     @Test
     public void testGen() {
@@ -40,9 +48,10 @@ public class Generator {
 
     public void generate() {
         initEnvirenment();
+        initNamePathMap();
         Set<String> exportPackages = getExportPackages();
-        InterfaceGenerator interfaceGenerator = new InterfaceGenerator(this);
-        ClassGenerator classGenerator = new ClassGenerator(this);
+        interfaceGenerator = new InterfaceGenerator(this);
+        classGenerator = new ClassGenerator(this);
 
         for (String exportPackage : exportPackages) {
             JavaPackage javaPackage = jpb.getPackageByName(exportPackage);
@@ -52,27 +61,151 @@ public class Generator {
             List<JavaClass> javaClasses = new LinkedList<>(javaClasses0);
 
             for (JavaClass javaClass : javaClasses) {
-                if (javaClass.isEnum()) {
-                    //todo
-                    continue;
-                }
+                dealClass(javaClass);
+            }
+        }
+        dealExtraExport();
+        saveDirectExportInfo();
+    }
 
-                if (javaClass.isAnnotation()) {
-                    //todo
-                    continue;
-                }
+    private void dealExtraExport() {
+        Set<String> s1;
+        Set<String> s2 = new HashSet<>();
 
-                if (javaClass.isInner()) {
-                    //todo
-                    continue;
-                }
+        while (!(s1 = Sets.difference(this.extraExports,s2)).isEmpty()) {
+            s2 = new HashSet<>(this.extraExports);
+            s1 = new HashSet<>(s1);
+            for (String s : s1) {
+                JavaClass javaClass = jpb.getClassByName(s);
+                dealClass(javaClass);
+            }
+        }
 
-                if (javaClass.isPublic()) {
-                    CompilationUnit cu = interfaceGenerator.generateInterface(javaClass);
-                    classGenerator.generateClass(javaClass,cu);
+        saveExtraExportInfo();
+    }
+
+    private void save(Set<String> saveList,String path) {
+        File file = new File(path);
+        PrintWriter printWriter = null;
+        try {
+            file.createNewFile();
+            OutputStream out = new FileOutputStream(file);
+            printWriter = new PrintWriter(out);
+            for (String extraExport : saveList) {
+                printWriter.println(extraExport);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (printWriter != null) {
+                printWriter.close();
+            }
+        }
+    }
+
+    private void saveExtraExportInfo() {
+        save(this.extraExports,this.extraExportInfoPath);
+    }
+
+    private void saveDirectExportInfo() {
+        save(this.directExportclasses,this.directExportClassPath);
+    }
+
+    private void dealClass(JavaClass javaClass) {
+        if (javaClass.isEnum()) {
+            //todo
+            return;
+        }
+
+        if (javaClass.isAnnotation()) {
+            directExport(javaClass);
+            return;
+        }
+
+        if (javaClass.isInner()) {
+            //todo
+            return;
+        }
+
+        if (javaClass.isPublic()) {
+            CompilationUnit cu = interfaceGenerator.generateInterface(javaClass);
+            classGenerator.generateClass(javaClass,cu);
+        }
+    }
+
+    private void directExport(JavaClass javaClass) {
+        String path = this.name2path.get(javaClass.getFullyQualifiedName());
+        File file = new File(path);
+        File outFile = new File(this.outputDir + javaClass.getFullyQualifiedName().replaceAll("\\.", "/") + ".java");
+
+        if (!outFile.exists()) {
+            this.classGenerator.createDir(javaClass);
+            try {
+                outFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        InputStream is = null;
+        OutputStream out = null;
+        try {
+            is = new FileInputStream(file);
+            out = new FileOutputStream(outFile);
+            transfer(is,out);
+            this.directExportclasses.add(javaClass.getFullyQualifiedName());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }
+    }
+
+    private void transfer(InputStream is, OutputStream out) throws IOException {
+        int read;
+        byte[] buffer = new byte[1 << 13];
+        while ((read = is.read(buffer)) >= 0) {
+            out.write(buffer,0,read);
+        }
+    }
+
+    private void initNamePathMap() {
+        for (File file : sourceFile) {
+            memory(file);
+        }
+    }
+
+    private void memory(File file) {
+        if (file.isFile()) {
+            name2path.put(getPackageName(file),file.getAbsolutePath());
+            return;
+        }
+
+        for (File f : file.listFiles()) {
+            memory(f);
+        }
+    }
+
+    private String getPackageName(File file) {
+        String fileName = file.getAbsolutePath();
+        return fileName.substring(fileName.lastIndexOf("java/") + "java/".length(),fileName.lastIndexOf(".java"))
+                .replaceAll("/",".");
     }
 
     public Set<String> getExportPackages() {

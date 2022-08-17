@@ -144,3 +144,22 @@ interface的话随便放，为了方便我们就把他统一放在Interface这�
 到底是用javaparser重构还是，继续用qdox打补丁呢？
 
 重构吧，反正将来改代码的时候还要用到他的api
+
+
+
+
+
+现在未解决的问题
+
+1.   construct
+
+2.   annotation
+
+3.   extra export
+
+     要在遍历生成一遍
+
+
+
+今天先解决annotation吧
+

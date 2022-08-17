@@ -1,0 +1,11 @@
+org.apache.dubbo.config.annotation.Argument
+org.apache.dubbo.config.annotation.DubboService
+org.apache.dubbo.config.support.Parameter
+org.apache.dubbo.config.support.Nested
+org.apache.dubbo.config.annotation.Reference
+org.apache.dubbo.config.annotation.DubboReference
+org.apache.dubbo.config.annotation.Service
+org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig
+org.apache.dubbo.config.spring.context.annotation.EnableDubbo
+org.apache.dubbo.config.annotation.Method
+org.apache.dubbo.config.spring.context.annotation.DubboComponentScan

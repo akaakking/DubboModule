@@ -1,6 +1,5 @@
 package org.apache.dubbo.compiler;
 
-import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
@@ -11,12 +10,10 @@ import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.type.TypeParameter;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.Visitable;
 import com.thoughtworks.qdox.model.JavaClass;
-import javassist.compiler.ast.Keyword;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -116,7 +113,7 @@ public class ClassGenerator {
         }
     }
 
-    private void createDir(JavaClass javaClass) {
+    void createDir(JavaClass javaClass) {
         File dir  = new File(baseDir + javaClass.getPackageName().replaceAll("\\.","/"));
         if (!dir.exists()) {
             dir.mkdirs();
@@ -135,6 +132,7 @@ public class ClassGenerator {
         @Override
         public Visitable visit(MethodDeclaration n, Object arg) {
             super.visit(n, arg);
+            n.setPublic(true);
             BlockStmt  blockStmt = new BlockStmt();
 
             NameExpr nameExpr = new NameExpr("instance");
