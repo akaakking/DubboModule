@@ -43,7 +43,6 @@ public class InterfaceGenerator {
 
         addMethods(coid,javaClass);
 
-        // 最后
         addImports(cu);
         save(cu,javaClass);
 

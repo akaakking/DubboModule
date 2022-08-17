@@ -2,6 +2,7 @@ package org.apache.dubbo.compiler;
 
 
 
+import com.github.javaparser.ast.CompilationUnit;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.*;
 import org.junit.Test;
@@ -67,8 +68,8 @@ public class Generator {
                 }
 
                 if (javaClass.isPublic()) {
-                    interfaceGenerator.generateInterface(javaClass);
-//                    classGenerator.generateClass(javaClass);
+                    CompilationUnit cu = interfaceGenerator.generateInterface(javaClass);
+                    classGenerator.generateClass(javaClass,cu);
                 }
             }
         }
