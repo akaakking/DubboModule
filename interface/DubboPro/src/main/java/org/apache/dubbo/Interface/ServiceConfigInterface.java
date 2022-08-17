@@ -1,9 +1,5 @@
 package org.apache.dubbo.Interface;
 
-import org.apache.dubbo.config.ApplicationConfig;
-import org.apache.dubbo.config.MetadataReportConfig;
-import org.apache.dubbo.config.RegistryConfig;
-
 /**
  * //TODO add interface commment here
  *

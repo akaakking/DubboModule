@@ -8,7 +8,6 @@ package org.apache.dubbo.Interface;
  */
 public class In {
     public static void main(String[] args) {
-        String a = "org.apache.dubbo";
-        System.out.println(a.replaceAll("\\.", "/"));
+
     }
 }

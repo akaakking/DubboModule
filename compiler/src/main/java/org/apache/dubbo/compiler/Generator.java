@@ -1,19 +1,9 @@
 package org.apache.dubbo.compiler;
 
 
-import com.github.javaparser.StaticJavaParser;
-import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.Node;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.body.Parameter;
-import com.github.javaparser.ast.body.TypeDeclaration;
-import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import com.github.javaparser.ast.visitor.ModifierVisitor;
-import com.github.javaparser.ast.visitor.Visitable;
+
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.*;
-import com.thoughtworks.qdox.model.impl.DefaultJavaParameterizedType;
 import org.junit.Test;
 
 import java.io.*;
@@ -41,36 +31,14 @@ public class Generator {
     private  Set<String> exportClasses;
     private Set<String> extraExports = new HashSet<>();
     private Set<File> sourceFile = new HashSet<>();
-    private Map<String,String> name2path = new HashMap<>();
-
-
-    static JavaProjectBuilder getJpb() {
-        return jpb;
-    }
 
     @Test
     public void testGen() {
-//        try {
-//            CompilationUnit cu = StaticJavaParser.parse(new File("/home/wfh/DubboModule/dubbo/dubbo-config/dubbo-config-api/src/main/java/org/apache/dubbo/config/ConfigScopeModelInitializer.java"));
-//
-//            ClassOrInterfaceDeclaration cid = new ClassOrInterfaceDeclaration();
-//
-//            JavaClass javaClass;
-//            javaClass.getMethodBySignature();
-//
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        generate();
+        generate();
     }
-
-    // 先找办法不行的话就依托javaclass的数据用javaparser生成
-
-
 
     public void generate() {
         initEnvirenment();
-        initNamePathMap();
         Set<String> exportPackages = getExportPackages();
         InterfaceGenerator interfaceGenerator = new InterfaceGenerator(this);
         ClassGenerator classGenerator = new ClassGenerator(this);
@@ -100,18 +68,10 @@ public class Generator {
 
                 if (javaClass.isPublic()) {
                     interfaceGenerator.generateInterface(javaClass);
-//                classGenerator.generateClass(javaClass);
+//                    classGenerator.generateClass(javaClass);
                 }
             }
         }
-    }
-
-    public Map<String, String> getName2path() {
-        return name2path;
-    }
-
-    public void setName2path(Map<String, String> name2path) {
-        this.name2path = name2path;
     }
 
     public Set<String> getExportPackages() {
@@ -170,31 +130,9 @@ public class Generator {
 
     private void initEnvirenment() {
         initJavaProjectBuilder();
-        initNamePathMap();
     }
 
-    private void initNamePathMap() {
-        for (File file : sourceFile) {
-            memory(file);
-        }
-    }
 
-    private void memory(File file) {
-        if (file.isFile()) {
-            name2path.put(getPackageName(file),file.getAbsolutePath());
-            return;
-        }
-
-        for (File f : file.listFiles()) {
-            memory(f);
-        }
-    }
-
-    private String getPackageName(File file) {
-        String fileName = file.getAbsolutePath();
-        return fileName.substring(fileName.lastIndexOf("java/") + "java/".length(),fileName.lastIndexOf(".java"))
-                .replaceAll("/",".");
-    }
 // 倒是可以作为一个算法题写一写
 
     private void initJavaProjectBuilder() {
