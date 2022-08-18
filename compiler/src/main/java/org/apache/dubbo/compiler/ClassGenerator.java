@@ -72,9 +72,9 @@ public class ClassGenerator {
                 MethodCallExpr getMethodnameCallExpr = new MethodCallExpr(getMethodnameExpr,"getMethod");
                 for (JavaParameter parameter : method.getParameters()) {
                     if (this.interfaceGenerator.checkName(parameter.getJavaClass())) {
-                        getMethodnameCallExpr.addArgument(this.interfaceGenerator.addInterface(parameter.getType().getValue()));
+                        getMethodnameCallExpr.addArgument(this.interfaceGenerator.addInterface(parameter.getType().getValue()) + ".class");
                     } else {
-                        getMethodnameCallExpr.addArgument(parameter.getType().getValue());
+                        getMethodnameCallExpr.addArgument(parameter.getType().getValue() + ".class");
                     }
                 }
                 blockStmt.addStatement(getMethodnameCallExpr);
@@ -89,9 +89,15 @@ public class ClassGenerator {
                 for (JavaParameter parameter : method.getParameters()) {
                     invokeCall.addArgument(parameter.getName());
                 }
-                blockStmt.addStatement(invokeNameExpr);
-                
-                
+                blockStmt.addStatement(invokeCall);
+
+                this.interfaceGenerator.addReturnType(methodDeclaration,method);
+
+                for (JavaParameter parameter : method.getParameters()) {
+                    this.interfaceGenerator.addParams(methodDeclaration,parameter);
+                }
+
+                this.interfaceGenerator.addMethodGeneric(methodDeclaration,method);
             }
         }
     }

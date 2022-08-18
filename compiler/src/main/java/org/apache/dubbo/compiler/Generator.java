@@ -113,6 +113,11 @@ public class Generator {
     }
 
     private void dealClass(JavaClass javaClass) {
+        if (javaClass.isInner()) {
+            //todo
+            return;
+        }
+
         if (javaClass.isEnum()) {
             directExport(javaClass);
             return;
@@ -123,10 +128,6 @@ public class Generator {
             return;
         }
 
-        if (javaClass.isInner()) {
-            //todo
-            return;
-        }
 
         if (javaClass.isPublic()) {
             CompilationUnit cu = interfaceGenerator.generateInterface(javaClass);
@@ -135,7 +136,7 @@ public class Generator {
     }
 
     private void directExport(JavaClass javaClass) {
-        String path = this.name2path.get(javaClass.getFullyQualifiedName());
+        String path = this.name2path.get(javaClass.getBinaryName());
         File file = new File(path);
         File outFile = new File(this.outputDir + javaClass.getFullyQualifiedName().replaceAll("\\.", "/") + ".java");
 

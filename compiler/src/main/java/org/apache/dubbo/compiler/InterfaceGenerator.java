@@ -90,7 +90,7 @@ public class InterfaceGenerator {
     private void addImpls(ClassOrInterfaceDeclaration coid, JavaClass javaClass) {
         JavaType javaType = javaClass.getSuperClass();
         if (javaType != null && !javaType.getFullyQualifiedName().equals("java.lang.Object")) {
-            if (checkName(javaType.getFullyQualifiedName())) {
+            if (checkName(javaType.getBinaryName())) {
                 coid.addImplementedType(addInterface(shortName(javaType.getGenericValue())));
             } else {
                 coid.addImplementedType(javaType.getGenericValue());
@@ -121,40 +121,9 @@ public class InterfaceGenerator {
             MethodDeclaration parserMethodDeclaration = coid.addMethod(method.getName());
             parserMethodDeclaration.removeBody();
 
-            JavaType javaType = method.getReturnType();
+            addReturnType(parserMethodDeclaration,method);
 
-            if (checkName(javaType.getBinaryName()) && !method.getReturns().isEnum()) {
-                parserMethodDeclaration.setType(addInterface(shortName(javaType.getGenericValue())));
-            } else {
-                parserMethodDeclaration.setType(javaType.getGenericValue());
-                if (method.getReturns().isEnum()) {
-                    this.importList.add(javaType.getBinaryName());
-                }
-            }
-
-            for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : method.getTypeParameters()) {
-                TypeParameter parserTypeParameter = new TypeParameter();
-                parserTypeParameter.setName(typeParameter.getName());
-
-                if (typeParameter.getBounds() != null) {
-                    NodeList<ClassOrInterfaceType> nodeList = new NodeList<>();
-                    for (JavaType bound : typeParameter.getBounds()) {
-                        ClassOrInterfaceType coit = new ClassOrInterfaceType();
-                        if (checkName(bound.getFullyQualifiedName())) {
-                            coit.setName(addInterface(shortName(bound.getGenericValue())));
-                        } else {
-                            coit.setName(bound.getGenericValue());
-                        }
-                        nodeList.add(coit);
-                    }
-
-                    if (!nodeList.isEmpty()) {
-                        parserTypeParameter.setTypeBound(nodeList);
-                    }
-                }
-
-                parserMethodDeclaration.addTypeParameter(parserTypeParameter);
-            }
+            addMethodGeneric(parserMethodDeclaration,method);
 
 
             for (JavaParameter parameter : method.getParameters()) {
@@ -163,7 +132,46 @@ public class InterfaceGenerator {
         }
     }
 
-    private void addParams(MethodDeclaration parserMethodDeclaration,JavaParameter javaParameter) {
+    void addMethodGeneric(MethodDeclaration parserMethodDeclaration,JavaMethod method) {
+        for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : method.getTypeParameters()) {
+            TypeParameter parserTypeParameter = new TypeParameter();
+            parserTypeParameter.setName(typeParameter.getName());
+
+            if (typeParameter.getBounds() != null) {
+                NodeList<ClassOrInterfaceType> nodeList = new NodeList<>();
+                for (JavaType bound : typeParameter.getBounds()) {
+                    ClassOrInterfaceType coit = new ClassOrInterfaceType();
+                    if (checkName(bound.getFullyQualifiedName())) {
+                        coit.setName(addInterface(shortName(bound.getGenericValue())));
+                    } else {
+                        coit.setName(bound.getGenericValue());
+                    }
+                    nodeList.add(coit);
+                }
+
+                if (!nodeList.isEmpty()) {
+                    parserTypeParameter.setTypeBound(nodeList);
+                }
+            }
+
+            parserMethodDeclaration.addTypeParameter(parserTypeParameter);
+        }
+    }
+
+    void addReturnType(MethodDeclaration parserMethodDeclaration,JavaMethod method) {
+        JavaType javaType = method.getReturnType();
+
+        if (checkName(javaType.getBinaryName()) && !method.getReturns().isEnum()) {
+            parserMethodDeclaration.setType(addInterface(shortName(javaType.getGenericValue())));
+        } else {
+            parserMethodDeclaration.setType(javaType.getGenericValue());
+            if (method.getReturns().isEnum()) {
+                this.importList.add(javaType.getBinaryName());
+            }
+        }
+    }
+
+    void addParams(MethodDeclaration parserMethodDeclaration,JavaParameter javaParameter) {
         Parameter  parameter = new Parameter();
         parameter.setName(javaParameter.getName());
 
@@ -178,10 +186,10 @@ public class InterfaceGenerator {
 
     boolean checkName(JavaClass javaClass) {
         if (javaClass.isEnum()) {
-            this.importList.add(javaClass.getFullyQualifiedName());
+            this.importList.add(javaClass.getBinaryName());
             return false;
         } else {
-            return checkName(javaClass.getFullyQualifiedName());
+            return checkName(javaClass.getBinaryName());
         }
     }
 
@@ -199,7 +207,6 @@ public class InterfaceGenerator {
             if (!this.generator.getExportClasses().contains(name)) {
                 this.generator.getExtraExports().add(name);
             }
-
 
             if (name.contains("annotation")) {
                 this.importList.add(name);

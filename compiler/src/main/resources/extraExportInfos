@@ -18,9 +18,7 @@ org.apache.dubbo.rpc.model.ModuleModel
 org.apache.dubbo.common.config.InmemoryConfiguration
 org.apache.dubbo.Interface.ApplicationConfigInterface
 org.apache.dubbo.common.beans.factory.ScopeBeanFactory
-org.apache.dubbo.common.url.component.PathURLAddress
 org.apache.dubbo.rpc.model.ServiceMetadata
-org.apache.dubbo.common.utils.Holder
 org.apache.dubbo.registry.client.ServiceInstanceCustomizer
 org.apache.dubbo.rpc.model.ProviderModel$RegisterStatedURL
 org.apache.dubbo.metadata.MetadataInfo
@@ -38,7 +36,6 @@ org.apache.dubbo.common.config.CompositeConfiguration
 org.apache.dubbo.common.deploy.ModuleDeployer
 org.apache.dubbo.common.url.component.URLAddress
 org.apache.dubbo.common.extension.ExtensionAccessorAware
-org.apache.dubbo.config.spring.beans.factory.annotation.AbstractAnnotationBeanPostProcessor$AnnotatedInjectionMetadata
 org.apache.dubbo.common.deploy.ApplicationDeployer
 org.apache.dubbo.rpc.model.ScopeModelDestroyListener
 org.apache.dubbo.common.context.Lifecycle
@@ -55,7 +52,6 @@ org.apache.dubbo.common.status.Status$Level
 org.apache.dubbo.common.context.LifecycleAdapter
 org.apache.dubbo.registry.client.InstanceAddressURL
 org.apache.dubbo.rpc.Invoker
-org.apache.dubbo.config.spring.beans.factory.annotation.AbstractAnnotationBeanPostProcessor$AnnotatedInjectElement
 org.apache.dubbo.rpc.model.ProviderModel
 org.apache.dubbo.rpc.model.FrameworkServiceRepository
 org.apache.dubbo.common.config.configcenter.ConfigChangeType
