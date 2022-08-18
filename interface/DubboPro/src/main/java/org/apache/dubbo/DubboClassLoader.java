@@ -36,43 +36,46 @@ public class DubboClassLoader {
 
     //TODO 异常没处理好
     public static Object getInstance(Class<?> clazz) {
-        Class klass = null;
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        return getInstance(clazz.getName());
+    }
+
+    public static Object getInstance(String className,Class[] params,Object[] args) {
+        Object instance = null;
 
         try {
-            klass = classLoader.loadClass(clazz.getName());
+            Class klass = classLoader.loadClass(className);
+            Constructor constructor = klass.getConstructor(params);
+            instance = constructor.newInstance(args);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-        try {
-            return  klass.newInstance();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return instance;
     }
+
 
     // 字符串操作会成为慢操作，到时候看看能不能优化一下 todo
     public static Object getInstance(Class<?> clazz,String args)  {
-        Class klass = null;
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        Object instance = null;
         try {
-            klass = classLoader.loadClass(clazz.getName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
+            Class klass = classLoader.loadClass(clazz.getName());
             Constructor constructor = klass.getConstructor(String.class);
-            return constructor.newInstance(args);
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException e) {
+            instance = constructor.newInstance(args);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
-        return null;
+
+        return instance;
     }
 
     private static File UnZipJAR() {

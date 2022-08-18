@@ -149,17 +149,116 @@ interface的话随便放，为了方便我们就把他统一放在Interface这�
 
 
 
-现在未解决的问题
+现在有个问题就是，如果是样例这种形式，那么我在调用serviceConfig的方法的时候是怎么调用的；
 
-1.   construct
+我们知道我们所有方法的调用其实都是调用的instance,那我们直接在初始化的时候赋值instance完事。即下边这样
 
-2.   annotation
+好像直接赋值也可以？反正我们的目的都是为了初始化instance/
 
-3.   extra export
+```java
+public class ServiceConfig<T> implments ServiceConfigInterface<T> extends ServiceCongfigBase<T> {
+    public ServiceConfig() {
+        instan = “分得分”；
+    }
+}
 
-     要在遍历生成一遍
+public class ServiceConfigBase<T> implments ServiceConfigBaseInterface<T>{
+    protect ServiceConfigBaseInterface instance;
+    
+    // 由于是新类所以用他做参数不会和以往构造方法冲突。
+    protect ServiceConfigBase(ServiceConfigBaseInterface fds) {
+    }
+}
+```
 
 
 
-今天先解决annotation吧
+很难受的一点是将来用户继承我们的类也没用。。。。。得不到想要的属性以及方法。但接口的话应该是没有问题的，也没有办法用抽象类。
+
+当一个类可被实例化的时候，那么他就要含有一个instance不管他的父类有无。
+
+
+
+```java
+public DubboShutdownHook(ApplicationModel applicationModel) {
+	instance = DubboClassLoader.getInstance();
+}
+
+DubboClassLoader.getInstance(); //  获得无参构造生成的对象
+// 看一下获得一个方法需要什么吧 需要typr数组和value数组。现在就是说value数组，type数组可能会有点问题。
+// 除非将内部construct改掉。否则没办法匹配。
+// 原来的全部用interface替代。 接口参数全用interface代替这是必然的。
+能不能找到呢？
+DubboClassLoader.getInstance(); // 
+
+
+            for (JavaParameter parameter : method.getParameters()) {
+                addParams(parserMethodDeclaration,parameter);
+            }
+        }
+    }
+
+    private void addParams(MethodDeclaration parserMethodDeclaration,JavaParameter javaParameter) {
+        Parameter  parameter = new Parameter();
+        parameter.setName(javaParameter.getName());
+
+        if (checkName(javaParameter.getType().getBinaryName())) {
+            parameter.setType(addInterface(shortName(javaParameter.getType().getGenericValue())));
+        } else {
+            parameter.setType(javaParameter.getType().getGenericValue());
+        }
+
+        parserMethodDeclaration.addParameter(parameter);
+    }
+
+
+           BlockStmt blockStmt = new BlockStmt();
+            ExpressionStmt expressionStmt = new ExpressionStmt();
+            constructor.setBody(blockStmt);
+            blockStmt.addStatement(expressionStmt);
+
+            NameExpr instance = new NameExpr("instance");
+            NameExpr DubboClassLoader = new NameExpr("(ServiceConfig)DubboClassLoader");
+
+            MethodCallExpr methodCallExpr = new MethodCallExpr(DubboClassLoader,"getInstance");
+            methodCallExpr.addArgument("params");
+            methodCallExpr.addArgument("args");
+
+            VariableDeclarationExpr variableDeclarationExpr = new VariableDeclarationExpr();
+            VariableDeclarator variableDeclarator = new VariableDeclarator();
+            variableDeclarator.setName("params");
+            variableDeclarator.setType(new ClassOrInterfaceType("class[]"));
+            variableDeclarator.setInitializer(methodCallExpr);
+            NodeList<VariableDeclarator> variableDeclarators = new NodeList<>();
+            variableDeclarators.add(variableDeclarator);
+            variableDeclarationExpr.setVariables(variableDeclarators);
+            expressionStmt.setExpression(variableDeclarationExpr);
+
+
+
+
+            blockStmt.addStatement(methodCallExpr);
+
+
+```
+
+
+
+
+
+1.   List<URL> 
+
+     
+
+     ```
+     ApplicationBuilderInterface addRegistries(List<? extends RegistryConfig> registries);
+     ```
+
+2.   注解没加
+
+3.   静态方法反射吧没啥说的了
+
+```java
+instance.getClass().getM
+```
 

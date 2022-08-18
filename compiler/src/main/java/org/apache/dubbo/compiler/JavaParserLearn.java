@@ -8,6 +8,7 @@ import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.MethodCallExpr;
+import com.github.javaparser.ast.expr.Name;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.*;
@@ -21,10 +22,8 @@ import com.thoughtworks.qdox.model.*;
 import org.junit.Test;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * 最多看到5点注意搞清楚一件事
@@ -100,21 +99,27 @@ public class JavaParserLearn {
 
     @Test
     public void gsdfs() {
-        JavaProjectBuilder jpb = new JavaProjectBuilder();
-        try {
-            jpb.addSource(new File("/home/wfh/DubboModule/dubbo/dubbo-config/dubbo-config-api/src/main/java/org/apache/dubbo/config/bootstrap/builders/AbstractBuilder.java"));
-            for (JavaClass aClass : jpb.getClasses()) {
-                for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : aClass.getTypeParameters()) {
-                    System.out.println(typeParameter.getName());
-                    for (JavaType bound : typeParameter.getBounds()) {
-                        System.out.println(bound);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        CompilationUnit cu = new CompilationUnit();
+
+        NameExpr nameExpr = new NameExpr();
+        nameExpr.setName("return method = instance.getClass()");
+        MethodCallExpr methodCallExpr = new MethodCallExpr(nameExpr,"getMethod");
+    }
+
+    @Test
+    public void fsdbnvcf() {
+        CompilationUnit cu = StaticJavaParser.parse("public class A{ public void eat() {} public A(){}}");
+        ClassOrInterfaceDeclaration coid =  cu.getClassByName("A").get();
+        for (MethodDeclaration method : coid.getMethods()) {
+            BlockStmt blockStmt = new BlockStmt();
+            method.setBody(blockStmt);
+            NameExpr nameExpr = new NameExpr("return method");
+            MethodCallExpr methodCallExpr = new MethodCallExpr(nameExpr,"invoke");
+            methodCallExpr.addArgument("fdsfd");
+            blockStmt.addStatement(methodCallExpr);
         }
 
+        System.out.println(cu);
     }
 
     @Test
@@ -152,7 +157,6 @@ public class JavaParserLearn {
         }
 
         System.out.println(cu);
-
     }
 
     @Test

@@ -43,6 +43,7 @@ public class InterfaceGenerator {
         addMethods(coid,javaClass);
 
         addImports(cu);
+
         save(cu,javaClass);
 
         importList.clear();
@@ -113,15 +114,22 @@ public class InterfaceGenerator {
 
     private void addMethods(ClassOrInterfaceDeclaration coid,JavaClass javaClass) {
         for (JavaMethod method : javaClass.getMethods()) {
+            if (method.isStatic() || !method.isPublic()) {
+                continue;
+            }
+
             MethodDeclaration parserMethodDeclaration = coid.addMethod(method.getName());
             parserMethodDeclaration.removeBody();
 
             JavaType javaType = method.getReturnType();
 
-            if (checkName(javaType.getBinaryName())) {
+            if (checkName(javaType.getBinaryName()) && !method.getReturns().isEnum()) {
                 parserMethodDeclaration.setType(addInterface(shortName(javaType.getGenericValue())));
             } else {
                 parserMethodDeclaration.setType(javaType.getGenericValue());
+                if (method.getReturns().isEnum()) {
+                    this.importList.add(javaType.getBinaryName());
+                }
             }
 
             for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : method.getTypeParameters()) {
@@ -168,9 +176,21 @@ public class InterfaceGenerator {
         parserMethodDeclaration.addParameter(parameter);
     }
 
+    boolean checkName(JavaClass javaClass) {
+        if (javaClass.isEnum()) {
+            this.importList.add(javaClass.getFullyQualifiedName());
+            return false;
+        } else {
+            return checkName(javaClass.getFullyQualifiedName());
+        }
+    }
+
     // 检查全限定名并做相应处理 不加[ < 在包内的话返回true
-    private boolean checkName(String name) {
+    boolean checkName(String name) {
         if (isPrimitive(name) || name.startsWith("java.lang")) {
+            if (name.startsWith("java.lang.reflect")) {
+                this.importList.add(name);
+            }
             return false;
         }
 
@@ -178,6 +198,12 @@ public class InterfaceGenerator {
             // 在想要暴露的包中
             if (!this.generator.getExportClasses().contains(name)) {
                 this.generator.getExtraExports().add(name);
+            }
+
+
+            if (name.contains("annotation")) {
+                this.importList.add(name);
+                return false;
             }
 
             return true;
@@ -195,7 +221,7 @@ public class InterfaceGenerator {
         }
     }
 
-    private String addInterface(String s) {
+    String addInterface(String s) {
         StringBuilder sb = new StringBuilder(s);
 
         if (s.contains("<")) {
@@ -218,7 +244,7 @@ public class InterfaceGenerator {
     }
 
     // 外部来的有可能有相关问题
-    private String shortName(String oldName) {
+    String shortName(String oldName) {
 
         if (!oldName.contains(".")) {
             return oldName;

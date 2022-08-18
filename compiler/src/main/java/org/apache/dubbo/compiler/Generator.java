@@ -52,6 +52,7 @@ public class Generator {
         Set<String> exportPackages = getExportPackages();
         interfaceGenerator = new InterfaceGenerator(this);
         classGenerator = new ClassGenerator(this);
+        classGenerator.setInterfaceGenerator(interfaceGenerator);
 
         for (String exportPackage : exportPackages) {
             JavaPackage javaPackage = jpb.getPackageByName(exportPackage);
@@ -113,7 +114,7 @@ public class Generator {
 
     private void dealClass(JavaClass javaClass) {
         if (javaClass.isEnum()) {
-            //todo
+            directExport(javaClass);
             return;
         }
 
