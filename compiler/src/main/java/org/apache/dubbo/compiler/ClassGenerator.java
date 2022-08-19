@@ -20,9 +20,6 @@ import com.thoughtworks.qdox.model.JavaMethod;
 import com.thoughtworks.qdox.model.JavaParameter;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -35,20 +32,18 @@ import java.util.Set;
  * @Date 2022/8/16 上午11:08
  */
 public class ClassGenerator {
-    private Generator generator;
+    private AbstractGenerator generator;
     private Set<String> existsDirs = new HashSet<>();
     private MethodGenerator methodGenerator  = new MethodGenerator();
-    private InterfaceGenerator interfaceGenerator;
     private String baseDir;
 
-    public ClassGenerator(Generator generator) {
+    public ClassGenerator(AbstractGenerator generator) {
         this.generator = generator;
         this.baseDir = generator.getOutputDir();
     }
 
     void generateClass(JavaClass javaClass,CompilationUnit cu) {
         ClassOrInterfaceDeclaration coid = interface2Class(javaClass,cu);
-        addField(javaClass,coid);
 
         methodGenerator.visit(cu,null);
 
@@ -56,7 +51,11 @@ public class ClassGenerator {
 
         addConstruct(javaClass,coid);
 
-        save(javaClass,cu);
+        addField(javaClass,coid);
+
+        this.generator.addImports(cu);
+
+        saveClass(javaClass,cu);
     }
 
     private void addStaticMethod(JavaClass javaClass,ClassOrInterfaceDeclaration coid) {
@@ -71,8 +70,8 @@ public class ClassGenerator {
                 getMethodnameExpr.setName("Method method = instance.getClass()");
                 MethodCallExpr getMethodnameCallExpr = new MethodCallExpr(getMethodnameExpr,"getMethod");
                 for (JavaParameter parameter : method.getParameters()) {
-                    if (this.interfaceGenerator.checkName(parameter.getJavaClass())) {
-                        getMethodnameCallExpr.addArgument(this.interfaceGenerator.addInterface(parameter.getType().getValue()) + ".class");
+                    if (this.generator.checkName(parameter.getJavaClass())) {
+                        getMethodnameCallExpr.addArgument(this.generator.addInterface(parameter.getType().getValue()) + ".class");
                     } else {
                         getMethodnameCallExpr.addArgument(parameter.getType().getValue() + ".class");
                     }
@@ -91,13 +90,13 @@ public class ClassGenerator {
                 }
                 blockStmt.addStatement(invokeCall);
 
-                this.interfaceGenerator.addReturnType(methodDeclaration,method);
+                this.generator.addReturnType(methodDeclaration,method);
 
                 for (JavaParameter parameter : method.getParameters()) {
-                    this.interfaceGenerator.addParams(methodDeclaration,parameter);
+                    this.generator.addParams(methodDeclaration,parameter);
                 }
 
-                this.interfaceGenerator.addMethodGeneric(methodDeclaration,method);
+                this.generator.addMethodGeneric(methodDeclaration,method);
             }
         }
     }
@@ -123,9 +122,9 @@ public class ClassGenerator {
                 parserParameter.setName(parameter.getName());
                 args.add(parameter.getName());
 
-                if (this.interfaceGenerator.checkName(parameter.getType().getBinaryName())) {
-                    parserParameter.setType(this.interfaceGenerator.addInterface(
-                                            this.interfaceGenerator.shortName(parameter.getType().getGenericValue())));
+                if (this.generator.checkName(parameter.getType().getBinaryName())) {
+                    parserParameter.setType(this.generator.addInterface(
+                                            this.generator.shortName(parameter.getType().getGenericValue())));
                 } else {
                     parserParameter.setType(parameter.getType().getGenericValue());
                 }
@@ -214,7 +213,7 @@ public class ClassGenerator {
         return coid;
     }
 
-    private void save(JavaClass javaClass,CompilationUnit cu) {
+    void saveClass(JavaClass javaClass,CompilationUnit cu) {
         if (!this.existsDirs.contains(javaClass.getPackageName())) {
             createDir(javaClass);
             this.existsDirs.add(javaClass.getPackageName());
@@ -222,28 +221,7 @@ public class ClassGenerator {
 
         String path = this.baseDir + javaClass.getFullyQualifiedName().replaceAll("\\.", "/") + ".java";
 
-        File file = new File(path);
-
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        PrintWriter printWriter = null;
-
-        try {
-            printWriter = new PrintWriter(file);
-            printWriter.print(cu.toString());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (printWriter != null) {
-                printWriter.close();
-            }
-        }
+        this.generator.saveContent(cu.toString(),path);
     }
 
     void createDir(JavaClass javaClass) {
@@ -255,10 +233,6 @@ public class ClassGenerator {
 
     public String getBaseDir() {
         return baseDir;
-    }
-
-    public void setInterfaceGenerator(InterfaceGenerator interfaceGenerator) {
-        this.interfaceGenerator = interfaceGenerator;
     }
 
     public void setBaseDir(String baseDir) {

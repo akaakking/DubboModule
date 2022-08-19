@@ -256,9 +256,19 @@ DubboClassLoader.getInstance(); //
 
 2.   注解没加
 
-3.   静态方法反射吧没啥说的了
+3.   额外暴露功能
 
-```java
-instance.getClass().getM
-```
+4.   额外暴露的类没有instance
+
+5.   对内部api里外部api的引用做统计
+
+6.   setRegistry（） {
+
+​	getinstance（）
+
+​	}
+
+
+
+接口和abstract这些其实还没有处理好。
 

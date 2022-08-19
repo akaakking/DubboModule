@@ -2,6 +2,7 @@ package org.apache.dubbo.compiler;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.*;
@@ -27,29 +28,27 @@ import java.util.Set;
  * @Date 2022/8/16 下午2:56
  */
 public class InterfaceGenerator {
-    private Generator generator;
-    private List<String> importList = new ArrayList<>();
+    private AbstractGenerator generator;
     private String interfaceDir;
 
-    public InterfaceGenerator(Generator generator) {
+    public InterfaceGenerator(AbstractGenerator generator) {
         this.generator = generator;
         createInterfaceDir();
     }
 
     CompilationUnit generateInterface(JavaClass javaClass) {
         CompilationUnit cu = new CompilationUnit();
+
         ClassOrInterfaceDeclaration coid = addClass(cu,javaClass);
 
         addMethods(coid,javaClass);
 
-        addImports(cu);
+        this.generator.addImports(cu);
 
-        save(cu,javaClass);
+        saveInterface(cu,javaClass);
 
-        importList.clear();
         return cu;
     }
-
 
     private ClassOrInterfaceDeclaration addClass(CompilationUnit cu, JavaClass javaClass) {
         cu.setPackageDeclaration("org.apache.dubbo.Interface");
@@ -58,59 +57,42 @@ public class InterfaceGenerator {
         coid.setInterface(true);
 
         // deal class generic
-        for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : javaClass.getTypeParameters()) {
-            TypeParameter parserTypeParameter = new TypeParameter();
-            parserTypeParameter.setName(typeParameter.getName());
-
-            if (typeParameter.getBounds() != null) {
-                NodeList<ClassOrInterfaceType> nodeList = new NodeList<>();
-                for (JavaType bound : typeParameter.getBounds()) {
-                    ClassOrInterfaceType coit = new ClassOrInterfaceType();
-                    if (checkName(bound.getFullyQualifiedName())) {
-                        coit.setName(addInterface(shortName(bound.getGenericValue())));
-                    } else {
-                        coit.setName(bound.getGenericValue());
-                    }
-                    nodeList.add(coit);
-                }
-
-                if (!nodeList.isEmpty()) {
-                    parserTypeParameter.setTypeBound(nodeList);
-                }
-            }
-
-            coid.addTypeParameter(parserTypeParameter);
-        }
+        dealClassGeneric(coid,javaClass);
 
         addImpls(coid,javaClass);
 
         return coid;
     }
 
+    private void dealClassGeneric(ClassOrInterfaceDeclaration coid,JavaClass javaClass) {
+        for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : javaClass.getTypeParameters()) {
+            TypeParameter parserTypeParameter = this.generator.stuffTypeParameter(typeParameter);
+            coid.addTypeParameter(parserTypeParameter);
+        }
+    }
+
+
+
     private void addImpls(ClassOrInterfaceDeclaration coid, JavaClass javaClass) {
         JavaType javaType = javaClass.getSuperClass();
         if (javaType != null && !javaType.getFullyQualifiedName().equals("java.lang.Object")) {
-            if (checkName(javaType.getBinaryName())) {
-                coid.addImplementedType(addInterface(shortName(javaType.getGenericValue())));
+            if (this.generator.checkName(javaType.getBinaryName())) {
+                coid.addImplementedType(this.generator.addInterface(this.generator.shortName(javaType.getGenericValue())));
             } else {
                 coid.addImplementedType(javaType.getGenericValue());
             }
         }
 
         for (JavaType implement : javaClass.getImplements()) {
-            if (checkName(implement.getFullyQualifiedName())) {
-                coid.addImplementedType(addInterface(shortName(implement.getGenericValue())));
+            if (this.generator.checkName(implement.getFullyQualifiedName())) {
+                coid.addImplementedType(this.generator.addInterface(this.generator.shortName(implement.getGenericValue())));
             } else {
                 coid.addImplementedType(implement.getGenericValue());
             }
         }
     }
 
-    private void addImports(CompilationUnit cu) {
-        for (String importName : this.importList) {
-            cu.addImport(importName);
-        }
-    }
+
 
     private void addMethods(ClassOrInterfaceDeclaration coid,JavaClass javaClass) {
         for (JavaMethod method : javaClass.getMethods()) {
@@ -121,143 +103,19 @@ public class InterfaceGenerator {
             MethodDeclaration parserMethodDeclaration = coid.addMethod(method.getName());
             parserMethodDeclaration.removeBody();
 
-            addReturnType(parserMethodDeclaration,method);
+            this.generator.addReturnType(parserMethodDeclaration,method);
 
-            addMethodGeneric(parserMethodDeclaration,method);
-
+            this.generator.addMethodGeneric(parserMethodDeclaration,method);
 
             for (JavaParameter parameter : method.getParameters()) {
-                addParams(parserMethodDeclaration,parameter);
+                this.generator.addParams(parserMethodDeclaration,parameter);
             }
         }
     }
 
-    void addMethodGeneric(MethodDeclaration parserMethodDeclaration,JavaMethod method) {
-        for (JavaTypeVariable<JavaGenericDeclaration> typeParameter : method.getTypeParameters()) {
-            TypeParameter parserTypeParameter = new TypeParameter();
-            parserTypeParameter.setName(typeParameter.getName());
 
-            if (typeParameter.getBounds() != null) {
-                NodeList<ClassOrInterfaceType> nodeList = new NodeList<>();
-                for (JavaType bound : typeParameter.getBounds()) {
-                    ClassOrInterfaceType coit = new ClassOrInterfaceType();
-                    if (checkName(bound.getFullyQualifiedName())) {
-                        coit.setName(addInterface(shortName(bound.getGenericValue())));
-                    } else {
-                        coit.setName(bound.getGenericValue());
-                    }
-                    nodeList.add(coit);
-                }
-
-                if (!nodeList.isEmpty()) {
-                    parserTypeParameter.setTypeBound(nodeList);
-                }
-            }
-
-            parserMethodDeclaration.addTypeParameter(parserTypeParameter);
-        }
-    }
-
-    void addReturnType(MethodDeclaration parserMethodDeclaration,JavaMethod method) {
-        JavaType javaType = method.getReturnType();
-
-        if (checkName(javaType.getBinaryName()) && !method.getReturns().isEnum()) {
-            parserMethodDeclaration.setType(addInterface(shortName(javaType.getGenericValue())));
-        } else {
-            parserMethodDeclaration.setType(javaType.getGenericValue());
-            if (method.getReturns().isEnum()) {
-                this.importList.add(javaType.getBinaryName());
-            }
-        }
-    }
-
-    void addParams(MethodDeclaration parserMethodDeclaration,JavaParameter javaParameter) {
-        Parameter  parameter = new Parameter();
-        parameter.setName(javaParameter.getName());
-
-        if (checkName(javaParameter.getType().getBinaryName())) {
-            parameter.setType(addInterface(shortName(javaParameter.getType().getGenericValue())));
-        } else {
-            parameter.setType(javaParameter.getType().getGenericValue());
-        }
-
-        parserMethodDeclaration.addParameter(parameter);
-    }
-
-    boolean checkName(JavaClass javaClass) {
-        if (javaClass.isEnum()) {
-            this.importList.add(javaClass.getBinaryName());
-            return false;
-        } else {
-            return checkName(javaClass.getBinaryName());
-        }
-    }
-
-    // 检查全限定名并做相应处理 不加[ < 在包内的话返回true
-    boolean checkName(String name) {
-        if (isPrimitive(name) || name.startsWith("java.lang")) {
-            if (name.startsWith("java.lang.reflect")) {
-                this.importList.add(name);
-            }
-            return false;
-        }
-
-        if (name.startsWith("org.apache.dubbo") || name.startsWith("com.alibab.dubbo")) {
-            // 在想要暴露的包中
-            if (!this.generator.getExportClasses().contains(name)) {
-                this.generator.getExtraExports().add(name);
-            }
-
-            if (name.contains("annotation")) {
-                this.importList.add(name);
-                return false;
-            }
-
-            return true;
-        }
-
-        if (name.length() == 1) {
-            return false;
-        }
-
-        if (!name.contains(".")) {
-            return true;
-        } else {
-            this.importList.add(name);
-            return false;
-        }
-    }
-
-    String addInterface(String s) {
-        StringBuilder sb = new StringBuilder(s);
-
-        if (s.contains("<")) {
-            sb.insert(sb.lastIndexOf("<"),"Interface");
-            return sb.toString();
-        }
-
-        if (s.contains("[")) {
-            sb.insert(sb.lastIndexOf("["),"Interface");
-            return sb.toString();
-        }
-
-        return s + "Interface";
-    }
-
-    boolean isPrimitive(String name) {
-        return "void".equals( name ) || "boolean".equals( name ) || "byte".equals( name ) || "char".equals( name )
-                || "short".equals( name ) || "int".equals( name ) || "long".equals( name ) || "float".equals( name )
-                || "double".equals( name );
-    }
-
-    // 外部来的有可能有相关问题
-    String shortName(String oldName) {
-
-        if (!oldName.contains(".")) {
-            return oldName;
-        }
-
-        return oldName.substring(oldName.lastIndexOf(".") + 1);
+    void saveInterface(CompilationUnit cu,JavaClass javaClass) {
+        this.generator.saveContent(cu.toString(),this.interfaceDir + javaClass.getName() + "Interface.java");
     }
 
     private void createInterfaceDir() {
@@ -266,30 +124,6 @@ public class InterfaceGenerator {
         File file = new File(this.interfaceDir);
 
         file.mkdirs();
-    }
-
-    private void save(CompilationUnit cu,JavaClass javaClass) {
-        String path = this.interfaceDir + javaClass.getName() + "Interface" + ".java";
-
-        File file = new File(path);
-
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        PrintWriter writer = null;
-        try {
-            writer = new PrintWriter(file);
-            writer.print(cu.toString());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (writer != null) {
-                writer.close();
-            }
-        }
     }
 }
 
