@@ -250,9 +250,10 @@ DubboClassLoader.getInstance(); //
 
 解决问题还是挺方便的
 
-1.   注解没有添加
+1.   注解没有添加             todo
 2.   abstract innerclass  enum这些没想好怎么处理
 3.   对内部api里外部api的引用做统计
-4.   List<URL>
-5.   setRegistry（） { getInstance（）}
+4.   List<URL>             todo
+5.   setRegistry（） { getInstance（）}             todo
 6.   额外暴露功能
+7.   修改源码

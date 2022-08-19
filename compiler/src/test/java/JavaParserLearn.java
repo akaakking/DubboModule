@@ -5,6 +5,7 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
+import com.github.javaparser.ast.expr.NormalAnnotationExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
@@ -95,6 +96,11 @@ public class JavaParserLearn {
     }
 
     @Test
+    public void fdsfsdffd() {
+
+    }
+
+    @Test
     public void gsdfs() {
         CompilationUnit cu = new CompilationUnit();
 
@@ -107,16 +113,30 @@ public class JavaParserLearn {
     public void fsdbnvcf() {
         CompilationUnit cu = StaticJavaParser.parse("public class A{ public void eat() {} public A(){}}");
         ClassOrInterfaceDeclaration coid =  cu.getClassByName("A").get();
-        for (MethodDeclaration method : coid.getMethods()) {
-            BlockStmt blockStmt = new BlockStmt();
-            method.setBody(blockStmt);
-            NameExpr nameExpr = new NameExpr("return method");
-            MethodCallExpr methodCallExpr = new MethodCallExpr(nameExpr,"invoke");
-            methodCallExpr.addArgument("fdsfd");
-            blockStmt.addStatement(methodCallExpr);
+        JavaProjectBuilder  jpb = new JavaProjectBuilder();
+        try {
+            jpb.addSource(new File("/home/wfh/DubboModule/dubbo/dubbo-common/src/main/java/org/apache/dubbo/config/AbstractReferenceConfig.java"));
+            for (JavaClass aClass : jpb.getClasses()) {
+                for (JavaMethod method : aClass.getMethods()) {
+                    for (JavaAnnotation annotation : method.getAnnotations()) {
+//                        System.out.println(annotation); // @java.lang.Override()   @org.apache.dubbo.config.support.Parameter(excluded=true,attribute=false)
+//                        System.out.println(annotation.getType()); //java.lang.Override   org.apache.dubbo.config.support.Parameter
+//                        System.out.println(annotation.getType().getName()); //Override    org.apache.dubbo.config.support.Parameter
+//                        System.out.println(annotation.getCodeBlock()); //@java.lang.Override   @org.apache.dubbo.config.support.Parameter(excluded=true,attribute=false)
+//                        System.out.println();
+                    }
+                }
+            }
+
+            NormalAnnotationExpr normalAnnotationExpr = new NormalAnnotationExpr();
+            normalAnnotationExpr.addPair("wang","feihong");
+
+            coid.addAnnotation("java.lang.Override");
+            System.out.println(cu.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        System.out.println(cu);
     }
 
     @Test

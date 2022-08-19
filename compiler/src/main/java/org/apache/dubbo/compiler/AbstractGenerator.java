@@ -5,8 +5,11 @@ package org.apache.dubbo.compiler;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
+import com.github.javaparser.ast.expr.AnnotationExpr;
+import com.github.javaparser.ast.expr.NormalAnnotationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.TypeParameter;
 import com.google.common.collect.Sets;
@@ -244,7 +247,7 @@ public abstract class AbstractGenerator{
         if (javaClass.isEnum()) {
             this.importList.add(javaClass.getBinaryName());
             return false;
-        } else {
+        } else{
             return checkName(javaClass.getBinaryName());
         }
     }
@@ -257,6 +260,38 @@ public abstract class AbstractGenerator{
 
         return oldName.substring(oldName.lastIndexOf(".") + 1);
     }
+
+
+    void copyAnnotationToMethod(JavaMethod javaMethod,MethodDeclaration methodDeclaration) {
+        for (JavaAnnotation annotation : javaMethod.getAnnotations()) {
+            NormalAnnotationExpr normalAnnotationExpr =  new NormalAnnotationExpr();
+            copyAnnotation(annotation,normalAnnotationExpr);
+            methodDeclaration.addAnnotation(normalAnnotationExpr);
+        }
+    }
+
+    void copyAnnotationToClass(JavaClass javaClass,ClassOrInterfaceDeclaration coid) {
+        for (JavaAnnotation annotation : javaClass.getAnnotations()) {
+            NormalAnnotationExpr normalAnnotationExpr =  new NormalAnnotationExpr();
+            copyAnnotation(annotation,normalAnnotationExpr);
+            coid.addAnnotation(normalAnnotationExpr);
+        }
+    }
+
+    void copyAnnotation(JavaAnnotation javaAnnotation, NormalAnnotationExpr annotationExpr) {
+
+        if (javaAnnotation.getType().toString().startsWith("org.apache.dubbo")
+                                || javaAnnotation.getType().toString().startsWith("com.alibaba.dubbo")) {
+            if (!this.exportClasses.contains(javaAnnotation.getType().toString())) {
+                this.extraExports.add(javaAnnotation.getType().toString());
+            }
+        }
+
+        javaAnnotation.getPropertyMap().forEach((key,value) -> {
+            annotationExpr.addPair(key,value.toString());
+        });
+    }
+
 
     protected void saveSet(Set<String> saveList,String path) {
         File file = new File(path);
