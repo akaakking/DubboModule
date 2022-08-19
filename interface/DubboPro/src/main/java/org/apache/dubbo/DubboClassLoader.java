@@ -61,6 +61,16 @@ public class DubboClassLoader {
         return instance;
     }
 
+    public static Class getKlass(String name) {
+        try {
+            return classLoader.loadClass(name);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 
     // 字符串操作会成为慢操作，到时候看看能不能优化一下 todo
     public static Object getInstance(Class<?> clazz,String args)  {

@@ -246,29 +246,13 @@ DubboClassLoader.getInstance(); //
 
 
 
-1.   List<URL> 
-
-     
-
-     ```
-     ApplicationBuilderInterface addRegistries(List<? extends RegistryConfig> registries);
-     ```
-
-2.   注解没加
-
-3.   额外暴露功能
-
-4.   额外暴露的类没有instance
-
-5.   对内部api里外部api的引用做统计
-
-6.   setRegistry（） {
-
-​	getinstance（）
-
-​	}
 
 
+解决问题还是挺方便的
 
-接口和abstract这些其实还没有处理好。
-
+1.   注解没有添加
+2.   abstract innerclass  enum这些没想好怎么处理
+3.   对内部api里外部api的引用做统计
+4.   List<URL>
+5.   setRegistry（） { getInstance（）}
+6.   额外暴露功能

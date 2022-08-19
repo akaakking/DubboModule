@@ -51,8 +51,6 @@ public class ClassGenerator {
 
         addConstruct(javaClass,coid);
 
-        addField(javaClass,coid);
-
         this.generator.addImports(cu);
 
         saveClass(javaClass,cu);
@@ -66,9 +64,16 @@ public class ClassGenerator {
                 BlockStmt blockStmt = new BlockStmt();
                 methodDeclaration.setBody(blockStmt);
 
+                NameExpr klassNameExpr = new NameExpr();
+                klassNameExpr.setName("Class klass = DubboClassLoader");
+                MethodCallExpr klassMethodCallExpr = new MethodCallExpr(klassNameExpr,"getKlass");
+                klassMethodCallExpr.addArgument(javaClass.getName() + ".class.getName()");
+                blockStmt.addStatement(klassNameExpr);
+
                 NameExpr getMethodnameExpr = new NameExpr();
-                getMethodnameExpr.setName("Method method = instance.getClass()");
+                getMethodnameExpr.setName("Method method = klass");
                 MethodCallExpr getMethodnameCallExpr = new MethodCallExpr(getMethodnameExpr,"getMethod");
+                getMethodnameCallExpr.addArgument(method.getName());
                 for (JavaParameter parameter : method.getParameters()) {
                     if (this.generator.checkName(parameter.getJavaClass())) {
                         getMethodnameCallExpr.addArgument(this.generator.addInterface(parameter.getType().getValue()) + ".class");
@@ -77,6 +82,7 @@ public class ClassGenerator {
                     }
                 }
                 blockStmt.addStatement(getMethodnameCallExpr);
+
 
                 NameExpr invokeNameExpr = new NameExpr();
                 if (method.getReturns().isVoid()) {
@@ -178,8 +184,8 @@ public class ClassGenerator {
     }
 
     private void addField(JavaClass javaClass,ClassOrInterfaceDeclaration coid) {
-        if (javaClass.getSuperJavaClass() != null
-                        && !javaClass.getSuperJavaClass().getFullyQualifiedName().equals("java.lang.Object")) {
+        if (javaClass.getSuperJavaClass() == null
+                        || javaClass.getSuperJavaClass().getFullyQualifiedName().equals("java.lang.Object")) {
             coid.addField(javaClass.getName() + "Interface","instance", Modifier.Keyword.PROTECTED);
         }
     }
@@ -207,6 +213,13 @@ public class ClassGenerator {
             for (TypeParameter typeParameter : coid.getTypeParameters()) {
                 nodeList.add(new TypeParameter().setName(typeParameter.getName()));
             }
+        }
+
+        if (javaClass.getSuperJavaClass() != null && !javaClass.getSuperJavaClass().getFullyQualifiedName().startsWith("java.lang.Object")) {
+            coid.addExtendedType(javaClass.getSuperClass().getGenericValue());
+            this.generator.importList.add(javaClass.getSuperJavaClass().getBinaryName());
+        } else {
+            addField(javaClass,coid);
         }
 
         coid.addImplementedType(classOrInterfaceType);

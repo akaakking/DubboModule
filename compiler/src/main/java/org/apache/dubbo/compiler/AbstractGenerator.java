@@ -279,6 +279,10 @@ public abstract class AbstractGenerator{
 
     // 检查全限定名并做相应处理 不加[ < 在包内的话返回true
     boolean checkName(String name) {
+        if (name == null) {
+            return false;
+        }
+
         if (isPrimitive(name) || name.startsWith("java.lang")) {
             if (name.startsWith("java.lang.reflect")) {
                 this.importList.add(name);

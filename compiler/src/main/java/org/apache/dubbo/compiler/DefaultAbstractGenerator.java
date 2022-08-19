@@ -12,7 +12,7 @@ import java.util.Set;
  * @Author wfh
  * @Date 2022/8/19 下午12:30
  */
-public class DefaultAbstractGenerator extends AbstractGenerator{
+public class DefaultAbstractGenerator extends AbstractGenerator {
     public static final String ExportPackageInfoPath = "/home/wfh/DubboModule/compiler/src/main/resources/exportpackage";
 
     private String exportPackageInfoPath;
