@@ -250,10 +250,49 @@ DubboClassLoader.getInstance(); //
 
 解决问题还是挺方便的
 
-1.   注解没有添加             todo
+1.   注解没有添加             todo   已做
 2.   abstract innerclass  enum这些没想好怎么处理
 3.   对内部api里外部api的引用做统计
 4.   List<URL>             todo
 5.   setRegistry（） { getInstance（）}             todo
 6.   额外暴露功能
 7.   修改源码
+
+
+
+java.lang.Map<java.lang.String,java.lang,O
+
+
+
+
+
+
+
+```java
+public class MetadataReportBuilder extends AbstractBuilder<MetadataReportConfig, MetadataReportBuilder> implements MetadataReportBuilderInterface {
+
+    public MetadataReportBuilder address(String address) {
+        return instance.address(address);
+    }
+
+    public MetadataReportBuilder username(String username) {
+        return instance.username(username);
+    }
+
+    public MetadataReportBuilder password(String password) {
+        return instance.password(password);
+    }
+
+    public MetadataReportBuilder timeout(Integer timeout) {
+        return instance.timeout(timeout);
+    }
+
+    public MetadataReportBuilder group(String group) {
+        return instance.group(group);
+    }
+
+    public MetadataReportBuilder appendParameters(Map<String, String> appendParameters) {
+        return instance.appendParameters(appendParameters);
+    }
+```
+

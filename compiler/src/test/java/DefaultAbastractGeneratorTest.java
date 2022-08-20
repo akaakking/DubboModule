@@ -1,5 +1,3 @@
-import com.github.javaparser.StaticJavaParser;
-import com.github.javaparser.ast.CompilationUnit;
 import org.apache.dubbo.compiler.AbstractGenerator;
 import org.apache.dubbo.compiler.DefaultAbstractGenerator;
 
@@ -11,6 +9,9 @@ import org.apache.dubbo.compiler.DefaultAbstractGenerator;
  */
 public class DefaultAbastractGeneratorTest {
     public static void main(String[] args) {
-        System.out.println(String.class.getName());
+        DefaultAbstractGenerator  defaultAbstractGenerator = new DefaultAbstractGenerator(AbstractGenerator.PROJECT_BASE_PATH,AbstractGenerator.OUTPUT_DIR,DefaultAbstractGenerator.ExportPackageInfoPath);
+        defaultAbstractGenerator.generate();
     }
+
+    // option<Referengce<Applia>>
 }

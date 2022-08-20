@@ -11,6 +11,7 @@ import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.NormalAnnotationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.type.TypeParameter;
 import com.google.common.collect.Sets;
 import com.thoughtworks.qdox.JavaProjectBuilder;
@@ -18,6 +19,7 @@ import com.thoughtworks.qdox.model.*;
 import org.junit.Test;
 
 import java.io.*;
+import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -151,12 +153,7 @@ public abstract class AbstractGenerator{
     void addParams(MethodDeclaration parserMethodDeclaration,JavaParameter javaParameter) {
         Parameter parameter = new Parameter();
         parameter.setName(javaParameter.getName());
-
-        if (checkName(javaParameter.getType().getBinaryName())) {
-            parameter.setType(addInterface(shortName(javaParameter.getType().getGenericValue())));
-        } else {
-            parameter.setType(javaParameter.getType().getGenericValue());
-        }
+        parameter.setType(dealType(javaParameter.getType()));
 
         parserMethodDeclaration.addParameter(parameter);
     }
@@ -165,9 +162,9 @@ public abstract class AbstractGenerator{
         JavaType javaType = method.getReturnType();
 
         if (checkName(javaType.getBinaryName()) && !method.getReturns().isEnum()) {
-            parserMethodDeclaration.setType(addInterface(shortName(javaType.getGenericValue())));
+            parserMethodDeclaration.setType(dealType(javaType));
         } else {
-            parserMethodDeclaration.setType(javaType.getGenericValue());
+            parserMethodDeclaration.setType(dealType(javaType));
             if (method.getReturns().isEnum()) {
                 this.importList.add(javaType.getBinaryName());
             }
@@ -210,11 +207,7 @@ public abstract class AbstractGenerator{
             NodeList<ClassOrInterfaceType> nodeList = new NodeList<>();
             for (JavaType bound : typeParameter.getBounds()) {
                 ClassOrInterfaceType coit = new ClassOrInterfaceType();
-                if (checkName(bound.getFullyQualifiedName())) {
-                    coit.setName(addInterface(shortName(bound.getGenericValue())));
-                } else {
-                    coit.setName(bound.getGenericValue());
-                }
+                coit.setName(dealType(bound));
                 nodeList.add(coit);
             }
 
@@ -260,7 +253,6 @@ public abstract class AbstractGenerator{
 
         return oldName.substring(oldName.lastIndexOf(".") + 1);
     }
-
 
     void copyAnnotationToMethod(JavaMethod javaMethod,MethodDeclaration methodDeclaration) {
         for (JavaAnnotation annotation : javaMethod.getAnnotations()) {
@@ -314,6 +306,14 @@ public abstract class AbstractGenerator{
 
     // 检查全限定名并做相应处理 不加[ < 在包内的话返回true
     boolean checkName(String name) {
+        if (name.contains("[")) {
+            name = name.substring(0,name.indexOf("["));
+        }
+
+        if (name.contains("<")) {
+            name = name.substring(0,name.indexOf("<"));
+        }
+
         if (name == null) {
             return false;
         }
@@ -322,6 +322,7 @@ public abstract class AbstractGenerator{
             if (name.startsWith("java.lang.reflect")) {
                 this.importList.add(name);
             }
+
             return false;
         }
 
@@ -349,6 +350,10 @@ public abstract class AbstractGenerator{
             this.importList.add(name);
             return false;
         }
+    }
+
+    public String dealType(JavaType javaType) {
+        return dealType(javaType.getGenericFullyQualifiedName(),javaType.getGenericValue());
     }
 
     boolean isPrimitive(String name) {
@@ -461,6 +466,110 @@ public abstract class AbstractGenerator{
         for (File f : file.listFiles()) {
             memory(f);
         }
+    }
+
+    String dealType(String genericFullName,String genericValue) {
+        String brackets = "";
+
+        // 没有泛型不做处理
+        if (!genericValue.contains("<")) {
+            if (checkName(genericValue)) {
+                return addInterface(shortName(genericValue));
+            } else {
+                return shortName(genericValue);
+            }
+        }
+
+        if (genericValue.contains("[")) {
+            brackets = genericValue.substring(genericValue.indexOf("["),genericValue.lastIndexOf("]")  + 1);
+            genericValue = genericValue.substring(0,genericValue.indexOf("["));
+            genericFullName = genericFullName.substring(0,genericFullName.indexOf("["));
+        }
+
+        Queue<String> suffixs = new LinkedList<>(); // ? extend
+        StringBuilder result = new StringBuilder();
+        int i = 0;
+
+
+        while (i < genericFullName.length()) {
+            int index1 = genericFullName.indexOf("<",i);
+            int index2 = genericFullName.indexOf(">",i);
+            int index3 = genericFullName.indexOf(" ",i);
+            int index4 = genericFullName.indexOf(",",i);
+            int index5 = genericFullName.indexOf("? extends ",i);
+            int index6 = genericFullName.indexOf("? super ",i);
+
+            int min = min(index1,index2,index3,index4,index5,index6);
+
+            if (i == min) {
+                if (i == index5) {
+                    i = i + 10;
+                } else if (i==index6)  {
+                    i = i + 8;
+                } else {
+                    i = i + 1;
+                }
+            } else {
+                String s1 = genericFullName.substring(i, min);
+                if (checkName(s1)) {
+                    suffixs.add("Interface");
+                } else {
+                    suffixs.add("");
+                }
+                i = min;
+                if (i == index5) {
+                    i = i + 10;
+                } else if (i==index6)  {
+                    i = i + 8;
+                } else {
+                    i = i + 1;
+                }
+            }
+        }
+
+        i = 0;
+
+        while (i < genericValue.length() - 1) {
+            int index1 = genericValue.indexOf("<",i);
+            int index2 = genericValue.indexOf(">",i);
+            int index3 = genericValue.indexOf(" ",i);
+            int index4 = genericValue.indexOf(",",i);
+            int index5 = genericValue.indexOf("? extends ",i);
+            int index6 = genericValue.indexOf("? super ",i);
+
+            int min = min(index1,index2,index3,index4,index5,index6);
+
+            if (i == min) {
+                if (i == index5) {
+                    result.append(genericValue.substring(i,i + 10));
+                    i = i + 10;
+                }  else if (i==index6)  {
+                    result.append(genericValue.substring(i,i + 8));
+                    i = i + 8;
+                } else {
+                    result.append(genericValue.substring(i,i + 1));
+                    i = i + 1;
+                }
+            } else {
+                String s1 = genericValue.substring(i, min);
+                result.append(s1).append(suffixs.poll());
+                i = min;
+            }
+        }
+
+        return result.append(">").append(brackets).toString();
+    }
+
+    // 求出最小非负
+    private int min(int... nums) {
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i<nums.length; i++) {
+            if (nums[i] >= 0  && nums[i] < min) {
+                min = nums[i];
+            }
+        }
+
+        return min;
     }
 
 

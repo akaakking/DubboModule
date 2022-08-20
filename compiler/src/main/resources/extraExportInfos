@@ -1,4 +1,3 @@
-org.apache.dubbo.common.config.configcenter.ConfigurationListener
 org.apache.dubbo.common.lang.Prioritized
 org.apache.dubbo.common.extension.ExtensionScope
 org.apache.dubbo.common.config.PropertiesConfiguration
@@ -7,7 +6,6 @@ org.apache.dubbo.Interface.RegistryConfigInterface
 org.apache.dubbo.common.extension.ExtensionInjector
 org.apache.dubbo.rpc.model.ScopeModelInitializer
 org.apache.dubbo.common.url.component.URLParam
-org.apache.dubbo.common.config.configcenter.ConfigChangedEvent
 org.apache.dubbo.common.URL
 org.apache.dubbo.common.deploy.Deployer
 org.apache.dubbo.rpc.model.MethodDescriptor
@@ -24,6 +22,7 @@ org.apache.dubbo.rpc.model.ProviderModel$RegisterStatedURL
 org.apache.dubbo.metadata.MetadataInfo
 org.apache.dubbo.rpc.model.FrameworkModel
 org.apache.dubbo.common.config.Configuration
+org.apache.dubbo.metadata.definition.model.MethodDefinition
 org.apache.dubbo.common.status.StatusChecker
 org.apache.dubbo.common.extension.ExtensionAccessor
 org.apache.dubbo.config.bootstrap.DubboBootstrap$Module
@@ -47,14 +46,11 @@ org.apache.dubbo.metadata.definition.model.ServiceDefinition
 org.apache.dubbo.rpc.model.ConsumerMethodModel
 org.apache.dubbo.rpc.model.MethodDescriptor$RpcType
 org.apache.dubbo.rpc.model.ModuleServiceRepository
-org.apache.dubbo.rpc.Invocation
 org.apache.dubbo.common.status.Status$Level
 org.apache.dubbo.common.context.LifecycleAdapter
-org.apache.dubbo.registry.client.InstanceAddressURL
 org.apache.dubbo.rpc.Invoker
 org.apache.dubbo.rpc.model.ProviderModel
 org.apache.dubbo.rpc.model.FrameworkServiceRepository
-org.apache.dubbo.common.config.configcenter.ConfigChangeType
 org.apache.dubbo.common.BaseServiceMetadata
 org.apache.dubbo.common.config.ModuleEnvironment
 org.apache.dubbo.common.extension.LoadingStrategy
@@ -67,8 +63,8 @@ org.apache.dubbo.metadata.MetadataInfo$ServiceInfo
 org.apache.dubbo.common.deploy.DeployListener
 org.apache.dubbo.common.context.ApplicationExt
 org.apache.dubbo.metadata.InstanceMetadataChangedListener
+org.apache.dubbo.metadata.definition.model.TypeDefinition
 org.apache.dubbo.common.context.ModuleExt
-org.apache.dubbo.registry.client.ServiceInstance
 org.apache.dubbo.Interface.ServiceConfigInterface
 org.apache.dubbo.common.threadpool.manager.ExecutorRepository
 org.apache.dubbo.rpc.model.ScopeModel

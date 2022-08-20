@@ -71,8 +71,6 @@ public class InterfaceGenerator {
         }
     }
 
-
-
     private void addImpls(ClassOrInterfaceDeclaration coid, JavaClass javaClass) {
         JavaType javaType = javaClass.getSuperClass();
         if (javaType != null && !javaType.getFullyQualifiedName().equals("java.lang.Object")) {
