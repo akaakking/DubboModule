@@ -36,19 +36,19 @@ public class ReferenceConfigBase<T> extends AbstractReferenceConfig implements R
         instance.setInterface(interfaceClass);
     }
 
-    public StringInterface getClient() {
+    public String getClient() {
         return instance.getClient();
     }
 
-    public void setClient(StringInterface client) {
+    public void setClient(String client) {
         instance.setClient(client);
     }
 
-    public StringInterface getUrl() {
+    public String getUrl() {
         return instance.getUrl();
     }
 
-    public void setUrl(StringInterface url) {
+    public void setUrl(String url) {
         instance.setUrl(url);
     }
 
@@ -57,14 +57,14 @@ public class ReferenceConfigBase<T> extends AbstractReferenceConfig implements R
     }
 
     public void setConsumer(ConsumerConfigInterface consumer) {
-        instance.setConsumer(consumer);
+        instance.setConsumer(consumer.getInternalInstance(), consumer);
     }
 
-    public StringInterface getProtocol() {
+    public String getProtocol() {
         return instance.getProtocol();
     }
 
-    public void setProtocol(StringInterface protocol) {
+    public void setProtocol(String protocol) {
         instance.setProtocol(protocol);
     }
 
@@ -72,19 +72,19 @@ public class ReferenceConfigBase<T> extends AbstractReferenceConfig implements R
         return instance.getServiceMetadata();
     }
 
-    public StringInterface getUniqueServiceName() {
+    public String getUniqueServiceName() {
         return instance.getUniqueServiceName();
     }
 
-    public StringInterface getVersion() {
+    public String getVersion() {
         return instance.getVersion();
     }
 
-    public StringInterface getGroup() {
+    public String getGroup() {
         return instance.getGroup();
     }
 
-    public BooleanInterface shouldReferAsync() {
+    public Boolean shouldReferAsync() {
         return instance.shouldReferAsync();
     }
 
@@ -96,15 +96,23 @@ public class ReferenceConfigBase<T> extends AbstractReferenceConfig implements R
         instance.destroy();
     }
 
-    public static Class<?> determineInterfaceClass(StringInterface generic, StringInterface interfaceName) {
+    public static Class<?> determineInterfaceClass(String generic, String interfaceName) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(determineInterfaceClass, String.class, String.class);
         return method.invoke(generic, interfaceName);
     }
 
-    public static Class<?> determineInterfaceClass(StringInterface generic, StringInterface interfaceName, ClassLoaderInterface classLoader) {
+    public static Class<?> determineInterfaceClass(String generic, String interfaceName, ClassLoader classLoader) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(determineInterfaceClass, String.class, String.class, ClassLoader.class);
         return method.invoke(generic, interfaceName, classLoader);
+    }
+
+    public ReferenceConfigBaseInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ReferenceConfigBaseInterface getInternalInstance() {
+        return instance;
     }
 }

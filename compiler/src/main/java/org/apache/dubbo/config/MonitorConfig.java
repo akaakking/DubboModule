@@ -7,51 +7,51 @@ import org.apache.dubbo.config.AbstractConfig;
 
 public class MonitorConfig extends AbstractConfig implements MonitorConfigInterface {
 
-    public StringInterface getAddress() {
+    public String getAddress() {
         return instance.getAddress();
     }
 
-    public void setAddress(StringInterface address) {
+    public void setAddress(String address) {
         instance.setAddress(address);
     }
 
-    public StringInterface getProtocol() {
+    public String getProtocol() {
         return instance.getProtocol();
     }
 
-    public void setProtocol(StringInterface protocol) {
+    public void setProtocol(String protocol) {
         instance.setProtocol(protocol);
     }
 
-    public StringInterface getUsername() {
+    public String getUsername() {
         return instance.getUsername();
     }
 
-    public void setUsername(StringInterface username) {
+    public void setUsername(String username) {
         instance.setUsername(username);
     }
 
-    public StringInterface getPassword() {
+    public String getPassword() {
         return instance.getPassword();
     }
 
-    public void setPassword(StringInterface password) {
+    public void setPassword(String password) {
         instance.setPassword(password);
     }
 
-    public StringInterface getGroup() {
+    public String getGroup() {
         return instance.getGroup();
     }
 
-    public void setGroup(StringInterface group) {
+    public void setGroup(String group) {
         instance.setGroup(group);
     }
 
-    public StringInterface getVersion() {
+    public String getVersion() {
         return instance.getVersion();
     }
 
-    public void setVersion(StringInterface version) {
+    public void setVersion(String version) {
         instance.setVersion(version);
     }
 
@@ -63,16 +63,24 @@ public class MonitorConfig extends AbstractConfig implements MonitorConfigInterf
         instance.setParameters(parameters);
     }
 
-    public StringInterface getInterval() {
+    public String getInterval() {
         return instance.getInterval();
     }
 
-    public void setInterval(StringInterface interval) {
+    public void setInterval(String interval) {
         instance.setInterval(interval);
     }
 
     public boolean isValid() {
         return instance.isValid();
+    }
+
+    public MonitorConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public MonitorConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public MonitorConfig() {

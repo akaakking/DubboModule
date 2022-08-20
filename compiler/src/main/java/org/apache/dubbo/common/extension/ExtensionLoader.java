@@ -11,35 +11,35 @@ public class ExtensionLoader<T> implements ExtensionLoaderInterface<T> {
         instance.destroy();
     }
 
-    public StringInterface getExtensionName(T extensionInstance) {
+    public String getExtensionName(T extensionInstance) {
         return instance.getExtensionName(extensionInstance);
     }
 
-    public StringInterface getExtensionName(Class<?> extensionClass) {
+    public String getExtensionName(Class<?> extensionClass) {
         return instance.getExtensionName(extensionClass);
     }
 
-    public List<T> getActivateExtension(URLInterface url, StringInterface key) {
-        return instance.getActivateExtension(url, key);
+    public List<T> getActivateExtension(URLInterface url, String key) {
+        return instance.getActivateExtension(url.getInternalInstance(), url, key);
     }
 
-    public List<T> getActivateExtension(URLInterface url, StringInterface[] values) {
-        return instance.getActivateExtension(url, values);
+    public List<T> getActivateExtension(URLInterface url, String[] values) {
+        return instance.getActivateExtension(url.getInternalInstance(), url, values);
     }
 
-    public List<T> getActivateExtension(URLInterface url, StringInterface key, StringInterface group) {
-        return instance.getActivateExtension(url, key, group);
+    public List<T> getActivateExtension(URLInterface url, String key, String group) {
+        return instance.getActivateExtension(url.getInternalInstance(), url, key, group);
     }
 
-    public List<T> getActivateExtension(URLInterface url, StringInterface[] values, StringInterface group) {
-        return instance.getActivateExtension(url, values, group);
+    public List<T> getActivateExtension(URLInterface url, String[] values, String group) {
+        return instance.getActivateExtension(url.getInternalInstance(), url, values, group);
     }
 
     public List<T> getActivateExtensions() {
         return instance.getActivateExtensions();
     }
 
-    public T getLoadedExtension(StringInterface name) {
+    public T getLoadedExtension(String name) {
         return instance.getLoadedExtension(name);
     }
 
@@ -51,15 +51,15 @@ public class ExtensionLoader<T> implements ExtensionLoaderInterface<T> {
         return instance.getLoadedExtensionInstances();
     }
 
-    public T getExtension(StringInterface name) {
+    public T getExtension(String name) {
         return instance.getExtension(name);
     }
 
-    public T getExtension(StringInterface name, boolean wrap) {
+    public T getExtension(String name, boolean wrap) {
         return instance.getExtension(name, wrap);
     }
 
-    public T getOrDefaultExtension(StringInterface name) {
+    public T getOrDefaultExtension(String name) {
         return instance.getOrDefaultExtension(name);
     }
 
@@ -67,7 +67,7 @@ public class ExtensionLoader<T> implements ExtensionLoaderInterface<T> {
         return instance.getDefaultExtension();
     }
 
-    public boolean hasExtension(StringInterface name) {
+    public boolean hasExtension(String name) {
         return instance.hasExtension(name);
     }
 
@@ -79,15 +79,15 @@ public class ExtensionLoader<T> implements ExtensionLoaderInterface<T> {
         return instance.getSupportedExtensionInstances();
     }
 
-    public StringInterface getDefaultExtensionName() {
+    public String getDefaultExtensionName() {
         return instance.getDefaultExtensionName();
     }
 
-    public void addExtension(StringInterface name, Class<?> clazz) {
+    public void addExtension(String name, Class<?> clazz) {
         instance.addExtension(name, clazz);
     }
 
-    public void replaceExtension(StringInterface name, Class<?> clazz) {
+    public void replaceExtension(String name, Class<?> clazz) {
         instance.replaceExtension(name, clazz);
     }
 
@@ -95,7 +95,7 @@ public class ExtensionLoader<T> implements ExtensionLoaderInterface<T> {
         return instance.getAdaptiveExtension();
     }
 
-    public StringInterface toString() {
+    public String toString() {
         return instance.toString();
     }
 
@@ -119,9 +119,17 @@ public class ExtensionLoader<T> implements ExtensionLoaderInterface<T> {
         return method.invoke(type);
     }
 
-    public static void resetExtensionLoader(ClassInterface type) {
+    public static void resetExtensionLoader(Class type) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(resetExtensionLoader, Class.class);
         method.invoke(type);
+    }
+
+    public ExtensionLoaderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ExtensionLoaderInterface getInternalInstance() {
+        return instance;
     }
 }

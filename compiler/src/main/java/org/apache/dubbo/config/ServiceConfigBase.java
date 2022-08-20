@@ -13,7 +13,7 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
         return instance.shouldExport();
     }
 
-    public BooleanInterface getExport() {
+    public Boolean getExport() {
         return instance.getExport();
     }
 
@@ -21,12 +21,12 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
         return instance.shouldDelay();
     }
 
-    public IntegerInterface getDelay() {
+    public Integer getDelay() {
         return instance.getDelay();
     }
 
     public Optional<String> getContextPath(ProtocolConfigInterface protocolConfig) {
-        return instance.getContextPath(protocolConfig);
+        return instance.getContextPath(protocolConfig.getInternalInstance(), protocolConfig);
     }
 
     public Map<String, String> getMetaData() {
@@ -53,11 +53,11 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
         instance.setRef(ref);
     }
 
-    public StringInterface getPath() {
+    public String getPath() {
         return instance.getPath();
     }
 
-    public void setPath(StringInterface path) {
+    public void setPath(String path) {
         instance.setPath(path);
     }
 
@@ -66,22 +66,22 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
     }
 
     public void setProvider(ProviderConfigInterface provider) {
-        instance.setProvider(provider);
+        instance.setProvider(provider.getInternalInstance(), provider);
     }
 
-    public StringInterface getProviderIds() {
+    public String getProviderIds() {
         return instance.getProviderIds();
     }
 
-    public void setProviderIds(StringInterface providerIds) {
+    public void setProviderIds(String providerIds) {
         instance.setProviderIds(providerIds);
     }
 
-    public StringInterface getGeneric() {
+    public String getGeneric() {
         return instance.getGeneric();
     }
 
-    public void setGeneric(StringInterface generic) {
+    public void setGeneric(String generic) {
         instance.setGeneric(generic);
     }
 
@@ -93,19 +93,19 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
         return instance.getPrefixes();
     }
 
-    public StringInterface getUniqueServiceName() {
+    public String getUniqueServiceName() {
         return instance.getUniqueServiceName();
     }
 
-    public StringInterface getGroup() {
+    public String getGroup() {
         return instance.getGroup();
     }
 
-    public StringInterface getVersion() {
+    public String getVersion() {
         return instance.getVersion();
     }
 
-    public BooleanInterface shouldExportAsync() {
+    public Boolean shouldExportAsync() {
         return instance.shouldExportAsync();
     }
 
@@ -123,5 +123,13 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
 
     public boolean isUnexported() {
         return instance.isUnexported();
+    }
+
+    public ServiceConfigBaseInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ServiceConfigBaseInterface getInternalInstance() {
+        return instance;
     }
 }

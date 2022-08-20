@@ -6,53 +6,61 @@ import org.apache.dubbo.Interface.*;
 
 public class AsyncMethodInfo implements AsyncMethodInfoInterface {
 
-    public ObjectInterface getOninvokeInstance() {
+    public Object getOninvokeInstance() {
         return instance.getOninvokeInstance();
     }
 
-    public void setOninvokeInstance(ObjectInterface oninvokeInstance) {
+    public void setOninvokeInstance(Object oninvokeInstance) {
         instance.setOninvokeInstance(oninvokeInstance);
     }
 
-    public MethodInterface getOninvokeMethod() {
+    public Method getOninvokeMethod() {
         return instance.getOninvokeMethod();
     }
 
-    public void setOninvokeMethod(MethodInterface oninvokeMethod) {
+    public void setOninvokeMethod(Method oninvokeMethod) {
         instance.setOninvokeMethod(oninvokeMethod);
     }
 
-    public ObjectInterface getOnreturnInstance() {
+    public Object getOnreturnInstance() {
         return instance.getOnreturnInstance();
     }
 
-    public void setOnreturnInstance(ObjectInterface onreturnInstance) {
+    public void setOnreturnInstance(Object onreturnInstance) {
         instance.setOnreturnInstance(onreturnInstance);
     }
 
-    public MethodInterface getOnreturnMethod() {
+    public Method getOnreturnMethod() {
         return instance.getOnreturnMethod();
     }
 
-    public void setOnreturnMethod(MethodInterface onreturnMethod) {
+    public void setOnreturnMethod(Method onreturnMethod) {
         instance.setOnreturnMethod(onreturnMethod);
     }
 
-    public ObjectInterface getOnthrowInstance() {
+    public Object getOnthrowInstance() {
         return instance.getOnthrowInstance();
     }
 
-    public void setOnthrowInstance(ObjectInterface onthrowInstance) {
+    public void setOnthrowInstance(Object onthrowInstance) {
         instance.setOnthrowInstance(onthrowInstance);
     }
 
-    public MethodInterface getOnthrowMethod() {
+    public Method getOnthrowMethod() {
         return instance.getOnthrowMethod();
     }
 
-    public void setOnthrowMethod(MethodInterface onthrowMethod) {
+    public void setOnthrowMethod(Method onthrowMethod) {
         instance.setOnthrowMethod(onthrowMethod);
     }
 
     protected AsyncMethodInfoInterface instance;
+
+    public AsyncMethodInfoInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AsyncMethodInfoInterface getInternalInstance() {
+        return instance;
+    }
 }

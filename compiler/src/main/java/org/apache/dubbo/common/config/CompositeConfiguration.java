@@ -14,22 +14,30 @@ public class CompositeConfiguration implements CompositeConfigurationInterface {
     }
 
     public void addConfiguration(ConfigurationInterface configuration) {
-        instance.addConfiguration(configuration);
+        instance.addConfiguration(configuration.getInternalInstance(), configuration);
     }
 
     public void addConfigurationFirst(ConfigurationInterface configuration) {
-        instance.addConfigurationFirst(configuration);
+        instance.addConfigurationFirst(configuration.getInternalInstance(), configuration);
     }
 
     public void addConfiguration(int pos, ConfigurationInterface configuration) {
-        instance.addConfiguration(pos, configuration);
+        instance.addConfiguration(pos, configuration.getInternalInstance(), configuration);
     }
 
-    public ObjectInterface getInternalProperty(StringInterface key) {
+    public Object getInternalProperty(String key) {
         return instance.getInternalProperty(key);
     }
 
     protected CompositeConfigurationInterface instance;
+
+    public CompositeConfigurationInterface getInternalInstance() {
+        return instance;
+    }
+
+    public CompositeConfigurationInterface getInternalInstance() {
+        return instance;
+    }
 
     public CompositeConfiguration() {
         instance = (CompositeConfigurationInterface) DubboClassLoader.getInstance(CompositeConfiguration.class.getName());

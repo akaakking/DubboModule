@@ -11,7 +11,7 @@ import org.apache.dubbo.config.context.AbstractConfigManager;
 public class ModuleConfigManager extends AbstractConfigManager implements ModuleConfigManagerInterface {
 
     public void setModule(ModuleConfigInterface module) {
-        instance.setModule(module);
+        instance.setModule(module.getInternalInstance(), module);
     }
 
     public Optional<ModuleConfigInterface> getModule() {
@@ -30,7 +30,7 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
         return instance.getServices();
     }
 
-    public <T> ServiceConfigBaseInterface<T> getService(StringInterface id) {
+    public <T> ServiceConfigBaseInterface<T> getService(String id) {
         return instance.getService(id);
     }
 
@@ -46,19 +46,19 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
         return instance.getReferences();
     }
 
-    public <T> ReferenceConfigBaseInterface<T> getReference(StringInterface id) {
+    public <T> ReferenceConfigBaseInterface<T> getReference(String id) {
         return instance.getReference(id);
     }
 
     public void addProvider(ProviderConfigInterface providerConfig) {
-        instance.addProvider(providerConfig);
+        instance.addProvider(providerConfig.getInternalInstance(), providerConfig);
     }
 
     public void addProviders(Iterable<ProviderConfigInterface> providerConfigs) {
         instance.addProviders(providerConfigs);
     }
 
-    public Optional<ProviderConfigInterface> getProvider(StringInterface id) {
+    public Optional<ProviderConfigInterface> getProvider(String id) {
         return instance.getProvider(id);
     }
 
@@ -71,14 +71,14 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
     }
 
     public void addConsumer(ConsumerConfigInterface consumerConfig) {
-        instance.addConsumer(consumerConfig);
+        instance.addConsumer(consumerConfig.getInternalInstance(), consumerConfig);
     }
 
     public void addConsumers(Iterable<ConsumerConfigInterface> consumerConfigs) {
         instance.addConsumers(consumerConfigs);
     }
 
-    public Optional<ConsumerConfigInterface> getConsumer(StringInterface id) {
+    public Optional<ConsumerConfigInterface> getConsumer(String id) {
         return instance.getConsumer(id);
     }
 
@@ -114,7 +114,7 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
         return instance.getConfigs(configType);
     }
 
-    public <T extends AbstractConfigInterface> Optional<T> getConfig(Class<T> cls, StringInterface idOrName) {
+    public <T extends AbstractConfigInterface> Optional<T> getConfig(Class<T> cls, String idOrName) {
         return instance.getConfig(cls, idOrName);
     }
 
@@ -142,7 +142,7 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
         return instance.getDefaultConfigCenter();
     }
 
-    public Optional<ConfigCenterConfigInterface> getConfigCenter(StringInterface id) {
+    public Optional<ConfigCenterConfigInterface> getConfigCenter(String id) {
         return instance.getConfigCenter(id);
     }
 
@@ -158,7 +158,7 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
         return instance.getDefaultMetadataConfigs();
     }
 
-    public Optional<ProtocolConfigInterface> getProtocol(StringInterface idOrName) {
+    public Optional<ProtocolConfigInterface> getProtocol(String idOrName) {
         return instance.getProtocol(idOrName);
     }
 
@@ -170,7 +170,7 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
         return instance.getProtocols();
     }
 
-    public Optional<RegistryConfigInterface> getRegistry(StringInterface id) {
+    public Optional<RegistryConfigInterface> getRegistry(String id) {
         return instance.getRegistry(id);
     }
 
@@ -180,6 +180,14 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
 
     public Collection<RegistryConfigInterface> getRegistries() {
         return instance.getRegistries();
+    }
+
+    public ModuleConfigManagerInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ModuleConfigManagerInterface getInternalInstance() {
+        return instance;
     }
 
     public ModuleConfigManager(ModuleModelInterface moduleModel) {

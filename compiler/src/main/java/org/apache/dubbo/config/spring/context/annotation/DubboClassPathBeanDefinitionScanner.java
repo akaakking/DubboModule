@@ -11,8 +11,16 @@ import org.springframework.core.io.ResourceLoader;
 
 public class DubboClassPathBeanDefinitionScanner extends ClassPathBeanDefinitionScanner implements DubboClassPathBeanDefinitionScannerInterface {
 
-    public Set<BeanDefinition> findCandidateComponents(StringInterface basePackage) {
+    public Set<BeanDefinition> findCandidateComponents(String basePackage) {
         return instance.findCandidateComponents(basePackage);
+    }
+
+    public DubboClassPathBeanDefinitionScannerInterface getInternalInstance() {
+        return instance;
+    }
+
+    public DubboClassPathBeanDefinitionScannerInterface getInternalInstance() {
+        return instance;
     }
 
     public DubboClassPathBeanDefinitionScanner(BeanDefinitionRegistry registry, boolean useDefaultFilters, Environment environment, ResourceLoader resourceLoader) {

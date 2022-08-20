@@ -13,7 +13,7 @@ public class Environment extends LifecycleAdapter implements EnvironmentInterfac
         instance.initialize();
     }
 
-    public void setLocalMigrationRule(StringInterface localMigrationRule) {
+    public void setLocalMigrationRule(String localMigrationRule) {
         instance.setLocalMigrationRule(localMigrationRule);
     }
 
@@ -53,16 +53,16 @@ public class Environment extends LifecycleAdapter implements EnvironmentInterfac
         instance.updateAppConfigMap(map);
     }
 
-    public ConfigurationInterface getPrefixedConfiguration(AbstractConfigInterface config, StringInterface prefix) {
-        return instance.getPrefixedConfiguration(config, prefix);
+    public ConfigurationInterface getPrefixedConfiguration(AbstractConfigInterface config, String prefix) {
+        return instance.getPrefixedConfiguration(config.getInternalInstance(), config, prefix);
     }
 
     public CompositeConfigurationInterface getConfiguration() {
         return instance.getConfiguration();
     }
 
-    public List<Map<String, String>> getConfigurationMaps(AbstractConfigInterface config, StringInterface prefix) {
-        return instance.getConfigurationMaps(config, prefix);
+    public List<Map<String, String>> getConfigurationMaps(AbstractConfigInterface config, String prefix) {
+        return instance.getConfigurationMaps(config.getInternalInstance(), config, prefix);
     }
 
     public List<Map<String, String>> getConfigurationMaps() {
@@ -77,7 +77,7 @@ public class Environment extends LifecycleAdapter implements EnvironmentInterfac
         instance.reset();
     }
 
-    public StringInterface resolvePlaceholders(StringInterface str) {
+    public String resolvePlaceholders(String str) {
         return instance.resolvePlaceholders(str);
     }
 
@@ -105,7 +105,7 @@ public class Environment extends LifecycleAdapter implements EnvironmentInterfac
         return instance.getAppConfiguration();
     }
 
-    public StringInterface getLocalMigrationRule() {
+    public String getLocalMigrationRule() {
         return instance.getLocalMigrationRule();
     }
 
@@ -122,7 +122,15 @@ public class Environment extends LifecycleAdapter implements EnvironmentInterfac
     }
 
     public void setDynamicConfiguration(DynamicConfigurationInterface defaultDynamicConfiguration) {
-        instance.setDynamicConfiguration(defaultDynamicConfiguration);
+        instance.setDynamicConfiguration(defaultDynamicConfiguration.getInternalInstance(), defaultDynamicConfiguration);
+    }
+
+    public EnvironmentInterface getInternalInstance() {
+        return instance;
+    }
+
+    public EnvironmentInterface getInternalInstance() {
+        return instance;
     }
 
     public Environment(ScopeModelInterface scopeModel) {

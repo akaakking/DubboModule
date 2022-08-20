@@ -18,14 +18,14 @@ public class AbstractConfig implements AbstractConfigInterface {
     }
 
     public void setScopeModel(ScopeModelInterface scopeModel) {
-        instance.setScopeModel(scopeModel);
+        instance.setScopeModel(scopeModel.getInternalInstance(), scopeModel);
     }
 
-    public StringInterface getId() {
+    public String getId() {
         return instance.getId();
     }
 
-    public void setId(StringInterface id) {
+    public void setId(String id) {
         instance.setId(id);
     }
 
@@ -42,7 +42,7 @@ public class AbstractConfig implements AbstractConfigInterface {
     }
 
     public void overrideWithConfig(AbstractConfigInterface newOne, boolean overrideAll) {
-        instance.overrideWithConfig(newOne, overrideAll);
+        instance.overrideWithConfig(newOne.getInternalInstance(), newOne, overrideAll);
     }
 
     public void refresh() {
@@ -57,19 +57,19 @@ public class AbstractConfig implements AbstractConfigInterface {
         return instance.isValid();
     }
 
-    public BooleanInterface isDefault() {
+    public Boolean isDefault() {
         return instance.isDefault();
     }
 
-    public void setDefault(BooleanInterface isDefault) {
+    public void setDefault(Boolean isDefault) {
         instance.setDefault(isDefault);
     }
 
-    public StringInterface toString() {
+    public String toString() {
         return instance.toString();
     }
 
-    public boolean equals(ObjectInterface obj) {
+    public boolean equals(Object obj) {
         return instance.equals(obj);
     }
 
@@ -79,39 +79,47 @@ public class AbstractConfig implements AbstractConfigInterface {
 
     protected AbstractConfigInterface instance;
 
-    public static StringInterface getTagName(Class<?> cls) {
+    public static String getTagName(Class<?> cls) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getTagName, Class.class);
         return method.invoke(cls);
     }
 
-    public static StringInterface getPluralTagName(Class<?> cls) {
+    public static String getPluralTagName(Class<?> cls) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getPluralTagName, Class.class);
         return method.invoke(cls);
     }
 
-    public static void appendParameters(Map<String, String> parameters, ObjectInterface config) {
+    public static void appendParameters(Map<String, String> parameters, Object config) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(appendParameters, Map.class, Object.class);
         method.invoke(parameters, config);
     }
 
-    public static void appendParameters(Map<String, String> parameters, ObjectInterface config, StringInterface prefix) {
+    public static void appendParameters(Map<String, String> parameters, Object config, String prefix) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(appendParameters, Map.class, Object.class, String.class);
         method.invoke(parameters, config, prefix);
     }
 
-    public static void appendAttributes(Map<String, String> parameters, ObjectInterface config) {
+    public static void appendAttributes(Map<String, String> parameters, Object config) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(appendAttributes, Map.class, Object.class);
         method.invoke(parameters, config);
     }
 
-    public static StringInterface getTypePrefix(Class<? extends AbstractConfigInterface> cls) {
+    public static String getTypePrefix(Class<? extends AbstractConfigInterface> cls) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getTypePrefix, Class.class);
         return method.invoke(cls);
+    }
+
+    public AbstractConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AbstractConfigInterface getInternalInstance() {
+        return instance;
     }
 }

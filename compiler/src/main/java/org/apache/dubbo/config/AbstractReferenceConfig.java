@@ -6,115 +6,123 @@ import org.apache.dubbo.config.AbstractInterfaceConfig;
 
 public class AbstractReferenceConfig extends AbstractInterfaceConfig implements AbstractReferenceConfigInterface {
 
-    public BooleanInterface isCheck() {
+    public Boolean isCheck() {
         return instance.isCheck();
     }
 
-    public void setCheck(BooleanInterface check) {
+    public void setCheck(Boolean check) {
         instance.setCheck(check);
     }
 
-    public BooleanInterface isInit() {
+    public Boolean isInit() {
         return instance.isInit();
     }
 
-    public void setInit(BooleanInterface init) {
+    public void setInit(Boolean init) {
         instance.setInit(init);
     }
 
-    public BooleanInterface isGeneric() {
+    public Boolean isGeneric() {
         return instance.isGeneric();
     }
 
-    public void setGeneric(BooleanInterface generic) {
+    public void setGeneric(Boolean generic) {
         instance.setGeneric(generic);
     }
 
-    public StringInterface getGeneric() {
+    public String getGeneric() {
         return instance.getGeneric();
     }
 
-    public void setGeneric(StringInterface generic) {
+    public void setGeneric(String generic) {
         instance.setGeneric(generic);
     }
 
-    public BooleanInterface isInjvm() {
+    public Boolean isInjvm() {
         return instance.isInjvm();
     }
 
-    public void setInjvm(BooleanInterface injvm) {
+    public void setInjvm(Boolean injvm) {
         instance.setInjvm(injvm);
     }
 
-    public StringInterface getFilter() {
+    public String getFilter() {
         return instance.getFilter();
     }
 
-    public StringInterface getListener() {
+    public String getListener() {
         return instance.getListener();
     }
 
-    public void setListener(StringInterface listener) {
+    public void setListener(String listener) {
         instance.setListener(listener);
     }
 
-    public BooleanInterface getLazy() {
+    public Boolean getLazy() {
         return instance.getLazy();
     }
 
-    public void setLazy(BooleanInterface lazy) {
+    public void setLazy(Boolean lazy) {
         instance.setLazy(lazy);
     }
 
-    public void setOnconnect(StringInterface onconnect) {
+    public void setOnconnect(String onconnect) {
         instance.setOnconnect(onconnect);
     }
 
-    public void setOndisconnect(StringInterface ondisconnect) {
+    public void setOndisconnect(String ondisconnect) {
         instance.setOndisconnect(ondisconnect);
     }
 
-    public BooleanInterface getStubevent() {
+    public Boolean getStubevent() {
         return instance.getStubevent();
     }
 
-    public StringInterface getReconnect() {
+    public String getReconnect() {
         return instance.getReconnect();
     }
 
-    public void setReconnect(StringInterface reconnect) {
+    public void setReconnect(String reconnect) {
         instance.setReconnect(reconnect);
     }
 
-    public BooleanInterface getSticky() {
+    public Boolean getSticky() {
         return instance.getSticky();
     }
 
-    public void setSticky(BooleanInterface sticky) {
+    public void setSticky(Boolean sticky) {
         instance.setSticky(sticky);
     }
 
-    public StringInterface getProvidedBy() {
+    public String getProvidedBy() {
         return instance.getProvidedBy();
     }
 
-    public void setProvidedBy(StringInterface providedBy) {
+    public void setProvidedBy(String providedBy) {
         instance.setProvidedBy(providedBy);
     }
 
-    public StringInterface getRouter() {
+    public String getRouter() {
         return instance.getRouter();
     }
 
-    public void setRouter(StringInterface router) {
+    public void setRouter(String router) {
         instance.setRouter(router);
     }
 
-    public BooleanInterface getReferAsync() {
+    public Boolean getReferAsync() {
         return instance.getReferAsync();
     }
 
-    public void setReferAsync(BooleanInterface referAsync) {
+    public void setReferAsync(Boolean referAsync) {
         instance.setReferAsync(referAsync);
+    }
+
+    public AbstractReferenceConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AbstractReferenceConfigInterface getInternalInstance() {
+        return instance;
     }
 }

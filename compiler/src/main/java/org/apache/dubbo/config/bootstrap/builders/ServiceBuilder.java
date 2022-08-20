@@ -7,11 +7,11 @@ import org.apache.dubbo.config.bootstrap.builders.AbstractServiceBuilder;
 
 public class ServiceBuilder<U> extends AbstractServiceBuilder<ServiceConfig<U>, ServiceBuilder<U>> implements ServiceBuilderInterface<U> {
 
-    public ServiceBuilderInterface<U> id(StringInterface id) {
+    public ServiceBuilderInterface<U> id(String id) {
         return instance.id(id);
     }
 
-    public ServiceBuilderInterface<U> interfaceName(StringInterface interfaceName) {
+    public ServiceBuilderInterface<U> interfaceName(String interfaceName) {
         return instance.interfaceName(interfaceName);
     }
 
@@ -23,12 +23,12 @@ public class ServiceBuilder<U> extends AbstractServiceBuilder<ServiceConfig<U>, 
         return instance.ref(ref);
     }
 
-    public ServiceBuilderInterface<U> path(StringInterface path) {
+    public ServiceBuilderInterface<U> path(String path) {
         return instance.path(path);
     }
 
     public ServiceBuilderInterface<U> addMethod(MethodConfigInterface method) {
-        return instance.addMethod(method);
+        return instance.addMethod(method.getInternalInstance(), method);
     }
 
     public ServiceBuilderInterface<U> addMethods(List<? extends MethodConfigInterface> methods) {
@@ -36,14 +36,14 @@ public class ServiceBuilder<U> extends AbstractServiceBuilder<ServiceConfig<U>, 
     }
 
     public ServiceBuilderInterface<U> provider(ProviderConfigInterface provider) {
-        return instance.provider(provider);
+        return instance.provider(provider.getInternalInstance(), provider);
     }
 
-    public ServiceBuilderInterface<U> providerIds(StringInterface providerIds) {
+    public ServiceBuilderInterface<U> providerIds(String providerIds) {
         return instance.providerIds(providerIds);
     }
 
-    public ServiceBuilderInterface<U> generic(StringInterface generic) {
+    public ServiceBuilderInterface<U> generic(String generic) {
         return instance.generic(generic);
     }
 
@@ -55,5 +55,13 @@ public class ServiceBuilder<U> extends AbstractServiceBuilder<ServiceConfig<U>, 
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(newBuilder);
         return method.invoke();
+    }
+
+    public ServiceBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ServiceBuilderInterface getInternalInstance() {
+        return instance;
     }
 }

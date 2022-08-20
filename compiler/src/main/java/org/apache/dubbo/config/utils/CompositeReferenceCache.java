@@ -10,11 +10,11 @@ public class CompositeReferenceCache implements CompositeReferenceCacheInterface
         return instance.get(referenceConfig);
     }
 
-    public <T> T get(StringInterface key, Class<T> type) {
+    public <T> T get(String key, Class<T> type) {
         return instance.get(key, type);
     }
 
-    public <T> T get(StringInterface key) {
+    public <T> T get(String key) {
         return instance.get(key);
     }
 
@@ -26,7 +26,7 @@ public class CompositeReferenceCache implements CompositeReferenceCacheInterface
         return instance.get(type);
     }
 
-    public void destroy(StringInterface key, Class<?> type) {
+    public void destroy(String key, Class<?> type) {
         instance.destroy(key, type);
     }
 
@@ -43,6 +43,14 @@ public class CompositeReferenceCache implements CompositeReferenceCacheInterface
     }
 
     protected CompositeReferenceCacheInterface instance;
+
+    public CompositeReferenceCacheInterface getInternalInstance() {
+        return instance;
+    }
+
+    public CompositeReferenceCacheInterface getInternalInstance() {
+        return instance;
+    }
 
     public CompositeReferenceCache(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};

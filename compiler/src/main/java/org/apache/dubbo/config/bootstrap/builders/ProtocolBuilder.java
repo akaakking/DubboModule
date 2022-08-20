@@ -7,139 +7,139 @@ import org.apache.dubbo.config.bootstrap.builders.AbstractBuilder;
 
 public class ProtocolBuilder extends AbstractBuilder<ProtocolConfig, ProtocolBuilder> implements ProtocolBuilderInterface {
 
-    public ProtocolBuilderInterface id(StringInterface id) {
+    public ProtocolBuilderInterface id(String id) {
         return instance.id(id);
     }
 
-    public ProtocolBuilderInterface name(StringInterface name) {
+    public ProtocolBuilderInterface name(String name) {
         return instance.name(name);
     }
 
-    public ProtocolBuilderInterface host(StringInterface host) {
+    public ProtocolBuilderInterface host(String host) {
         return instance.host(host);
     }
 
-    public ProtocolBuilderInterface port(IntegerInterface port) {
+    public ProtocolBuilderInterface port(Integer port) {
         return instance.port(port);
     }
 
-    public ProtocolBuilderInterface contextpath(StringInterface contextpath) {
+    public ProtocolBuilderInterface contextpath(String contextpath) {
         return instance.contextpath(contextpath);
     }
 
-    public ProtocolBuilderInterface path(StringInterface path) {
+    public ProtocolBuilderInterface path(String path) {
         return instance.path(path);
     }
 
-    public ProtocolBuilderInterface threadpool(StringInterface threadpool) {
+    public ProtocolBuilderInterface threadpool(String threadpool) {
         return instance.threadpool(threadpool);
     }
 
-    public ProtocolBuilderInterface corethreads(IntegerInterface corethreads) {
+    public ProtocolBuilderInterface corethreads(Integer corethreads) {
         return instance.corethreads(corethreads);
     }
 
-    public ProtocolBuilderInterface threads(IntegerInterface threads) {
+    public ProtocolBuilderInterface threads(Integer threads) {
         return instance.threads(threads);
     }
 
-    public ProtocolBuilderInterface iothreads(IntegerInterface iothreads) {
+    public ProtocolBuilderInterface iothreads(Integer iothreads) {
         return instance.iothreads(iothreads);
     }
 
-    public ProtocolBuilderInterface queues(IntegerInterface queues) {
+    public ProtocolBuilderInterface queues(Integer queues) {
         return instance.queues(queues);
     }
 
-    public ProtocolBuilderInterface accepts(IntegerInterface accepts) {
+    public ProtocolBuilderInterface accepts(Integer accepts) {
         return instance.accepts(accepts);
     }
 
-    public ProtocolBuilderInterface codec(StringInterface codec) {
+    public ProtocolBuilderInterface codec(String codec) {
         return instance.codec(codec);
     }
 
-    public ProtocolBuilderInterface serialization(StringInterface serialization) {
+    public ProtocolBuilderInterface serialization(String serialization) {
         return instance.serialization(serialization);
     }
 
-    public ProtocolBuilderInterface charset(StringInterface charset) {
+    public ProtocolBuilderInterface charset(String charset) {
         return instance.charset(charset);
     }
 
-    public ProtocolBuilderInterface payload(IntegerInterface payload) {
+    public ProtocolBuilderInterface payload(Integer payload) {
         return instance.payload(payload);
     }
 
-    public ProtocolBuilderInterface buffer(IntegerInterface buffer) {
+    public ProtocolBuilderInterface buffer(Integer buffer) {
         return instance.buffer(buffer);
     }
 
-    public ProtocolBuilderInterface heartbeat(IntegerInterface heartbeat) {
+    public ProtocolBuilderInterface heartbeat(Integer heartbeat) {
         return instance.heartbeat(heartbeat);
     }
 
-    public ProtocolBuilderInterface accesslog(StringInterface accesslog) {
+    public ProtocolBuilderInterface accesslog(String accesslog) {
         return instance.accesslog(accesslog);
     }
 
-    public ProtocolBuilderInterface transporter(StringInterface transporter) {
+    public ProtocolBuilderInterface transporter(String transporter) {
         return instance.transporter(transporter);
     }
 
-    public ProtocolBuilderInterface exchanger(StringInterface exchanger) {
+    public ProtocolBuilderInterface exchanger(String exchanger) {
         return instance.exchanger(exchanger);
     }
 
-    public ProtocolBuilderInterface dispatcher(StringInterface dispatcher) {
+    public ProtocolBuilderInterface dispatcher(String dispatcher) {
         return instance.dispatcher(dispatcher);
     }
 
-    public ProtocolBuilderInterface dispather(StringInterface dispather) {
+    public ProtocolBuilderInterface dispather(String dispather) {
         return instance.dispather(dispather);
     }
 
-    public ProtocolBuilderInterface networker(StringInterface networker) {
+    public ProtocolBuilderInterface networker(String networker) {
         return instance.networker(networker);
     }
 
-    public ProtocolBuilderInterface server(StringInterface server) {
+    public ProtocolBuilderInterface server(String server) {
         return instance.server(server);
     }
 
-    public ProtocolBuilderInterface client(StringInterface client) {
+    public ProtocolBuilderInterface client(String client) {
         return instance.client(client);
     }
 
-    public ProtocolBuilderInterface telnet(StringInterface telnet) {
+    public ProtocolBuilderInterface telnet(String telnet) {
         return instance.telnet(telnet);
     }
 
-    public ProtocolBuilderInterface prompt(StringInterface prompt) {
+    public ProtocolBuilderInterface prompt(String prompt) {
         return instance.prompt(prompt);
     }
 
-    public ProtocolBuilderInterface status(StringInterface status) {
+    public ProtocolBuilderInterface status(String status) {
         return instance.status(status);
     }
 
-    public ProtocolBuilderInterface register(BooleanInterface register) {
+    public ProtocolBuilderInterface register(Boolean register) {
         return instance.register(register);
     }
 
-    public ProtocolBuilderInterface keepAlive(BooleanInterface keepAlive) {
+    public ProtocolBuilderInterface keepAlive(Boolean keepAlive) {
         return instance.keepAlive(keepAlive);
     }
 
-    public ProtocolBuilderInterface optimizer(StringInterface optimizer) {
+    public ProtocolBuilderInterface optimizer(String optimizer) {
         return instance.optimizer(optimizer);
     }
 
-    public ProtocolBuilderInterface extension(StringInterface extension) {
+    public ProtocolBuilderInterface extension(String extension) {
         return instance.extension(extension);
     }
 
-    public ProtocolBuilderInterface appendParameter(StringInterface key, StringInterface value) {
+    public ProtocolBuilderInterface appendParameter(String key, String value) {
         return instance.appendParameter(key, value);
     }
 
@@ -147,7 +147,7 @@ public class ProtocolBuilder extends AbstractBuilder<ProtocolConfig, ProtocolBui
         return instance.appendParameters(appendParameters);
     }
 
-    public ProtocolBuilderInterface isDefault(BooleanInterface isDefault) {
+    public ProtocolBuilderInterface isDefault(Boolean isDefault) {
         return instance.isDefault(isDefault);
     }
 
@@ -159,5 +159,13 @@ public class ProtocolBuilder extends AbstractBuilder<ProtocolConfig, ProtocolBui
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(newBuilder);
         return method.invoke();
+    }
+
+    public ProtocolBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ProtocolBuilderInterface getInternalInstance() {
+        return instance;
     }
 }

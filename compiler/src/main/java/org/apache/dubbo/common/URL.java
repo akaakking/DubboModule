@@ -20,43 +20,43 @@ public class URL implements URLInterface {
         return instance.getUrlParam();
     }
 
-    public StringInterface getProtocol() {
+    public String getProtocol() {
         return instance.getProtocol();
     }
 
-    public URLInterface setProtocol(StringInterface protocol) {
+    public URLInterface setProtocol(String protocol) {
         return instance.setProtocol(protocol);
     }
 
-    public StringInterface getUsername() {
+    public String getUsername() {
         return instance.getUsername();
     }
 
-    public URLInterface setUsername(StringInterface username) {
+    public URLInterface setUsername(String username) {
         return instance.setUsername(username);
     }
 
-    public StringInterface getPassword() {
+    public String getPassword() {
         return instance.getPassword();
     }
 
-    public URLInterface setPassword(StringInterface password) {
+    public URLInterface setPassword(String password) {
         return instance.setPassword(password);
     }
 
-    public StringInterface getAuthority() {
+    public String getAuthority() {
         return instance.getAuthority();
     }
 
-    public StringInterface getUserInformation() {
+    public String getUserInformation() {
         return instance.getUserInformation();
     }
 
-    public StringInterface getHost() {
+    public String getHost() {
         return instance.getHost();
     }
 
-    public URLInterface setHost(StringInterface host) {
+    public URLInterface setHost(String host) {
         return instance.setHost(host);
     }
 
@@ -72,23 +72,23 @@ public class URL implements URLInterface {
         return instance.getPort(defaultPort);
     }
 
-    public StringInterface getAddress() {
+    public String getAddress() {
         return instance.getAddress();
     }
 
-    public URLInterface setAddress(StringInterface address) {
+    public URLInterface setAddress(String address) {
         return instance.setAddress(address);
     }
 
-    public StringInterface getIp() {
+    public String getIp() {
         return instance.getIp();
     }
 
-    public StringInterface getBackupAddress() {
+    public String getBackupAddress() {
         return instance.getBackupAddress();
     }
 
-    public StringInterface getBackupAddress(int defaultPort) {
+    public String getBackupAddress(int defaultPort) {
         return instance.getBackupAddress(defaultPort);
     }
 
@@ -96,15 +96,15 @@ public class URL implements URLInterface {
         return instance.getBackupUrls();
     }
 
-    public StringInterface getPath() {
+    public String getPath() {
         return instance.getPath();
     }
 
-    public URLInterface setPath(StringInterface path) {
+    public URLInterface setPath(String path) {
         return instance.setPath(path);
     }
 
-    public StringInterface getAbsolutePath() {
+    public String getAbsolutePath() {
         return instance.getAbsolutePath();
     }
 
@@ -120,40 +120,40 @@ public class URL implements URLInterface {
         return instance.getParameters(nameToSelect);
     }
 
-    public StringInterface getParameterAndDecoded(StringInterface key) {
+    public String getParameterAndDecoded(String key) {
         return instance.getParameterAndDecoded(key);
     }
 
-    public StringInterface getParameterAndDecoded(StringInterface key, StringInterface defaultValue) {
+    public String getParameterAndDecoded(String key, String defaultValue) {
         return instance.getParameterAndDecoded(key, defaultValue);
     }
 
-    public StringInterface getParameter(StringInterface key) {
+    public String getParameter(String key) {
         return instance.getParameter(key);
     }
 
-    public StringInterface getParameter(StringInterface key, StringInterface defaultValue) {
+    public String getParameter(String key, String defaultValue) {
         return instance.getParameter(key, defaultValue);
     }
 
-    public StringInterface[] getParameter(StringInterface key, StringInterface[] defaultValue) {
+    public String[] getParameter(String key, String[] defaultValue) {
         return instance.getParameter(key, defaultValue);
     }
 
-    public List<String> getParameter(StringInterface key, List<String> defaultValue) {
+    public List<String> getParameter(String key, List<String> defaultValue) {
         return instance.getParameter(key, defaultValue);
     }
 
-    public <T> T getParameter(StringInterface key, Class<T> valueType) {
+    public <T> T getParameter(String key, Class<T> valueType) {
         return instance.getParameter(key, valueType);
     }
 
-    public <T> T getParameter(StringInterface key, Class<T> valueType, T defaultValue) {
+    public <T> T getParameter(String key, Class<T> valueType, T defaultValue) {
         return instance.getParameter(key, valueType, defaultValue);
     }
 
     public URLInterface setScopeModel(ScopeModelInterface scopeModel) {
-        return instance.setScopeModel(scopeModel);
+        return instance.setScopeModel(scopeModel.getInternalInstance(), scopeModel);
     }
 
     public ScopeModelInterface getScopeModel() {
@@ -177,162 +177,162 @@ public class URL implements URLInterface {
     }
 
     public URLInterface setServiceModel(ServiceModelInterface serviceModel) {
-        return instance.setServiceModel(serviceModel);
+        return instance.setServiceModel(serviceModel.getInternalInstance(), serviceModel);
     }
 
     public ServiceModelInterface getServiceModel() {
         return instance.getServiceModel();
     }
 
-    public URLInterface getUrlParameter(StringInterface key) {
+    public URLInterface getUrlParameter(String key) {
         return instance.getUrlParameter(key);
     }
 
-    public double getParameter(StringInterface key, double defaultValue) {
+    public double getParameter(String key, double defaultValue) {
         return instance.getParameter(key, defaultValue);
     }
 
-    public float getParameter(StringInterface key, float defaultValue) {
+    public float getParameter(String key, float defaultValue) {
         return instance.getParameter(key, defaultValue);
     }
 
-    public long getParameter(StringInterface key, long defaultValue) {
+    public long getParameter(String key, long defaultValue) {
         return instance.getParameter(key, defaultValue);
     }
 
-    public int getParameter(StringInterface key, int defaultValue) {
+    public int getParameter(String key, int defaultValue) {
         return instance.getParameter(key, defaultValue);
     }
 
-    public short getParameter(StringInterface key, short defaultValue) {
+    public short getParameter(String key, short defaultValue) {
         return instance.getParameter(key, defaultValue);
     }
 
-    public byte getParameter(StringInterface key, byte defaultValue) {
+    public byte getParameter(String key, byte defaultValue) {
         return instance.getParameter(key, defaultValue);
     }
 
-    public float getPositiveParameter(StringInterface key, float defaultValue) {
+    public float getPositiveParameter(String key, float defaultValue) {
         return instance.getPositiveParameter(key, defaultValue);
     }
 
-    public double getPositiveParameter(StringInterface key, double defaultValue) {
+    public double getPositiveParameter(String key, double defaultValue) {
         return instance.getPositiveParameter(key, defaultValue);
     }
 
-    public long getPositiveParameter(StringInterface key, long defaultValue) {
+    public long getPositiveParameter(String key, long defaultValue) {
         return instance.getPositiveParameter(key, defaultValue);
     }
 
-    public int getPositiveParameter(StringInterface key, int defaultValue) {
+    public int getPositiveParameter(String key, int defaultValue) {
         return instance.getPositiveParameter(key, defaultValue);
     }
 
-    public short getPositiveParameter(StringInterface key, short defaultValue) {
+    public short getPositiveParameter(String key, short defaultValue) {
         return instance.getPositiveParameter(key, defaultValue);
     }
 
-    public byte getPositiveParameter(StringInterface key, byte defaultValue) {
+    public byte getPositiveParameter(String key, byte defaultValue) {
         return instance.getPositiveParameter(key, defaultValue);
     }
 
-    public char getParameter(StringInterface key, char defaultValue) {
+    public char getParameter(String key, char defaultValue) {
         return instance.getParameter(key, defaultValue);
     }
 
-    public boolean getParameter(StringInterface key, boolean defaultValue) {
+    public boolean getParameter(String key, boolean defaultValue) {
         return instance.getParameter(key, defaultValue);
     }
 
-    public boolean hasParameter(StringInterface key) {
+    public boolean hasParameter(String key) {
         return instance.hasParameter(key);
     }
 
-    public StringInterface getMethodParameterAndDecoded(StringInterface method, StringInterface key) {
+    public String getMethodParameterAndDecoded(String method, String key) {
         return instance.getMethodParameterAndDecoded(method, key);
     }
 
-    public StringInterface getMethodParameterAndDecoded(StringInterface method, StringInterface key, StringInterface defaultValue) {
+    public String getMethodParameterAndDecoded(String method, String key, String defaultValue) {
         return instance.getMethodParameterAndDecoded(method, key, defaultValue);
     }
 
-    public StringInterface getMethodParameter(StringInterface method, StringInterface key) {
+    public String getMethodParameter(String method, String key) {
         return instance.getMethodParameter(method, key);
     }
 
-    public StringInterface getMethodParameterStrict(StringInterface method, StringInterface key) {
+    public String getMethodParameterStrict(String method, String key) {
         return instance.getMethodParameterStrict(method, key);
     }
 
-    public StringInterface getMethodParameter(StringInterface method, StringInterface key, StringInterface defaultValue) {
+    public String getMethodParameter(String method, String key, String defaultValue) {
         return instance.getMethodParameter(method, key, defaultValue);
     }
 
-    public double getMethodParameter(StringInterface method, StringInterface key, double defaultValue) {
+    public double getMethodParameter(String method, String key, double defaultValue) {
         return instance.getMethodParameter(method, key, defaultValue);
     }
 
-    public float getMethodParameter(StringInterface method, StringInterface key, float defaultValue) {
+    public float getMethodParameter(String method, String key, float defaultValue) {
         return instance.getMethodParameter(method, key, defaultValue);
     }
 
-    public long getMethodParameter(StringInterface method, StringInterface key, long defaultValue) {
+    public long getMethodParameter(String method, String key, long defaultValue) {
         return instance.getMethodParameter(method, key, defaultValue);
     }
 
-    public int getMethodParameter(StringInterface method, StringInterface key, int defaultValue) {
+    public int getMethodParameter(String method, String key, int defaultValue) {
         return instance.getMethodParameter(method, key, defaultValue);
     }
 
-    public short getMethodParameter(StringInterface method, StringInterface key, short defaultValue) {
+    public short getMethodParameter(String method, String key, short defaultValue) {
         return instance.getMethodParameter(method, key, defaultValue);
     }
 
-    public byte getMethodParameter(StringInterface method, StringInterface key, byte defaultValue) {
+    public byte getMethodParameter(String method, String key, byte defaultValue) {
         return instance.getMethodParameter(method, key, defaultValue);
     }
 
-    public double getMethodPositiveParameter(StringInterface method, StringInterface key, double defaultValue) {
+    public double getMethodPositiveParameter(String method, String key, double defaultValue) {
         return instance.getMethodPositiveParameter(method, key, defaultValue);
     }
 
-    public float getMethodPositiveParameter(StringInterface method, StringInterface key, float defaultValue) {
+    public float getMethodPositiveParameter(String method, String key, float defaultValue) {
         return instance.getMethodPositiveParameter(method, key, defaultValue);
     }
 
-    public long getMethodPositiveParameter(StringInterface method, StringInterface key, long defaultValue) {
+    public long getMethodPositiveParameter(String method, String key, long defaultValue) {
         return instance.getMethodPositiveParameter(method, key, defaultValue);
     }
 
-    public int getMethodPositiveParameter(StringInterface method, StringInterface key, int defaultValue) {
+    public int getMethodPositiveParameter(String method, String key, int defaultValue) {
         return instance.getMethodPositiveParameter(method, key, defaultValue);
     }
 
-    public short getMethodPositiveParameter(StringInterface method, StringInterface key, short defaultValue) {
+    public short getMethodPositiveParameter(String method, String key, short defaultValue) {
         return instance.getMethodPositiveParameter(method, key, defaultValue);
     }
 
-    public byte getMethodPositiveParameter(StringInterface method, StringInterface key, byte defaultValue) {
+    public byte getMethodPositiveParameter(String method, String key, byte defaultValue) {
         return instance.getMethodPositiveParameter(method, key, defaultValue);
     }
 
-    public char getMethodParameter(StringInterface method, StringInterface key, char defaultValue) {
+    public char getMethodParameter(String method, String key, char defaultValue) {
         return instance.getMethodParameter(method, key, defaultValue);
     }
 
-    public boolean getMethodParameter(StringInterface method, StringInterface key, boolean defaultValue) {
+    public boolean getMethodParameter(String method, String key, boolean defaultValue) {
         return instance.getMethodParameter(method, key, defaultValue);
     }
 
-    public boolean hasMethodParameter(StringInterface method, StringInterface key) {
+    public boolean hasMethodParameter(String method, String key) {
         return instance.hasMethodParameter(method, key);
     }
 
-    public StringInterface getAnyMethodParameter(StringInterface key) {
+    public String getAnyMethodParameter(String key) {
         return instance.getAnyMethodParameter(key);
     }
 
-    public boolean hasMethodParameter(StringInterface method) {
+    public boolean hasMethodParameter(String method) {
         return instance.hasMethodParameter(method);
     }
 
@@ -344,59 +344,59 @@ public class URL implements URLInterface {
         return instance.isAnyHost();
     }
 
-    public URLInterface addParameterAndEncoded(StringInterface key, StringInterface value) {
+    public URLInterface addParameterAndEncoded(String key, String value) {
         return instance.addParameterAndEncoded(key, value);
     }
 
-    public URLInterface addParameter(StringInterface key, boolean value) {
+    public URLInterface addParameter(String key, boolean value) {
         return instance.addParameter(key, value);
     }
 
-    public URLInterface addParameter(StringInterface key, char value) {
+    public URLInterface addParameter(String key, char value) {
         return instance.addParameter(key, value);
     }
 
-    public URLInterface addParameter(StringInterface key, byte value) {
+    public URLInterface addParameter(String key, byte value) {
         return instance.addParameter(key, value);
     }
 
-    public URLInterface addParameter(StringInterface key, short value) {
+    public URLInterface addParameter(String key, short value) {
         return instance.addParameter(key, value);
     }
 
-    public URLInterface addParameter(StringInterface key, int value) {
+    public URLInterface addParameter(String key, int value) {
         return instance.addParameter(key, value);
     }
 
-    public URLInterface addParameter(StringInterface key, long value) {
+    public URLInterface addParameter(String key, long value) {
         return instance.addParameter(key, value);
     }
 
-    public URLInterface addParameter(StringInterface key, float value) {
+    public URLInterface addParameter(String key, float value) {
         return instance.addParameter(key, value);
     }
 
-    public URLInterface addParameter(StringInterface key, double value) {
+    public URLInterface addParameter(String key, double value) {
         return instance.addParameter(key, value);
     }
 
-    public URLInterface addParameter(StringInterface key, Enum<?> value) {
+    public URLInterface addParameter(String key, Enum<?> value) {
         return instance.addParameter(key, value);
     }
 
-    public URLInterface addParameter(StringInterface key, NumberInterface value) {
+    public URLInterface addParameter(String key, Number value) {
         return instance.addParameter(key, value);
     }
 
-    public URLInterface addParameter(StringInterface key, CharSequenceInterface value) {
+    public URLInterface addParameter(String key, CharSequence value) {
         return instance.addParameter(key, value);
     }
 
-    public URLInterface addParameter(StringInterface key, StringInterface value) {
+    public URLInterface addParameter(String key, String value) {
         return instance.addParameter(key, value);
     }
 
-    public URLInterface addParameterIfAbsent(StringInterface key, StringInterface value) {
+    public URLInterface addParameterIfAbsent(String key, String value) {
         return instance.addParameterIfAbsent(key, value);
     }
 
@@ -408,15 +408,15 @@ public class URL implements URLInterface {
         return instance.addParametersIfAbsent(parameters);
     }
 
-    public URLInterface addParameters(StringInterface pairs) {
+    public URLInterface addParameters(String pairs) {
         return instance.addParameters(pairs);
     }
 
-    public URLInterface addParameterString(StringInterface query) {
+    public URLInterface addParameterString(String query) {
         return instance.addParameterString(query);
     }
 
-    public URLInterface removeParameter(StringInterface key) {
+    public URLInterface removeParameter(String key) {
         return instance.removeParameter(key);
     }
 
@@ -424,7 +424,7 @@ public class URL implements URLInterface {
         return instance.removeParameters(keys);
     }
 
-    public URLInterface removeParameters(StringInterface keys) {
+    public URLInterface removeParameters(String keys) {
         return instance.removeParameters(keys);
     }
 
@@ -432,7 +432,7 @@ public class URL implements URLInterface {
         return instance.clearParameters();
     }
 
-    public StringInterface getRawParameter(StringInterface key) {
+    public String getRawParameter(String key) {
         return instance.getRawParameter(key);
     }
 
@@ -440,35 +440,35 @@ public class URL implements URLInterface {
         return instance.toMap();
     }
 
-    public StringInterface toString() {
+    public String toString() {
         return instance.toString();
     }
 
-    public StringInterface toString(StringInterface parameters) {
+    public String toString(String parameters) {
         return instance.toString(parameters);
     }
 
-    public StringInterface toIdentityString() {
+    public String toIdentityString() {
         return instance.toIdentityString();
     }
 
-    public StringInterface toIdentityString(StringInterface parameters) {
+    public String toIdentityString(String parameters) {
         return instance.toIdentityString(parameters);
     }
 
-    public StringInterface toFullString() {
+    public String toFullString() {
         return instance.toFullString();
     }
 
-    public StringInterface toFullString(StringInterface parameters) {
+    public String toFullString(String parameters) {
         return instance.toFullString(parameters);
     }
 
-    public StringInterface toParameterString() {
+    public String toParameterString() {
         return instance.toParameterString();
     }
 
-    public StringInterface toParameterString(StringInterface parameters) {
+    public String toParameterString(String parameters) {
         return instance.toParameterString(parameters);
     }
 
@@ -476,87 +476,87 @@ public class URL implements URLInterface {
         return instance.toJavaURL();
     }
 
-    public InetSocketAddressInterface toInetSocketAddress() {
+    public InetSocketAddress toInetSocketAddress() {
         return instance.toInetSocketAddress();
     }
 
-    public StringInterface getColonSeparatedKey() {
+    public String getColonSeparatedKey() {
         return instance.getColonSeparatedKey();
     }
 
-    public StringInterface getServiceKey() {
+    public String getServiceKey() {
         return instance.getServiceKey();
     }
 
-    public StringInterface getDisplayServiceKey() {
+    public String getDisplayServiceKey() {
         return instance.getDisplayServiceKey();
     }
 
-    public StringInterface getPathKey() {
+    public String getPathKey() {
         return instance.getPathKey();
     }
 
-    public StringInterface getProtocolServiceKey() {
+    public String getProtocolServiceKey() {
         return instance.getProtocolServiceKey();
     }
 
-    public StringInterface toServiceStringWithoutResolving() {
+    public String toServiceStringWithoutResolving() {
         return instance.toServiceStringWithoutResolving();
     }
 
-    public StringInterface toServiceString() {
+    public String toServiceString() {
         return instance.toServiceString();
     }
 
-    public StringInterface getServiceName() {
+    public String getServiceName() {
         return instance.getServiceName();
     }
 
-    public StringInterface getServiceInterface() {
+    public String getServiceInterface() {
         return instance.getServiceInterface();
     }
 
-    public URLInterface setServiceInterface(StringInterface service) {
+    public URLInterface setServiceInterface(String service) {
         return instance.setServiceInterface(service);
     }
 
-    public int getIntParameter(StringInterface key) {
+    public int getIntParameter(String key) {
         return instance.getIntParameter(key);
     }
 
-    public int getIntParameter(StringInterface key, int defaultValue) {
+    public int getIntParameter(String key, int defaultValue) {
         return instance.getIntParameter(key, defaultValue);
     }
 
-    public int getPositiveIntParameter(StringInterface key, int defaultValue) {
+    public int getPositiveIntParameter(String key, int defaultValue) {
         return instance.getPositiveIntParameter(key, defaultValue);
     }
 
-    public boolean getBooleanParameter(StringInterface key) {
+    public boolean getBooleanParameter(String key) {
         return instance.getBooleanParameter(key);
     }
 
-    public boolean getBooleanParameter(StringInterface key, boolean defaultValue) {
+    public boolean getBooleanParameter(String key, boolean defaultValue) {
         return instance.getBooleanParameter(key, defaultValue);
     }
 
-    public int getMethodIntParameter(StringInterface method, StringInterface key) {
+    public int getMethodIntParameter(String method, String key) {
         return instance.getMethodIntParameter(method, key);
     }
 
-    public int getMethodIntParameter(StringInterface method, StringInterface key, int defaultValue) {
+    public int getMethodIntParameter(String method, String key, int defaultValue) {
         return instance.getMethodIntParameter(method, key, defaultValue);
     }
 
-    public int getMethodPositiveIntParameter(StringInterface method, StringInterface key, int defaultValue) {
+    public int getMethodPositiveIntParameter(String method, String key, int defaultValue) {
         return instance.getMethodPositiveIntParameter(method, key, defaultValue);
     }
 
-    public boolean getMethodBooleanParameter(StringInterface method, StringInterface key) {
+    public boolean getMethodBooleanParameter(String method, String key) {
         return instance.getMethodBooleanParameter(method, key);
     }
 
-    public boolean getMethodBooleanParameter(StringInterface method, StringInterface key, boolean defaultValue) {
+    public boolean getMethodBooleanParameter(String method, String key, boolean defaultValue) {
         return instance.getMethodBooleanParameter(method, key, defaultValue);
     }
 
@@ -568,59 +568,59 @@ public class URL implements URLInterface {
         return instance.hashCode();
     }
 
-    public boolean equals(ObjectInterface obj) {
+    public boolean equals(Object obj) {
         return instance.equals(obj);
     }
 
-    public StringInterface getApplication(StringInterface defaultValue) {
+    public String getApplication(String defaultValue) {
         return instance.getApplication(defaultValue);
     }
 
-    public StringInterface getApplication() {
+    public String getApplication() {
         return instance.getApplication();
     }
 
-    public StringInterface getRemoteApplication() {
+    public String getRemoteApplication() {
         return instance.getRemoteApplication();
     }
 
-    public StringInterface getGroup() {
+    public String getGroup() {
         return instance.getGroup();
     }
 
-    public StringInterface getGroup(StringInterface defaultValue) {
+    public String getGroup(String defaultValue) {
         return instance.getGroup(defaultValue);
     }
 
-    public StringInterface getVersion() {
+    public String getVersion() {
         return instance.getVersion();
     }
 
-    public StringInterface getVersion(StringInterface defaultValue) {
+    public String getVersion(String defaultValue) {
         return instance.getVersion(defaultValue);
     }
 
-    public StringInterface getConcatenatedParameter(StringInterface key) {
+    public String getConcatenatedParameter(String key) {
         return instance.getConcatenatedParameter(key);
     }
 
-    public StringInterface getCategory(StringInterface defaultValue) {
+    public String getCategory(String defaultValue) {
         return instance.getCategory(defaultValue);
     }
 
-    public StringInterface[] getCategory(StringInterface[] defaultValue) {
+    public String[] getCategory(String[] defaultValue) {
         return instance.getCategory(defaultValue);
     }
 
-    public StringInterface getCategory() {
+    public String getCategory() {
         return instance.getCategory();
     }
 
-    public StringInterface getSide(StringInterface defaultValue) {
+    public String getSide(String defaultValue) {
         return instance.getSide(defaultValue);
     }
 
-    public StringInterface getSide() {
+    public String getSide() {
         return instance.getSide();
     }
 
@@ -632,147 +632,147 @@ public class URL implements URLInterface {
         return instance.addAttributes(attributes);
     }
 
-    public ObjectInterface getAttribute(StringInterface key) {
+    public Object getAttribute(String key) {
         return instance.getAttribute(key);
     }
 
-    public ObjectInterface getAttribute(StringInterface key, ObjectInterface defaultValue) {
+    public Object getAttribute(String key, Object defaultValue) {
         return instance.getAttribute(key, defaultValue);
     }
 
-    public URLInterface putAttribute(StringInterface key, ObjectInterface obj) {
+    public URLInterface putAttribute(String key, Object obj) {
         return instance.putAttribute(key, obj);
     }
 
-    public URLInterface removeAttribute(StringInterface key) {
+    public URLInterface removeAttribute(String key) {
         return instance.removeAttribute(key);
     }
 
-    public boolean hasAttribute(StringInterface key) {
+    public boolean hasAttribute(String key) {
         return instance.hasAttribute(key);
     }
 
-    public Map<String, String> getServiceParameters(StringInterface service) {
+    public Map<String, String> getServiceParameters(String service) {
         return instance.getServiceParameters(service);
     }
 
-    public StringInterface getServiceParameter(StringInterface service, StringInterface key) {
+    public String getServiceParameter(String service, String key) {
         return instance.getServiceParameter(service, key);
     }
 
-    public StringInterface getServiceParameter(StringInterface service, StringInterface key, StringInterface defaultValue) {
+    public String getServiceParameter(String service, String key, String defaultValue) {
         return instance.getServiceParameter(service, key, defaultValue);
     }
 
-    public int getServiceParameter(StringInterface service, StringInterface key, int defaultValue) {
+    public int getServiceParameter(String service, String key, int defaultValue) {
         return instance.getServiceParameter(service, key, defaultValue);
     }
 
-    public double getServiceParameter(StringInterface service, StringInterface key, double defaultValue) {
+    public double getServiceParameter(String service, String key, double defaultValue) {
         return instance.getServiceParameter(service, key, defaultValue);
     }
 
-    public float getServiceParameter(StringInterface service, StringInterface key, float defaultValue) {
+    public float getServiceParameter(String service, String key, float defaultValue) {
         return instance.getServiceParameter(service, key, defaultValue);
     }
 
-    public long getServiceParameter(StringInterface service, StringInterface key, long defaultValue) {
+    public long getServiceParameter(String service, String key, long defaultValue) {
         return instance.getServiceParameter(service, key, defaultValue);
     }
 
-    public short getServiceParameter(StringInterface service, StringInterface key, short defaultValue) {
+    public short getServiceParameter(String service, String key, short defaultValue) {
         return instance.getServiceParameter(service, key, defaultValue);
     }
 
-    public byte getServiceParameter(StringInterface service, StringInterface key, byte defaultValue) {
+    public byte getServiceParameter(String service, String key, byte defaultValue) {
         return instance.getServiceParameter(service, key, defaultValue);
     }
 
-    public char getServiceParameter(StringInterface service, StringInterface key, char defaultValue) {
+    public char getServiceParameter(String service, String key, char defaultValue) {
         return instance.getServiceParameter(service, key, defaultValue);
     }
 
-    public boolean getServiceParameter(StringInterface service, StringInterface key, boolean defaultValue) {
+    public boolean getServiceParameter(String service, String key, boolean defaultValue) {
         return instance.getServiceParameter(service, key, defaultValue);
     }
 
-    public boolean hasServiceParameter(StringInterface service, StringInterface key) {
+    public boolean hasServiceParameter(String service, String key) {
         return instance.hasServiceParameter(service, key);
     }
 
-    public float getPositiveServiceParameter(StringInterface service, StringInterface key, float defaultValue) {
+    public float getPositiveServiceParameter(String service, String key, float defaultValue) {
         return instance.getPositiveServiceParameter(service, key, defaultValue);
     }
 
-    public double getPositiveServiceParameter(StringInterface service, StringInterface key, double defaultValue) {
+    public double getPositiveServiceParameter(String service, String key, double defaultValue) {
         return instance.getPositiveServiceParameter(service, key, defaultValue);
     }
 
-    public long getPositiveServiceParameter(StringInterface service, StringInterface key, long defaultValue) {
+    public long getPositiveServiceParameter(String service, String key, long defaultValue) {
         return instance.getPositiveServiceParameter(service, key, defaultValue);
     }
 
-    public int getPositiveServiceParameter(StringInterface service, StringInterface key, int defaultValue) {
+    public int getPositiveServiceParameter(String service, String key, int defaultValue) {
         return instance.getPositiveServiceParameter(service, key, defaultValue);
     }
 
-    public short getPositiveServiceParameter(StringInterface service, StringInterface key, short defaultValue) {
+    public short getPositiveServiceParameter(String service, String key, short defaultValue) {
         return instance.getPositiveServiceParameter(service, key, defaultValue);
     }
 
-    public byte getPositiveServiceParameter(StringInterface service, StringInterface key, byte defaultValue) {
+    public byte getPositiveServiceParameter(String service, String key, byte defaultValue) {
         return instance.getPositiveServiceParameter(service, key, defaultValue);
     }
 
-    public StringInterface getServiceMethodParameterAndDecoded(StringInterface service, StringInterface method, StringInterface key) {
+    public String getServiceMethodParameterAndDecoded(String service, String method, String key) {
         return instance.getServiceMethodParameterAndDecoded(service, method, key);
     }
 
-    public StringInterface getServiceMethodParameterAndDecoded(StringInterface service, StringInterface method, StringInterface key, StringInterface defaultValue) {
+    public String getServiceMethodParameterAndDecoded(String service, String method, String key, String defaultValue) {
         return instance.getServiceMethodParameterAndDecoded(service, method, key, defaultValue);
     }
 
-    public StringInterface getServiceMethodParameterStrict(StringInterface service, StringInterface method, StringInterface key) {
+    public String getServiceMethodParameterStrict(String service, String method, String key) {
         return instance.getServiceMethodParameterStrict(service, method, key);
     }
 
-    public StringInterface getServiceMethodParameter(StringInterface service, StringInterface method, StringInterface key) {
+    public String getServiceMethodParameter(String service, String method, String key) {
         return instance.getServiceMethodParameter(service, method, key);
     }
 
-    public StringInterface getServiceMethodParameter(StringInterface service, StringInterface method, StringInterface key, StringInterface defaultValue) {
+    public String getServiceMethodParameter(String service, String method, String key, String defaultValue) {
         return instance.getServiceMethodParameter(service, method, key, defaultValue);
     }
 
-    public double getServiceMethodParameter(StringInterface service, StringInterface method, StringInterface key, double defaultValue) {
+    public double getServiceMethodParameter(String service, String method, String key, double defaultValue) {
         return instance.getServiceMethodParameter(service, method, key, defaultValue);
     }
 
-    public float getServiceMethodParameter(StringInterface service, StringInterface method, StringInterface key, float defaultValue) {
+    public float getServiceMethodParameter(String service, String method, String key, float defaultValue) {
         return instance.getServiceMethodParameter(service, method, key, defaultValue);
     }
 
-    public long getServiceMethodParameter(StringInterface service, StringInterface method, StringInterface key, long defaultValue) {
+    public long getServiceMethodParameter(String service, String method, String key, long defaultValue) {
         return instance.getServiceMethodParameter(service, method, key, defaultValue);
     }
 
-    public int getServiceMethodParameter(StringInterface service, StringInterface method, StringInterface key, int defaultValue) {
+    public int getServiceMethodParameter(String service, String method, String key, int defaultValue) {
         return instance.getServiceMethodParameter(service, method, key, defaultValue);
     }
 
-    public short getMethodParameter(StringInterface service, StringInterface method, StringInterface key, short defaultValue) {
+    public short getMethodParameter(String service, String method, String key, short defaultValue) {
         return instance.getMethodParameter(service, method, key, defaultValue);
     }
 
-    public byte getServiceMethodParameter(StringInterface service, StringInterface method, StringInterface key, byte defaultValue) {
+    public byte getServiceMethodParameter(String service, String method, String key, byte defaultValue) {
         return instance.getServiceMethodParameter(service, method, key, defaultValue);
     }
 
-    public boolean hasServiceMethodParameter(StringInterface service, StringInterface method, StringInterface key) {
+    public boolean hasServiceMethodParameter(String service, String method, String key) {
         return instance.hasServiceMethodParameter(service, method, key);
     }
 
-    public boolean hasServiceMethodParameter(StringInterface service, StringInterface method) {
+    public boolean hasServiceMethodParameter(String service, String method) {
         return instance.hasServiceMethodParameter(service, method);
     }
 
@@ -782,64 +782,72 @@ public class URL implements URLInterface {
 
     protected URLInterface instance;
 
-    public static URLInterface cacheableValueOf(StringInterface url) {
+    public static URLInterface cacheableValueOf(String url) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(cacheableValueOf, String.class);
         return method.invoke(url);
     }
 
-    public static URLInterface valueOf(StringInterface url) {
+    public static URLInterface valueOf(String url) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(valueOf, String.class);
         return method.invoke(url);
     }
 
-    public static URLInterface valueOf(StringInterface url, ScopeModelInterface scopeModel) {
+    public static URLInterface valueOf(String url, ScopeModelInterface scopeModel) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(valueOf, String.class, ScopeModelInterface.class);
         return method.invoke(url, scopeModel);
     }
 
-    public static URLInterface valueOf(StringInterface url, boolean encoded) {
+    public static URLInterface valueOf(String url, boolean encoded) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(valueOf, String.class, boolean.class);
         return method.invoke(url, encoded);
     }
 
-    public static URLInterface valueOf(StringInterface url, StringInterface reserveParams) {
+    public static URLInterface valueOf(String url, String reserveParams) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(valueOf, String.class, String.class);
         return method.invoke(url, reserveParams);
     }
 
-    public static URLInterface valueOf(URLInterface url, StringInterface[] reserveParams, StringInterface[] reserveParamPrefixes) {
+    public static URLInterface valueOf(URLInterface url, String[] reserveParams, String[] reserveParamPrefixes) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(valueOf, URLInterface.class, String[].class, String[].class);
         return method.invoke(url, reserveParams, reserveParamPrefixes);
     }
 
-    public static StringInterface encode(StringInterface value) {
+    public static String encode(String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(encode, String.class);
         return method.invoke(value);
     }
 
-    public static StringInterface decode(StringInterface value) {
+    public static String decode(String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(decode, String.class);
         return method.invoke(value);
     }
 
-    public static StringInterface buildKey(StringInterface path, StringInterface group, StringInterface version) {
+    public static String buildKey(String path, String group, String version) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(buildKey, String.class, String.class, String.class);
         return method.invoke(path, group, version);
     }
 
-    public static void putMethodParameter(StringInterface method, StringInterface key, StringInterface value, Map<String, Map<String, String>> methodParameters) {
+    public static void putMethodParameter(String method, String key, String value, Map<String, Map<String, String>> methodParameters) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(putMethodParameter, String.class, String.class, String.class, Map.class);
         method.invoke(method, key, value, methodParameters);
+    }
+
+    public URLInterface getInternalInstance() {
+        return instance;
+    }
+
+    public URLInterface getInternalInstance() {
+        return instance;
     }
 
     public URL(URLAddressInterface urlAddress, URLParamInterface urlParam) {

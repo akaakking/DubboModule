@@ -118,73 +118,73 @@ public class ConfigValidationUtils implements ConfigValidationUtilsInterface {
         method.invoke(config);
     }
 
-    public static void checkExtension(ScopeModelInterface scopeModel, Class<?> type, StringInterface property, StringInterface value) {
+    public static void checkExtension(ScopeModelInterface scopeModel, Class<?> type, String property, String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkExtension, ScopeModelInterface.class, Class.class, String.class, String.class);
         method.invoke(scopeModel, type, property, value);
     }
 
-    public static void checkMultiExtension(ScopeModelInterface scopeModel, Class<?> type, StringInterface property, StringInterface value) {
+    public static void checkMultiExtension(ScopeModelInterface scopeModel, Class<?> type, String property, String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkMultiExtension, ScopeModelInterface.class, Class.class, String.class, String.class);
         method.invoke(scopeModel, type, property, value);
     }
 
-    public static void checkMultiExtension(ScopeModelInterface scopeModel, List<Class<?>> types, StringInterface property, StringInterface value) {
+    public static void checkMultiExtension(ScopeModelInterface scopeModel, List<Class<?>> types, String property, String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkMultiExtension, ScopeModelInterface.class, List.class, String.class, String.class);
         method.invoke(scopeModel, types, property, value);
     }
 
-    public static void checkLength(StringInterface property, StringInterface value) {
+    public static void checkLength(String property, String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkLength, String.class, String.class);
         method.invoke(property, value);
     }
 
-    public static void checkPathLength(StringInterface property, StringInterface value) {
+    public static void checkPathLength(String property, String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkPathLength, String.class, String.class);
         method.invoke(property, value);
     }
 
-    public static void checkName(StringInterface property, StringInterface value) {
+    public static void checkName(String property, String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkName, String.class, String.class);
         method.invoke(property, value);
     }
 
-    public static void checkHost(StringInterface property, StringInterface value) {
+    public static void checkHost(String property, String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkHost, String.class, String.class);
         method.invoke(property, value);
     }
 
-    public static void checkNameHasSymbol(StringInterface property, StringInterface value) {
+    public static void checkNameHasSymbol(String property, String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkNameHasSymbol, String.class, String.class);
         method.invoke(property, value);
     }
 
-    public static void checkKey(StringInterface property, StringInterface value) {
+    public static void checkKey(String property, String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkKey, String.class, String.class);
         method.invoke(property, value);
     }
 
-    public static void checkMultiName(StringInterface property, StringInterface value) {
+    public static void checkMultiName(String property, String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkMultiName, String.class, String.class);
         method.invoke(property, value);
     }
 
-    public static void checkPathName(StringInterface property, StringInterface value) {
+    public static void checkPathName(String property, String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkPathName, String.class, String.class);
         method.invoke(property, value);
     }
 
-    public static void checkMethodName(StringInterface property, StringInterface value) {
+    public static void checkMethodName(String property, String value) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkMethodName, String.class, String.class);
         method.invoke(property, value);
@@ -196,9 +196,17 @@ public class ConfigValidationUtils implements ConfigValidationUtilsInterface {
         method.invoke(parameters);
     }
 
-    public static void checkProperty(StringInterface property, StringInterface value, int maxlength, PatternInterface pattern) {
+    public static void checkProperty(String property, String value, int maxlength, Pattern pattern) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(checkProperty, String.class, String.class, int.class, Pattern.class);
         method.invoke(property, value, maxlength, pattern);
+    }
+
+    public ConfigValidationUtilsInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ConfigValidationUtilsInterface getInternalInstance() {
+        return instance;
     }
 }

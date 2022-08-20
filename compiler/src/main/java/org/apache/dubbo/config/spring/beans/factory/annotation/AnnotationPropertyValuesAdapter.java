@@ -9,19 +9,19 @@ import org.springframework.core.env.PropertyResolver;
 
 public class AnnotationPropertyValuesAdapter implements AnnotationPropertyValuesAdapterInterface {
 
-    public PropertyValueInterface[] getPropertyValues() {
+    public PropertyValue[] getPropertyValues() {
         return instance.getPropertyValues();
     }
 
-    public PropertyValueInterface getPropertyValue(StringInterface propertyName) {
+    public PropertyValue getPropertyValue(String propertyName) {
         return instance.getPropertyValue(propertyName);
     }
 
-    public PropertyValuesInterface changesSince(PropertyValuesInterface old) {
+    public PropertyValues changesSince(PropertyValues old) {
         return instance.changesSince(old);
     }
 
-    public boolean contains(StringInterface propertyName) {
+    public boolean contains(String propertyName) {
         return instance.contains(propertyName);
     }
 
@@ -30,6 +30,14 @@ public class AnnotationPropertyValuesAdapter implements AnnotationPropertyValues
     }
 
     protected AnnotationPropertyValuesAdapterInterface instance;
+
+    public AnnotationPropertyValuesAdapterInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AnnotationPropertyValuesAdapterInterface getInternalInstance() {
+        return instance;
+    }
 
     public AnnotationPropertyValuesAdapter(Map<String, Object> attributes, PropertyResolver propertyResolver, String ignoreAttributeNames) {
         Class[] params = new Class[]{MapMap<String,Object>.class, PropertyResolver.class, String.class};

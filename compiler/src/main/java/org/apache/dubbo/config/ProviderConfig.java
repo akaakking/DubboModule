@@ -6,232 +6,240 @@ import org.apache.dubbo.config.AbstractServiceConfig;
 
 public class ProviderConfig extends AbstractServiceConfig implements ProviderConfigInterface {
 
-    public void setProtocol(StringInterface protocol) {
+    public void setProtocol(String protocol) {
         instance.setProtocol(protocol);
     }
 
-    public StringInterface getHost() {
+    public String getHost() {
         return instance.getHost();
     }
 
-    public void setHost(StringInterface host) {
+    public void setHost(String host) {
         instance.setHost(host);
     }
 
-    public IntegerInterface getPort() {
+    public Integer getPort() {
         return instance.getPort();
     }
 
-    public void setPort(IntegerInterface port) {
+    public void setPort(Integer port) {
         instance.setPort(port);
     }
 
-    public StringInterface getPath() {
+    public String getPath() {
         return instance.getPath();
     }
 
-    public void setPath(StringInterface path) {
+    public void setPath(String path) {
         instance.setPath(path);
     }
 
-    public StringInterface getContextpath() {
+    public String getContextpath() {
         return instance.getContextpath();
     }
 
-    public void setContextpath(StringInterface contextpath) {
+    public void setContextpath(String contextpath) {
         instance.setContextpath(contextpath);
     }
 
-    public StringInterface getThreadpool() {
+    public String getThreadpool() {
         return instance.getThreadpool();
     }
 
-    public void setThreadpool(StringInterface threadpool) {
+    public void setThreadpool(String threadpool) {
         instance.setThreadpool(threadpool);
     }
 
-    public StringInterface getThreadname() {
+    public String getThreadname() {
         return instance.getThreadname();
     }
 
-    public void setThreadname(StringInterface threadname) {
+    public void setThreadname(String threadname) {
         instance.setThreadname(threadname);
     }
 
-    public IntegerInterface getThreads() {
+    public Integer getThreads() {
         return instance.getThreads();
     }
 
-    public void setThreads(IntegerInterface threads) {
+    public void setThreads(Integer threads) {
         instance.setThreads(threads);
     }
 
-    public IntegerInterface getIothreads() {
+    public Integer getIothreads() {
         return instance.getIothreads();
     }
 
-    public void setIothreads(IntegerInterface iothreads) {
+    public void setIothreads(Integer iothreads) {
         instance.setIothreads(iothreads);
     }
 
-    public IntegerInterface getAlive() {
+    public Integer getAlive() {
         return instance.getAlive();
     }
 
-    public void setAlive(IntegerInterface alive) {
+    public void setAlive(Integer alive) {
         instance.setAlive(alive);
     }
 
-    public IntegerInterface getQueues() {
+    public Integer getQueues() {
         return instance.getQueues();
     }
 
-    public void setQueues(IntegerInterface queues) {
+    public void setQueues(Integer queues) {
         instance.setQueues(queues);
     }
 
-    public IntegerInterface getAccepts() {
+    public Integer getAccepts() {
         return instance.getAccepts();
     }
 
-    public void setAccepts(IntegerInterface accepts) {
+    public void setAccepts(Integer accepts) {
         instance.setAccepts(accepts);
     }
 
-    public StringInterface getCodec() {
+    public String getCodec() {
         return instance.getCodec();
     }
 
-    public void setCodec(StringInterface codec) {
+    public void setCodec(String codec) {
         instance.setCodec(codec);
     }
 
-    public StringInterface getCharset() {
+    public String getCharset() {
         return instance.getCharset();
     }
 
-    public void setCharset(StringInterface charset) {
+    public void setCharset(String charset) {
         instance.setCharset(charset);
     }
 
-    public IntegerInterface getPayload() {
+    public Integer getPayload() {
         return instance.getPayload();
     }
 
-    public void setPayload(IntegerInterface payload) {
+    public void setPayload(Integer payload) {
         instance.setPayload(payload);
     }
 
-    public IntegerInterface getBuffer() {
+    public Integer getBuffer() {
         return instance.getBuffer();
     }
 
-    public void setBuffer(IntegerInterface buffer) {
+    public void setBuffer(Integer buffer) {
         instance.setBuffer(buffer);
     }
 
-    public StringInterface getServer() {
+    public String getServer() {
         return instance.getServer();
     }
 
-    public void setServer(StringInterface server) {
+    public void setServer(String server) {
         instance.setServer(server);
     }
 
-    public StringInterface getClient() {
+    public String getClient() {
         return instance.getClient();
     }
 
-    public void setClient(StringInterface client) {
+    public void setClient(String client) {
         instance.setClient(client);
     }
 
-    public StringInterface getTelnet() {
+    public String getTelnet() {
         return instance.getTelnet();
     }
 
-    public void setTelnet(StringInterface telnet) {
+    public void setTelnet(String telnet) {
         instance.setTelnet(telnet);
     }
 
-    public StringInterface getPrompt() {
+    public String getPrompt() {
         return instance.getPrompt();
     }
 
-    public void setPrompt(StringInterface prompt) {
+    public void setPrompt(String prompt) {
         instance.setPrompt(prompt);
     }
 
-    public StringInterface getStatus() {
+    public String getStatus() {
         return instance.getStatus();
     }
 
-    public void setStatus(StringInterface status) {
+    public void setStatus(String status) {
         instance.setStatus(status);
     }
 
-    public StringInterface getTransporter() {
+    public String getTransporter() {
         return instance.getTransporter();
     }
 
-    public void setTransporter(StringInterface transporter) {
+    public void setTransporter(String transporter) {
         instance.setTransporter(transporter);
     }
 
-    public StringInterface getExchanger() {
+    public String getExchanger() {
         return instance.getExchanger();
     }
 
-    public void setExchanger(StringInterface exchanger) {
+    public void setExchanger(String exchanger) {
         instance.setExchanger(exchanger);
     }
 
-    public StringInterface getDispather() {
+    public String getDispather() {
         return instance.getDispather();
     }
 
-    public void setDispather(StringInterface dispather) {
+    public void setDispather(String dispather) {
         instance.setDispather(dispather);
     }
 
-    public StringInterface getDispatcher() {
+    public String getDispatcher() {
         return instance.getDispatcher();
     }
 
-    public void setDispatcher(StringInterface dispatcher) {
+    public void setDispatcher(String dispatcher) {
         instance.setDispatcher(dispatcher);
     }
 
-    public StringInterface getNetworker() {
+    public String getNetworker() {
         return instance.getNetworker();
     }
 
-    public void setNetworker(StringInterface networker) {
+    public void setNetworker(String networker) {
         instance.setNetworker(networker);
     }
 
-    public IntegerInterface getWait() {
+    public Integer getWait() {
         return instance.getWait();
     }
 
-    public void setWait(IntegerInterface wait) {
+    public void setWait(Integer wait) {
         instance.setWait(wait);
     }
 
-    public IntegerInterface getExportThreadNum() {
+    public Integer getExportThreadNum() {
         return instance.getExportThreadNum();
     }
 
-    public void setExportThreadNum(IntegerInterface exportThreadNum) {
+    public void setExportThreadNum(Integer exportThreadNum) {
         instance.setExportThreadNum(exportThreadNum);
     }
 
-    public BooleanInterface getExportBackground() {
+    public Boolean getExportBackground() {
         return instance.getExportBackground();
     }
 
-    public void setExportBackground(BooleanInterface exportBackground) {
+    public void setExportBackground(Boolean exportBackground) {
         instance.setExportBackground(exportBackground);
+    }
+
+    public ProviderConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ProviderConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public ProviderConfig() {

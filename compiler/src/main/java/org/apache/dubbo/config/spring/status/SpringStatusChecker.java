@@ -12,6 +12,14 @@ public class SpringStatusChecker implements SpringStatusCheckerInterface {
 
     protected SpringStatusCheckerInterface instance;
 
+    public SpringStatusCheckerInterface getInternalInstance() {
+        return instance;
+    }
+
+    public SpringStatusCheckerInterface getInternalInstance() {
+        return instance;
+    }
+
     public SpringStatusChecker(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};

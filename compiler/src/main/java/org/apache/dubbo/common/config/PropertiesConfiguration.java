@@ -1,5 +1,6 @@
 package org.apache.dubbo.common.config;
 
+import java.util.Properties;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -10,23 +11,23 @@ public class PropertiesConfiguration implements PropertiesConfigurationInterface
         instance.refresh();
     }
 
-    public StringInterface getProperty(StringInterface key) {
+    public String getProperty(String key) {
         return instance.getProperty(key);
     }
 
-    public ObjectInterface getInternalProperty(StringInterface key) {
+    public Object getInternalProperty(String key) {
         return instance.getInternalProperty(key);
     }
 
-    public void setProperty(StringInterface key, StringInterface value) {
+    public void setProperty(String key, String value) {
         instance.setProperty(key, value);
     }
 
-    public StringInterface remove(StringInterface key) {
+    public String remove(String key) {
         return instance.remove(key);
     }
 
-    public void setProperties(PropertiesInterface properties) {
+    public void setProperties(Properties properties) {
         instance.setProperties(properties);
     }
 
@@ -35,6 +36,14 @@ public class PropertiesConfiguration implements PropertiesConfigurationInterface
     }
 
     protected PropertiesConfigurationInterface instance;
+
+    public PropertiesConfigurationInterface getInternalInstance() {
+        return instance;
+    }
+
+    public PropertiesConfigurationInterface getInternalInstance() {
+        return instance;
+    }
 
     public PropertiesConfiguration(ScopeModelInterface scopeModel) {
         Class[] params = new Class[]{ScopeModelInterface.class};

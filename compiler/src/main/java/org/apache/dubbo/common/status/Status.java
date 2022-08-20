@@ -10,15 +10,23 @@ public class Status implements StatusInterface {
         return instance.getLevel();
     }
 
-    public StringInterface getMessage() {
+    public String getMessage() {
         return instance.getMessage();
     }
 
-    public StringInterface getDescription() {
+    public String getDescription() {
         return instance.getDescription();
     }
 
     protected StatusInterface instance;
+
+    public StatusInterface getInternalInstance() {
+        return instance;
+    }
+
+    public StatusInterface getInternalInstance() {
+        return instance;
+    }
 
     public Status(LevelInterface level) {
         Class[] params = new Class[]{LevelInterface.class};

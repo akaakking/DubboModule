@@ -10,7 +10,7 @@ public class SpringCompatUtils implements SpringCompatUtilsInterface {
 
     protected SpringCompatUtilsInterface instance;
 
-    public static <T> T getPropertyValue(PropertyValuesInterface pvs, StringInterface propertyName) {
+    public static <T> T getPropertyValue(PropertyValues pvs, String propertyName) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getPropertyValue, PropertyValues.class, String.class);
         return method.invoke(pvs, propertyName);
@@ -22,21 +22,29 @@ public class SpringCompatUtils implements SpringCompatUtilsInterface {
         return method.invoke();
     }
 
-    public static StringInterface getFactoryMethodReturnType(AnnotatedBeanDefinitionInterface annotatedBeanDefinition) {
+    public static String getFactoryMethodReturnType(AnnotatedBeanDefinition annotatedBeanDefinition) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getFactoryMethodReturnType, AnnotatedBeanDefinition.class);
         return method.invoke(annotatedBeanDefinition);
     }
 
-    public static MethodMetadataInterface getFactoryMethodMetadata(AnnotatedBeanDefinitionInterface annotatedBeanDefinition) {
+    public static MethodMetadata getFactoryMethodMetadata(AnnotatedBeanDefinition annotatedBeanDefinition) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getFactoryMethodMetadata, AnnotatedBeanDefinition.class);
         return method.invoke(annotatedBeanDefinition);
     }
 
-    public static ClassInterface getGenericTypeOfReturnType(MethodMetadataInterface factoryMethodMetadata) {
+    public static Class getGenericTypeOfReturnType(MethodMetadata factoryMethodMetadata) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getGenericTypeOfReturnType, MethodMetadata.class);
         return method.invoke(factoryMethodMetadata);
+    }
+
+    public SpringCompatUtilsInterface getInternalInstance() {
+        return instance;
+    }
+
+    public SpringCompatUtilsInterface getInternalInstance() {
+        return instance;
     }
 }

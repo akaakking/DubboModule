@@ -7,30 +7,30 @@ import org.apache.dubbo.Interface.*;
 public class FrameworkServiceRepository implements FrameworkServiceRepositoryInterface {
 
     public void registerProvider(ProviderModelInterface providerModel) {
-        instance.registerProvider(providerModel);
+        instance.registerProvider(providerModel.getInternalInstance(), providerModel);
     }
 
     public void unregisterProvider(ProviderModelInterface providerModel) {
-        instance.unregisterProvider(providerModel);
+        instance.unregisterProvider(providerModel.getInternalInstance(), providerModel);
     }
 
-    public ProviderModelInterface lookupExportedServiceWithoutGroup(StringInterface key) {
+    public ProviderModelInterface lookupExportedServiceWithoutGroup(String key) {
         return instance.lookupExportedServiceWithoutGroup(key);
     }
 
-    public List<ProviderModelInterface> lookupExportedServicesWithoutGroup(StringInterface key) {
+    public List<ProviderModelInterface> lookupExportedServicesWithoutGroup(String key) {
         return instance.lookupExportedServicesWithoutGroup(key);
     }
 
     public void registerProviderUrl(URLInterface url) {
-        instance.registerProviderUrl(url);
+        instance.registerProviderUrl(url.getInternalInstance(), url);
     }
 
-    public ProviderModelInterface lookupExportedService(StringInterface serviceKey) {
+    public ProviderModelInterface lookupExportedService(String serviceKey) {
         return instance.lookupExportedService(serviceKey);
     }
 
-    public List<URLInterface> lookupRegisteredProviderUrlsWithoutGroup(StringInterface key) {
+    public List<URLInterface> lookupRegisteredProviderUrlsWithoutGroup(String key) {
         return instance.lookupRegisteredProviderUrlsWithoutGroup(key);
     }
 
@@ -43,6 +43,14 @@ public class FrameworkServiceRepository implements FrameworkServiceRepositoryInt
     }
 
     protected FrameworkServiceRepositoryInterface instance;
+
+    public FrameworkServiceRepositoryInterface getInternalInstance() {
+        return instance;
+    }
+
+    public FrameworkServiceRepositoryInterface getInternalInstance() {
+        return instance;
+    }
 
     public FrameworkServiceRepository(FrameworkModelInterface frameworkModel) {
         Class[] params = new Class[]{FrameworkModelInterface.class};

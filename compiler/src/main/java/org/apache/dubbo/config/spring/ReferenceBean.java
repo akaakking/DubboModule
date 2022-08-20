@@ -6,6 +6,7 @@ import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.context.ApplicationContext;
 import java.util.Map;
 import org.springframework.beans.MutablePropertyValues;
 import org.apache.dubbo.DubboClassLoader;
@@ -13,15 +14,15 @@ import org.apache.dubbo.Interface.*;
 
 public class ReferenceBean<T> implements ReferenceBeanInterface<T> {
 
-    public void setApplicationContext(ApplicationContextInterface applicationContext) {
+    public void setApplicationContext(ApplicationContext applicationContext) {
         instance.setApplicationContext(applicationContext);
     }
 
-    public void setBeanClassLoader(ClassLoaderInterface classLoader) {
+    public void setBeanClassLoader(ClassLoader classLoader) {
         instance.setBeanClassLoader(classLoader);
     }
 
-    public void setBeanName(StringInterface name) {
+    public void setBeanName(String name) {
         instance.setBeanName(name);
     }
 
@@ -45,11 +46,11 @@ public class ReferenceBean<T> implements ReferenceBeanInterface<T> {
         instance.destroy();
     }
 
-    public StringInterface getId() {
+    public String getId() {
         return instance.getId();
     }
 
-    public void setId(StringInterface id) {
+    public void setId(String id) {
         instance.setId(id);
     }
 
@@ -57,19 +58,19 @@ public class ReferenceBean<T> implements ReferenceBeanInterface<T> {
         return instance.getInterfaceClass();
     }
 
-    public StringInterface getServiceInterface() {
+    public String getServiceInterface() {
         return instance.getServiceInterface();
     }
 
-    public StringInterface getGroup() {
+    public String getGroup() {
         return instance.getGroup();
     }
 
-    public StringInterface getVersion() {
+    public String getVersion() {
         return instance.getVersion();
     }
 
-    public StringInterface getKey() {
+    public String getKey() {
         return instance.getKey();
     }
 
@@ -77,7 +78,7 @@ public class ReferenceBean<T> implements ReferenceBeanInterface<T> {
         return instance.getReferenceProps();
     }
 
-    public MutablePropertyValuesInterface getPropertyValues() {
+    public MutablePropertyValues getPropertyValues() {
         return instance.getPropertyValues();
     }
 
@@ -85,11 +86,19 @@ public class ReferenceBean<T> implements ReferenceBeanInterface<T> {
         return instance.getReferenceConfig();
     }
 
-    public void setKeyAndReferenceConfig(StringInterface key, ReferenceConfigInterface referenceConfig) {
-        instance.setKeyAndReferenceConfig(key, referenceConfig);
+    public void setKeyAndReferenceConfig(String key, ReferenceConfigInterface referenceConfig) {
+        instance.setKeyAndReferenceConfig(key, referenceConfig.getInternalInstance(), referenceConfig);
     }
 
     protected ReferenceBeanInterface instance;
+
+    public ReferenceBeanInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ReferenceBeanInterface getInternalInstance() {
+        return instance;
+    }
 
     public ReferenceBean() {
         instance = (ReferenceBeanInterface) DubboClassLoader.getInstance(ReferenceBean.class.getName());

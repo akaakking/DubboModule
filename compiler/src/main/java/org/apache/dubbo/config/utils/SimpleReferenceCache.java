@@ -11,11 +11,11 @@ public class SimpleReferenceCache implements SimpleReferenceCacheInterface {
         return instance.get(rc);
     }
 
-    public <T> T get(StringInterface key, Class<T> type) {
+    public <T> T get(String key, Class<T> type) {
         return instance.get(key, type);
     }
 
-    public <T> T get(StringInterface key) {
+    public <T> T get(String key) {
         return instance.get(key);
     }
 
@@ -27,7 +27,7 @@ public class SimpleReferenceCache implements SimpleReferenceCacheInterface {
         return instance.get(type);
     }
 
-    public void destroy(StringInterface key, Class<?> type) {
+    public void destroy(String key, Class<?> type) {
         instance.destroy(key, type);
     }
 
@@ -51,7 +51,7 @@ public class SimpleReferenceCache implements SimpleReferenceCacheInterface {
         return instance.getReferenceTypeMap();
     }
 
-    public StringInterface toString() {
+    public String toString() {
         return instance.toString();
     }
 
@@ -69,15 +69,23 @@ public class SimpleReferenceCache implements SimpleReferenceCacheInterface {
         return method.invoke();
     }
 
-    public static SimpleReferenceCacheInterface getCache(StringInterface name) {
+    public static SimpleReferenceCacheInterface getCache(String name) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getCache, String.class);
         return method.invoke(name);
     }
 
-    public static SimpleReferenceCacheInterface getCache(StringInterface name, KeyGeneratorInterface keyGenerator) {
+    public static SimpleReferenceCacheInterface getCache(String name, KeyGeneratorInterface keyGenerator) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getCache, String.class, KeyGeneratorInterface.class);
         return method.invoke(name, keyGenerator);
+    }
+
+    public SimpleReferenceCacheInterface getInternalInstance() {
+        return instance;
+    }
+
+    public SimpleReferenceCacheInterface getInternalInstance() {
+        return instance;
     }
 }

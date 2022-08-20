@@ -5,15 +5,15 @@ import org.apache.dubbo.Interface.*;
 
 public class ArgumentBuilder implements ArgumentBuilderInterface {
 
-    public ArgumentBuilderInterface index(IntegerInterface index) {
+    public ArgumentBuilderInterface index(Integer index) {
         return instance.index(index);
     }
 
-    public ArgumentBuilderInterface type(StringInterface type) {
+    public ArgumentBuilderInterface type(String type) {
         return instance.type(type);
     }
 
-    public ArgumentBuilderInterface callback(BooleanInterface callback) {
+    public ArgumentBuilderInterface callback(Boolean callback) {
         return instance.callback(callback);
     }
 
@@ -22,4 +22,12 @@ public class ArgumentBuilder implements ArgumentBuilderInterface {
     }
 
     protected ArgumentBuilderInterface instance;
+
+    public ArgumentBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ArgumentBuilderInterface getInternalInstance() {
+        return instance;
+    }
 }

@@ -19,11 +19,11 @@ public class DefaultApplicationDeployer extends AbstractDeployer<ApplicationMode
         instance.initialize();
     }
 
-    public FutureInterface start() {
+    public Future start() {
         return instance.start();
     }
 
-    public FutureInterface getStartFuture() {
+    public Future getStartFuture() {
         return instance.getStartFuture();
     }
 
@@ -52,17 +52,25 @@ public class DefaultApplicationDeployer extends AbstractDeployer<ApplicationMode
     }
 
     public void notifyModuleChanged(ModuleModelInterface moduleModel, DeployStateInterface state) {
-        instance.notifyModuleChanged(moduleModel, state);
+        instance.notifyModuleChanged(moduleModel.getInternalInstance(), moduleModel, state.getInternalInstance(), state);
     }
 
     public void checkState(ModuleModelInterface moduleModel, DeployStateInterface moduleState) {
-        instance.checkState(moduleModel, moduleState);
+        instance.checkState(moduleModel.getInternalInstance(), moduleModel, moduleState.getInternalInstance(), moduleState);
     }
 
     public static ApplicationDeployerInterface get(ScopeModelInterface moduleOrApplicationModel) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(get, ScopeModelInterface.class);
         return method.invoke(moduleOrApplicationModel);
+    }
+
+    public DefaultApplicationDeployerInterface getInternalInstance() {
+        return instance;
+    }
+
+    public DefaultApplicationDeployerInterface getInternalInstance() {
+        return instance;
     }
 
     public DefaultApplicationDeployer(ApplicationModelInterface applicationModel) {

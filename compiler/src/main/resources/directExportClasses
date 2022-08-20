@@ -4,6 +4,7 @@ org.apache.dubbo.config.support.Nested
 org.apache.dubbo.config.annotation.Reference
 org.apache.dubbo.common.deploy.DeployState
 org.apache.dubbo.config.context.ConfigMode
+org.apache.dubbo.common.config.configcenter.ConfigChangeType
 org.apache.dubbo.config.annotation.DubboService
 org.apache.dubbo.config.support.Parameter
 org.apache.dubbo.config.bootstrap.BootstrapTakeoverMode

@@ -36,16 +36,16 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
         return instance.getCurrentConfig();
     }
 
-    public StringInterface getApplicationName() {
+    public String getApplicationName() {
         return instance.getApplicationName();
     }
 
-    public StringInterface tryGetApplicationName() {
+    public String tryGetApplicationName() {
         return instance.tryGetApplicationName();
     }
 
     public void removeModule(ModuleModelInterface moduleModel) {
-        instance.removeModule(moduleModel);
+        instance.removeModule(moduleModel.getInternalInstance(), moduleModel);
     }
 
     public List<ModuleModelInterface> getModuleModels() {
@@ -65,22 +65,22 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
     }
 
     public void setEnvironment(EnvironmentInterface environment) {
-        instance.setEnvironment(environment);
+        instance.setEnvironment(environment.getInternalInstance(), environment);
     }
 
     public void setConfigManager(ConfigManagerInterface configManager) {
-        instance.setConfigManager(configManager);
+        instance.setConfigManager(configManager.getInternalInstance(), configManager);
     }
 
     public void setServiceRepository(ServiceRepositoryInterface serviceRepository) {
-        instance.setServiceRepository(serviceRepository);
+        instance.setServiceRepository(serviceRepository.getInternalInstance(), serviceRepository);
     }
 
-    public void addClassLoader(ClassLoaderInterface classLoader) {
+    public void addClassLoader(ClassLoader classLoader) {
         instance.addClassLoader(classLoader);
     }
 
-    public void removeClassLoader(ClassLoaderInterface classLoader) {
+    public void removeClassLoader(ClassLoader classLoader) {
         instance.removeClassLoader(classLoader);
     }
 
@@ -89,7 +89,7 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
     }
 
     public void setDeployer(ApplicationDeployerInterface deployer) {
-        instance.setDeployer(deployer);
+        instance.setDeployer(deployer.getInternalInstance(), deployer);
     }
 
     public static ApplicationModelInterface ofNullable(ApplicationModelInterface applicationModel) {
@@ -116,13 +116,13 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
         return method.invoke();
     }
 
-    public static ProviderModelInterface getProviderModel(StringInterface serviceKey) {
+    public static ProviderModelInterface getProviderModel(String serviceKey) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getProviderModel, String.class);
         return method.invoke(serviceKey);
     }
 
-    public static ConsumerModelInterface getConsumerModel(StringInterface serviceKey) {
+    public static ConsumerModelInterface getConsumerModel(String serviceKey) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getConsumerModel, String.class);
         return method.invoke(serviceKey);
@@ -158,13 +158,13 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
         return method.invoke();
     }
 
-    public static StringInterface getName() {
+    public static String getName() {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getName);
         return method.invoke();
     }
 
-    public static StringInterface getApplication() {
+    public static String getApplication() {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getApplication);
         return method.invoke();
@@ -174,6 +174,14 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(reset);
         method.invoke();
+    }
+
+    public ApplicationModelInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ApplicationModelInterface getInternalInstance() {
+        return instance;
     }
 
     public ApplicationModel(FrameworkModelInterface frameworkModel) {

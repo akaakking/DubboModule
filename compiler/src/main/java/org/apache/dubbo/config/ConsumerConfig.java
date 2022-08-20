@@ -6,80 +6,88 @@ import org.apache.dubbo.config.AbstractReferenceConfig;
 
 public class ConsumerConfig extends AbstractReferenceConfig implements ConsumerConfigInterface {
 
-    public void setTimeout(IntegerInterface timeout) {
+    public void setTimeout(Integer timeout) {
         instance.setTimeout(timeout);
     }
 
-    public StringInterface getClient() {
+    public String getClient() {
         return instance.getClient();
     }
 
-    public void setClient(StringInterface client) {
+    public void setClient(String client) {
         instance.setClient(client);
     }
 
-    public StringInterface getThreadpool() {
+    public String getThreadpool() {
         return instance.getThreadpool();
     }
 
-    public void setThreadpool(StringInterface threadpool) {
+    public void setThreadpool(String threadpool) {
         instance.setThreadpool(threadpool);
     }
 
-    public IntegerInterface getCorethreads() {
+    public Integer getCorethreads() {
         return instance.getCorethreads();
     }
 
-    public void setCorethreads(IntegerInterface corethreads) {
+    public void setCorethreads(Integer corethreads) {
         instance.setCorethreads(corethreads);
     }
 
-    public IntegerInterface getThreads() {
+    public Integer getThreads() {
         return instance.getThreads();
     }
 
-    public void setThreads(IntegerInterface threads) {
+    public void setThreads(Integer threads) {
         instance.setThreads(threads);
     }
 
-    public IntegerInterface getQueues() {
+    public Integer getQueues() {
         return instance.getQueues();
     }
 
-    public void setQueues(IntegerInterface queues) {
+    public void setQueues(Integer queues) {
         instance.setQueues(queues);
     }
 
-    public IntegerInterface getShareconnections() {
+    public Integer getShareconnections() {
         return instance.getShareconnections();
     }
 
-    public void setShareconnections(IntegerInterface shareconnections) {
+    public void setShareconnections(Integer shareconnections) {
         instance.setShareconnections(shareconnections);
     }
 
-    public StringInterface getUrlMergeProcessor() {
+    public String getUrlMergeProcessor() {
         return instance.getUrlMergeProcessor();
     }
 
-    public void setUrlMergeProcessor(StringInterface urlMergeProcessor) {
+    public void setUrlMergeProcessor(String urlMergeProcessor) {
         instance.setUrlMergeProcessor(urlMergeProcessor);
     }
 
-    public IntegerInterface getReferThreadNum() {
+    public Integer getReferThreadNum() {
         return instance.getReferThreadNum();
     }
 
-    public void setReferThreadNum(IntegerInterface referThreadNum) {
+    public void setReferThreadNum(Integer referThreadNum) {
         instance.setReferThreadNum(referThreadNum);
     }
 
-    public BooleanInterface getReferBackground() {
+    public Boolean getReferBackground() {
         return instance.getReferBackground();
     }
 
-    public void setReferBackground(BooleanInterface referBackground) {
+    public void setReferBackground(Boolean referBackground) {
         instance.setReferBackground(referBackground);
+    }
+
+    public ConsumerConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ConsumerConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public ConsumerConfig() {

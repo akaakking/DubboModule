@@ -46,11 +46,24 @@ public class ClassGenerator {
 
         addStaticMethod(javaClass,coid);
 
+        addGetInstanceMethod(javaClass,coid);
+
+        addGetInstanceMethod(javaClass,coid);
+
         addConstruct(javaClass,coid);
 
         this.generator.addImports(cu);
 
         saveClass(javaClass,cu);
+    }
+
+    public void addGetInstanceMethod(JavaClass javaClass,ClassOrInterfaceDeclaration coid) {
+        MethodDeclaration methodDeclaration = coid.addMethod("getInternalInstance", Modifier.Keyword.PUBLIC);
+        BlockStmt blockStmt = new BlockStmt();
+        methodDeclaration.setBody(blockStmt);
+        methodDeclaration.setType(javaClass.getName() + "Interface");
+
+        blockStmt.addStatement(new ReturnStmt(new NameExpr("instance")));
     }
 
     private void addStaticMethod(JavaClass javaClass,ClassOrInterfaceDeclaration coid) {
@@ -261,15 +274,14 @@ public class ClassGenerator {
 
             if (n.getParameters() != null && !n.getParameters().isEmpty()) {
                 for (Parameter parameter : n.getParameters()) {
+                    if (parameter.getType().toString().endsWith("Interface")) {
+                        methodCallExpr.addArgument(parameter.getNameAsString() + ".getInternalInstance()");
+                    }
                     methodCallExpr.addArgument(parameter.getNameAsString());
                 }
             }
 
             if (!n.getType().isVoidType()) {
-                ReturnStmt returnStmt = new ReturnStmt();
-                NameExpr returnNameExpr = new NameExpr();
-                returnNameExpr.setName("anyVariableName");
-                returnStmt.setExpression(returnNameExpr);
                 blockStmt.addStatement(new ReturnStmt(methodCallExpr));
             } else {
                 blockStmt.addStatement(methodCallExpr);

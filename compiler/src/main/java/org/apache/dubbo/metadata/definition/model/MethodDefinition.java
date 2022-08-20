@@ -7,7 +7,7 @@ import org.apache.dubbo.Interface.*;
 
 public class MethodDefinition implements MethodDefinitionInterface {
 
-    public StringInterface getName() {
+    public String getName() {
         return instance.getName();
     }
 
@@ -15,15 +15,15 @@ public class MethodDefinition implements MethodDefinitionInterface {
         return instance.getParameters();
     }
 
-    public StringInterface[] getParameterTypes() {
+    public String[] getParameterTypes() {
         return instance.getParameterTypes();
     }
 
-    public StringInterface getReturnType() {
+    public String getReturnType() {
         return instance.getReturnType();
     }
 
-    public void setName(StringInterface name) {
+    public void setName(String name) {
         instance.setName(name);
     }
 
@@ -31,11 +31,11 @@ public class MethodDefinition implements MethodDefinitionInterface {
         instance.setParameters(parameters);
     }
 
-    public void setParameterTypes(StringInterface[] parameterTypes) {
+    public void setParameterTypes(String[] parameterTypes) {
         instance.setParameterTypes(parameterTypes);
     }
 
-    public void setReturnType(StringInterface returnType) {
+    public void setReturnType(String returnType) {
         instance.setReturnType(returnType);
     }
 
@@ -47,11 +47,11 @@ public class MethodDefinition implements MethodDefinitionInterface {
         instance.setAnnotations(annotations);
     }
 
-    public StringInterface toString() {
+    public String toString() {
         return instance.toString();
     }
 
-    public boolean equals(ObjectInterface o) {
+    public boolean equals(Object o) {
         return instance.equals(o);
     }
 
@@ -60,4 +60,12 @@ public class MethodDefinition implements MethodDefinitionInterface {
     }
 
     protected MethodDefinitionInterface instance;
+
+    public MethodDefinitionInterface getInternalInstance() {
+        return instance;
+    }
+
+    public MethodDefinitionInterface getInternalInstance() {
+        return instance;
+    }
 }

@@ -7,31 +7,39 @@ import org.apache.dubbo.config.annotation.Argument;
 
 public class ArgumentConfig implements ArgumentConfigInterface {
 
-    public IntegerInterface getIndex() {
+    public Integer getIndex() {
         return instance.getIndex();
     }
 
-    public void setIndex(IntegerInterface index) {
+    public void setIndex(Integer index) {
         instance.setIndex(index);
     }
 
-    public StringInterface getType() {
+    public String getType() {
         return instance.getType();
     }
 
-    public void setType(StringInterface type) {
+    public void setType(String type) {
         instance.setType(type);
     }
 
-    public void setCallback(BooleanInterface callback) {
+    public void setCallback(Boolean callback) {
         instance.setCallback(callback);
     }
 
-    public BooleanInterface isCallback() {
+    public Boolean isCallback() {
         return instance.isCallback();
     }
 
     protected ArgumentConfigInterface instance;
+
+    public ArgumentConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ArgumentConfigInterface getInternalInstance() {
+        return instance;
+    }
 
     public ArgumentConfig() {
         instance = (ArgumentConfigInterface) DubboClassLoader.getInstance(ArgumentConfig.class.getName());

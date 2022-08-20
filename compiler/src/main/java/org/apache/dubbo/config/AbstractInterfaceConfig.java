@@ -20,75 +20,75 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
         return instance.toUrls();
     }
 
-    public StringInterface getLocal() {
+    public String getLocal() {
         return instance.getLocal();
     }
 
-    public void setLocal(BooleanInterface local) {
+    public void setLocal(Boolean local) {
         instance.setLocal(local);
     }
 
-    public void setLocal(StringInterface local) {
+    public void setLocal(String local) {
         instance.setLocal(local);
     }
 
-    public StringInterface getStub() {
+    public String getStub() {
         return instance.getStub();
     }
 
-    public void setStub(BooleanInterface stub) {
+    public void setStub(Boolean stub) {
         instance.setStub(stub);
     }
 
-    public void setStub(StringInterface stub) {
+    public void setStub(String stub) {
         instance.setStub(stub);
     }
 
-    public StringInterface getCluster() {
+    public String getCluster() {
         return instance.getCluster();
     }
 
-    public void setCluster(StringInterface cluster) {
+    public void setCluster(String cluster) {
         instance.setCluster(cluster);
     }
 
-    public StringInterface getProxy() {
+    public String getProxy() {
         return instance.getProxy();
     }
 
-    public void setProxy(StringInterface proxy) {
+    public void setProxy(String proxy) {
         instance.setProxy(proxy);
     }
 
-    public IntegerInterface getConnections() {
+    public Integer getConnections() {
         return instance.getConnections();
     }
 
-    public void setConnections(IntegerInterface connections) {
+    public void setConnections(Integer connections) {
         instance.setConnections(connections);
     }
 
-    public StringInterface getFilter() {
+    public String getFilter() {
         return instance.getFilter();
     }
 
-    public void setFilter(StringInterface filter) {
+    public void setFilter(String filter) {
         instance.setFilter(filter);
     }
 
-    public StringInterface getListener() {
+    public String getListener() {
         return instance.getListener();
     }
 
-    public void setListener(StringInterface listener) {
+    public void setListener(String listener) {
         instance.setListener(listener);
     }
 
-    public StringInterface getLayer() {
+    public String getLayer() {
         return instance.getLayer();
     }
 
-    public void setLayer(StringInterface layer) {
+    public void setLayer(String layer) {
         instance.setLayer(layer);
     }
 
@@ -97,7 +97,7 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void setApplication(ApplicationConfigInterfaceInterface application) {
-        instance.setApplication(application);
+        instance.setApplication(application.getInternalInstance(), application);
     }
 
     public ModuleConfigInterface getModule() {
@@ -105,7 +105,7 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void setModule(ModuleConfigInterface module) {
-        instance.setModule(module);
+        instance.setModule(module.getInternalInstance(), module);
     }
 
     public RegistryConfigInterface getRegistry() {
@@ -113,7 +113,7 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void setRegistry(RegistryConfigInterfaceInterface registry) {
-        instance.setRegistry(registry);
+        instance.setRegistry(registry.getInternalInstance(), registry);
     }
 
     public List<RegistryConfigInterface> getRegistries() {
@@ -124,11 +124,11 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
         instance.setRegistries(registries);
     }
 
-    public StringInterface getRegistryIds() {
+    public String getRegistryIds() {
         return instance.getRegistryIds();
     }
 
-    public void setRegistryIds(StringInterface registryIds) {
+    public void setRegistryIds(String registryIds) {
         instance.setRegistryIds(registryIds);
     }
 
@@ -141,26 +141,26 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void addMethod(MethodConfigInterface methodConfig) {
-        instance.addMethod(methodConfig);
+        instance.addMethod(methodConfig.getInternalInstance(), methodConfig);
     }
 
     public MonitorConfigInterface getMonitor() {
         return instance.getMonitor();
     }
 
-    public void setMonitor(StringInterface monitor) {
+    public void setMonitor(String monitor) {
         instance.setMonitor(monitor);
     }
 
     public void setMonitor(MonitorConfigInterface monitor) {
-        instance.setMonitor(monitor);
+        instance.setMonitor(monitor.getInternalInstance(), monitor);
     }
 
-    public StringInterface getOwner() {
+    public String getOwner() {
         return instance.getOwner();
     }
 
-    public void setOwner(StringInterface owner) {
+    public void setOwner(String owner) {
         instance.setOwner(owner);
     }
 
@@ -169,38 +169,38 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void setConfigCenter(ConfigCenterConfigInterface configCenter) {
-        instance.setConfigCenter(configCenter);
+        instance.setConfigCenter(configCenter.getInternalInstance(), configCenter);
     }
 
-    public IntegerInterface getCallbacks() {
+    public Integer getCallbacks() {
         return instance.getCallbacks();
     }
 
-    public void setCallbacks(IntegerInterface callbacks) {
+    public void setCallbacks(Integer callbacks) {
         instance.setCallbacks(callbacks);
     }
 
-    public StringInterface getOnconnect() {
+    public String getOnconnect() {
         return instance.getOnconnect();
     }
 
-    public void setOnconnect(StringInterface onconnect) {
+    public void setOnconnect(String onconnect) {
         instance.setOnconnect(onconnect);
     }
 
-    public StringInterface getOndisconnect() {
+    public String getOndisconnect() {
         return instance.getOndisconnect();
     }
 
-    public void setOndisconnect(StringInterface ondisconnect) {
+    public void setOndisconnect(String ondisconnect) {
         instance.setOndisconnect(ondisconnect);
     }
 
-    public StringInterface getScope() {
+    public String getScope() {
         return instance.getScope();
     }
 
-    public void setScope(StringInterface scope) {
+    public void setScope(String scope) {
         instance.setScope(scope);
     }
 
@@ -209,22 +209,22 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void setMetadataReportConfig(MetadataReportConfigInterfaceInterface metadataReportConfig) {
-        instance.setMetadataReportConfig(metadataReportConfig);
+        instance.setMetadataReportConfig(metadataReportConfig.getInternalInstance(), metadataReportConfig);
     }
 
-    public StringInterface getTag() {
+    public String getTag() {
         return instance.getTag();
     }
 
-    public void setTag(StringInterface tag) {
+    public void setTag(String tag) {
         instance.setTag(tag);
     }
 
-    public BooleanInterface getAuth() {
+    public Boolean getAuth() {
         return instance.getAuth();
     }
 
-    public void setAuth(BooleanInterface auth) {
+    public void setAuth(Boolean auth) {
         instance.setAuth(auth);
     }
 
@@ -232,51 +232,51 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
         return instance.getSslConfig();
     }
 
-    public BooleanInterface getSingleton() {
+    public Boolean getSingleton() {
         return instance.getSingleton();
     }
 
-    public void setSingleton(BooleanInterface singleton) {
+    public void setSingleton(Boolean singleton) {
         instance.setSingleton(singleton);
     }
 
-    public StringInterface getGroup(AbstractInterfaceConfigInterface interfaceConfig) {
-        return instance.getGroup(interfaceConfig);
+    public String getGroup(AbstractInterfaceConfigInterface interfaceConfig) {
+        return instance.getGroup(interfaceConfig.getInternalInstance(), interfaceConfig);
     }
 
-    public StringInterface getVersion(AbstractInterfaceConfigInterface interfaceConfig) {
-        return instance.getVersion(interfaceConfig);
+    public String getVersion(AbstractInterfaceConfigInterface interfaceConfig) {
+        return instance.getVersion(interfaceConfig.getInternalInstance(), interfaceConfig);
     }
 
-    public StringInterface getVersion() {
+    public String getVersion() {
         return instance.getVersion();
     }
 
-    public void setVersion(StringInterface version) {
+    public void setVersion(String version) {
         instance.setVersion(version);
     }
 
-    public StringInterface getGroup() {
+    public String getGroup() {
         return instance.getGroup();
     }
 
-    public void setGroup(StringInterface group) {
+    public void setGroup(String group) {
         instance.setGroup(group);
     }
 
-    public StringInterface getInterface() {
+    public String getInterface() {
         return instance.getInterface();
     }
 
-    public void setInterface(StringInterface interfaceName) {
+    public void setInterface(String interfaceName) {
         instance.setInterface(interfaceName);
     }
 
-    public ClassLoaderInterface getInterfaceClassLoader() {
+    public ClassLoader getInterfaceClassLoader() {
         return instance.getInterfaceClassLoader();
     }
 
-    public void setInterfaceClassLoader(ClassLoaderInterface interfaceClassLoader) {
+    public void setInterfaceClassLoader(ClassLoader interfaceClassLoader) {
         instance.setInterfaceClassLoader(interfaceClassLoader);
     }
 
@@ -284,5 +284,13 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(appendRuntimeParameters, Map.class);
         method.invoke(map);
+    }
+
+    public AbstractInterfaceConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AbstractInterfaceConfigInterface getInternalInstance() {
+        return instance;
     }
 }

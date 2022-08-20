@@ -6,6 +6,8 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.core.env.Environment;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 
@@ -15,7 +17,7 @@ public class AbstractAnnotationBeanPostProcessor extends InstantiationAwareBeanP
         return instance.getAnnotationType();
     }
 
-    public void setBeanFactory(BeanFactoryInterface beanFactory) {
+    public void setBeanFactory(BeanFactory beanFactory) {
         instance.setBeanFactory(beanFactory);
     }
 
@@ -23,11 +25,19 @@ public class AbstractAnnotationBeanPostProcessor extends InstantiationAwareBeanP
         instance.destroy();
     }
 
-    public void setBeanClassLoader(ClassLoaderInterface classLoader) {
+    public void setBeanClassLoader(ClassLoader classLoader) {
         instance.setBeanClassLoader(classLoader);
     }
 
-    public void setEnvironment(EnvironmentInterface environment) {
+    public void setEnvironment(Environment environment) {
         instance.setEnvironment(environment);
+    }
+
+    public AbstractAnnotationBeanPostProcessorInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AbstractAnnotationBeanPostProcessorInterface getInternalInstance() {
+        return instance;
     }
 }

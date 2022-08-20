@@ -35,107 +35,107 @@ public class ConfigCenterConfig extends AbstractConfig implements ConfigCenterCo
         instance.setAppExternalConfig(appExternalConfiguration);
     }
 
-    public StringInterface getProtocol() {
+    public String getProtocol() {
         return instance.getProtocol();
     }
 
-    public void setProtocol(StringInterface protocol) {
+    public void setProtocol(String protocol) {
         instance.setProtocol(protocol);
     }
 
-    public StringInterface getAddress() {
+    public String getAddress() {
         return instance.getAddress();
     }
 
-    public void setAddress(StringInterface address) {
+    public void setAddress(String address) {
         instance.setAddress(address);
     }
 
-    public IntegerInterface getPort() {
+    public Integer getPort() {
         return instance.getPort();
     }
 
-    public void setPort(IntegerInterface port) {
+    public void setPort(Integer port) {
         instance.setPort(port);
     }
 
-    public StringInterface getCluster() {
+    public String getCluster() {
         return instance.getCluster();
     }
 
-    public void setCluster(StringInterface cluster) {
+    public void setCluster(String cluster) {
         instance.setCluster(cluster);
     }
 
-    public StringInterface getNamespace() {
+    public String getNamespace() {
         return instance.getNamespace();
     }
 
-    public void setNamespace(StringInterface namespace) {
+    public void setNamespace(String namespace) {
         instance.setNamespace(namespace);
     }
 
-    public StringInterface getGroup() {
+    public String getGroup() {
         return instance.getGroup();
     }
 
-    public void setGroup(StringInterface group) {
+    public void setGroup(String group) {
         instance.setGroup(group);
     }
 
-    public BooleanInterface isCheck() {
+    public Boolean isCheck() {
         return instance.isCheck();
     }
 
-    public void setCheck(BooleanInterface check) {
+    public void setCheck(Boolean check) {
         instance.setCheck(check);
     }
 
-    public BooleanInterface isHighestPriority() {
+    public Boolean isHighestPriority() {
         return instance.isHighestPriority();
     }
 
-    public void setHighestPriority(BooleanInterface highestPriority) {
+    public void setHighestPriority(Boolean highestPriority) {
         instance.setHighestPriority(highestPriority);
     }
 
-    public StringInterface getUsername() {
+    public String getUsername() {
         return instance.getUsername();
     }
 
-    public void setUsername(StringInterface username) {
+    public void setUsername(String username) {
         instance.setUsername(username);
     }
 
-    public StringInterface getPassword() {
+    public String getPassword() {
         return instance.getPassword();
     }
 
-    public void setPassword(StringInterface password) {
+    public void setPassword(String password) {
         instance.setPassword(password);
     }
 
-    public LongInterface getTimeout() {
+    public Long getTimeout() {
         return instance.getTimeout();
     }
 
-    public void setTimeout(LongInterface timeout) {
+    public void setTimeout(Long timeout) {
         instance.setTimeout(timeout);
     }
 
-    public StringInterface getConfigFile() {
+    public String getConfigFile() {
         return instance.getConfigFile();
     }
 
-    public void setConfigFile(StringInterface configFile) {
+    public void setConfigFile(String configFile) {
         instance.setConfigFile(configFile);
     }
 
-    public StringInterface getAppConfigFile() {
+    public String getAppConfigFile() {
         return instance.getAppConfigFile();
     }
 
-    public void setAppConfigFile(StringInterface appConfigFile) {
+    public void setAppConfigFile(String appConfigFile) {
         instance.setAppConfigFile(appConfigFile);
     }
 
@@ -153,6 +153,14 @@ public class ConfigCenterConfig extends AbstractConfig implements ConfigCenterCo
 
     public void updateParameters(Map<String, String> parameters) {
         instance.updateParameters(parameters);
+    }
+
+    public ConfigCenterConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ConfigCenterConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public ConfigCenterConfig() {

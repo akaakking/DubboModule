@@ -7,23 +7,23 @@ import org.apache.dubbo.config.bootstrap.builders.AbstractBuilder;
 
 public class MetadataReportBuilder extends AbstractBuilder<MetadataReportConfig, MetadataReportBuilder> implements MetadataReportBuilderInterface {
 
-    public MetadataReportBuilderInterface address(StringInterface address) {
+    public MetadataReportBuilderInterface address(String address) {
         return instance.address(address);
     }
 
-    public MetadataReportBuilderInterface username(StringInterface username) {
+    public MetadataReportBuilderInterface username(String username) {
         return instance.username(username);
     }
 
-    public MetadataReportBuilderInterface password(StringInterface password) {
+    public MetadataReportBuilderInterface password(String password) {
         return instance.password(password);
     }
 
-    public MetadataReportBuilderInterface timeout(IntegerInterface timeout) {
+    public MetadataReportBuilderInterface timeout(Integer timeout) {
         return instance.timeout(timeout);
     }
 
-    public MetadataReportBuilderInterface group(StringInterface group) {
+    public MetadataReportBuilderInterface group(String group) {
         return instance.group(group);
     }
 
@@ -31,27 +31,27 @@ public class MetadataReportBuilder extends AbstractBuilder<MetadataReportConfig,
         return instance.appendParameters(appendParameters);
     }
 
-    public MetadataReportBuilderInterface appendParameter(StringInterface key, StringInterface value) {
+    public MetadataReportBuilderInterface appendParameter(String key, String value) {
         return instance.appendParameter(key, value);
     }
 
-    public MetadataReportBuilderInterface retryTimes(IntegerInterface retryTimes) {
+    public MetadataReportBuilderInterface retryTimes(Integer retryTimes) {
         return instance.retryTimes(retryTimes);
     }
 
-    public MetadataReportBuilderInterface retryPeriod(IntegerInterface retryPeriod) {
+    public MetadataReportBuilderInterface retryPeriod(Integer retryPeriod) {
         return instance.retryPeriod(retryPeriod);
     }
 
-    public MetadataReportBuilderInterface cycleReport(BooleanInterface cycleReport) {
+    public MetadataReportBuilderInterface cycleReport(Boolean cycleReport) {
         return instance.cycleReport(cycleReport);
     }
 
-    public MetadataReportBuilderInterface syncReport(BooleanInterface syncReport) {
+    public MetadataReportBuilderInterface syncReport(Boolean syncReport) {
         return instance.syncReport(syncReport);
     }
 
-    public MetadataReportBuilderInterface check(BooleanInterface check) {
+    public MetadataReportBuilderInterface check(Boolean check) {
         return instance.check(check);
     }
 
@@ -63,5 +63,13 @@ public class MetadataReportBuilder extends AbstractBuilder<MetadataReportConfig,
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(newBuilder);
         return method.invoke();
+    }
+
+    public MetadataReportBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public MetadataReportBuilderInterface getInternalInstance() {
+        return instance;
     }
 }

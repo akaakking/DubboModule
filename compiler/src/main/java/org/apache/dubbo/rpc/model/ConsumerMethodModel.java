@@ -6,15 +6,15 @@ import org.apache.dubbo.Interface.*;
 
 public class ConsumerMethodModel implements ConsumerMethodModelInterface {
 
-    public MethodInterface getMethod() {
+    public Method getMethod() {
         return instance.getMethod();
     }
 
-    public void addAttribute(StringInterface key, ObjectInterface value) {
+    public void addAttribute(String key, Object value) {
         instance.addAttribute(key, value);
     }
 
-    public ObjectInterface getAttribute(StringInterface key) {
+    public Object getAttribute(String key) {
         return instance.getAttribute(key);
     }
 
@@ -22,11 +22,11 @@ public class ConsumerMethodModel implements ConsumerMethodModelInterface {
         return instance.getReturnClass();
     }
 
-    public StringInterface getMethodName() {
+    public String getMethodName() {
         return instance.getMethodName();
     }
 
-    public StringInterface[] getParameterTypes() {
+    public String[] getParameterTypes() {
         return instance.getParameterTypes();
     }
 
@@ -39,6 +39,14 @@ public class ConsumerMethodModel implements ConsumerMethodModelInterface {
     }
 
     protected ConsumerMethodModelInterface instance;
+
+    public ConsumerMethodModelInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ConsumerMethodModelInterface getInternalInstance() {
+        return instance;
+    }
 
     public ConsumerMethodModel(Method method) {
         Class[] params = new Class[]{Method.class};

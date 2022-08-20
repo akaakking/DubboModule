@@ -15,8 +15,16 @@ public class DubboApplicationStateEvent extends ApplicationEvent implements Dubb
         return instance.getState();
     }
 
-    public ThrowableInterface getCause() {
+    public Throwable getCause() {
         return instance.getCause();
+    }
+
+    public DubboApplicationStateEventInterface getInternalInstance() {
+        return instance;
+    }
+
+    public DubboApplicationStateEventInterface getInternalInstance() {
+        return instance;
     }
 
     public DubboApplicationStateEvent(ApplicationModelInterface applicationModel, DeployStateInterface state) {

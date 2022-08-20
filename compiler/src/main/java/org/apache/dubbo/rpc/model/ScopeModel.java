@@ -17,22 +17,22 @@ public class ScopeModel implements ScopeModelInterface {
     }
 
     public void addDestroyListener(ScopeModelDestroyListenerInterface listener) {
-        instance.addDestroyListener(listener);
+        instance.addDestroyListener(listener.getInternalInstance(), listener);
     }
 
     public Map<String, Object> getAttributes() {
         return instance.getAttributes();
     }
 
-    public <T> T getAttribute(StringInterface key, Class<T> type) {
+    public <T> T getAttribute(String key, Class<T> type) {
         return instance.getAttribute(key, type);
     }
 
-    public ObjectInterface getAttribute(StringInterface key) {
+    public Object getAttribute(String key) {
         return instance.getAttribute(key);
     }
 
-    public void setAttribute(StringInterface key, ObjectInterface value) {
+    public void setAttribute(String key, Object value) {
         instance.setAttribute(key, value);
     }
 
@@ -52,11 +52,11 @@ public class ScopeModel implements ScopeModelInterface {
         return instance.getScope();
     }
 
-    public void addClassLoader(ClassLoaderInterface classLoader) {
+    public void addClassLoader(ClassLoader classLoader) {
         instance.addClassLoader(classLoader);
     }
 
-    public void removeClassLoader(ClassLoaderInterface classLoader) {
+    public void removeClassLoader(ClassLoader classLoader) {
         instance.removeClassLoader(classLoader);
     }
 
@@ -68,15 +68,15 @@ public class ScopeModel implements ScopeModelInterface {
         return instance.getModelEnvironment();
     }
 
-    public StringInterface getInternalId() {
+    public String getInternalId() {
         return instance.getInternalId();
     }
 
-    public StringInterface getModelName() {
+    public String getModelName() {
         return instance.getModelName();
     }
 
-    public void setModelName(StringInterface modelName) {
+    public void setModelName(String modelName) {
         instance.setModelName(modelName);
     }
 
@@ -84,13 +84,21 @@ public class ScopeModel implements ScopeModelInterface {
         return instance.isInternal();
     }
 
-    public StringInterface getDesc() {
+    public String getDesc() {
         return instance.getDesc();
     }
 
-    public StringInterface toString() {
+    public String toString() {
         return instance.toString();
     }
 
     protected ScopeModelInterface instance;
+
+    public ScopeModelInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ScopeModelInterface getInternalInstance() {
+        return instance;
+    }
 }

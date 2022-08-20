@@ -6,43 +6,43 @@ import org.apache.dubbo.Interface.*;
 
 public class URLAddress implements URLAddressInterface {
 
-    public StringInterface getProtocol() {
+    public String getProtocol() {
         return instance.getProtocol();
     }
 
-    public URLAddressInterface setProtocol(StringInterface protocol) {
+    public URLAddressInterface setProtocol(String protocol) {
         return instance.setProtocol(protocol);
     }
 
-    public StringInterface getUsername() {
+    public String getUsername() {
         return instance.getUsername();
     }
 
-    public URLAddressInterface setUsername(StringInterface username) {
+    public URLAddressInterface setUsername(String username) {
         return instance.setUsername(username);
     }
 
-    public StringInterface getPassword() {
+    public String getPassword() {
         return instance.getPassword();
     }
 
-    public URLAddressInterface setPassword(StringInterface password) {
+    public URLAddressInterface setPassword(String password) {
         return instance.setPassword(password);
     }
 
-    public StringInterface getPath() {
+    public String getPath() {
         return instance.getPath();
     }
 
-    public URLAddressInterface setPath(StringInterface path) {
+    public URLAddressInterface setPath(String path) {
         return instance.setPath(path);
     }
 
-    public StringInterface getHost() {
+    public String getHost() {
         return instance.getHost();
     }
 
-    public URLAddressInterface setHost(StringInterface host) {
+    public URLAddressInterface setHost(String host) {
         return instance.setHost(host);
     }
 
@@ -54,19 +54,19 @@ public class URLAddress implements URLAddressInterface {
         return instance.setPort(port);
     }
 
-    public StringInterface getAddress() {
+    public String getAddress() {
         return instance.getAddress();
     }
 
-    public URLAddressInterface setAddress(StringInterface host, int port) {
+    public URLAddressInterface setAddress(String host, int port) {
         return instance.setAddress(host, port);
     }
 
-    public StringInterface getIp() {
+    public String getIp() {
         return instance.getIp();
     }
 
-    public StringInterface getRawAddress() {
+    public String getRawAddress() {
         return instance.getRawAddress();
     }
 
@@ -82,20 +82,28 @@ public class URLAddress implements URLAddressInterface {
         return instance.hashCode();
     }
 
-    public boolean equals(ObjectInterface obj) {
+    public boolean equals(Object obj) {
         return instance.equals(obj);
     }
 
-    public StringInterface toString() {
+    public String toString() {
         return instance.toString();
     }
 
     protected URLAddressInterface instance;
 
-    public static URLAddressInterface parse(StringInterface rawAddress, StringInterface defaultProtocol, boolean encoded) {
+    public static URLAddressInterface parse(String rawAddress, String defaultProtocol, boolean encoded) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(parse, String.class, String.class, boolean.class);
         return method.invoke(rawAddress, defaultProtocol, encoded);
+    }
+
+    public URLAddressInterface getInternalInstance() {
+        return instance;
+    }
+
+    public URLAddressInterface getInternalInstance() {
+        return instance;
     }
 
     public URLAddress(String host, int port) {

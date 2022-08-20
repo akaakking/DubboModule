@@ -9,7 +9,7 @@ import org.apache.dubbo.config.annotation.Reference;
 
 public class ReferenceConfig<T> extends ReferenceConfigBase<T> implements ReferenceConfigInterface<T> {
 
-    public StringInterface getServices() {
+    public String getServices() {
         return instance.getServices();
     }
 
@@ -17,7 +17,7 @@ public class ReferenceConfig<T> extends ReferenceConfigBase<T> implements Refere
         return instance.getSubscribedServices();
     }
 
-    public void setServices(StringInterface services) {
+    public void setServices(String services) {
         instance.setServices(services);
     }
 
@@ -35,6 +35,14 @@ public class ReferenceConfig<T> extends ReferenceConfigBase<T> implements Refere
 
     public Callable<Void> getDestroyRunner() {
         return instance.getDestroyRunner();
+    }
+
+    public ReferenceConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ReferenceConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public ReferenceConfig() {

@@ -5,11 +5,11 @@ import org.apache.dubbo.Interface.*;
 
 public class BaseServiceMetadata implements BaseServiceMetadataInterface {
 
-    public StringInterface getDisplayServiceKey() {
+    public String getDisplayServiceKey() {
         return instance.getDisplayServiceKey();
     }
 
-    public StringInterface getServiceKey() {
+    public String getServiceKey() {
         return instance.getServiceKey();
     }
 
@@ -17,31 +17,31 @@ public class BaseServiceMetadata implements BaseServiceMetadataInterface {
         instance.generateServiceKey();
     }
 
-    public void setServiceKey(StringInterface serviceKey) {
+    public void setServiceKey(String serviceKey) {
         instance.setServiceKey(serviceKey);
     }
 
-    public StringInterface getServiceInterfaceName() {
+    public String getServiceInterfaceName() {
         return instance.getServiceInterfaceName();
     }
 
-    public void setServiceInterfaceName(StringInterface serviceInterfaceName) {
+    public void setServiceInterfaceName(String serviceInterfaceName) {
         instance.setServiceInterfaceName(serviceInterfaceName);
     }
 
-    public StringInterface getVersion() {
+    public String getVersion() {
         return instance.getVersion();
     }
 
-    public void setVersion(StringInterface version) {
+    public void setVersion(String version) {
         instance.setVersion(version);
     }
 
-    public StringInterface getGroup() {
+    public String getGroup() {
         return instance.getGroup();
     }
 
-    public void setGroup(StringInterface group) {
+    public void setGroup(String group) {
         instance.setGroup(group);
     }
 
@@ -50,44 +50,52 @@ public class BaseServiceMetadata implements BaseServiceMetadataInterface {
     }
 
     public void setServiceModel(ServiceModelInterface serviceModel) {
-        instance.setServiceModel(serviceModel);
+        instance.setServiceModel(serviceModel.getInternalInstance(), serviceModel);
     }
 
     protected BaseServiceMetadataInterface instance;
 
-    public static StringInterface buildServiceKey(StringInterface path, StringInterface group, StringInterface version) {
+    public static String buildServiceKey(String path, String group, String version) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(buildServiceKey, String.class, String.class, String.class);
         return method.invoke(path, group, version);
     }
 
-    public static StringInterface versionFromServiceKey(StringInterface serviceKey) {
+    public static String versionFromServiceKey(String serviceKey) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(versionFromServiceKey, String.class);
         return method.invoke(serviceKey);
     }
 
-    public static StringInterface groupFromServiceKey(StringInterface serviceKey) {
+    public static String groupFromServiceKey(String serviceKey) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(groupFromServiceKey, String.class);
         return method.invoke(serviceKey);
     }
 
-    public static StringInterface interfaceFromServiceKey(StringInterface serviceKey) {
+    public static String interfaceFromServiceKey(String serviceKey) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(interfaceFromServiceKey, String.class);
         return method.invoke(serviceKey);
     }
 
-    public static BaseServiceMetadataInterface revertDisplayServiceKey(StringInterface displayKey) {
+    public static BaseServiceMetadataInterface revertDisplayServiceKey(String displayKey) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(revertDisplayServiceKey, String.class);
         return method.invoke(displayKey);
     }
 
-    public static StringInterface keyWithoutGroup(StringInterface interfaceName, StringInterface version) {
+    public static String keyWithoutGroup(String interfaceName, String version) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(keyWithoutGroup, String.class, String.class);
         return method.invoke(interfaceName, version);
+    }
+
+    public BaseServiceMetadataInterface getInternalInstance() {
+        return instance;
+    }
+
+    public BaseServiceMetadataInterface getInternalInstance() {
+        return instance;
     }
 }

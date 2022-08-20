@@ -7,51 +7,51 @@ import org.apache.dubbo.config.bootstrap.builders.AbstractInterfaceBuilder;
 
 public class AbstractServiceBuilder<T extends AbstractServiceConfigInterface, B extends AbstractServiceBuilderInterface<T,B>> extends AbstractInterfaceBuilder<T, B> implements AbstractServiceBuilderInterface<T, B> {
 
-    public B version(StringInterface version) {
+    public B version(String version) {
         return instance.version(version);
     }
 
-    public B group(StringInterface group) {
+    public B group(String group) {
         return instance.group(group);
     }
 
-    public B deprecated(BooleanInterface deprecated) {
+    public B deprecated(Boolean deprecated) {
         return instance.deprecated(deprecated);
     }
 
-    public B delay(IntegerInterface delay) {
+    public B delay(Integer delay) {
         return instance.delay(delay);
     }
 
-    public B export(BooleanInterface export) {
+    public B export(Boolean export) {
         return instance.export(export);
     }
 
-    public B weight(IntegerInterface weight) {
+    public B weight(Integer weight) {
         return instance.weight(weight);
     }
 
-    public B document(StringInterface document) {
+    public B document(String document) {
         return instance.document(document);
     }
 
-    public B dynamic(BooleanInterface dynamic) {
+    public B dynamic(Boolean dynamic) {
         return instance.dynamic(dynamic);
     }
 
-    public B token(StringInterface token) {
+    public B token(String token) {
         return instance.token(token);
     }
 
-    public B token(BooleanInterface token) {
+    public B token(Boolean token) {
         return instance.token(token);
     }
 
-    public B accesslog(StringInterface accesslog) {
+    public B accesslog(String accesslog) {
         return instance.accesslog(accesslog);
     }
 
-    public B accesslog(BooleanInterface accesslog) {
+    public B accesslog(Boolean accesslog) {
         return instance.accesslog(accesslog);
     }
 
@@ -60,30 +60,38 @@ public class AbstractServiceBuilder<T extends AbstractServiceConfigInterface, B 
     }
 
     public B addProtocol(ProtocolConfigInterface protocol) {
-        return instance.addProtocol(protocol);
+        return instance.addProtocol(protocol.getInternalInstance(), protocol);
     }
 
-    public B protocolIds(StringInterface protocolIds) {
+    public B protocolIds(String protocolIds) {
         return instance.protocolIds(protocolIds);
     }
 
-    public B executes(IntegerInterface executes) {
+    public B executes(Integer executes) {
         return instance.executes(executes);
     }
 
-    public B register(BooleanInterface register) {
+    public B register(Boolean register) {
         return instance.register(register);
     }
 
-    public B warmup(IntegerInterface warmup) {
+    public B warmup(Integer warmup) {
         return instance.warmup(warmup);
     }
 
-    public B serialization(StringInterface serialization) {
+    public B serialization(String serialization) {
         return instance.serialization(serialization);
     }
 
     public void build(T instance) {
         instance.build(instance);
+    }
+
+    public AbstractServiceBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AbstractServiceBuilderInterface getInternalInstance() {
+        return instance;
     }
 }

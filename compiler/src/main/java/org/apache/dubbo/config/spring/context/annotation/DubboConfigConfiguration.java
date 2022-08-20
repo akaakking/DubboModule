@@ -6,4 +6,12 @@ import org.apache.dubbo.Interface.*;
 public class DubboConfigConfiguration implements DubboConfigConfigurationInterface {
 
     protected DubboConfigConfigurationInterface instance;
+
+    public DubboConfigConfigurationInterface getInternalInstance() {
+        return instance;
+    }
+
+    public DubboConfigConfigurationInterface getInternalInstance() {
+        return instance;
+    }
 }

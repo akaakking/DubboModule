@@ -7,7 +7,7 @@ import org.apache.dubbo.common.BaseServiceMetadata;
 
 public class ServiceMetadata extends BaseServiceMetadata implements ServiceMetadataInterface {
 
-    public StringInterface getServiceKey() {
+    public String getServiceKey() {
         return instance.getServiceKey();
     }
 
@@ -19,15 +19,15 @@ public class ServiceMetadata extends BaseServiceMetadata implements ServiceMetad
         return instance.getAttributeMap();
     }
 
-    public ObjectInterface getAttribute(StringInterface key) {
+    public Object getAttribute(String key) {
         return instance.getAttribute(key);
     }
 
-    public void addAttribute(StringInterface key, ObjectInterface value) {
+    public void addAttribute(String key, Object value) {
         instance.addAttribute(key, value);
     }
 
-    public void addAttachment(StringInterface key, ObjectInterface value) {
+    public void addAttachment(String key, Object value) {
         instance.addAttachment(key, value);
     }
 
@@ -35,11 +35,11 @@ public class ServiceMetadata extends BaseServiceMetadata implements ServiceMetad
         return instance.getServiceType();
     }
 
-    public StringInterface getDefaultGroup() {
+    public String getDefaultGroup() {
         return instance.getDefaultGroup();
     }
 
-    public void setDefaultGroup(StringInterface defaultGroup) {
+    public void setDefaultGroup(String defaultGroup) {
         instance.setDefaultGroup(defaultGroup);
     }
 
@@ -47,12 +47,20 @@ public class ServiceMetadata extends BaseServiceMetadata implements ServiceMetad
         instance.setServiceType(serviceType);
     }
 
-    public ObjectInterface getTarget() {
+    public Object getTarget() {
         return instance.getTarget();
     }
 
-    public void setTarget(ObjectInterface target) {
+    public void setTarget(Object target) {
         instance.setTarget(target);
+    }
+
+    public ServiceMetadataInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ServiceMetadataInterface getInternalInstance() {
+        return instance;
     }
 
     public ServiceMetadata(String serviceInterfaceName, String group, String version, Class<?> serviceType) {

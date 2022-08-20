@@ -6,7 +6,15 @@ import org.apache.dubbo.config.spring.context.properties.AbstractDubboConfigBind
 
 public class DefaultDubboConfigBinder extends AbstractDubboConfigBinder implements DefaultDubboConfigBinderInterface {
 
-    public <C extends AbstractConfigInterface> void bind(StringInterface prefix, C dubboConfig) {
+    public <C extends AbstractConfigInterface> void bind(String prefix, C dubboConfig) {
         instance.bind(prefix, dubboConfig);
+    }
+
+    public DefaultDubboConfigBinderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public DefaultDubboConfigBinderInterface getInternalInstance() {
+        return instance;
     }
 }

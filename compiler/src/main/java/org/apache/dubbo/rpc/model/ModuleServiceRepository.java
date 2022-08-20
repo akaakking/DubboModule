@@ -10,24 +10,24 @@ public class ModuleServiceRepository implements ModuleServiceRepositoryInterface
         return instance.getModuleModel();
     }
 
-    public void registerConsumer(StringInterface serviceKey, ServiceDescriptorInterface serviceDescriptor, ReferenceConfigBaseInterface<?> rc, ObjectInterface proxy, ServiceMetadataInterface serviceMetadata) {
-        instance.registerConsumer(serviceKey, serviceDescriptor, rc, proxy, serviceMetadata);
+    public void registerConsumer(String serviceKey, ServiceDescriptorInterface serviceDescriptor, ReferenceConfigBaseInterface<?> rc, Object proxy, ServiceMetadataInterface serviceMetadata) {
+        instance.registerConsumer(serviceKey, serviceDescriptor.getInternalInstance(), serviceDescriptor, rc, proxy, serviceMetadata.getInternalInstance(), serviceMetadata);
     }
 
     public void registerConsumer(ConsumerModelInterface consumerModel) {
-        instance.registerConsumer(consumerModel);
+        instance.registerConsumer(consumerModel.getInternalInstance(), consumerModel);
     }
 
-    public void registerProvider(StringInterface serviceKey, ObjectInterface serviceInstance, ServiceDescriptorInterface serviceModel, ServiceConfigBaseInterface<?> serviceConfig, ServiceMetadataInterface serviceMetadata) {
-        instance.registerProvider(serviceKey, serviceInstance, serviceModel, serviceConfig, serviceMetadata);
+    public void registerProvider(String serviceKey, Object serviceInstance, ServiceDescriptorInterface serviceModel, ServiceConfigBaseInterface<?> serviceConfig, ServiceMetadataInterface serviceMetadata) {
+        instance.registerProvider(serviceKey, serviceInstance, serviceModel.getInternalInstance(), serviceModel, serviceConfig, serviceMetadata.getInternalInstance(), serviceMetadata);
     }
 
     public void registerProvider(ProviderModelInterface providerModel) {
-        instance.registerProvider(providerModel);
+        instance.registerProvider(providerModel.getInternalInstance(), providerModel);
     }
 
     public ServiceDescriptorInterface registerService(ServiceDescriptorInterface serviceDescriptor) {
-        return instance.registerService(serviceDescriptor);
+        return instance.registerService(serviceDescriptor.getInternalInstance(), serviceDescriptor);
     }
 
     public ServiceDescriptorInterface registerService(Class<?> interfaceClazz) {
@@ -35,18 +35,18 @@ public class ModuleServiceRepository implements ModuleServiceRepositoryInterface
     }
 
     public ServiceDescriptorInterface registerService(Class<?> interfaceClazz, ServiceDescriptorInterface serviceDescriptor) {
-        return instance.registerService(interfaceClazz, serviceDescriptor);
+        return instance.registerService(interfaceClazz, serviceDescriptor.getInternalInstance(), serviceDescriptor);
     }
 
-    public ServiceDescriptorInterface registerService(StringInterface path, Class<?> interfaceClass) {
+    public ServiceDescriptorInterface registerService(String path, Class<?> interfaceClass) {
         return instance.registerService(path, interfaceClass);
     }
 
-    public void reRegisterProvider(StringInterface newServiceKey, StringInterface serviceKey) {
+    public void reRegisterProvider(String newServiceKey, String serviceKey) {
         instance.reRegisterProvider(newServiceKey, serviceKey);
     }
 
-    public void reRegisterConsumer(StringInterface newServiceKey, StringInterface serviceKey) {
+    public void reRegisterConsumer(String newServiceKey, String serviceKey) {
         instance.reRegisterConsumer(newServiceKey, serviceKey);
     }
 
@@ -54,31 +54,31 @@ public class ModuleServiceRepository implements ModuleServiceRepositoryInterface
         instance.unregisterService(interfaceClazz);
     }
 
-    public void unregisterService(StringInterface path) {
+    public void unregisterService(String path) {
         instance.unregisterService(path);
     }
 
     public void unregisterProvider(ProviderModelInterface providerModel) {
-        instance.unregisterProvider(providerModel);
+        instance.unregisterProvider(providerModel.getInternalInstance(), providerModel);
     }
 
     public void unregisterConsumer(ConsumerModelInterface consumerModel) {
-        instance.unregisterConsumer(consumerModel);
+        instance.unregisterConsumer(consumerModel.getInternalInstance(), consumerModel);
     }
 
     public List<ServiceDescriptorInterface> getAllServices() {
         return instance.getAllServices();
     }
 
-    public ServiceDescriptorInterface getService(StringInterface serviceName) {
+    public ServiceDescriptorInterface getService(String serviceName) {
         return instance.getService(serviceName);
     }
 
-    public ServiceDescriptorInterface lookupService(StringInterface interfaceName) {
+    public ServiceDescriptorInterface lookupService(String interfaceName) {
         return instance.lookupService(interfaceName);
     }
 
-    public MethodDescriptorInterface lookupMethod(StringInterface interfaceName, StringInterface methodName) {
+    public MethodDescriptorInterface lookupMethod(String interfaceName, String methodName) {
         return instance.lookupMethod(interfaceName, methodName);
     }
 
@@ -86,7 +86,7 @@ public class ModuleServiceRepository implements ModuleServiceRepositoryInterface
         return instance.getExportedServices();
     }
 
-    public ProviderModelInterface lookupExportedService(StringInterface serviceKey) {
+    public ProviderModelInterface lookupExportedService(String serviceKey) {
         return instance.lookupExportedService(serviceKey);
     }
 
@@ -94,11 +94,11 @@ public class ModuleServiceRepository implements ModuleServiceRepositoryInterface
         return instance.getReferredServices();
     }
 
-    public ConsumerModelInterface lookupReferredService(StringInterface serviceKey) {
+    public ConsumerModelInterface lookupReferredService(String serviceKey) {
         return instance.lookupReferredService(serviceKey);
     }
 
-    public List<ConsumerModelInterface> lookupReferredServices(StringInterface serviceKey) {
+    public List<ConsumerModelInterface> lookupReferredServices(String serviceKey) {
         return instance.lookupReferredServices(serviceKey);
     }
 
@@ -107,6 +107,14 @@ public class ModuleServiceRepository implements ModuleServiceRepositoryInterface
     }
 
     protected ModuleServiceRepositoryInterface instance;
+
+    public ModuleServiceRepositoryInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ModuleServiceRepositoryInterface getInternalInstance() {
+        return instance;
+    }
 
     public ModuleServiceRepository(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};

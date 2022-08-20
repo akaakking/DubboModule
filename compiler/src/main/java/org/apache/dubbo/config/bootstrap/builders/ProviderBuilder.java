@@ -6,99 +6,107 @@ import org.apache.dubbo.config.bootstrap.builders.AbstractServiceBuilder;
 
 public class ProviderBuilder extends AbstractServiceBuilder<ProviderConfig, ProviderBuilder> implements ProviderBuilderInterface {
 
-    public ProviderBuilderInterface host(StringInterface host) {
+    public ProviderBuilderInterface host(String host) {
         return instance.host(host);
     }
 
-    public ProviderBuilderInterface port(IntegerInterface port) {
+    public ProviderBuilderInterface port(Integer port) {
         return instance.port(port);
     }
 
-    public ProviderBuilderInterface contextPath(StringInterface contextPath) {
+    public ProviderBuilderInterface contextPath(String contextPath) {
         return instance.contextPath(contextPath);
     }
 
-    public ProviderBuilderInterface threadPool(StringInterface threadPool) {
+    public ProviderBuilderInterface threadPool(String threadPool) {
         return instance.threadPool(threadPool);
     }
 
-    public ProviderBuilderInterface threads(IntegerInterface threads) {
+    public ProviderBuilderInterface threads(Integer threads) {
         return instance.threads(threads);
     }
 
-    public ProviderBuilderInterface ioThreads(IntegerInterface ioThreads) {
+    public ProviderBuilderInterface ioThreads(Integer ioThreads) {
         return instance.ioThreads(ioThreads);
     }
 
-    public ProviderBuilderInterface queues(IntegerInterface queues) {
+    public ProviderBuilderInterface queues(Integer queues) {
         return instance.queues(queues);
     }
 
-    public ProviderBuilderInterface accepts(IntegerInterface accepts) {
+    public ProviderBuilderInterface accepts(Integer accepts) {
         return instance.accepts(accepts);
     }
 
-    public ProviderBuilderInterface codec(StringInterface codec) {
+    public ProviderBuilderInterface codec(String codec) {
         return instance.codec(codec);
     }
 
-    public ProviderBuilderInterface charset(StringInterface charset) {
+    public ProviderBuilderInterface charset(String charset) {
         return instance.charset(charset);
     }
 
-    public ProviderBuilderInterface payload(IntegerInterface payload) {
+    public ProviderBuilderInterface payload(Integer payload) {
         return instance.payload(payload);
     }
 
-    public ProviderBuilderInterface buffer(IntegerInterface buffer) {
+    public ProviderBuilderInterface buffer(Integer buffer) {
         return instance.buffer(buffer);
     }
 
-    public ProviderBuilderInterface transporter(StringInterface transporter) {
+    public ProviderBuilderInterface transporter(String transporter) {
         return instance.transporter(transporter);
     }
 
-    public ProviderBuilderInterface exchanger(StringInterface exchanger) {
+    public ProviderBuilderInterface exchanger(String exchanger) {
         return instance.exchanger(exchanger);
     }
 
-    public ProviderBuilderInterface dispatcher(StringInterface dispatcher) {
+    public ProviderBuilderInterface dispatcher(String dispatcher) {
         return instance.dispatcher(dispatcher);
     }
 
-    public ProviderBuilderInterface networker(StringInterface networker) {
+    public ProviderBuilderInterface networker(String networker) {
         return instance.networker(networker);
     }
 
-    public ProviderBuilderInterface server(StringInterface server) {
+    public ProviderBuilderInterface server(String server) {
         return instance.server(server);
     }
 
-    public ProviderBuilderInterface client(StringInterface client) {
+    public ProviderBuilderInterface client(String client) {
         return instance.client(client);
     }
 
-    public ProviderBuilderInterface telnet(StringInterface telnet) {
+    public ProviderBuilderInterface telnet(String telnet) {
         return instance.telnet(telnet);
     }
 
-    public ProviderBuilderInterface prompt(StringInterface prompt) {
+    public ProviderBuilderInterface prompt(String prompt) {
         return instance.prompt(prompt);
     }
 
-    public ProviderBuilderInterface status(StringInterface status) {
+    public ProviderBuilderInterface status(String status) {
         return instance.status(status);
     }
 
-    public ProviderBuilderInterface wait(IntegerInterface wait) {
+    public ProviderBuilderInterface wait(Integer wait) {
         return instance.wait(wait);
     }
 
-    public ProviderBuilderInterface isDefault(BooleanInterface isDefault) {
+    public ProviderBuilderInterface isDefault(Boolean isDefault) {
         return instance.isDefault(isDefault);
     }
 
     public ProviderConfigInterface build() {
         return instance.build();
+    }
+
+    public ProviderBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ProviderBuilderInterface getInternalInstance() {
+        return instance;
     }
 }

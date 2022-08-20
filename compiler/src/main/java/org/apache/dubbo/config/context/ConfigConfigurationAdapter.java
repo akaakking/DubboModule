@@ -6,7 +6,7 @@ import org.apache.dubbo.Interface.*;
 
 public class ConfigConfigurationAdapter implements ConfigConfigurationAdapterInterface {
 
-    public ObjectInterface getInternalProperty(StringInterface key) {
+    public Object getInternalProperty(String key) {
         return instance.getInternalProperty(key);
     }
 
@@ -15,6 +15,14 @@ public class ConfigConfigurationAdapter implements ConfigConfigurationAdapterInt
     }
 
     protected ConfigConfigurationAdapterInterface instance;
+
+    public ConfigConfigurationAdapterInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ConfigConfigurationAdapterInterface getInternalInstance() {
+        return instance;
+    }
 
     public ConfigConfigurationAdapter(AbstractConfigInterface config, String prefix) {
         Class[] params = new Class[]{AbstractConfigInterface.class, String.class};

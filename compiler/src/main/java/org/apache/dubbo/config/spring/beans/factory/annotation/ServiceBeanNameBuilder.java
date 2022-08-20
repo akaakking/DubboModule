@@ -10,47 +10,55 @@ import org.apache.dubbo.config.annotation.Reference;
 
 public class ServiceBeanNameBuilder implements ServiceBeanNameBuilderInterface {
 
-    public ServiceBeanNameBuilderInterface group(StringInterface group) {
+    public ServiceBeanNameBuilder group(String group) {
         return instance.group(group);
     }
 
-    public ServiceBeanNameBuilderInterface version(StringInterface version) {
+    public ServiceBeanNameBuilder version(String version) {
         return instance.version(version);
     }
 
-    public StringInterface build() {
+    public String build() {
         return instance.build();
     }
 
     protected ServiceBeanNameBuilderInterface instance;
 
-    public static ServiceBeanNameBuilderInterface create(AnnotationAttributesInterface attributes, Class<?> defaultInterfaceClass, EnvironmentInterface environment) {
+    public static ServiceBeanNameBuilder create(AnnotationAttributes attributes, Class<?> defaultInterfaceClass, Environment environment) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(create, AnnotationAttributes.class, Class.class, Environment.class);
         return method.invoke(attributes, defaultInterfaceClass, environment);
     }
 
-    public static ServiceBeanNameBuilderInterface create(Class<?> interfaceClass, EnvironmentInterface environment) {
+    public static ServiceBeanNameBuilder create(Class<?> interfaceClass, Environment environment) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(create, Class.class, Environment.class);
         return method.invoke(interfaceClass, environment);
     }
 
-    public static ServiceBeanNameBuilderInterface create(StringInterface interfaceClass, EnvironmentInterface environment) {
+    public static ServiceBeanNameBuilder create(String interfaceClass, Environment environment) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(create, String.class, Environment.class);
         return method.invoke(interfaceClass, environment);
     }
 
-    public static ServiceBeanNameBuilderInterface create(ServiceInterface service, Class<?> interfaceClass, EnvironmentInterface environment) {
+    public static ServiceBeanNameBuilder create(Service service, Class<?> interfaceClass, Environment environment) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(create, Service.class, Class.class, Environment.class);
         return method.invoke(service, interfaceClass, environment);
     }
 
-    public static ServiceBeanNameBuilderInterface create(ReferenceInterface reference, Class<?> interfaceClass, EnvironmentInterface environment) {
+    public static ServiceBeanNameBuilder create(Reference reference, Class<?> interfaceClass, Environment environment) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(create, Reference.class, Class.class, Environment.class);
         return method.invoke(reference, interfaceClass, environment);
+    }
+
+    public ServiceBeanNameBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ServiceBeanNameBuilderInterface getInternalInstance() {
+        return instance;
     }
 }

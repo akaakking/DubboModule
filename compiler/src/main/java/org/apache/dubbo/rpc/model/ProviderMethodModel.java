@@ -8,15 +8,15 @@ import org.apache.dubbo.Interface.*;
 
 public class ProviderMethodModel implements ProviderMethodModelInterface {
 
-    public MethodInterface getMethod() {
+    public Method getMethod() {
         return instance.getMethod();
     }
 
-    public StringInterface getMethodName() {
+    public String getMethodName() {
         return instance.getMethodName();
     }
 
-    public StringInterface[] getMethodArgTypes() {
+    public String[] getMethodArgTypes() {
         return instance.getMethodArgTypes();
     }
 
@@ -28,11 +28,19 @@ public class ProviderMethodModel implements ProviderMethodModelInterface {
         return instance.getParameterClasses();
     }
 
-    public TypeInterface[] getGenericParameterTypes() {
+    public Type[] getGenericParameterTypes() {
         return instance.getGenericParameterTypes();
     }
 
     protected ProviderMethodModelInterface instance;
+
+    public ProviderMethodModelInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ProviderMethodModelInterface getInternalInstance() {
+        return instance;
+    }
 
     public ProviderMethodModel(Method method) {
         Class[] params = new Class[]{Method.class};

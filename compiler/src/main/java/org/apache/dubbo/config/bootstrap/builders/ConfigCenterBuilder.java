@@ -7,51 +7,51 @@ import org.apache.dubbo.config.bootstrap.builders.AbstractBuilder;
 
 public class ConfigCenterBuilder extends AbstractBuilder<ConfigCenterConfig, ConfigCenterBuilder> implements ConfigCenterBuilderInterface {
 
-    public ConfigCenterBuilderInterface protocol(StringInterface protocol) {
+    public ConfigCenterBuilderInterface protocol(String protocol) {
         return instance.protocol(protocol);
     }
 
-    public ConfigCenterBuilderInterface address(StringInterface address) {
+    public ConfigCenterBuilderInterface address(String address) {
         return instance.address(address);
     }
 
-    public ConfigCenterBuilderInterface cluster(StringInterface cluster) {
+    public ConfigCenterBuilderInterface cluster(String cluster) {
         return instance.cluster(cluster);
     }
 
-    public ConfigCenterBuilderInterface namespace(StringInterface namespace) {
+    public ConfigCenterBuilderInterface namespace(String namespace) {
         return instance.namespace(namespace);
     }
 
-    public ConfigCenterBuilderInterface group(StringInterface group) {
+    public ConfigCenterBuilderInterface group(String group) {
         return instance.group(group);
     }
 
-    public ConfigCenterBuilderInterface username(StringInterface username) {
+    public ConfigCenterBuilderInterface username(String username) {
         return instance.username(username);
     }
 
-    public ConfigCenterBuilderInterface password(StringInterface password) {
+    public ConfigCenterBuilderInterface password(String password) {
         return instance.password(password);
     }
 
-    public ConfigCenterBuilderInterface timeout(LongInterface timeout) {
+    public ConfigCenterBuilderInterface timeout(Long timeout) {
         return instance.timeout(timeout);
     }
 
-    public ConfigCenterBuilderInterface highestPriority(BooleanInterface highestPriority) {
+    public ConfigCenterBuilderInterface highestPriority(Boolean highestPriority) {
         return instance.highestPriority(highestPriority);
     }
 
-    public ConfigCenterBuilderInterface check(BooleanInterface check) {
+    public ConfigCenterBuilderInterface check(Boolean check) {
         return instance.check(check);
     }
 
-    public ConfigCenterBuilderInterface configFile(StringInterface configFile) {
+    public ConfigCenterBuilderInterface configFile(String configFile) {
         return instance.configFile(configFile);
     }
 
-    public ConfigCenterBuilderInterface appConfigFile(StringInterface appConfigFile) {
+    public ConfigCenterBuilderInterface appConfigFile(String appConfigFile) {
         return instance.appConfigFile(appConfigFile);
     }
 
@@ -59,11 +59,19 @@ public class ConfigCenterBuilder extends AbstractBuilder<ConfigCenterConfig, Con
         return instance.appendParameters(appendParameters);
     }
 
-    public ConfigCenterBuilderInterface appendParameter(StringInterface key, StringInterface value) {
+    public ConfigCenterBuilderInterface appendParameter(String key, String value) {
         return instance.appendParameter(key, value);
     }
 
     public ConfigCenterConfigInterface build() {
         return instance.build();
+    }
+
+    public ConfigCenterBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ConfigCenterBuilderInterface getInternalInstance() {
+        return instance;
     }
 }

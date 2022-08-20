@@ -7,79 +7,79 @@ import org.apache.dubbo.config.AbstractInterfaceConfig;
 
 public class AbstractServiceConfig extends AbstractInterfaceConfig implements AbstractServiceConfigInterface {
 
-    public StringInterface getVersion() {
+    public String getVersion() {
         return instance.getVersion();
     }
 
-    public void setVersion(StringInterface version) {
+    public void setVersion(String version) {
         instance.setVersion(version);
     }
 
-    public StringInterface getGroup() {
+    public String getGroup() {
         return instance.getGroup();
     }
 
-    public void setGroup(StringInterface group) {
+    public void setGroup(String group) {
         instance.setGroup(group);
     }
 
-    public IntegerInterface getDelay() {
+    public Integer getDelay() {
         return instance.getDelay();
     }
 
-    public void setDelay(IntegerInterface delay) {
+    public void setDelay(Integer delay) {
         instance.setDelay(delay);
     }
 
-    public BooleanInterface getExport() {
+    public Boolean getExport() {
         return instance.getExport();
     }
 
-    public void setExport(BooleanInterface export) {
+    public void setExport(Boolean export) {
         instance.setExport(export);
     }
 
-    public IntegerInterface getWeight() {
+    public Integer getWeight() {
         return instance.getWeight();
     }
 
-    public void setWeight(IntegerInterface weight) {
+    public void setWeight(Integer weight) {
         instance.setWeight(weight);
     }
 
-    public StringInterface getDocument() {
+    public String getDocument() {
         return instance.getDocument();
     }
 
-    public void setDocument(StringInterface document) {
+    public void setDocument(String document) {
         instance.setDocument(document);
     }
 
-    public StringInterface getToken() {
+    public String getToken() {
         return instance.getToken();
     }
 
-    public void setToken(BooleanInterface token) {
+    public void setToken(Boolean token) {
         instance.setToken(token);
     }
 
-    public void setToken(StringInterface token) {
+    public void setToken(String token) {
         instance.setToken(token);
     }
 
-    public BooleanInterface isDeprecated() {
+    public Boolean isDeprecated() {
         return instance.isDeprecated();
     }
 
-    public void setDeprecated(BooleanInterface deprecated) {
+    public void setDeprecated(Boolean deprecated) {
         instance.setDeprecated(deprecated);
     }
 
-    public BooleanInterface isDynamic() {
+    public Boolean isDynamic() {
         return instance.isDynamic();
     }
 
-    public void setDynamic(BooleanInterface dynamic) {
+    public void setDynamic(Boolean dynamic) {
         instance.setDynamic(dynamic);
     }
 
@@ -96,78 +96,86 @@ public class AbstractServiceConfig extends AbstractInterfaceConfig implements Ab
     }
 
     public void setProtocol(ProtocolConfigInterface protocol) {
-        instance.setProtocol(protocol);
+        instance.setProtocol(protocol.getInternalInstance(), protocol);
     }
 
-    public StringInterface getProtocolIds() {
+    public String getProtocolIds() {
         return instance.getProtocolIds();
     }
 
-    public void setProtocolIds(StringInterface protocolIds) {
+    public void setProtocolIds(String protocolIds) {
         instance.setProtocolIds(protocolIds);
     }
 
-    public StringInterface getAccesslog() {
+    public String getAccesslog() {
         return instance.getAccesslog();
     }
 
-    public void setAccesslog(BooleanInterface accesslog) {
+    public void setAccesslog(Boolean accesslog) {
         instance.setAccesslog(accesslog);
     }
 
-    public void setAccesslog(StringInterface accesslog) {
+    public void setAccesslog(String accesslog) {
         instance.setAccesslog(accesslog);
     }
 
-    public IntegerInterface getExecutes() {
+    public Integer getExecutes() {
         return instance.getExecutes();
     }
 
-    public void setExecutes(IntegerInterface executes) {
+    public void setExecutes(Integer executes) {
         instance.setExecutes(executes);
     }
 
-    public StringInterface getFilter() {
+    public String getFilter() {
         return instance.getFilter();
     }
 
-    public StringInterface getListener() {
+    public String getListener() {
         return instance.getListener();
     }
 
-    public void setListener(StringInterface listener) {
+    public void setListener(String listener) {
         instance.setListener(listener);
     }
 
-    public BooleanInterface isRegister() {
+    public Boolean isRegister() {
         return instance.isRegister();
     }
 
-    public void setRegister(BooleanInterface register) {
+    public void setRegister(Boolean register) {
         instance.setRegister(register);
     }
 
-    public IntegerInterface getWarmup() {
+    public Integer getWarmup() {
         return instance.getWarmup();
     }
 
-    public void setWarmup(IntegerInterface warmup) {
+    public void setWarmup(Integer warmup) {
         instance.setWarmup(warmup);
     }
 
-    public StringInterface getSerialization() {
+    public String getSerialization() {
         return instance.getSerialization();
     }
 
-    public void setSerialization(StringInterface serialization) {
+    public void setSerialization(String serialization) {
         instance.setSerialization(serialization);
     }
 
-    public BooleanInterface getExportAsync() {
+    public Boolean getExportAsync() {
         return instance.getExportAsync();
     }
 
-    public void setExportAsync(BooleanInterface exportAsync) {
+    public void setExportAsync(Boolean exportAsync) {
         instance.setExportAsync(exportAsync);
+    }
+
+    public AbstractServiceConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AbstractServiceConfigInterface getInternalInstance() {
+        return instance;
     }
 }

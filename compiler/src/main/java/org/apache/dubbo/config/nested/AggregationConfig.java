@@ -5,29 +5,37 @@ import org.apache.dubbo.Interface.*;
 
 public class AggregationConfig implements AggregationConfigInterface {
 
-    public BooleanInterface getEnabled() {
+    public Boolean getEnabled() {
         return instance.getEnabled();
     }
 
-    public void setEnabled(BooleanInterface enabled) {
+    public void setEnabled(Boolean enabled) {
         instance.setEnabled(enabled);
     }
 
-    public IntegerInterface getBucketNum() {
+    public Integer getBucketNum() {
         return instance.getBucketNum();
     }
 
-    public void setBucketNum(IntegerInterface bucketNum) {
+    public void setBucketNum(Integer bucketNum) {
         instance.setBucketNum(bucketNum);
     }
 
-    public IntegerInterface getTimeWindowSeconds() {
+    public Integer getTimeWindowSeconds() {
         return instance.getTimeWindowSeconds();
     }
 
-    public void setTimeWindowSeconds(IntegerInterface timeWindowSeconds) {
+    public void setTimeWindowSeconds(Integer timeWindowSeconds) {
         instance.setTimeWindowSeconds(timeWindowSeconds);
     }
 
     protected AggregationConfigInterface instance;
+
+    public AggregationConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AggregationConfigInterface getInternalInstance() {
+        return instance;
+    }
 }

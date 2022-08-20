@@ -18,4 +18,12 @@ public class LifecycleAdapter implements LifecycleAdapterInterface {
     }
 
     protected LifecycleAdapterInterface instance;
+
+    public LifecycleAdapterInterface getInternalInstance() {
+        return instance;
+    }
+
+    public LifecycleAdapterInterface getInternalInstance() {
+        return instance;
+    }
 }

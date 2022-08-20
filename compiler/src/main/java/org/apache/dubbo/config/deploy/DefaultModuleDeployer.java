@@ -11,11 +11,11 @@ public class DefaultModuleDeployer extends AbstractDeployer<ModuleModel> impleme
         instance.initialize();
     }
 
-    public FutureInterface start() {
+    public Future start() {
         return instance.start();
     }
 
-    public FutureInterface getStartFuture() {
+    public Future getStartFuture() {
         return instance.getStartFuture();
     }
 
@@ -41,6 +41,14 @@ public class DefaultModuleDeployer extends AbstractDeployer<ModuleModel> impleme
 
     public void prepare() {
         instance.prepare();
+    }
+
+    public DefaultModuleDeployerInterface getInternalInstance() {
+        return instance;
+    }
+
+    public DefaultModuleDeployerInterface getInternalInstance() {
+        return instance;
     }
 
     public DefaultModuleDeployer(ModuleModelInterface moduleModel) {

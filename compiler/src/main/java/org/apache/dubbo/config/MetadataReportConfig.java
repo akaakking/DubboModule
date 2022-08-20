@@ -11,51 +11,51 @@ public class MetadataReportConfig extends AbstractConfig implements MetadataRepo
         return instance.toUrl();
     }
 
-    public StringInterface getProtocol() {
+    public String getProtocol() {
         return instance.getProtocol();
     }
 
-    public void setProtocol(StringInterface protocol) {
+    public void setProtocol(String protocol) {
         instance.setProtocol(protocol);
     }
 
-    public StringInterface getAddress() {
+    public String getAddress() {
         return instance.getAddress();
     }
 
-    public void setAddress(StringInterface address) {
+    public void setAddress(String address) {
         instance.setAddress(address);
     }
 
-    public IntegerInterface getPort() {
+    public Integer getPort() {
         return instance.getPort();
     }
 
-    public void setPort(IntegerInterface port) {
+    public void setPort(Integer port) {
         instance.setPort(port);
     }
 
-    public StringInterface getUsername() {
+    public String getUsername() {
         return instance.getUsername();
     }
 
-    public void setUsername(StringInterface username) {
+    public void setUsername(String username) {
         instance.setUsername(username);
     }
 
-    public StringInterface getPassword() {
+    public String getPassword() {
         return instance.getPassword();
     }
 
-    public void setPassword(StringInterface password) {
+    public void setPassword(String password) {
         instance.setPassword(password);
     }
 
-    public IntegerInterface getTimeout() {
+    public Integer getTimeout() {
         return instance.getTimeout();
     }
 
-    public void setTimeout(IntegerInterface timeout) {
+    public void setTimeout(Integer timeout) {
         instance.setTimeout(timeout);
     }
 
@@ -67,35 +67,35 @@ public class MetadataReportConfig extends AbstractConfig implements MetadataRepo
         instance.setParameters(parameters);
     }
 
-    public IntegerInterface getRetryTimes() {
+    public Integer getRetryTimes() {
         return instance.getRetryTimes();
     }
 
-    public void setRetryTimes(IntegerInterface retryTimes) {
+    public void setRetryTimes(Integer retryTimes) {
         instance.setRetryTimes(retryTimes);
     }
 
-    public IntegerInterface getRetryPeriod() {
+    public Integer getRetryPeriod() {
         return instance.getRetryPeriod();
     }
 
-    public void setRetryPeriod(IntegerInterface retryPeriod) {
+    public void setRetryPeriod(Integer retryPeriod) {
         instance.setRetryPeriod(retryPeriod);
     }
 
-    public BooleanInterface getCycleReport() {
+    public Boolean getCycleReport() {
         return instance.getCycleReport();
     }
 
-    public void setCycleReport(BooleanInterface cycleReport) {
+    public void setCycleReport(Boolean cycleReport) {
         instance.setCycleReport(cycleReport);
     }
 
-    public BooleanInterface getSyncReport() {
+    public Boolean getSyncReport() {
         return instance.getSyncReport();
     }
 
-    public void setSyncReport(BooleanInterface syncReport) {
+    public void setSyncReport(Boolean syncReport) {
         instance.setSyncReport(syncReport);
     }
 
@@ -103,35 +103,35 @@ public class MetadataReportConfig extends AbstractConfig implements MetadataRepo
         return instance.isValid();
     }
 
-    public StringInterface getGroup() {
+    public String getGroup() {
         return instance.getGroup();
     }
 
-    public void setGroup(StringInterface group) {
+    public void setGroup(String group) {
         instance.setGroup(group);
     }
 
-    public BooleanInterface getCluster() {
+    public Boolean getCluster() {
         return instance.getCluster();
     }
 
-    public void setCluster(BooleanInterface cluster) {
+    public void setCluster(Boolean cluster) {
         instance.setCluster(cluster);
     }
 
-    public StringInterface getRegistry() {
+    public String getRegistry() {
         return instance.getRegistry();
     }
 
-    public void setRegistry(StringInterface registry) {
+    public void setRegistry(String registry) {
         instance.setRegistry(registry);
     }
 
-    public StringInterface getFile() {
+    public String getFile() {
         return instance.getFile();
     }
 
-    public void setFile(StringInterface file) {
+    public void setFile(String file) {
         instance.setFile(file);
     }
 
@@ -139,28 +139,36 @@ public class MetadataReportConfig extends AbstractConfig implements MetadataRepo
         instance.updateParameters(parameters);
     }
 
-    public BooleanInterface isCheck() {
+    public Boolean isCheck() {
         return instance.isCheck();
     }
 
-    public void setCheck(BooleanInterface check) {
+    public void setCheck(Boolean check) {
         instance.setCheck(check);
     }
 
-    public BooleanInterface getReportMetadata() {
+    public Boolean getReportMetadata() {
         return instance.getReportMetadata();
     }
 
-    public void setReportMetadata(BooleanInterface reportMetadata) {
+    public void setReportMetadata(Boolean reportMetadata) {
         instance.setReportMetadata(reportMetadata);
     }
 
-    public BooleanInterface getReportDefinition() {
+    public Boolean getReportDefinition() {
         return instance.getReportDefinition();
     }
 
-    public void setReportDefinition(BooleanInterface reportDefinition) {
+    public void setReportDefinition(Boolean reportDefinition) {
         instance.setReportDefinition(reportDefinition);
+    }
+
+    public MetadataReportConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public MetadataReportConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public MetadataReportConfig() {

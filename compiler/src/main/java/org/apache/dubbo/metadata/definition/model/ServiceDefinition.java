@@ -7,11 +7,11 @@ import org.apache.dubbo.Interface.*;
 
 public class ServiceDefinition implements ServiceDefinitionInterface {
 
-    public StringInterface getCanonicalName() {
+    public String getCanonicalName() {
         return instance.getCanonicalName();
     }
 
-    public StringInterface getCodeSource() {
+    public String getCodeSource() {
         return instance.getCodeSource();
     }
 
@@ -23,15 +23,15 @@ public class ServiceDefinition implements ServiceDefinitionInterface {
         return instance.getTypes();
     }
 
-    public StringInterface getUniqueId() {
+    public String getUniqueId() {
         return instance.getUniqueId();
     }
 
-    public void setCanonicalName(StringInterface canonicalName) {
+    public void setCanonicalName(String canonicalName) {
         instance.setCanonicalName(canonicalName);
     }
 
-    public void setCodeSource(StringInterface codeSource) {
+    public void setCodeSource(String codeSource) {
         instance.setCodeSource(codeSource);
     }
 
@@ -51,11 +51,11 @@ public class ServiceDefinition implements ServiceDefinitionInterface {
         instance.setAnnotations(annotations);
     }
 
-    public StringInterface toString() {
+    public String toString() {
         return instance.toString();
     }
 
-    public boolean equals(ObjectInterface o) {
+    public boolean equals(Object o) {
         return instance.equals(o);
     }
 
@@ -64,4 +64,12 @@ public class ServiceDefinition implements ServiceDefinitionInterface {
     }
 
     protected ServiceDefinitionInterface instance;
+
+    public ServiceDefinitionInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ServiceDefinitionInterface getInternalInstance() {
+        return instance;
+    }
 }

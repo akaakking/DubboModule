@@ -15,7 +15,15 @@ public class FullServiceDefinition extends ServiceDefinition implements FullServ
         instance.setParameters(parameters);
     }
 
-    public StringInterface toString() {
+    public String toString() {
         return instance.toString();
+    }
+
+    public FullServiceDefinitionInterface getInternalInstance() {
+        return instance;
+    }
+
+    public FullServiceDefinitionInterface getInternalInstance() {
+        return instance;
     }
 }

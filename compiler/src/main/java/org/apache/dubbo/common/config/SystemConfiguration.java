@@ -6,7 +6,7 @@ import org.apache.dubbo.Interface.*;
 
 public class SystemConfiguration implements SystemConfigurationInterface {
 
-    public ObjectInterface getInternalProperty(StringInterface key) {
+    public Object getInternalProperty(String key) {
         return instance.getInternalProperty(key);
     }
 
@@ -15,4 +15,12 @@ public class SystemConfiguration implements SystemConfigurationInterface {
     }
 
     protected SystemConfigurationInterface instance;
+
+    public SystemConfigurationInterface getInternalInstance() {
+        return instance;
+    }
+
+    public SystemConfigurationInterface getInternalInstance() {
+        return instance;
+    }
 }

@@ -7,116 +7,124 @@ import org.apache.dubbo.config.AbstractConfig;
 
 public class SslConfig extends AbstractConfig implements SslConfigInterface {
 
-    public StringInterface getServerKeyCertChainPath() {
+    public String getServerKeyCertChainPath() {
         return instance.getServerKeyCertChainPath();
     }
 
-    public void setServerKeyCertChainPath(StringInterface serverKeyCertChainPath) {
+    public void setServerKeyCertChainPath(String serverKeyCertChainPath) {
         instance.setServerKeyCertChainPath(serverKeyCertChainPath);
     }
 
-    public StringInterface getServerPrivateKeyPath() {
+    public String getServerPrivateKeyPath() {
         return instance.getServerPrivateKeyPath();
     }
 
-    public void setServerPrivateKeyPath(StringInterface serverPrivateKeyPath) {
+    public void setServerPrivateKeyPath(String serverPrivateKeyPath) {
         instance.setServerPrivateKeyPath(serverPrivateKeyPath);
     }
 
-    public StringInterface getServerKeyPassword() {
+    public String getServerKeyPassword() {
         return instance.getServerKeyPassword();
     }
 
-    public void setServerKeyPassword(StringInterface serverKeyPassword) {
+    public void setServerKeyPassword(String serverKeyPassword) {
         instance.setServerKeyPassword(serverKeyPassword);
     }
 
-    public StringInterface getServerTrustCertCollectionPath() {
+    public String getServerTrustCertCollectionPath() {
         return instance.getServerTrustCertCollectionPath();
     }
 
-    public void setServerTrustCertCollectionPath(StringInterface serverTrustCertCollectionPath) {
+    public void setServerTrustCertCollectionPath(String serverTrustCertCollectionPath) {
         instance.setServerTrustCertCollectionPath(serverTrustCertCollectionPath);
     }
 
-    public StringInterface getClientKeyCertChainPath() {
+    public String getClientKeyCertChainPath() {
         return instance.getClientKeyCertChainPath();
     }
 
-    public void setClientKeyCertChainPath(StringInterface clientKeyCertChainPath) {
+    public void setClientKeyCertChainPath(String clientKeyCertChainPath) {
         instance.setClientKeyCertChainPath(clientKeyCertChainPath);
     }
 
-    public StringInterface getClientPrivateKeyPath() {
+    public String getClientPrivateKeyPath() {
         return instance.getClientPrivateKeyPath();
     }
 
-    public void setClientPrivateKeyPath(StringInterface clientPrivateKeyPath) {
+    public void setClientPrivateKeyPath(String clientPrivateKeyPath) {
         instance.setClientPrivateKeyPath(clientPrivateKeyPath);
     }
 
-    public StringInterface getClientKeyPassword() {
+    public String getClientKeyPassword() {
         return instance.getClientKeyPassword();
     }
 
-    public void setClientKeyPassword(StringInterface clientKeyPassword) {
+    public void setClientKeyPassword(String clientKeyPassword) {
         instance.setClientKeyPassword(clientKeyPassword);
     }
 
-    public StringInterface getClientTrustCertCollectionPath() {
+    public String getClientTrustCertCollectionPath() {
         return instance.getClientTrustCertCollectionPath();
     }
 
-    public void setClientTrustCertCollectionPath(StringInterface clientTrustCertCollectionPath) {
+    public void setClientTrustCertCollectionPath(String clientTrustCertCollectionPath) {
         instance.setClientTrustCertCollectionPath(clientTrustCertCollectionPath);
     }
 
-    public InputStreamInterface getServerKeyCertChainPathStream() {
+    public InputStream getServerKeyCertChainPathStream() {
         return instance.getServerKeyCertChainPathStream();
     }
 
-    public void setServerKeyCertChainPathStream(InputStreamInterface serverKeyCertChainPathStream) {
+    public void setServerKeyCertChainPathStream(InputStream serverKeyCertChainPathStream) {
         instance.setServerKeyCertChainPathStream(serverKeyCertChainPathStream);
     }
 
-    public InputStreamInterface getServerPrivateKeyPathStream() {
+    public InputStream getServerPrivateKeyPathStream() {
         return instance.getServerPrivateKeyPathStream();
     }
 
-    public void setServerPrivateKeyPathStream(InputStreamInterface serverPrivateKeyPathStream) {
+    public void setServerPrivateKeyPathStream(InputStream serverPrivateKeyPathStream) {
         instance.setServerPrivateKeyPathStream(serverPrivateKeyPathStream);
     }
 
-    public InputStreamInterface getServerTrustCertCollectionPathStream() {
+    public InputStream getServerTrustCertCollectionPathStream() {
         return instance.getServerTrustCertCollectionPathStream();
     }
 
-    public void setServerTrustCertCollectionPathStream(InputStreamInterface serverTrustCertCollectionPathStream) {
+    public void setServerTrustCertCollectionPathStream(InputStream serverTrustCertCollectionPathStream) {
         instance.setServerTrustCertCollectionPathStream(serverTrustCertCollectionPathStream);
     }
 
-    public InputStreamInterface getClientKeyCertChainPathStream() {
+    public InputStream getClientKeyCertChainPathStream() {
         return instance.getClientKeyCertChainPathStream();
     }
 
-    public void setClientKeyCertChainPathStream(InputStreamInterface clientKeyCertChainPathStream) {
+    public void setClientKeyCertChainPathStream(InputStream clientKeyCertChainPathStream) {
         instance.setClientKeyCertChainPathStream(clientKeyCertChainPathStream);
     }
 
-    public InputStreamInterface getClientPrivateKeyPathStream() {
+    public InputStream getClientPrivateKeyPathStream() {
         return instance.getClientPrivateKeyPathStream();
     }
 
-    public void setClientPrivateKeyPathStream(InputStreamInterface clientPrivateKeyPathStream) {
+    public void setClientPrivateKeyPathStream(InputStream clientPrivateKeyPathStream) {
         instance.setClientPrivateKeyPathStream(clientPrivateKeyPathStream);
     }
 
-    public InputStreamInterface getClientTrustCertCollectionPathStream() {
+    public InputStream getClientTrustCertCollectionPathStream() {
         return instance.getClientTrustCertCollectionPathStream();
     }
 
-    public void setClientTrustCertCollectionPathStream(InputStreamInterface clientTrustCertCollectionPathStream) {
+    public void setClientTrustCertCollectionPathStream(InputStream clientTrustCertCollectionPathStream) {
         instance.setClientTrustCertCollectionPathStream(clientTrustCertCollectionPathStream);
+    }
+
+    public SslConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public SslConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public SslConfig() {

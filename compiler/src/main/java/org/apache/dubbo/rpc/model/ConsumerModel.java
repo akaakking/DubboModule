@@ -1,6 +1,7 @@
 package org.apache.dubbo.rpc.model;
 
 import java.util.Set;
+import java.lang.reflect.Method;
 import java.util.List;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 public class ConsumerModel extends ServiceModel implements ConsumerModelInterface {
 
-    public AsyncMethodInfoInterface getMethodConfig(StringInterface methodName) {
+    public AsyncMethodInfoInterface getMethodConfig(String methodName) {
         return instance.getMethodConfig(methodName);
     }
 
@@ -17,7 +18,7 @@ public class ConsumerModel extends ServiceModel implements ConsumerModelInterfac
         return instance.getApps();
     }
 
-    public AsyncMethodInfoInterface getAsyncInfo(StringInterface methodName) {
+    public AsyncMethodInfoInterface getAsyncInfo(String methodName) {
         return instance.getAsyncInfo(methodName);
     }
 
@@ -25,15 +26,15 @@ public class ConsumerModel extends ServiceModel implements ConsumerModelInterfac
         instance.initMethodModels();
     }
 
-    public ConsumerMethodModelInterface getMethodModel(MethodInterface method) {
+    public ConsumerMethodModelInterface getMethodModel(Method method) {
         return instance.getMethodModel(method);
     }
 
-    public ConsumerMethodModelInterface getMethodModel(StringInterface method) {
+    public ConsumerMethodModelInterface getMethodModel(String method) {
         return instance.getMethodModel(method);
     }
 
-    public ConsumerMethodModelInterface getMethodModel(StringInterface method, StringInterface[] argsType) {
+    public ConsumerMethodModelInterface getMethodModel(String method, String[] argsType) {
         return instance.getMethodModel(method, argsType);
     }
 
@@ -41,12 +42,20 @@ public class ConsumerModel extends ServiceModel implements ConsumerModelInterfac
         return instance.getAllMethodModels();
     }
 
-    public boolean equals(ObjectInterface o) {
+    public boolean equals(Object o) {
         return instance.equals(o);
     }
 
     public int hashCode() {
         return instance.hashCode();
+    }
+
+    public ConsumerModelInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ConsumerModelInterface getInternalInstance() {
+        return instance;
     }
 
     public ConsumerModel(String serviceKey, Object proxyObject, ServiceDescriptorInterface serviceDescriptor, Map<String, AsyncMethodInfo> methodConfigs, ClassLoader interfaceClassLoader) {

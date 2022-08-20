@@ -7,39 +7,39 @@ import org.apache.dubbo.config.bootstrap.builders.AbstractBuilder;
 
 public class MonitorBuilder extends AbstractBuilder<MonitorConfig, MonitorBuilder> implements MonitorBuilderInterface {
 
-    public MonitorBuilderInterface protocol(StringInterface protocol) {
+    public MonitorBuilderInterface protocol(String protocol) {
         return instance.protocol(protocol);
     }
 
-    public MonitorBuilderInterface address(StringInterface address) {
+    public MonitorBuilderInterface address(String address) {
         return instance.address(address);
     }
 
-    public MonitorBuilderInterface username(StringInterface username) {
+    public MonitorBuilderInterface username(String username) {
         return instance.username(username);
     }
 
-    public MonitorBuilderInterface password(StringInterface password) {
+    public MonitorBuilderInterface password(String password) {
         return instance.password(password);
     }
 
-    public MonitorBuilderInterface group(StringInterface group) {
+    public MonitorBuilderInterface group(String group) {
         return instance.group(group);
     }
 
-    public MonitorBuilderInterface version(StringInterface version) {
+    public MonitorBuilderInterface version(String version) {
         return instance.version(version);
     }
 
-    public MonitorBuilderInterface interval(StringInterface interval) {
+    public MonitorBuilderInterface interval(String interval) {
         return instance.interval(interval);
     }
 
-    public MonitorBuilderInterface isDefault(BooleanInterface isDefault) {
+    public MonitorBuilderInterface isDefault(Boolean isDefault) {
         return instance.isDefault(isDefault);
     }
 
-    public MonitorBuilderInterface appendParameter(StringInterface key, StringInterface value) {
+    public MonitorBuilderInterface appendParameter(String key, String value) {
         return instance.appendParameter(key, value);
     }
 
@@ -49,5 +49,13 @@ public class MonitorBuilder extends AbstractBuilder<MonitorConfig, MonitorBuilde
 
     public MonitorConfigInterface build() {
         return instance.build();
+    }
+
+    public MonitorBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public MonitorBuilderInterface getInternalInstance() {
+        return instance;
     }
 }

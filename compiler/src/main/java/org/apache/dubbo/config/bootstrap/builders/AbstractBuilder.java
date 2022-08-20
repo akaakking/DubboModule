@@ -5,7 +5,7 @@ import org.apache.dubbo.Interface.*;
 
 public class AbstractBuilder<C extends AbstractConfigInterface, B extends AbstractBuilderInterface> implements AbstractBuilderInterface<C, B> {
 
-    public B id(StringInterface id) {
+    public B id(String id) {
         return instance.id(id);
     }
 
@@ -14,4 +14,12 @@ public class AbstractBuilder<C extends AbstractConfigInterface, B extends Abstra
     }
 
     protected AbstractBuilderInterface instance;
+
+    public AbstractBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AbstractBuilderInterface getInternalInstance() {
+        return instance;
+    }
 }

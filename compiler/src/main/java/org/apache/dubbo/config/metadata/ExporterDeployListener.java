@@ -6,15 +6,15 @@ import org.apache.dubbo.Interface.*;
 public class ExporterDeployListener implements ExporterDeployListenerInterface {
 
     public void onStarting(ApplicationModelInterface scopeModel) {
-        instance.onStarting(scopeModel);
+        instance.onStarting(scopeModel.getInternalInstance(), scopeModel);
     }
 
     public void onStarted(ApplicationModelInterface applicationModel) {
-        instance.onStarted(applicationModel);
+        instance.onStarted(applicationModel.getInternalInstance(), applicationModel);
     }
 
     public void onStopping(ApplicationModelInterface scopeModel) {
-        instance.onStopping(scopeModel);
+        instance.onStopping(scopeModel.getInternalInstance(), scopeModel);
     }
 
     public ConfigurableMetadataServiceExporterInterface getMetadataServiceExporter() {
@@ -22,19 +22,19 @@ public class ExporterDeployListener implements ExporterDeployListenerInterface {
     }
 
     public void setMetadataServiceExporter(ConfigurableMetadataServiceExporterInterface metadataServiceExporter) {
-        instance.setMetadataServiceExporter(metadataServiceExporter);
+        instance.setMetadataServiceExporter(metadataServiceExporter.getInternalInstance(), metadataServiceExporter);
     }
 
     public void onModuleStarted(ApplicationModelInterface applicationModel) {
-        instance.onModuleStarted(applicationModel);
+        instance.onModuleStarted(applicationModel.getInternalInstance(), applicationModel);
     }
 
     public void onStopped(ApplicationModelInterface scopeModel) {
-        instance.onStopped(scopeModel);
+        instance.onStopped(scopeModel.getInternalInstance(), scopeModel);
     }
 
-    public void onFailure(ApplicationModelInterface scopeModel, ThrowableInterface cause) {
-        instance.onFailure(scopeModel, cause);
+    public void onFailure(ApplicationModelInterface scopeModel, Throwable cause) {
+        instance.onFailure(scopeModel.getInternalInstance(), scopeModel, cause);
     }
 
     public int getPriority() {
@@ -42,4 +42,12 @@ public class ExporterDeployListener implements ExporterDeployListenerInterface {
     }
 
     protected ExporterDeployListenerInterface instance;
+
+    public ExporterDeployListenerInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ExporterDeployListenerInterface getInternalInstance() {
+        return instance;
+    }
 }

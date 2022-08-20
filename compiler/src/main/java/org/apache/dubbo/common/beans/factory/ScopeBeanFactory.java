@@ -10,15 +10,15 @@ public class ScopeBeanFactory implements ScopeBeanFactoryInterface {
         return instance.registerBean(bean);
     }
 
-    public <T> T registerBean(StringInterface name, Class<T> clazz) {
+    public <T> T registerBean(String name, Class<T> clazz) {
         return instance.registerBean(name, clazz);
     }
 
-    public void registerBean(ObjectInterface bean) {
+    public void registerBean(Object bean) {
         instance.registerBean(bean);
     }
 
-    public void registerBean(StringInterface name, ObjectInterface bean) {
+    public void registerBean(String name, Object bean) {
         instance.registerBean(name, bean);
     }
 
@@ -26,7 +26,7 @@ public class ScopeBeanFactory implements ScopeBeanFactoryInterface {
         return instance.getOrRegisterBean(type);
     }
 
-    public <T> T getOrRegisterBean(StringInterface name, Class<T> type) {
+    public <T> T getOrRegisterBean(String name, Class<T> type) {
         return instance.getOrRegisterBean(name, type);
     }
 
@@ -34,7 +34,7 @@ public class ScopeBeanFactory implements ScopeBeanFactoryInterface {
         return instance.getOrRegisterBean(type, mappingFunction);
     }
 
-    public <T> T getOrRegisterBean(StringInterface name, Class<T> type, Function<? super Class<T>, ? extends T> mappingFunction) {
+    public <T> T getOrRegisterBean(String name, Class<T> type, Function<? super Class<T>, ? extends T> mappingFunction) {
         return instance.getOrRegisterBean(name, type, mappingFunction);
     }
 
@@ -46,7 +46,7 @@ public class ScopeBeanFactory implements ScopeBeanFactoryInterface {
         return instance.getBean(type);
     }
 
-    public <T> T getBean(StringInterface name, Class<T> type) {
+    public <T> T getBean(String name, Class<T> type) {
         return instance.getBean(name, type);
     }
 
@@ -55,6 +55,14 @@ public class ScopeBeanFactory implements ScopeBeanFactoryInterface {
     }
 
     protected ScopeBeanFactoryInterface instance;
+
+    public ScopeBeanFactoryInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ScopeBeanFactoryInterface getInternalInstance() {
+        return instance;
+    }
 
     public ScopeBeanFactory(ScopeBeanFactoryInterface parent, ExtensionAccessorInterface extensionAccessor) {
         Class[] params = new Class[]{ScopeBeanFactoryInterface.class, ExtensionAccessorInterface.class};

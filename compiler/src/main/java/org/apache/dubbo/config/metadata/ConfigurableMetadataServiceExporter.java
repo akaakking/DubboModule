@@ -19,7 +19,7 @@ public class ConfigurableMetadataServiceExporter implements ConfigurableMetadata
     }
 
     public void setMetadataService(MetadataServiceDelegationInterface metadataService) {
-        instance.setMetadataService(metadataService);
+        instance.setMetadataService(metadataService.getInternalInstance(), metadataService);
     }
 
     public List<URLInterface> getExportedURLs() {
@@ -27,6 +27,14 @@ public class ConfigurableMetadataServiceExporter implements ConfigurableMetadata
     }
 
     protected ConfigurableMetadataServiceExporterInterface instance;
+
+    public ConfigurableMetadataServiceExporterInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ConfigurableMetadataServiceExporterInterface getInternalInstance() {
+        return instance;
+    }
 
     public ConfigurableMetadataServiceExporter(ApplicationModelInterface applicationModel, MetadataServiceDelegationInterface metadataService) {
         Class[] params = new Class[]{ApplicationModelInterface.class, MetadataServiceDelegationInterface.class};

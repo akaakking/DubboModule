@@ -6,15 +6,15 @@ import org.apache.dubbo.Interface.*;
 
 public class URLParam implements URLParamInterface {
 
-    public boolean hasMethodParameter(StringInterface method) {
+    public boolean hasMethodParameter(String method) {
         return instance.hasMethodParameter(method);
     }
 
-    public StringInterface getMethodParameter(StringInterface method, StringInterface key) {
+    public String getMethodParameter(String method, String key) {
         return instance.getMethodParameter(method, key);
     }
 
-    public StringInterface getMethodParameterStrict(StringInterface method, StringInterface key) {
+    public String getMethodParameterStrict(String method, String key) {
         return instance.getMethodParameterStrict(method, key);
     }
 
@@ -22,15 +22,15 @@ public class URLParam implements URLParamInterface {
         return instance.getParameters();
     }
 
-    public StringInterface getAnyMethodParameter(StringInterface key) {
+    public String getAnyMethodParameter(String key) {
         return instance.getAnyMethodParameter(key);
     }
 
-    public URLParamInterface addParameter(StringInterface key, StringInterface value) {
+    public URLParamInterface addParameter(String key, String value) {
         return instance.addParameter(key, value);
     }
 
-    public URLParamInterface addParameterIfAbsent(StringInterface key, StringInterface value) {
+    public URLParamInterface addParameterIfAbsent(String key, String value) {
         return instance.addParameterIfAbsent(key, value);
     }
 
@@ -42,7 +42,7 @@ public class URLParam implements URLParamInterface {
         return instance.addParametersIfAbsent(parameters);
     }
 
-    public URLParamInterface removeParameters(StringInterface keys) {
+    public URLParamInterface removeParameters(String keys) {
         return instance.removeParameters(keys);
     }
 
@@ -50,15 +50,15 @@ public class URLParam implements URLParamInterface {
         return instance.clearParameters();
     }
 
-    public boolean hasParameter(StringInterface key) {
+    public boolean hasParameter(String key) {
         return instance.hasParameter(key);
     }
 
-    public StringInterface getParameter(StringInterface key) {
+    public String getParameter(String key) {
         return instance.getParameter(key);
     }
 
-    public StringInterface getRawParam() {
+    public String getRawParam() {
         return instance.getRawParam();
     }
 
@@ -70,7 +70,7 @@ public class URLParam implements URLParamInterface {
         instance.setTimestamp(timestamp);
     }
 
-    public boolean equals(ObjectInterface o) {
+    public boolean equals(Object o) {
         return instance.equals(o);
     }
 
@@ -78,7 +78,7 @@ public class URLParam implements URLParamInterface {
         return instance.hashCode();
     }
 
-    public StringInterface toString() {
+    public String toString() {
         return instance.toString();
     }
 
@@ -96,21 +96,29 @@ public class URLParam implements URLParamInterface {
         return method.invoke(params);
     }
 
-    public static URLParamInterface parse(StringInterface rawParam, boolean encoded, Map<String, String> extraParameters) {
+    public static URLParamInterface parse(String rawParam, boolean encoded, Map<String, String> extraParameters) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(parse, String.class, boolean.class, Map.class);
         return method.invoke(rawParam, encoded, extraParameters);
     }
 
-    public static URLParamInterface parse(StringInterface rawParam) {
+    public static URLParamInterface parse(String rawParam) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(parse, String.class);
         return method.invoke(rawParam);
     }
 
-    public static URLParamInterface parse(Map<String, String> params, StringInterface rawParam) {
+    public static URLParamInterface parse(Map<String, String> params, String rawParam) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(parse, Map.class, String.class);
         return method.invoke(params, rawParam);
+    }
+
+    public URLParamInterface getInternalInstance() {
+        return instance;
+    }
+
+    public URLParamInterface getInternalInstance() {
+        return instance;
     }
 }

@@ -454,6 +454,22 @@ public class JavaParserLearn {
 
 
     @Test
+    public void gengg() {
+        CompilationUnit cu = StaticJavaParser.parse("public class A {public void add(String a){}}");
+        ClassOrInterfaceDeclaration coid = cu.getClassByName("A").get();
+
+        for (MethodDeclaration method : coid.getMethods()) {
+            BlockStmt blockStmt = new BlockStmt();
+            method.setBody(blockStmt);
+            MethodCallExpr methodCallExpr = new MethodCallExpr(new NameExpr("instance"),"get");
+            methodCallExpr.addArgument("name.getInstance()");
+            blockStmt.addStatement(new ExpressionStmt(methodCallExpr));
+        }
+
+        System.out.println(cu);
+    }
+
+    @Test
     public void gene() {
 //        String geneFull = "java.util.Map<? extends java.lang.String,java.uitl.Map<java.lang.String,java.lang.List<org.apache.dubbo.String>>>";
 //        String geneValue = "Map<String,Map<? extends String,List<String>>>";

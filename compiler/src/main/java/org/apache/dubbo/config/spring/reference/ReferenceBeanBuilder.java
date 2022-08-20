@@ -11,120 +11,120 @@ public class ReferenceBeanBuilder implements ReferenceBeanBuilderInterface {
         return instance.build();
     }
 
-    public ReferenceBeanBuilderInterface setServices(StringInterface services) {
+    public ReferenceBeanBuilderInterface setServices(String services) {
         return instance.setServices(services);
     }
 
-    public ReferenceBeanBuilderInterface setInterface(StringInterface interfaceName) {
+    public ReferenceBeanBuilderInterface setInterface(String interfaceName) {
         return instance.setInterface(interfaceName);
     }
 
-    public ReferenceBeanBuilderInterface setInterface(ClassInterface interfaceClass) {
+    public ReferenceBeanBuilderInterface setInterface(Class interfaceClass) {
         return instance.setInterface(interfaceClass);
     }
 
-    public ReferenceBeanBuilderInterface setClient(StringInterface client) {
+    public ReferenceBeanBuilderInterface setClient(String client) {
         return instance.setClient(client);
     }
 
-    public ReferenceBeanBuilderInterface setUrl(StringInterface url) {
+    public ReferenceBeanBuilderInterface setUrl(String url) {
         return instance.setUrl(url);
     }
 
     public ReferenceBeanBuilderInterface setConsumer(ConsumerConfigInterface consumer) {
+        return instance.setConsumer(consumer.getInternalInstance(), consumer);
+    }
+
+    public ReferenceBeanBuilderInterface setConsumer(String consumer) {
         return instance.setConsumer(consumer);
     }
 
-    public ReferenceBeanBuilderInterface setConsumer(StringInterface consumer) {
-        return instance.setConsumer(consumer);
-    }
-
-    public ReferenceBeanBuilderInterface setProtocol(StringInterface protocol) {
+    public ReferenceBeanBuilderInterface setProtocol(String protocol) {
         return instance.setProtocol(protocol);
     }
 
-    public ReferenceBeanBuilderInterface setCheck(BooleanInterface check) {
+    public ReferenceBeanBuilderInterface setCheck(Boolean check) {
         return instance.setCheck(check);
     }
 
-    public ReferenceBeanBuilderInterface setInit(BooleanInterface init) {
+    public ReferenceBeanBuilderInterface setInit(Boolean init) {
         return instance.setInit(init);
     }
 
-    public ReferenceBeanBuilderInterface setGeneric(BooleanInterface generic) {
+    public ReferenceBeanBuilderInterface setGeneric(Boolean generic) {
         return instance.setGeneric(generic);
     }
 
-    public ReferenceBeanBuilderInterface setInjvm(BooleanInterface injvm) {
+    public ReferenceBeanBuilderInterface setInjvm(Boolean injvm) {
         return instance.setInjvm(injvm);
     }
 
-    public ReferenceBeanBuilderInterface setListener(StringInterface listener) {
+    public ReferenceBeanBuilderInterface setListener(String listener) {
         return instance.setListener(listener);
     }
 
-    public ReferenceBeanBuilderInterface setLazy(BooleanInterface lazy) {
+    public ReferenceBeanBuilderInterface setLazy(Boolean lazy) {
         return instance.setLazy(lazy);
     }
 
-    public ReferenceBeanBuilderInterface setOnconnect(StringInterface onconnect) {
+    public ReferenceBeanBuilderInterface setOnconnect(String onconnect) {
         return instance.setOnconnect(onconnect);
     }
 
-    public ReferenceBeanBuilderInterface setOndisconnect(StringInterface ondisconnect) {
+    public ReferenceBeanBuilderInterface setOndisconnect(String ondisconnect) {
         return instance.setOndisconnect(ondisconnect);
     }
 
-    public ReferenceBeanBuilderInterface setReconnect(StringInterface reconnect) {
+    public ReferenceBeanBuilderInterface setReconnect(String reconnect) {
         return instance.setReconnect(reconnect);
     }
 
-    public ReferenceBeanBuilderInterface setSticky(BooleanInterface sticky) {
+    public ReferenceBeanBuilderInterface setSticky(Boolean sticky) {
         return instance.setSticky(sticky);
     }
 
-    public ReferenceBeanBuilderInterface setVersion(StringInterface version) {
+    public ReferenceBeanBuilderInterface setVersion(String version) {
         return instance.setVersion(version);
     }
 
-    public ReferenceBeanBuilderInterface setGroup(StringInterface group) {
+    public ReferenceBeanBuilderInterface setGroup(String group) {
         return instance.setGroup(group);
     }
 
-    public ReferenceBeanBuilderInterface setProvidedBy(StringInterface providedBy) {
+    public ReferenceBeanBuilderInterface setProvidedBy(String providedBy) {
         return instance.setProvidedBy(providedBy);
     }
 
-    public ReferenceBeanBuilderInterface setStub(StringInterface stub) {
+    public ReferenceBeanBuilderInterface setStub(String stub) {
         return instance.setStub(stub);
     }
 
-    public ReferenceBeanBuilderInterface setCluster(StringInterface cluster) {
+    public ReferenceBeanBuilderInterface setCluster(String cluster) {
         return instance.setCluster(cluster);
     }
 
-    public ReferenceBeanBuilderInterface setProxy(StringInterface proxy) {
+    public ReferenceBeanBuilderInterface setProxy(String proxy) {
         return instance.setProxy(proxy);
     }
 
-    public ReferenceBeanBuilderInterface setConnections(IntegerInterface connections) {
+    public ReferenceBeanBuilderInterface setConnections(Integer connections) {
         return instance.setConnections(connections);
     }
 
-    public ReferenceBeanBuilderInterface setFilter(StringInterface filter) {
+    public ReferenceBeanBuilderInterface setFilter(String filter) {
         return instance.setFilter(filter);
     }
 
-    public ReferenceBeanBuilderInterface setLayer(StringInterface layer) {
+    public ReferenceBeanBuilderInterface setLayer(String layer) {
         return instance.setLayer(layer);
     }
 
-    public ReferenceBeanBuilderInterface setRegistry(StringInterface[] registryIds) {
+    public ReferenceBeanBuilderInterface setRegistry(String[] registryIds) {
         return instance.setRegistry(registryIds);
     }
 
     public ReferenceBeanBuilderInterface setRegistry(RegistryConfigInterface registry) {
-        return instance.setRegistry(registry);
+        return instance.setRegistry(registry.getInternalInstance(), registry);
     }
 
     public ReferenceBeanBuilderInterface setRegistries(List<? extends RegistryConfigInterface> registries) {
@@ -136,66 +136,66 @@ public class ReferenceBeanBuilder implements ReferenceBeanBuilderInterface {
     }
 
     public ReferenceBeanBuilderInterface setMonitor(MonitorConfigInterface monitor) {
+        return instance.setMonitor(monitor.getInternalInstance(), monitor);
+    }
+
+    public ReferenceBeanBuilderInterface setMonitor(String monitor) {
         return instance.setMonitor(monitor);
     }
 
-    public ReferenceBeanBuilderInterface setMonitor(StringInterface monitor) {
-        return instance.setMonitor(monitor);
-    }
-
-    public ReferenceBeanBuilderInterface setOwner(StringInterface owner) {
+    public ReferenceBeanBuilderInterface setOwner(String owner) {
         return instance.setOwner(owner);
     }
 
-    public ReferenceBeanBuilderInterface setCallbacks(IntegerInterface callbacks) {
+    public ReferenceBeanBuilderInterface setCallbacks(Integer callbacks) {
         return instance.setCallbacks(callbacks);
     }
 
-    public ReferenceBeanBuilderInterface setScope(StringInterface scope) {
+    public ReferenceBeanBuilderInterface setScope(String scope) {
         return instance.setScope(scope);
     }
 
-    public ReferenceBeanBuilderInterface setTag(StringInterface tag) {
+    public ReferenceBeanBuilderInterface setTag(String tag) {
         return instance.setTag(tag);
     }
 
-    public ReferenceBeanBuilderInterface setTimeout(IntegerInterface timeout) {
+    public ReferenceBeanBuilderInterface setTimeout(Integer timeout) {
         return instance.setTimeout(timeout);
     }
 
-    public ReferenceBeanBuilderInterface setRetries(IntegerInterface retries) {
+    public ReferenceBeanBuilderInterface setRetries(Integer retries) {
         return instance.setRetries(retries);
     }
 
-    public ReferenceBeanBuilderInterface setLoadBalance(StringInterface loadbalance) {
+    public ReferenceBeanBuilderInterface setLoadBalance(String loadbalance) {
         return instance.setLoadBalance(loadbalance);
     }
 
-    public ReferenceBeanBuilderInterface setAsync(BooleanInterface async) {
+    public ReferenceBeanBuilderInterface setAsync(Boolean async) {
         return instance.setAsync(async);
     }
 
-    public ReferenceBeanBuilderInterface setActives(IntegerInterface actives) {
+    public ReferenceBeanBuilderInterface setActives(Integer actives) {
         return instance.setActives(actives);
     }
 
-    public ReferenceBeanBuilderInterface setSent(BooleanInterface sent) {
+    public ReferenceBeanBuilderInterface setSent(Boolean sent) {
         return instance.setSent(sent);
     }
 
-    public ReferenceBeanBuilderInterface setMock(StringInterface mock) {
+    public ReferenceBeanBuilderInterface setMock(String mock) {
         return instance.setMock(mock);
     }
 
-    public ReferenceBeanBuilderInterface setMerger(StringInterface merger) {
+    public ReferenceBeanBuilderInterface setMerger(String merger) {
         return instance.setMerger(merger);
     }
 
-    public ReferenceBeanBuilderInterface setCache(StringInterface cache) {
+    public ReferenceBeanBuilderInterface setCache(String cache) {
         return instance.setCache(cache);
     }
 
-    public ReferenceBeanBuilderInterface setValidation(StringInterface validation) {
+    public ReferenceBeanBuilderInterface setValidation(String validation) {
         return instance.setValidation(validation);
     }
 
@@ -204,4 +204,12 @@ public class ReferenceBeanBuilder implements ReferenceBeanBuilderInterface {
     }
 
     protected ReferenceBeanBuilderInterface instance;
+
+    public ReferenceBeanBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ReferenceBeanBuilderInterface getInternalInstance() {
+        return instance;
+    }
 }

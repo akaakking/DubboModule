@@ -7,251 +7,251 @@ import org.apache.dubbo.config.AbstractConfig;
 
 public class ProtocolConfig extends AbstractConfig implements ProtocolConfigInterface {
 
-    public StringInterface getName() {
+    public String getName() {
         return instance.getName();
     }
 
-    public void setName(StringInterface name) {
+    public void setName(String name) {
         instance.setName(name);
     }
 
-    public StringInterface getHost() {
+    public String getHost() {
         return instance.getHost();
     }
 
-    public void setHost(StringInterface host) {
+    public void setHost(String host) {
         instance.setHost(host);
     }
 
-    public IntegerInterface getPort() {
+    public Integer getPort() {
         return instance.getPort();
     }
 
-    public void setPort(IntegerInterface port) {
+    public void setPort(Integer port) {
         instance.setPort(port);
     }
 
-    public StringInterface getPath() {
+    public String getPath() {
         return instance.getPath();
     }
 
-    public void setPath(StringInterface path) {
+    public void setPath(String path) {
         instance.setPath(path);
     }
 
-    public StringInterface getContextpath() {
+    public String getContextpath() {
         return instance.getContextpath();
     }
 
-    public void setContextpath(StringInterface contextpath) {
+    public void setContextpath(String contextpath) {
         instance.setContextpath(contextpath);
     }
 
-    public StringInterface getThreadpool() {
+    public String getThreadpool() {
         return instance.getThreadpool();
     }
 
-    public void setThreadpool(StringInterface threadpool) {
+    public void setThreadpool(String threadpool) {
         instance.setThreadpool(threadpool);
     }
 
-    public StringInterface getThreadname() {
+    public String getThreadname() {
         return instance.getThreadname();
     }
 
-    public void setThreadname(StringInterface threadname) {
+    public void setThreadname(String threadname) {
         instance.setThreadname(threadname);
     }
 
-    public IntegerInterface getCorethreads() {
+    public Integer getCorethreads() {
         return instance.getCorethreads();
     }
 
-    public void setCorethreads(IntegerInterface corethreads) {
+    public void setCorethreads(Integer corethreads) {
         instance.setCorethreads(corethreads);
     }
 
-    public IntegerInterface getThreads() {
+    public Integer getThreads() {
         return instance.getThreads();
     }
 
-    public void setThreads(IntegerInterface threads) {
+    public void setThreads(Integer threads) {
         instance.setThreads(threads);
     }
 
-    public IntegerInterface getIothreads() {
+    public Integer getIothreads() {
         return instance.getIothreads();
     }
 
-    public void setIothreads(IntegerInterface iothreads) {
+    public void setIothreads(Integer iothreads) {
         instance.setIothreads(iothreads);
     }
 
-    public IntegerInterface getAlive() {
+    public Integer getAlive() {
         return instance.getAlive();
     }
 
-    public void setAlive(IntegerInterface alive) {
+    public void setAlive(Integer alive) {
         instance.setAlive(alive);
     }
 
-    public IntegerInterface getQueues() {
+    public Integer getQueues() {
         return instance.getQueues();
     }
 
-    public void setQueues(IntegerInterface queues) {
+    public void setQueues(Integer queues) {
         instance.setQueues(queues);
     }
 
-    public IntegerInterface getAccepts() {
+    public Integer getAccepts() {
         return instance.getAccepts();
     }
 
-    public void setAccepts(IntegerInterface accepts) {
+    public void setAccepts(Integer accepts) {
         instance.setAccepts(accepts);
     }
 
-    public StringInterface getCodec() {
+    public String getCodec() {
         return instance.getCodec();
     }
 
-    public void setCodec(StringInterface codec) {
+    public void setCodec(String codec) {
         instance.setCodec(codec);
     }
 
-    public StringInterface getSerialization() {
+    public String getSerialization() {
         return instance.getSerialization();
     }
 
-    public void setSerialization(StringInterface serialization) {
+    public void setSerialization(String serialization) {
         instance.setSerialization(serialization);
     }
 
-    public StringInterface getCharset() {
+    public String getCharset() {
         return instance.getCharset();
     }
 
-    public void setCharset(StringInterface charset) {
+    public void setCharset(String charset) {
         instance.setCharset(charset);
     }
 
-    public IntegerInterface getPayload() {
+    public Integer getPayload() {
         return instance.getPayload();
     }
 
-    public void setPayload(IntegerInterface payload) {
+    public void setPayload(Integer payload) {
         instance.setPayload(payload);
     }
 
-    public IntegerInterface getBuffer() {
+    public Integer getBuffer() {
         return instance.getBuffer();
     }
 
-    public void setBuffer(IntegerInterface buffer) {
+    public void setBuffer(Integer buffer) {
         instance.setBuffer(buffer);
     }
 
-    public IntegerInterface getHeartbeat() {
+    public Integer getHeartbeat() {
         return instance.getHeartbeat();
     }
 
-    public void setHeartbeat(IntegerInterface heartbeat) {
+    public void setHeartbeat(Integer heartbeat) {
         instance.setHeartbeat(heartbeat);
     }
 
-    public StringInterface getServer() {
+    public String getServer() {
         return instance.getServer();
     }
 
-    public void setServer(StringInterface server) {
+    public void setServer(String server) {
         instance.setServer(server);
     }
 
-    public StringInterface getClient() {
+    public String getClient() {
         return instance.getClient();
     }
 
-    public void setClient(StringInterface client) {
+    public void setClient(String client) {
         instance.setClient(client);
     }
 
-    public StringInterface getAccesslog() {
+    public String getAccesslog() {
         return instance.getAccesslog();
     }
 
-    public void setAccesslog(StringInterface accesslog) {
+    public void setAccesslog(String accesslog) {
         instance.setAccesslog(accesslog);
     }
 
-    public StringInterface getTelnet() {
+    public String getTelnet() {
         return instance.getTelnet();
     }
 
-    public void setTelnet(StringInterface telnet) {
+    public void setTelnet(String telnet) {
         instance.setTelnet(telnet);
     }
 
-    public StringInterface getPrompt() {
+    public String getPrompt() {
         return instance.getPrompt();
     }
 
-    public void setPrompt(StringInterface prompt) {
+    public void setPrompt(String prompt) {
         instance.setPrompt(prompt);
     }
 
-    public StringInterface getStatus() {
+    public String getStatus() {
         return instance.getStatus();
     }
 
-    public void setStatus(StringInterface status) {
+    public void setStatus(String status) {
         instance.setStatus(status);
     }
 
-    public BooleanInterface isRegister() {
+    public Boolean isRegister() {
         return instance.isRegister();
     }
 
-    public void setRegister(BooleanInterface register) {
+    public void setRegister(Boolean register) {
         instance.setRegister(register);
     }
 
-    public StringInterface getTransporter() {
+    public String getTransporter() {
         return instance.getTransporter();
     }
 
-    public void setTransporter(StringInterface transporter) {
+    public void setTransporter(String transporter) {
         instance.setTransporter(transporter);
     }
 
-    public StringInterface getExchanger() {
+    public String getExchanger() {
         return instance.getExchanger();
     }
 
-    public void setExchanger(StringInterface exchanger) {
+    public void setExchanger(String exchanger) {
         instance.setExchanger(exchanger);
     }
 
-    public StringInterface getDispather() {
+    public String getDispather() {
         return instance.getDispather();
     }
 
-    public void setDispather(StringInterface dispather) {
+    public void setDispather(String dispather) {
         instance.setDispather(dispather);
     }
 
-    public StringInterface getDispatcher() {
+    public String getDispatcher() {
         return instance.getDispatcher();
     }
 
-    public void setDispatcher(StringInterface dispatcher) {
+    public void setDispatcher(String dispatcher) {
         instance.setDispatcher(dispatcher);
     }
 
-    public StringInterface getNetworker() {
+    public String getNetworker() {
         return instance.getNetworker();
     }
 
-    public void setNetworker(StringInterface networker) {
+    public void setNetworker(String networker) {
         instance.setNetworker(networker);
     }
 
@@ -263,40 +263,48 @@ public class ProtocolConfig extends AbstractConfig implements ProtocolConfigInte
         instance.setParameters(parameters);
     }
 
-    public BooleanInterface getSslEnabled() {
+    public Boolean getSslEnabled() {
         return instance.getSslEnabled();
     }
 
-    public void setSslEnabled(BooleanInterface sslEnabled) {
+    public void setSslEnabled(Boolean sslEnabled) {
         instance.setSslEnabled(sslEnabled);
     }
 
-    public BooleanInterface getKeepAlive() {
+    public Boolean getKeepAlive() {
         return instance.getKeepAlive();
     }
 
-    public void setKeepAlive(BooleanInterface keepAlive) {
+    public void setKeepAlive(Boolean keepAlive) {
         instance.setKeepAlive(keepAlive);
     }
 
-    public StringInterface getOptimizer() {
+    public String getOptimizer() {
         return instance.getOptimizer();
     }
 
-    public void setOptimizer(StringInterface optimizer) {
+    public void setOptimizer(String optimizer) {
         instance.setOptimizer(optimizer);
     }
 
-    public StringInterface getExtension() {
+    public String getExtension() {
         return instance.getExtension();
     }
 
-    public void setExtension(StringInterface extension) {
+    public void setExtension(String extension) {
         instance.setExtension(extension);
     }
 
     public boolean isValid() {
         return instance.isValid();
+    }
+
+    public ProtocolConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ProtocolConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public ProtocolConfig() {

@@ -6,7 +6,7 @@ import org.apache.dubbo.Interface.*;
 
 public class EnvironmentConfiguration implements EnvironmentConfigurationInterface {
 
-    public ObjectInterface getInternalProperty(StringInterface key) {
+    public Object getInternalProperty(String key) {
         return instance.getInternalProperty(key);
     }
 
@@ -15,4 +15,12 @@ public class EnvironmentConfiguration implements EnvironmentConfigurationInterfa
     }
 
     protected EnvironmentConfigurationInterface instance;
+
+    public EnvironmentConfigurationInterface getInternalInstance() {
+        return instance;
+    }
+
+    public EnvironmentConfigurationInterface getInternalInstance() {
+        return instance;
+    }
 }

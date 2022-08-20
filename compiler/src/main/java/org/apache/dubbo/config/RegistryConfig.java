@@ -7,175 +7,175 @@ import org.apache.dubbo.config.AbstractConfig;
 
 public class RegistryConfig extends AbstractConfig implements RegistryConfigInterface {
 
-    public StringInterface getId() {
+    public String getId() {
         return instance.getId();
     }
 
-    public StringInterface getProtocol() {
+    public String getProtocol() {
         return instance.getProtocol();
     }
 
-    public void setProtocol(StringInterface protocol) {
+    public void setProtocol(String protocol) {
         instance.setProtocol(protocol);
     }
 
-    public StringInterface getAddress() {
+    public String getAddress() {
         return instance.getAddress();
     }
 
-    public void setAddress(StringInterface address) {
+    public void setAddress(String address) {
         instance.setAddress(address);
     }
 
-    public IntegerInterface getPort() {
+    public Integer getPort() {
         return instance.getPort();
     }
 
-    public void setPort(IntegerInterface port) {
+    public void setPort(Integer port) {
         instance.setPort(port);
     }
 
-    public StringInterface getUsername() {
+    public String getUsername() {
         return instance.getUsername();
     }
 
-    public void setUsername(StringInterface username) {
+    public void setUsername(String username) {
         instance.setUsername(username);
     }
 
-    public StringInterface getPassword() {
+    public String getPassword() {
         return instance.getPassword();
     }
 
-    public void setPassword(StringInterface password) {
+    public void setPassword(String password) {
         instance.setPassword(password);
     }
 
-    public IntegerInterface getWait() {
+    public Integer getWait() {
         return instance.getWait();
     }
 
-    public void setWait(IntegerInterface wait) {
+    public void setWait(Integer wait) {
         instance.setWait(wait);
     }
 
-    public BooleanInterface isCheck() {
+    public Boolean isCheck() {
         return instance.isCheck();
     }
 
-    public void setCheck(BooleanInterface check) {
+    public void setCheck(Boolean check) {
         instance.setCheck(check);
     }
 
-    public StringInterface getFile() {
+    public String getFile() {
         return instance.getFile();
     }
 
-    public void setFile(StringInterface file) {
+    public void setFile(String file) {
         instance.setFile(file);
     }
 
-    public StringInterface getTransport() {
+    public String getTransport() {
         return instance.getTransport();
     }
 
-    public void setTransport(StringInterface transport) {
+    public void setTransport(String transport) {
         instance.setTransport(transport);
     }
 
-    public StringInterface getTransporter() {
+    public String getTransporter() {
         return instance.getTransporter();
     }
 
-    public void setTransporter(StringInterface transporter) {
+    public void setTransporter(String transporter) {
         instance.setTransporter(transporter);
     }
 
-    public StringInterface getServer() {
+    public String getServer() {
         return instance.getServer();
     }
 
-    public void setServer(StringInterface server) {
+    public void setServer(String server) {
         instance.setServer(server);
     }
 
-    public StringInterface getClient() {
+    public String getClient() {
         return instance.getClient();
     }
 
-    public void setClient(StringInterface client) {
+    public void setClient(String client) {
         instance.setClient(client);
     }
 
-    public IntegerInterface getTimeout() {
+    public Integer getTimeout() {
         return instance.getTimeout();
     }
 
-    public void setTimeout(IntegerInterface timeout) {
+    public void setTimeout(Integer timeout) {
         instance.setTimeout(timeout);
     }
 
-    public IntegerInterface getSession() {
+    public Integer getSession() {
         return instance.getSession();
     }
 
-    public void setSession(IntegerInterface session) {
+    public void setSession(Integer session) {
         instance.setSession(session);
     }
 
-    public BooleanInterface isDynamic() {
+    public Boolean isDynamic() {
         return instance.isDynamic();
     }
 
-    public void setDynamic(BooleanInterface dynamic) {
+    public void setDynamic(Boolean dynamic) {
         instance.setDynamic(dynamic);
     }
 
-    public BooleanInterface isRegister() {
+    public Boolean isRegister() {
         return instance.isRegister();
     }
 
-    public void setRegister(BooleanInterface register) {
+    public void setRegister(Boolean register) {
         instance.setRegister(register);
     }
 
-    public BooleanInterface isSubscribe() {
+    public Boolean isSubscribe() {
         return instance.isSubscribe();
     }
 
-    public void setSubscribe(BooleanInterface subscribe) {
+    public void setSubscribe(Boolean subscribe) {
         instance.setSubscribe(subscribe);
     }
 
-    public StringInterface getCluster() {
+    public String getCluster() {
         return instance.getCluster();
     }
 
-    public void setCluster(StringInterface cluster) {
+    public void setCluster(String cluster) {
         instance.setCluster(cluster);
     }
 
-    public StringInterface getZone() {
+    public String getZone() {
         return instance.getZone();
     }
 
-    public void setZone(StringInterface zone) {
+    public void setZone(String zone) {
         instance.setZone(zone);
     }
 
-    public StringInterface getGroup() {
+    public String getGroup() {
         return instance.getGroup();
     }
 
-    public void setGroup(StringInterface group) {
+    public void setGroup(String group) {
         instance.setGroup(group);
     }
 
-    public StringInterface getVersion() {
+    public String getVersion() {
         return instance.getVersion();
     }
 
-    public void setVersion(StringInterface version) {
+    public void setVersion(String version) {
         instance.setVersion(version);
     }
 
@@ -191,80 +191,88 @@ public class RegistryConfig extends AbstractConfig implements RegistryConfigInte
         instance.updateParameters(parameters);
     }
 
-    public BooleanInterface getSimplified() {
+    public Boolean getSimplified() {
         return instance.getSimplified();
     }
 
-    public void setSimplified(BooleanInterface simplified) {
+    public void setSimplified(Boolean simplified) {
         instance.setSimplified(simplified);
     }
 
-    public StringInterface getExtraKeys() {
+    public String getExtraKeys() {
         return instance.getExtraKeys();
     }
 
-    public void setExtraKeys(StringInterface extraKeys) {
+    public void setExtraKeys(String extraKeys) {
         instance.setExtraKeys(extraKeys);
     }
 
-    public BooleanInterface getUseAsConfigCenter() {
+    public Boolean getUseAsConfigCenter() {
         return instance.getUseAsConfigCenter();
     }
 
-    public void setUseAsConfigCenter(BooleanInterface useAsConfigCenter) {
+    public void setUseAsConfigCenter(Boolean useAsConfigCenter) {
         instance.setUseAsConfigCenter(useAsConfigCenter);
     }
 
-    public BooleanInterface getUseAsMetadataCenter() {
+    public Boolean getUseAsMetadataCenter() {
         return instance.getUseAsMetadataCenter();
     }
 
-    public void setUseAsMetadataCenter(BooleanInterface useAsMetadataCenter) {
+    public void setUseAsMetadataCenter(Boolean useAsMetadataCenter) {
         instance.setUseAsMetadataCenter(useAsMetadataCenter);
     }
 
-    public StringInterface getAccepts() {
+    public String getAccepts() {
         return instance.getAccepts();
     }
 
-    public void setAccepts(StringInterface accepts) {
+    public void setAccepts(String accepts) {
         instance.setAccepts(accepts);
     }
 
-    public BooleanInterface getPreferred() {
+    public Boolean getPreferred() {
         return instance.getPreferred();
     }
 
-    public void setPreferred(BooleanInterface preferred) {
+    public void setPreferred(Boolean preferred) {
         instance.setPreferred(preferred);
     }
 
-    public IntegerInterface getWeight() {
+    public Integer getWeight() {
         return instance.getWeight();
     }
 
-    public void setWeight(IntegerInterface weight) {
+    public void setWeight(Integer weight) {
         instance.setWeight(weight);
     }
 
-    public StringInterface getRegisterMode() {
+    public String getRegisterMode() {
         return instance.getRegisterMode();
     }
 
-    public void setRegisterMode(StringInterface registerMode) {
+    public void setRegisterMode(String registerMode) {
         instance.setRegisterMode(registerMode);
     }
 
-    public BooleanInterface getEnableEmptyProtection() {
+    public Boolean getEnableEmptyProtection() {
         return instance.getEnableEmptyProtection();
     }
 
-    public void setEnableEmptyProtection(BooleanInterface enableEmptyProtection) {
+    public void setEnableEmptyProtection(Boolean enableEmptyProtection) {
         instance.setEnableEmptyProtection(enableEmptyProtection);
     }
 
     public boolean isValid() {
         return instance.isValid();
+    }
+
+    public RegistryConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public RegistryConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public RegistryConfig() {

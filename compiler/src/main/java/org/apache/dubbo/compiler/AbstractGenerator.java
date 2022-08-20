@@ -473,7 +473,7 @@ public abstract class AbstractGenerator{
 
         // 没有泛型不做处理
         if (!genericValue.contains("<")) {
-            if (checkName(genericValue)) {
+            if (checkName(genericFullName)) {
                 return addInterface(shortName(genericValue));
             } else {
                 return shortName(genericValue);

@@ -7,35 +7,35 @@ import org.apache.dubbo.config.AbstractConfig;
 
 public class ModuleConfig extends AbstractConfig implements ModuleConfigInterface {
 
-    public StringInterface getName() {
+    public String getName() {
         return instance.getName();
     }
 
-    public void setName(StringInterface name) {
+    public void setName(String name) {
         instance.setName(name);
     }
 
-    public StringInterface getVersion() {
+    public String getVersion() {
         return instance.getVersion();
     }
 
-    public void setVersion(StringInterface version) {
+    public void setVersion(String version) {
         instance.setVersion(version);
     }
 
-    public StringInterface getOwner() {
+    public String getOwner() {
         return instance.getOwner();
     }
 
-    public void setOwner(StringInterface owner) {
+    public void setOwner(String owner) {
         instance.setOwner(owner);
     }
 
-    public StringInterface getOrganization() {
+    public String getOrganization() {
         return instance.getOrganization();
     }
 
-    public void setOrganization(StringInterface organization) {
+    public void setOrganization(String organization) {
         instance.setOrganization(organization);
     }
 
@@ -44,7 +44,7 @@ public class ModuleConfig extends AbstractConfig implements ModuleConfigInterfac
     }
 
     public void setRegistry(RegistryConfigInterface registry) {
-        instance.setRegistry(registry);
+        instance.setRegistry(registry.getInternalInstance(), registry);
     }
 
     public List<RegistryConfigInterface> getRegistries() {
@@ -60,51 +60,59 @@ public class ModuleConfig extends AbstractConfig implements ModuleConfigInterfac
     }
 
     public void setMonitor(MonitorConfigInterface monitor) {
+        instance.setMonitor(monitor.getInternalInstance(), monitor);
+    }
+
+    public void setMonitor(String monitor) {
         instance.setMonitor(monitor);
     }
 
-    public void setMonitor(StringInterface monitor) {
-        instance.setMonitor(monitor);
-    }
-
-    public BooleanInterface getBackground() {
+    public Boolean getBackground() {
         return instance.getBackground();
     }
 
-    public void setBackground(BooleanInterface background) {
+    public void setBackground(Boolean background) {
         instance.setBackground(background);
     }
 
-    public IntegerInterface getReferThreadNum() {
+    public Integer getReferThreadNum() {
         return instance.getReferThreadNum();
     }
 
-    public void setReferThreadNum(IntegerInterface referThreadNum) {
+    public void setReferThreadNum(Integer referThreadNum) {
         instance.setReferThreadNum(referThreadNum);
     }
 
-    public IntegerInterface getExportThreadNum() {
+    public Integer getExportThreadNum() {
         return instance.getExportThreadNum();
     }
 
-    public void setExportThreadNum(IntegerInterface exportThreadNum) {
+    public void setExportThreadNum(Integer exportThreadNum) {
         instance.setExportThreadNum(exportThreadNum);
     }
 
-    public BooleanInterface getReferAsync() {
+    public Boolean getReferAsync() {
         return instance.getReferAsync();
     }
 
-    public void setReferAsync(BooleanInterface referAsync) {
+    public void setReferAsync(Boolean referAsync) {
         instance.setReferAsync(referAsync);
     }
 
-    public BooleanInterface getExportAsync() {
+    public Boolean getExportAsync() {
         return instance.getExportAsync();
     }
 
-    public void setExportAsync(BooleanInterface exportAsync) {
+    public void setExportAsync(Boolean exportAsync) {
         instance.setExportAsync(exportAsync);
+    }
+
+    public ModuleConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ModuleConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public ModuleConfig() {

@@ -6,11 +6,11 @@ import org.apache.dubbo.Interface.*;
 
 public class InmemoryConfiguration implements InmemoryConfigurationInterface {
 
-    public ObjectInterface getInternalProperty(StringInterface key) {
+    public Object getInternalProperty(String key) {
         return instance.getInternalProperty(key);
     }
 
-    public void addProperty(StringInterface key, StringInterface value) {
+    public void addProperty(String key, String value) {
         instance.addProperty(key, value);
     }
 
@@ -27,6 +27,14 @@ public class InmemoryConfiguration implements InmemoryConfigurationInterface {
     }
 
     protected InmemoryConfigurationInterface instance;
+
+    public InmemoryConfigurationInterface getInternalInstance() {
+        return instance;
+    }
+
+    public InmemoryConfigurationInterface getInternalInstance() {
+        return instance;
+    }
 
     public InmemoryConfiguration() {
         instance = (InmemoryConfigurationInterface) DubboClassLoader.getInstance(InmemoryConfiguration.class.getName());

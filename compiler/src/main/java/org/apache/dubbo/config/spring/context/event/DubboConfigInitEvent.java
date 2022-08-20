@@ -7,8 +7,16 @@ import org.apache.dubbo.Interface.*;
 
 public class DubboConfigInitEvent extends ApplicationEvent implements DubboConfigInitEventInterface {
 
-    public ApplicationContextInterface getApplicationContext() {
+    public ApplicationContext getApplicationContext() {
         return instance.getApplicationContext();
+    }
+
+    public DubboConfigInitEventInterface getInternalInstance() {
+        return instance;
+    }
+
+    public DubboConfigInitEventInterface getInternalInstance() {
+        return instance;
     }
 
     public DubboConfigInitEvent(ApplicationContext source) {

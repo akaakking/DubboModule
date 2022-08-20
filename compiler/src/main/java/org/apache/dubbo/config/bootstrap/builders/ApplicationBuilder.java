@@ -8,87 +8,87 @@ import org.apache.dubbo.config.bootstrap.builders.AbstractBuilder;
 
 public class ApplicationBuilder extends AbstractBuilder<ApplicationConfig, ApplicationBuilder> implements ApplicationBuilderInterface {
 
-    public ApplicationBuilderInterface name(StringInterface name) {
+    public ApplicationBuilderInterface name(String name) {
         return instance.name(name);
     }
 
-    public ApplicationBuilderInterface metadata(StringInterface metadata) {
+    public ApplicationBuilderInterface metadata(String metadata) {
         return instance.metadata(metadata);
     }
 
-    public ApplicationBuilderInterface version(StringInterface version) {
+    public ApplicationBuilderInterface version(String version) {
         return instance.version(version);
     }
 
-    public ApplicationBuilderInterface owner(StringInterface owner) {
+    public ApplicationBuilderInterface owner(String owner) {
         return instance.owner(owner);
     }
 
-    public ApplicationBuilderInterface organization(StringInterface organization) {
+    public ApplicationBuilderInterface organization(String organization) {
         return instance.organization(organization);
     }
 
-    public ApplicationBuilderInterface architecture(StringInterface architecture) {
+    public ApplicationBuilderInterface architecture(String architecture) {
         return instance.architecture(architecture);
     }
 
-    public ApplicationBuilderInterface environment(StringInterface environment) {
+    public ApplicationBuilderInterface environment(String environment) {
         return instance.environment(environment);
     }
 
-    public ApplicationBuilderInterface compiler(StringInterface compiler) {
+    public ApplicationBuilderInterface compiler(String compiler) {
         return instance.compiler(compiler);
     }
 
-    public ApplicationBuilderInterface logger(StringInterface logger) {
+    public ApplicationBuilderInterface logger(String logger) {
         return instance.logger(logger);
     }
 
     public ApplicationBuilderInterface addRegistry(RegistryConfigInterface registry) {
-        return instance.addRegistry(registry);
+        return instance.addRegistry(registry.getInternalInstance(), registry);
     }
 
     public ApplicationBuilderInterface addRegistries(List<? extends RegistryConfigInterface> registries) {
         return instance.addRegistries(registries);
     }
 
-    public ApplicationBuilderInterface registryIds(StringInterface registryIds) {
+    public ApplicationBuilderInterface registryIds(String registryIds) {
         return instance.registryIds(registryIds);
     }
 
     public ApplicationBuilderInterface monitor(MonitorConfigInterface monitor) {
+        return instance.monitor(monitor.getInternalInstance(), monitor);
+    }
+
+    public ApplicationBuilderInterface monitor(String monitor) {
         return instance.monitor(monitor);
     }
 
-    public ApplicationBuilderInterface monitor(StringInterface monitor) {
-        return instance.monitor(monitor);
-    }
-
-    public ApplicationBuilderInterface isDefault(BooleanInterface isDefault) {
+    public ApplicationBuilderInterface isDefault(Boolean isDefault) {
         return instance.isDefault(isDefault);
     }
 
-    public ApplicationBuilderInterface dumpDirectory(StringInterface dumpDirectory) {
+    public ApplicationBuilderInterface dumpDirectory(String dumpDirectory) {
         return instance.dumpDirectory(dumpDirectory);
     }
 
-    public ApplicationBuilderInterface qosEnable(BooleanInterface qosEnable) {
+    public ApplicationBuilderInterface qosEnable(Boolean qosEnable) {
         return instance.qosEnable(qosEnable);
     }
 
-    public ApplicationBuilderInterface qosPort(IntegerInterface qosPort) {
+    public ApplicationBuilderInterface qosPort(Integer qosPort) {
         return instance.qosPort(qosPort);
     }
 
-    public ApplicationBuilderInterface qosAcceptForeignIp(BooleanInterface qosAcceptForeignIp) {
+    public ApplicationBuilderInterface qosAcceptForeignIp(Boolean qosAcceptForeignIp) {
         return instance.qosAcceptForeignIp(qosAcceptForeignIp);
     }
 
-    public ApplicationBuilderInterface shutwait(StringInterface shutwait) {
+    public ApplicationBuilderInterface shutwait(String shutwait) {
         return instance.shutwait(shutwait);
     }
 
-    public ApplicationBuilderInterface appendParameter(StringInterface key, StringInterface value) {
+    public ApplicationBuilderInterface appendParameter(String key, String value) {
         return instance.appendParameter(key, value);
     }
 
@@ -96,19 +96,19 @@ public class ApplicationBuilder extends AbstractBuilder<ApplicationConfig, Appli
         return instance.appendParameters(appendParameters);
     }
 
-    public ApplicationBuilderInterface metadataServicePort(IntegerInterface metadataServicePort) {
+    public ApplicationBuilderInterface metadataServicePort(Integer metadataServicePort) {
         return instance.metadataServicePort(metadataServicePort);
     }
 
-    public ApplicationBuilderInterface livenessProbe(StringInterface livenessProbe) {
+    public ApplicationBuilderInterface livenessProbe(String livenessProbe) {
         return instance.livenessProbe(livenessProbe);
     }
 
-    public ApplicationBuilderInterface readinessProbe(StringInterface readinessProbe) {
+    public ApplicationBuilderInterface readinessProbe(String readinessProbe) {
         return instance.readinessProbe(readinessProbe);
     }
 
-    public ApplicationBuilderInterface startupProbe(StringInterface startupProbe) {
+    public ApplicationBuilderInterface startupProbe(String startupProbe) {
         return instance.startupProbe(startupProbe);
     }
 
@@ -120,5 +120,13 @@ public class ApplicationBuilder extends AbstractBuilder<ApplicationConfig, Appli
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(newBuilder);
         return method.invoke();
+    }
+
+    public ApplicationBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ApplicationBuilderInterface getInternalInstance() {
+        return instance;
     }
 }

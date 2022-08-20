@@ -20,7 +20,7 @@ public class TypeDefinition implements TypeDefinitionInterface {
         return instance.getProperties();
     }
 
-    public StringInterface getType() {
+    public String getType() {
         return instance.getType();
     }
 
@@ -36,15 +36,15 @@ public class TypeDefinition implements TypeDefinitionInterface {
         instance.setProperties(properties);
     }
 
-    public void setType(StringInterface type) {
+    public void setType(String type) {
         instance.setType(type);
     }
 
-    public StringInterface toString() {
+    public String toString() {
         return instance.toString();
     }
 
-    public boolean equals(ObjectInterface o) {
+    public boolean equals(Object o) {
         return instance.equals(o);
     }
 
@@ -54,16 +54,24 @@ public class TypeDefinition implements TypeDefinitionInterface {
 
     protected TypeDefinitionInterface instance;
 
-    public static StringInterface[] formatTypes(StringInterface[] types) {
+    public static String[] formatTypes(String[] types) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(formatTypes, String[].class);
         return method.invoke(types);
     }
 
-    public static StringInterface formatType(StringInterface type) {
+    public static String formatType(String type) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(formatType, String.class);
         return method.invoke(type);
+    }
+
+    public TypeDefinitionInterface getInternalInstance() {
+        return instance;
+    }
+
+    public TypeDefinitionInterface getInternalInstance() {
+        return instance;
     }
 
     public TypeDefinition() {

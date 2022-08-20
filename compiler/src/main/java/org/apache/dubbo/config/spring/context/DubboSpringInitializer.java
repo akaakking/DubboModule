@@ -9,21 +9,29 @@ public class DubboSpringInitializer implements DubboSpringInitializerInterface {
 
     protected DubboSpringInitializerInterface instance;
 
-    public static void initialize(BeanDefinitionRegistryInterface registry) {
+    public static void initialize(BeanDefinitionRegistry registry) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(initialize, BeanDefinitionRegistry.class);
         method.invoke(registry);
     }
 
-    public static boolean remove(BeanDefinitionRegistryInterface registry) {
+    public static boolean remove(BeanDefinitionRegistry registry) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(remove, BeanDefinitionRegistry.class);
         return method.invoke(registry);
     }
 
-    public static boolean remove(ApplicationContextInterface springContext) {
+    public static boolean remove(ApplicationContext springContext) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(remove, ApplicationContext.class);
         return method.invoke(springContext);
+    }
+
+    public DubboSpringInitializerInterface getInternalInstance() {
+        return instance;
+    }
+
+    public DubboSpringInitializerInterface getInternalInstance() {
+        return instance;
     }
 }

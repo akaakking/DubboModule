@@ -5,22 +5,24 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.context.ApplicationEventPublisherAware;
+import org.springframework.context.ApplicationContext;
 import org.apache.dubbo.config.annotation.Service;
+import org.springframework.context.ApplicationEventPublisher;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.ServiceConfig;
 
 public class ServiceBean<T> extends ServiceConfig<T> implements ServiceBeanInterface<T> {
 
-    public void setApplicationContext(ApplicationContextInterface applicationContext) {
+    public void setApplicationContext(ApplicationContext applicationContext) {
         instance.setApplicationContext(applicationContext);
     }
 
-    public void setBeanName(StringInterface name) {
+    public void setBeanName(String name) {
         instance.setBeanName(name);
     }
 
-    public ServiceInterface getService() {
+    public Service getService() {
         return instance.getService();
     }
 
@@ -28,7 +30,7 @@ public class ServiceBean<T> extends ServiceConfig<T> implements ServiceBeanInter
         instance.afterPropertiesSet();
     }
 
-    public StringInterface getBeanName() {
+    public String getBeanName() {
         return instance.getBeanName();
     }
 
@@ -36,8 +38,16 @@ public class ServiceBean<T> extends ServiceConfig<T> implements ServiceBeanInter
         instance.destroy();
     }
 
-    public void setApplicationEventPublisher(ApplicationEventPublisherInterface applicationEventPublisher) {
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
         instance.setApplicationEventPublisher(applicationEventPublisher);
+    }
+
+    public ServiceBeanInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ServiceBeanInterface getInternalInstance() {
+        return instance;
     }
 
     public ServiceBean() {

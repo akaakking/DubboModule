@@ -7,7 +7,7 @@ import org.apache.dubbo.rpc.model.ServiceModel;
 
 public class ProviderModel extends ServiceModel implements ProviderModelInterface {
 
-    public ObjectInterface getServiceInstance() {
+    public Object getServiceInstance() {
         return instance.getServiceInstance();
     }
 
@@ -16,18 +16,18 @@ public class ProviderModel extends ServiceModel implements ProviderModelInterfac
     }
 
     public void addStatedUrl(RegisterStatedURLInterface url) {
-        instance.addStatedUrl(url);
+        instance.addStatedUrl(url.getInternalInstance(), url);
     }
 
     public List<ProviderMethodModelInterface> getAllMethodModels() {
         return instance.getAllMethodModels();
     }
 
-    public ProviderMethodModelInterface getMethodModel(StringInterface methodName, StringInterface[] argTypes) {
+    public ProviderMethodModelInterface getMethodModel(String methodName, String[] argTypes) {
         return instance.getMethodModel(methodName, argTypes);
     }
 
-    public List<ProviderMethodModelInterface> getMethodModelList(StringInterface methodName) {
+    public List<ProviderMethodModelInterface> getMethodModelList(String methodName) {
         return instance.getMethodModelList(methodName);
     }
 
@@ -39,12 +39,20 @@ public class ProviderModel extends ServiceModel implements ProviderModelInterfac
         instance.setServiceUrls(urls);
     }
 
-    public boolean equals(ObjectInterface o) {
+    public boolean equals(Object o) {
         return instance.equals(o);
     }
 
     public int hashCode() {
         return instance.hashCode();
+    }
+
+    public ProviderModelInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ProviderModelInterface getInternalInstance() {
+        return instance;
     }
 
     public ProviderModel(String serviceKey, Object serviceInstance, ServiceDescriptorInterface serviceDescriptor, ClassLoader interfaceClassLoader) {

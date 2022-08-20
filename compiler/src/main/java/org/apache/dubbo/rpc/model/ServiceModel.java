@@ -12,7 +12,7 @@ public class ServiceModel implements ServiceModelInterface {
     }
 
     public void setConfig(AbstractInterfaceConfigInterface config) {
-        instance.setConfig(config);
+        instance.setConfig(config.getInternalInstance(), config);
     }
 
     public ReferenceConfigBaseInterface<?> getReferenceConfig() {
@@ -23,15 +23,15 @@ public class ServiceModel implements ServiceModelInterface {
         return instance.getServiceConfig();
     }
 
-    public StringInterface getServiceKey() {
+    public String getServiceKey() {
         return instance.getServiceKey();
     }
 
-    public void setProxyObject(ObjectInterface proxyObject) {
+    public void setProxyObject(Object proxyObject) {
         instance.setProxyObject(proxyObject);
     }
 
-    public ObjectInterface getProxyObject() {
+    public Object getProxyObject() {
         return instance.getProxyObject();
     }
 
@@ -39,11 +39,11 @@ public class ServiceModel implements ServiceModelInterface {
         return instance.getServiceModel();
     }
 
-    public void setClassLoader(ClassLoaderInterface classLoader) {
+    public void setClassLoader(ClassLoader classLoader) {
         instance.setClassLoader(classLoader);
     }
 
-    public ClassLoaderInterface getClassLoader() {
+    public ClassLoader getClassLoader() {
         return instance.getClassLoader();
     }
 
@@ -55,11 +55,11 @@ public class ServiceModel implements ServiceModelInterface {
         return instance.getServiceInterfaceClass();
     }
 
-    public void setServiceKey(StringInterface serviceKey) {
+    public void setServiceKey(String serviceKey) {
         instance.setServiceKey(serviceKey);
     }
 
-    public StringInterface getServiceName() {
+    public String getServiceName() {
         return instance.getServiceName();
     }
 
@@ -79,11 +79,11 @@ public class ServiceModel implements ServiceModelInterface {
         instance.setDestroyCaller(destroyCaller);
     }
 
-    public ClassLoaderInterface getInterfaceClassLoader() {
+    public ClassLoader getInterfaceClassLoader() {
         return instance.getInterfaceClassLoader();
     }
 
-    public boolean equals(ObjectInterface o) {
+    public boolean equals(Object o) {
         return instance.equals(o);
     }
 
@@ -92,6 +92,14 @@ public class ServiceModel implements ServiceModelInterface {
     }
 
     protected ServiceModelInterface instance;
+
+    public ServiceModelInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ServiceModelInterface getInternalInstance() {
+        return instance;
+    }
 
     public ServiceModel(Object proxyObject, String serviceKey, ServiceDescriptorInterface serviceModel, ModuleModelInterface moduleModel, ClassLoader interfaceClassLoader) {
         Class[] params = new Class[]{Object.class, String.class, ServiceDescriptorInterface.class, ModuleModelInterface.class, ClassLoader.class};

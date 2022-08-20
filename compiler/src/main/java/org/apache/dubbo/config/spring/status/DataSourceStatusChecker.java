@@ -12,6 +12,14 @@ public class DataSourceStatusChecker implements DataSourceStatusCheckerInterface
 
     protected DataSourceStatusCheckerInterface instance;
 
+    public DataSourceStatusCheckerInterface getInternalInstance() {
+        return instance;
+    }
+
+    public DataSourceStatusCheckerInterface getInternalInstance() {
+        return instance;
+    }
+
     public DataSourceStatusChecker(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};

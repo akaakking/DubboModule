@@ -7,7 +7,7 @@ import org.apache.dubbo.Interface.*;
 public class DubboSpringInitCustomizerHolder implements DubboSpringInitCustomizerHolderInterface {
 
     public void addCustomizer(DubboSpringInitCustomizerInterface customizer) {
-        instance.addCustomizer(customizer);
+        instance.addCustomizer(customizer.getInternalInstance(), customizer);
     }
 
     public void clearCustomizers() {
@@ -24,5 +24,13 @@ public class DubboSpringInitCustomizerHolder implements DubboSpringInitCustomize
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(get);
         return method.invoke();
+    }
+
+    public DubboSpringInitCustomizerHolderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public DubboSpringInitCustomizerHolderInterface getInternalInstance() {
+        return instance;
     }
 }

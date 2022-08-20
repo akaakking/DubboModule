@@ -14,34 +14,34 @@ public class MetadataInfo implements MetadataInfoInterface {
     }
 
     public void addService(URLInterface url) {
-        instance.addService(url);
+        instance.addService(url.getInternalInstance(), url);
     }
 
     public void removeService(URLInterface url) {
-        instance.removeService(url);
+        instance.removeService(url.getInternalInstance(), url);
     }
 
-    public StringInterface getRevision() {
+    public String getRevision() {
         return instance.getRevision();
     }
 
-    public StringInterface calAndGetRevision() {
+    public String calAndGetRevision() {
         return instance.calAndGetRevision();
     }
 
-    public void setRevision(StringInterface revision) {
+    public void setRevision(String revision) {
         instance.setRevision(revision);
     }
 
-    public StringInterface getContent() {
+    public String getContent() {
         return instance.getContent();
     }
 
-    public StringInterface getApp() {
+    public String getApp() {
         return instance.getApp();
     }
 
-    public void setApp(StringInterface app) {
+    public void setApp(String app) {
         instance.setApp(app);
     }
 
@@ -49,15 +49,15 @@ public class MetadataInfo implements MetadataInfoInterface {
         return instance.getServices();
     }
 
-    public ServiceInfoInterface getServiceInfo(StringInterface protocolServiceKey) {
+    public ServiceInfoInterface getServiceInfo(String protocolServiceKey) {
         return instance.getServiceInfo(protocolServiceKey);
     }
 
-    public ServiceInfoInterface getNoProtocolServiceInfo(StringInterface serviceKeyWithoutProtocol) {
+    public ServiceInfoInterface getNoProtocolServiceInfo(String serviceKeyWithoutProtocol) {
         return instance.getNoProtocolServiceInfo(serviceKeyWithoutProtocol);
     }
 
-    public ServiceInfoInterface getValidServiceInfo(StringInterface serviceKey) {
+    public ServiceInfoInterface getValidServiceInfo(String serviceKey) {
         return instance.getValidServiceInfo(serviceKey);
     }
 
@@ -69,24 +69,24 @@ public class MetadataInfo implements MetadataInfoInterface {
         return instance.getInstanceParams();
     }
 
-    public StringInterface getParameter(StringInterface key, StringInterface serviceKey) {
+    public String getParameter(String key, String serviceKey) {
         return instance.getParameter(key, serviceKey);
     }
 
-    public Map<String, String> getParameters(StringInterface serviceKey) {
+    public Map<String, String> getParameters(String serviceKey) {
         return instance.getParameters(serviceKey);
     }
 
-    public StringInterface getServiceString(StringInterface protocolServiceKey) {
+    public String getServiceString(String protocolServiceKey) {
         return instance.getServiceString(protocolServiceKey);
     }
 
     public void addSubscribedURL(URLInterface url) {
-        instance.addSubscribedURL(url);
+        instance.addSubscribedURL(url.getInternalInstance(), url);
     }
 
     public boolean removeSubscribedURL(URLInterface url) {
-        return instance.removeSubscribedURL(url);
+        return instance.removeSubscribedURL(url.getInternalInstance(), url);
     }
 
     public ConcurrentNavigableMap<String, SortedSet<URLInterface>> getSubscribedServiceURLs() {
@@ -101,15 +101,15 @@ public class MetadataInfo implements MetadataInfoInterface {
         return instance.hashCode();
     }
 
-    public boolean equals(ObjectInterface obj) {
+    public boolean equals(Object obj) {
         return instance.equals(obj);
     }
 
-    public StringInterface toString() {
+    public String toString() {
         return instance.toString();
     }
 
-    public StringInterface toFullString() {
+    public String toFullString() {
         return instance.toFullString();
     }
 
@@ -118,6 +118,14 @@ public class MetadataInfo implements MetadataInfoInterface {
     }
 
     protected MetadataInfoInterface instance;
+
+    public MetadataInfoInterface getInternalInstance() {
+        return instance;
+    }
+
+    public MetadataInfoInterface getInternalInstance() {
+        return instance;
+    }
 
     public MetadataInfo() {
         instance = (MetadataInfoInterface) DubboClassLoader.getInstance(MetadataInfo.class.getName());

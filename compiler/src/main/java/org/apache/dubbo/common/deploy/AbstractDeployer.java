@@ -50,7 +50,7 @@ public class AbstractDeployer<E extends ScopeModelInterface> implements Abstract
         instance.setPending();
     }
 
-    public ThrowableInterface getError() {
+    public Throwable getError() {
         return instance.getError();
     }
 
@@ -59,4 +59,12 @@ public class AbstractDeployer<E extends ScopeModelInterface> implements Abstract
     }
 
     protected AbstractDeployerInterface instance;
+
+    public AbstractDeployerInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AbstractDeployerInterface getInternalInstance() {
+        return instance;
+    }
 }

@@ -6,47 +6,55 @@ import org.apache.dubbo.config.bootstrap.builders.AbstractInterfaceBuilder;
 
 public class AbstractReferenceBuilder<T extends AbstractReferenceConfigInterface, B extends AbstractReferenceBuilderInterface<T,B>> extends AbstractInterfaceBuilder<T, B> implements AbstractReferenceBuilderInterface<T, B> {
 
-    public B check(BooleanInterface check) {
+    public B check(Boolean check) {
         return instance.check(check);
     }
 
-    public B init(BooleanInterface init) {
+    public B init(Boolean init) {
         return instance.init(init);
     }
 
-    public B generic(StringInterface generic) {
+    public B generic(String generic) {
         return instance.generic(generic);
     }
 
-    public B generic(BooleanInterface generic) {
+    public B generic(Boolean generic) {
         return instance.generic(generic);
     }
 
-    public B injvm(BooleanInterface injvm) {
+    public B injvm(Boolean injvm) {
         return instance.injvm(injvm);
     }
 
-    public B lazy(BooleanInterface lazy) {
+    public B lazy(Boolean lazy) {
         return instance.lazy(lazy);
     }
 
-    public B reconnect(StringInterface reconnect) {
+    public B reconnect(String reconnect) {
         return instance.reconnect(reconnect);
     }
 
-    public B sticky(BooleanInterface sticky) {
+    public B sticky(Boolean sticky) {
         return instance.sticky(sticky);
     }
 
-    public B version(StringInterface version) {
+    public B version(String version) {
         return instance.version(version);
     }
 
-    public B group(StringInterface group) {
+    public B group(String group) {
         return instance.group(group);
     }
 
     public void build(T instance) {
         instance.build(instance);
+    }
+
+    public AbstractReferenceBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AbstractReferenceBuilderInterface getInternalInstance() {
+        return instance;
     }
 }

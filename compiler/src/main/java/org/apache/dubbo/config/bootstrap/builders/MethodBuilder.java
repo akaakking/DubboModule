@@ -7,59 +7,59 @@ import org.apache.dubbo.config.bootstrap.builders.AbstractMethodBuilder;
 
 public class MethodBuilder extends AbstractMethodBuilder<MethodConfig, MethodBuilder> implements MethodBuilderInterface {
 
-    public MethodBuilderInterface name(StringInterface name) {
+    public MethodBuilderInterface name(String name) {
         return instance.name(name);
     }
 
-    public MethodBuilderInterface stat(IntegerInterface stat) {
+    public MethodBuilderInterface stat(Integer stat) {
         return instance.stat(stat);
     }
 
-    public MethodBuilderInterface retry(BooleanInterface retry) {
+    public MethodBuilderInterface retry(Boolean retry) {
         return instance.retry(retry);
     }
 
-    public MethodBuilderInterface reliable(BooleanInterface reliable) {
+    public MethodBuilderInterface reliable(Boolean reliable) {
         return instance.reliable(reliable);
     }
 
-    public MethodBuilderInterface executes(IntegerInterface executes) {
+    public MethodBuilderInterface executes(Integer executes) {
         return instance.executes(executes);
     }
 
-    public MethodBuilderInterface deprecated(BooleanInterface deprecated) {
+    public MethodBuilderInterface deprecated(Boolean deprecated) {
         return instance.deprecated(deprecated);
     }
 
-    public MethodBuilderInterface sticky(BooleanInterface sticky) {
+    public MethodBuilderInterface sticky(Boolean sticky) {
         return instance.sticky(sticky);
     }
 
-    public MethodBuilderInterface isReturn(BooleanInterface isReturn) {
+    public MethodBuilderInterface isReturn(Boolean isReturn) {
         return instance.isReturn(isReturn);
     }
 
-    public MethodBuilderInterface oninvoke(ObjectInterface oninvoke) {
+    public MethodBuilderInterface oninvoke(Object oninvoke) {
         return instance.oninvoke(oninvoke);
     }
 
-    public MethodBuilderInterface oninvokeMethod(StringInterface oninvokeMethod) {
+    public MethodBuilderInterface oninvokeMethod(String oninvokeMethod) {
         return instance.oninvokeMethod(oninvokeMethod);
     }
 
-    public MethodBuilderInterface onreturn(ObjectInterface onreturn) {
+    public MethodBuilderInterface onreturn(Object onreturn) {
         return instance.onreturn(onreturn);
     }
 
-    public MethodBuilderInterface onreturnMethod(StringInterface onreturnMethod) {
+    public MethodBuilderInterface onreturnMethod(String onreturnMethod) {
         return instance.onreturnMethod(onreturnMethod);
     }
 
-    public MethodBuilderInterface onthrow(ObjectInterface onthrow) {
+    public MethodBuilderInterface onthrow(Object onthrow) {
         return instance.onthrow(onthrow);
     }
 
-    public MethodBuilderInterface onthrowMethod(StringInterface onthrowMethod) {
+    public MethodBuilderInterface onthrowMethod(String onthrowMethod) {
         return instance.onthrowMethod(onthrowMethod);
     }
 
@@ -68,18 +68,26 @@ public class MethodBuilder extends AbstractMethodBuilder<MethodConfig, MethodBui
     }
 
     public MethodBuilderInterface addArgument(ArgumentConfigInterface argument) {
-        return instance.addArgument(argument);
+        return instance.addArgument(argument.getInternalInstance(), argument);
     }
 
-    public MethodBuilderInterface service(StringInterface service) {
+    public MethodBuilderInterface service(String service) {
         return instance.service(service);
     }
 
-    public MethodBuilderInterface serviceId(StringInterface serviceId) {
+    public MethodBuilderInterface serviceId(String serviceId) {
         return instance.serviceId(serviceId);
     }
 
     public MethodConfigInterface build() {
         return instance.build();
+    }
+
+    public MethodBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public MethodBuilderInterface getInternalInstance() {
+        return instance;
     }
 }

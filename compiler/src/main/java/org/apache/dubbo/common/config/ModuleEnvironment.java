@@ -13,16 +13,16 @@ public class ModuleEnvironment extends Environment implements ModuleEnvironmentI
         instance.initialize();
     }
 
-    public ConfigurationInterface getPrefixedConfiguration(AbstractConfigInterface config, StringInterface prefix) {
-        return instance.getPrefixedConfiguration(config, prefix);
+    public ConfigurationInterface getPrefixedConfiguration(AbstractConfigInterface config, String prefix) {
+        return instance.getPrefixedConfiguration(config.getInternalInstance(), config, prefix);
     }
 
     public CompositeConfigurationInterface getConfiguration() {
         return instance.getConfiguration();
     }
 
-    public List<Map<String, String>> getConfigurationMaps(AbstractConfigInterface config, StringInterface prefix) {
-        return instance.getConfigurationMaps(config, prefix);
+    public List<Map<String, String>> getConfigurationMaps(AbstractConfigInterface config, String prefix) {
+        return instance.getConfigurationMaps(config.getInternalInstance(), config, prefix);
     }
 
     public ConfigurationInterface getDynamicGlobalConfiguration() {
@@ -34,14 +34,14 @@ public class ModuleEnvironment extends Environment implements ModuleEnvironmentI
     }
 
     public void setDynamicConfiguration(DynamicConfigurationInterface dynamicConfiguration) {
-        instance.setDynamicConfiguration(dynamicConfiguration);
+        instance.setDynamicConfiguration(dynamicConfiguration.getInternalInstance(), dynamicConfiguration);
     }
 
     public void destroy() {
         instance.destroy();
     }
 
-    public void setLocalMigrationRule(StringInterface localMigrationRule) {
+    public void setLocalMigrationRule(String localMigrationRule) {
         instance.setLocalMigrationRule(localMigrationRule);
     }
 
@@ -105,12 +105,20 @@ public class ModuleEnvironment extends Environment implements ModuleEnvironmentI
         return instance.getAppConfiguration();
     }
 
-    public StringInterface getLocalMigrationRule() {
+    public String getLocalMigrationRule() {
         return instance.getLocalMigrationRule();
     }
 
     public void refreshClassLoaders() {
         instance.refreshClassLoaders();
+    }
+
+    public ModuleEnvironmentInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ModuleEnvironmentInterface getInternalInstance() {
+        return instance;
     }
 
     public ModuleEnvironment(ModuleModelInterface moduleModel) {

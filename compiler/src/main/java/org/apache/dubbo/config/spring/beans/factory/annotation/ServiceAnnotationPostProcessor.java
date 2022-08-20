@@ -6,6 +6,11 @@ import org.springframework.context.ResourceLoaderAware;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.context.ApplicationContext;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import java.util.Collection;
@@ -17,31 +22,39 @@ public class ServiceAnnotationPostProcessor implements ServiceAnnotationPostProc
         instance.afterPropertiesSet();
     }
 
-    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistryInterface registry) {
+    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
         instance.postProcessBeanDefinitionRegistry(registry);
     }
 
-    public void postProcessBeanFactory(ConfigurableListableBeanFactoryInterface beanFactory) {
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
         instance.postProcessBeanFactory(beanFactory);
     }
 
-    public void setEnvironment(EnvironmentInterface environment) {
+    public void setEnvironment(Environment environment) {
         instance.setEnvironment(environment);
     }
 
-    public void setResourceLoader(ResourceLoaderInterface resourceLoader) {
+    public void setResourceLoader(ResourceLoader resourceLoader) {
         instance.setResourceLoader(resourceLoader);
     }
 
-    public void setBeanClassLoader(ClassLoaderInterface classLoader) {
+    public void setBeanClassLoader(ClassLoader classLoader) {
         instance.setBeanClassLoader(classLoader);
     }
 
-    public void setApplicationContext(ApplicationContextInterface applicationContext) {
+    public void setApplicationContext(ApplicationContext applicationContext) {
         instance.setApplicationContext(applicationContext);
     }
 
     protected ServiceAnnotationPostProcessorInterface instance;
+
+    public ServiceAnnotationPostProcessorInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ServiceAnnotationPostProcessorInterface getInternalInstance() {
+        return instance;
+    }
 
     public ServiceAnnotationPostProcessor(String packagesToScan) {
         Class[] params = new Class[]{String.class};

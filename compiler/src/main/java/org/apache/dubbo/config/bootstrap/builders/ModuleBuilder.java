@@ -7,19 +7,19 @@ import org.apache.dubbo.config.bootstrap.builders.AbstractBuilder;
 
 public class ModuleBuilder extends AbstractBuilder<ModuleConfig, ModuleBuilder> implements ModuleBuilderInterface {
 
-    public ModuleBuilderInterface name(StringInterface name) {
+    public ModuleBuilderInterface name(String name) {
         return instance.name(name);
     }
 
-    public ModuleBuilderInterface version(StringInterface version) {
+    public ModuleBuilderInterface version(String version) {
         return instance.version(version);
     }
 
-    public ModuleBuilderInterface owner(StringInterface owner) {
+    public ModuleBuilderInterface owner(String owner) {
         return instance.owner(owner);
     }
 
-    public ModuleBuilderInterface organization(StringInterface organization) {
+    public ModuleBuilderInterface organization(String organization) {
         return instance.organization(organization);
     }
 
@@ -28,18 +28,26 @@ public class ModuleBuilder extends AbstractBuilder<ModuleConfig, ModuleBuilder> 
     }
 
     public ModuleBuilderInterface addRegistry(RegistryConfigInterface registry) {
-        return instance.addRegistry(registry);
+        return instance.addRegistry(registry.getInternalInstance(), registry);
     }
 
     public ModuleBuilderInterface monitor(MonitorConfigInterface monitor) {
-        return instance.monitor(monitor);
+        return instance.monitor(monitor.getInternalInstance(), monitor);
     }
 
-    public ModuleBuilderInterface isDefault(BooleanInterface isDefault) {
+    public ModuleBuilderInterface isDefault(Boolean isDefault) {
         return instance.isDefault(isDefault);
     }
 
     public ModuleConfigInterface build() {
         return instance.build();
+    }
+
+    public ModuleBuilderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ModuleBuilderInterface getInternalInstance() {
+        return instance;
     }
 }

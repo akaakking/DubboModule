@@ -11,95 +11,95 @@ public class AbstractMethodConfig extends AbstractConfig implements AbstractMeth
         return instance.getScopeModel();
     }
 
-    public IntegerInterface getForks() {
+    public Integer getForks() {
         return instance.getForks();
     }
 
-    public void setForks(IntegerInterface forks) {
+    public void setForks(Integer forks) {
         instance.setForks(forks);
     }
 
-    public IntegerInterface getTimeout() {
+    public Integer getTimeout() {
         return instance.getTimeout();
     }
 
-    public void setTimeout(IntegerInterface timeout) {
+    public void setTimeout(Integer timeout) {
         instance.setTimeout(timeout);
     }
 
-    public IntegerInterface getRetries() {
+    public Integer getRetries() {
         return instance.getRetries();
     }
 
-    public void setRetries(IntegerInterface retries) {
+    public void setRetries(Integer retries) {
         instance.setRetries(retries);
     }
 
-    public StringInterface getLoadbalance() {
+    public String getLoadbalance() {
         return instance.getLoadbalance();
     }
 
-    public void setLoadbalance(StringInterface loadbalance) {
+    public void setLoadbalance(String loadbalance) {
         instance.setLoadbalance(loadbalance);
     }
 
-    public BooleanInterface isAsync() {
+    public Boolean isAsync() {
         return instance.isAsync();
     }
 
-    public void setAsync(BooleanInterface async) {
+    public void setAsync(Boolean async) {
         instance.setAsync(async);
     }
 
-    public IntegerInterface getActives() {
+    public Integer getActives() {
         return instance.getActives();
     }
 
-    public void setActives(IntegerInterface actives) {
+    public void setActives(Integer actives) {
         instance.setActives(actives);
     }
 
-    public BooleanInterface getSent() {
+    public Boolean getSent() {
         return instance.getSent();
     }
 
-    public void setSent(BooleanInterface sent) {
+    public void setSent(Boolean sent) {
         instance.setSent(sent);
     }
 
-    public StringInterface getMock() {
+    public String getMock() {
         return instance.getMock();
     }
 
-    public void setMock(StringInterface mock) {
+    public void setMock(String mock) {
         instance.setMock(mock);
     }
 
-    public void setMock(ObjectInterface mock) {
+    public void setMock(Object mock) {
         instance.setMock(mock);
     }
 
-    public StringInterface getMerger() {
+    public String getMerger() {
         return instance.getMerger();
     }
 
-    public void setMerger(StringInterface merger) {
+    public void setMerger(String merger) {
         instance.setMerger(merger);
     }
 
-    public StringInterface getCache() {
+    public String getCache() {
         return instance.getCache();
     }
 
-    public void setCache(StringInterface cache) {
+    public void setCache(String cache) {
         instance.setCache(cache);
     }
 
-    public StringInterface getValidation() {
+    public String getValidation() {
         return instance.getValidation();
     }
 
-    public void setValidation(StringInterface validation) {
+    public void setValidation(String validation) {
         instance.setValidation(validation);
     }
 
@@ -109,5 +109,13 @@ public class AbstractMethodConfig extends AbstractConfig implements AbstractMeth
 
     public void setParameters(Map<String, String> parameters) {
         instance.setParameters(parameters);
+    }
+
+    public AbstractMethodConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AbstractMethodConfigInterface getInternalInstance() {
+        return instance;
     }
 }

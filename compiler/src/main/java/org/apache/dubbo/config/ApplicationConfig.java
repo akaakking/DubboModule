@@ -8,51 +8,51 @@ import org.apache.dubbo.config.AbstractConfig;
 
 public class ApplicationConfig extends AbstractConfig implements ApplicationConfigInterface {
 
-    public StringInterface getName() {
+    public String getName() {
         return instance.getName();
     }
 
-    public void setName(StringInterface name) {
+    public void setName(String name) {
         instance.setName(name);
     }
 
-    public StringInterface getVersion() {
+    public String getVersion() {
         return instance.getVersion();
     }
 
-    public void setVersion(StringInterface version) {
+    public void setVersion(String version) {
         instance.setVersion(version);
     }
 
-    public StringInterface getOwner() {
+    public String getOwner() {
         return instance.getOwner();
     }
 
-    public void setOwner(StringInterface owner) {
+    public void setOwner(String owner) {
         instance.setOwner(owner);
     }
 
-    public StringInterface getOrganization() {
+    public String getOrganization() {
         return instance.getOrganization();
     }
 
-    public void setOrganization(StringInterface organization) {
+    public void setOrganization(String organization) {
         instance.setOrganization(organization);
     }
 
-    public StringInterface getArchitecture() {
+    public String getArchitecture() {
         return instance.getArchitecture();
     }
 
-    public void setArchitecture(StringInterface architecture) {
+    public void setArchitecture(String architecture) {
         instance.setArchitecture(architecture);
     }
 
-    public StringInterface getEnvironment() {
+    public String getEnvironment() {
         return instance.getEnvironment();
     }
 
-    public void setEnvironment(StringInterface environment) {
+    public void setEnvironment(String environment) {
         instance.setEnvironment(environment);
     }
 
@@ -61,7 +61,7 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
     }
 
     public void setRegistry(RegistryConfigInterface registry) {
-        instance.setRegistry(registry);
+        instance.setRegistry(registry.getInternalInstance(), registry);
     }
 
     public List<RegistryConfigInterface> getRegistries() {
@@ -72,11 +72,11 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
         instance.setRegistries(registries);
     }
 
-    public StringInterface getRegistryIds() {
+    public String getRegistryIds() {
         return instance.getRegistryIds();
     }
 
-    public void setRegistryIds(StringInterface registryIds) {
+    public void setRegistryIds(String registryIds) {
         instance.setRegistryIds(registryIds);
     }
 
@@ -84,99 +84,99 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
         return instance.getMonitor();
     }
 
-    public void setMonitor(StringInterface monitor) {
+    public void setMonitor(String monitor) {
         instance.setMonitor(monitor);
     }
 
     public void setMonitor(MonitorConfigInterface monitor) {
-        instance.setMonitor(monitor);
+        instance.setMonitor(monitor.getInternalInstance(), monitor);
     }
 
-    public StringInterface getCompiler() {
+    public String getCompiler() {
         return instance.getCompiler();
     }
 
-    public void setCompiler(StringInterface compiler) {
+    public void setCompiler(String compiler) {
         instance.setCompiler(compiler);
     }
 
-    public StringInterface getLogger() {
+    public String getLogger() {
         return instance.getLogger();
     }
 
-    public void setLogger(StringInterface logger) {
+    public void setLogger(String logger) {
         instance.setLogger(logger);
     }
 
-    public StringInterface getDumpDirectory() {
+    public String getDumpDirectory() {
         return instance.getDumpDirectory();
     }
 
-    public void setDumpDirectory(StringInterface dumpDirectory) {
+    public void setDumpDirectory(String dumpDirectory) {
         instance.setDumpDirectory(dumpDirectory);
     }
 
-    public BooleanInterface getQosEnable() {
+    public Boolean getQosEnable() {
         return instance.getQosEnable();
     }
 
-    public void setQosEnable(BooleanInterface qosEnable) {
+    public void setQosEnable(Boolean qosEnable) {
         instance.setQosEnable(qosEnable);
     }
 
-    public StringInterface getQosHost() {
+    public String getQosHost() {
         return instance.getQosHost();
     }
 
-    public void setQosHost(StringInterface qosHost) {
+    public void setQosHost(String qosHost) {
         instance.setQosHost(qosHost);
     }
 
-    public IntegerInterface getQosPort() {
+    public Integer getQosPort() {
         return instance.getQosPort();
     }
 
-    public void setQosPort(IntegerInterface qosPort) {
+    public void setQosPort(Integer qosPort) {
         instance.setQosPort(qosPort);
     }
 
-    public BooleanInterface getQosAcceptForeignIp() {
+    public Boolean getQosAcceptForeignIp() {
         return instance.getQosAcceptForeignIp();
     }
 
-    public void setQosAcceptForeignIp(BooleanInterface qosAcceptForeignIp) {
+    public void setQosAcceptForeignIp(Boolean qosAcceptForeignIp) {
         instance.setQosAcceptForeignIp(qosAcceptForeignIp);
     }
 
-    public BooleanInterface getQosEnableCompatible() {
+    public Boolean getQosEnableCompatible() {
         return instance.getQosEnableCompatible();
     }
 
-    public void setQosEnableCompatible(BooleanInterface qosEnable) {
+    public void setQosEnableCompatible(Boolean qosEnable) {
         instance.setQosEnableCompatible(qosEnable);
     }
 
-    public StringInterface getQosHostCompatible() {
+    public String getQosHostCompatible() {
         return instance.getQosHostCompatible();
     }
 
-    public void setQosHostCompatible(StringInterface qosHost) {
+    public void setQosHostCompatible(String qosHost) {
         instance.setQosHostCompatible(qosHost);
     }
 
-    public IntegerInterface getQosPortCompatible() {
+    public Integer getQosPortCompatible() {
         return instance.getQosPortCompatible();
     }
 
-    public void setQosPortCompatible(IntegerInterface qosPort) {
+    public void setQosPortCompatible(Integer qosPort) {
         instance.setQosPortCompatible(qosPort);
     }
 
-    public BooleanInterface getQosAcceptForeignIpCompatible() {
+    public Boolean getQosAcceptForeignIpCompatible() {
         return instance.getQosAcceptForeignIpCompatible();
     }
 
-    public void setQosAcceptForeignIpCompatible(BooleanInterface qosAcceptForeignIp) {
+    public void setQosAcceptForeignIpCompatible(Boolean qosAcceptForeignIp) {
         instance.setQosAcceptForeignIpCompatible(qosAcceptForeignIp);
     }
 
@@ -188,15 +188,15 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
         instance.setParameters(parameters);
     }
 
-    public StringInterface getShutwait() {
+    public String getShutwait() {
         return instance.getShutwait();
     }
 
-    public void setShutwait(StringInterface shutwait) {
+    public void setShutwait(String shutwait) {
         instance.setShutwait(shutwait);
     }
 
-    public StringInterface getHostname() {
+    public String getHostname() {
         return instance.getHostname();
     }
 
@@ -204,104 +204,112 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
         return instance.isValid();
     }
 
-    public StringInterface getMetadataType() {
+    public String getMetadataType() {
         return instance.getMetadataType();
     }
 
-    public void setMetadataType(StringInterface metadataType) {
+    public void setMetadataType(String metadataType) {
         instance.setMetadataType(metadataType);
     }
 
-    public BooleanInterface getRegisterConsumer() {
+    public Boolean getRegisterConsumer() {
         return instance.getRegisterConsumer();
     }
 
-    public void setRegisterConsumer(BooleanInterface registerConsumer) {
+    public void setRegisterConsumer(Boolean registerConsumer) {
         instance.setRegisterConsumer(registerConsumer);
     }
 
-    public StringInterface getRepository() {
+    public String getRepository() {
         return instance.getRepository();
     }
 
-    public void setRepository(StringInterface repository) {
+    public void setRepository(String repository) {
         instance.setRepository(repository);
     }
 
-    public BooleanInterface getEnableFileCache() {
+    public Boolean getEnableFileCache() {
         return instance.getEnableFileCache();
     }
 
-    public void setEnableFileCache(BooleanInterface enableFileCache) {
+    public void setEnableFileCache(Boolean enableFileCache) {
         instance.setEnableFileCache(enableFileCache);
     }
 
-    public StringInterface getRegisterMode() {
+    public String getRegisterMode() {
         return instance.getRegisterMode();
     }
 
-    public void setRegisterMode(StringInterface registerMode) {
+    public void setRegisterMode(String registerMode) {
         instance.setRegisterMode(registerMode);
     }
 
-    public BooleanInterface getEnableEmptyProtection() {
+    public Boolean getEnableEmptyProtection() {
         return instance.getEnableEmptyProtection();
     }
 
-    public void setEnableEmptyProtection(BooleanInterface enableEmptyProtection) {
+    public void setEnableEmptyProtection(Boolean enableEmptyProtection) {
         instance.setEnableEmptyProtection(enableEmptyProtection);
     }
 
-    public StringInterface getProtocol() {
+    public String getProtocol() {
         return instance.getProtocol();
     }
 
-    public void setProtocol(StringInterface protocol) {
+    public void setProtocol(String protocol) {
         instance.setProtocol(protocol);
     }
 
-    public IntegerInterface getMetadataServicePort() {
+    public Integer getMetadataServicePort() {
         return instance.getMetadataServicePort();
     }
 
-    public void setMetadataServicePort(IntegerInterface metadataServicePort) {
+    public void setMetadataServicePort(Integer metadataServicePort) {
         instance.setMetadataServicePort(metadataServicePort);
     }
 
-    public StringInterface getMetadataServiceProtocol() {
+    public String getMetadataServiceProtocol() {
         return instance.getMetadataServiceProtocol();
     }
 
-    public void setMetadataServiceProtocol(StringInterface metadataServiceProtocol) {
+    public void setMetadataServiceProtocol(String metadataServiceProtocol) {
         instance.setMetadataServiceProtocol(metadataServiceProtocol);
     }
 
-    public StringInterface getLivenessProbe() {
+    public String getLivenessProbe() {
         return instance.getLivenessProbe();
     }
 
-    public void setLivenessProbe(StringInterface livenessProbe) {
+    public void setLivenessProbe(String livenessProbe) {
         instance.setLivenessProbe(livenessProbe);
     }
 
-    public StringInterface getReadinessProbe() {
+    public String getReadinessProbe() {
         return instance.getReadinessProbe();
     }
 
-    public void setReadinessProbe(StringInterface readinessProbe) {
+    public void setReadinessProbe(String readinessProbe) {
         instance.setReadinessProbe(readinessProbe);
     }
 
-    public StringInterface getStartupProbe() {
+    public String getStartupProbe() {
         return instance.getStartupProbe();
     }
 
-    public void setStartupProbe(StringInterface startupProbe) {
+    public void setStartupProbe(String startupProbe) {
         instance.setStartupProbe(startupProbe);
     }
 
     public void refresh() {
         instance.refresh();
+    }
+
+    public ApplicationConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ApplicationConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public ApplicationConfig() {

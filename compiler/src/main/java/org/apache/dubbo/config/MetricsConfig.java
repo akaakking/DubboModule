@@ -10,19 +10,19 @@ public class MetricsConfig extends AbstractConfig implements MetricsConfigInterf
         return instance.toUrl();
     }
 
-    public StringInterface getProtocol() {
+    public String getProtocol() {
         return instance.getProtocol();
     }
 
-    public void setProtocol(StringInterface protocol) {
+    public void setProtocol(String protocol) {
         instance.setProtocol(protocol);
     }
 
-    public StringInterface getPort() {
+    public String getPort() {
         return instance.getPort();
     }
 
-    public void setPort(StringInterface port) {
+    public void setPort(String port) {
         instance.setPort(port);
     }
 
@@ -31,7 +31,7 @@ public class MetricsConfig extends AbstractConfig implements MetricsConfigInterf
     }
 
     public void setPrometheus(PrometheusConfigInterface prometheus) {
-        instance.setPrometheus(prometheus);
+        instance.setPrometheus(prometheus.getInternalInstance(), prometheus);
     }
 
     public AggregationConfigInterface getAggregation() {
@@ -39,7 +39,15 @@ public class MetricsConfig extends AbstractConfig implements MetricsConfigInterf
     }
 
     public void setAggregation(AggregationConfigInterface aggregation) {
-        instance.setAggregation(aggregation);
+        instance.setAggregation(aggregation.getInternalInstance(), aggregation);
+    }
+
+    public MetricsConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public MetricsConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public MetricsConfig() {

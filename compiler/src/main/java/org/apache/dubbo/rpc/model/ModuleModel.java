@@ -14,7 +14,7 @@ public class ModuleModel extends ScopeModel implements ModuleModelInterface {
         return instance.getServiceRepository();
     }
 
-    public void addClassLoader(ClassLoaderInterface classLoader) {
+    public void addClassLoader(ClassLoader classLoader) {
         instance.addClassLoader(classLoader);
     }
 
@@ -31,15 +31,23 @@ public class ModuleModel extends ScopeModel implements ModuleModelInterface {
     }
 
     public void setDeployer(ModuleDeployerInterface deployer) {
-        instance.setDeployer(deployer);
+        instance.setDeployer(deployer.getInternalInstance(), deployer);
     }
 
     public void setModuleEnvironment(ModuleEnvironmentInterface moduleEnvironment) {
-        instance.setModuleEnvironment(moduleEnvironment);
+        instance.setModuleEnvironment(moduleEnvironment.getInternalInstance(), moduleEnvironment);
     }
 
     public ConsumerModelInterface registerInternalConsumer(Class<?> internalService, URLInterface url) {
-        return instance.registerInternalConsumer(internalService, url);
+        return instance.registerInternalConsumer(internalService, url.getInternalInstance(), url);
+    }
+
+    public ModuleModelInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ModuleModelInterface getInternalInstance() {
+        return instance;
     }
 
     public ModuleModel(ApplicationModelInterface applicationModel) {

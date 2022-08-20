@@ -16,51 +16,51 @@ public class MethodConfig extends AbstractMethodConfig implements MethodConfigIn
         return instance.convertMethodConfig2AsyncInfo();
     }
 
-    public StringInterface getName() {
+    public String getName() {
         return instance.getName();
     }
 
-    public void setName(StringInterface name) {
+    public void setName(String name) {
         instance.setName(name);
     }
 
-    public IntegerInterface getStat() {
+    public Integer getStat() {
         return instance.getStat();
     }
 
-    public void setStat(IntegerInterface stat) {
+    public void setStat(Integer stat) {
         instance.setStat(stat);
     }
 
-    public BooleanInterface isRetry() {
+    public Boolean isRetry() {
         return instance.isRetry();
     }
 
-    public void setRetry(BooleanInterface retry) {
+    public void setRetry(Boolean retry) {
         instance.setRetry(retry);
     }
 
-    public BooleanInterface isReliable() {
+    public Boolean isReliable() {
         return instance.isReliable();
     }
 
-    public void setReliable(BooleanInterface reliable) {
+    public void setReliable(Boolean reliable) {
         instance.setReliable(reliable);
     }
 
-    public IntegerInterface getExecutes() {
+    public Integer getExecutes() {
         return instance.getExecutes();
     }
 
-    public void setExecutes(IntegerInterface executes) {
+    public void setExecutes(Integer executes) {
         instance.setExecutes(executes);
     }
 
-    public BooleanInterface getDeprecated() {
+    public Boolean getDeprecated() {
         return instance.getDeprecated();
     }
 
-    public void setDeprecated(BooleanInterface deprecated) {
+    public void setDeprecated(Boolean deprecated) {
         instance.setDeprecated(deprecated);
     }
 
@@ -72,102 +72,110 @@ public class MethodConfig extends AbstractMethodConfig implements MethodConfigIn
         instance.setArguments(arguments);
     }
 
-    public BooleanInterface getSticky() {
+    public Boolean getSticky() {
         return instance.getSticky();
     }
 
-    public void setSticky(BooleanInterface sticky) {
+    public void setSticky(Boolean sticky) {
         instance.setSticky(sticky);
     }
 
-    public ObjectInterface getOnreturn() {
+    public Object getOnreturn() {
         return instance.getOnreturn();
     }
 
-    public void setOnreturn(ObjectInterface onreturn) {
+    public void setOnreturn(Object onreturn) {
         instance.setOnreturn(onreturn);
     }
 
-    public StringInterface getOnreturnMethod() {
+    public String getOnreturnMethod() {
         return instance.getOnreturnMethod();
     }
 
-    public void setOnreturnMethod(StringInterface onreturnMethod) {
+    public void setOnreturnMethod(String onreturnMethod) {
         instance.setOnreturnMethod(onreturnMethod);
     }
 
-    public ObjectInterface getOnthrow() {
+    public Object getOnthrow() {
         return instance.getOnthrow();
     }
 
-    public void setOnthrow(ObjectInterface onthrow) {
+    public void setOnthrow(Object onthrow) {
         instance.setOnthrow(onthrow);
     }
 
-    public StringInterface getOnthrowMethod() {
+    public String getOnthrowMethod() {
         return instance.getOnthrowMethod();
     }
 
-    public void setOnthrowMethod(StringInterface onthrowMethod) {
+    public void setOnthrowMethod(String onthrowMethod) {
         instance.setOnthrowMethod(onthrowMethod);
     }
 
-    public ObjectInterface getOninvoke() {
+    public Object getOninvoke() {
         return instance.getOninvoke();
     }
 
-    public void setOninvoke(ObjectInterface oninvoke) {
+    public void setOninvoke(Object oninvoke) {
         instance.setOninvoke(oninvoke);
     }
 
-    public StringInterface getOninvokeMethod() {
+    public String getOninvokeMethod() {
         return instance.getOninvokeMethod();
     }
 
-    public void setOninvokeMethod(StringInterface oninvokeMethod) {
+    public void setOninvokeMethod(String oninvokeMethod) {
         instance.setOninvokeMethod(oninvokeMethod);
     }
 
-    public BooleanInterface isReturn() {
+    public Boolean isReturn() {
         return instance.isReturn();
     }
 
-    public void setReturn(BooleanInterface isReturn) {
+    public void setReturn(Boolean isReturn) {
         instance.setReturn(isReturn);
     }
 
-    public StringInterface getService() {
+    public String getService() {
         return instance.getService();
     }
 
-    public void setService(StringInterface service) {
+    public void setService(String service) {
         instance.setService(service);
     }
 
-    public StringInterface getServiceId() {
+    public String getServiceId() {
         return instance.getServiceId();
     }
 
-    public void setServiceId(StringInterface serviceId) {
+    public void setServiceId(String serviceId) {
         instance.setServiceId(serviceId);
     }
 
-    public void setParentPrefix(StringInterface parentPrefix) {
+    public void setParentPrefix(String parentPrefix) {
         instance.setParentPrefix(parentPrefix);
     }
 
-    public StringInterface getParentPrefix() {
+    public String getParentPrefix() {
         return instance.getParentPrefix();
     }
 
     public void addArgument(ArgumentConfigInterface argumentConfig) {
-        instance.addArgument(argumentConfig);
+        instance.addArgument(argumentConfig.getInternalInstance(), argumentConfig);
     }
 
-    public static List<MethodConfigInterface> constructMethodConfig(MethodInterface[] methods) {
+    public static List<MethodConfigInterface> constructMethodConfig(Method[] methods) {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(constructMethodConfig, Method[].class);
         return method.invoke(methods);
+    }
+
+    public MethodConfigInterface getInternalInstance() {
+        return instance;
+    }
+
+    public MethodConfigInterface getInternalInstance() {
+        return instance;
     }
 
     public MethodConfig() {

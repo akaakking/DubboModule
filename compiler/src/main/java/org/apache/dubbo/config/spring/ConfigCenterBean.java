@@ -4,13 +4,14 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.env.Environment;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.ConfigCenterConfig;
 
 public class ConfigCenterBean extends ConfigCenterConfig implements ConfigCenterBeanInterface {
 
-    public void setApplicationContext(ApplicationContextInterface applicationContext) {
+    public void setApplicationContext(ApplicationContext applicationContext) {
         instance.setApplicationContext(applicationContext);
     }
 
@@ -18,20 +19,28 @@ public class ConfigCenterBean extends ConfigCenterConfig implements ConfigCenter
         instance.destroy();
     }
 
-    public void setEnvironment(EnvironmentInterface environment) {
+    public void setEnvironment(Environment environment) {
         instance.setEnvironment(environment);
     }
 
-    public ApplicationContextInterface getApplicationContext() {
+    public ApplicationContext getApplicationContext() {
         return instance.getApplicationContext();
     }
 
-    public BooleanInterface getIncludeSpringEnv() {
+    public Boolean getIncludeSpringEnv() {
         return instance.getIncludeSpringEnv();
     }
 
-    public void setIncludeSpringEnv(BooleanInterface includeSpringEnv) {
+    public void setIncludeSpringEnv(Boolean includeSpringEnv) {
         instance.setIncludeSpringEnv(includeSpringEnv);
+    }
+
+    public ConfigCenterBeanInterface getInternalInstance() {
+        return instance;
+    }
+
+    public ConfigCenterBeanInterface getInternalInstance() {
+        return instance;
     }
 
     public ConfigCenterBean() {

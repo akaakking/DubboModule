@@ -1,5 +1,6 @@
 package org.apache.dubbo.config.spring.context.properties;
 
+import org.springframework.core.env.Environment;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 
@@ -21,9 +22,17 @@ public class AbstractDubboConfigBinder implements AbstractDubboConfigBinderInter
         instance.setIgnoreInvalidFields(ignoreInvalidFields);
     }
 
-    public void setEnvironment(EnvironmentInterface environment) {
+    public void setEnvironment(Environment environment) {
         instance.setEnvironment(environment);
     }
 
     protected AbstractDubboConfigBinderInterface instance;
+
+    public AbstractDubboConfigBinderInterface getInternalInstance() {
+        return instance;
+    }
+
+    public AbstractDubboConfigBinderInterface getInternalInstance() {
+        return instance;
+    }
 }

@@ -13,15 +13,15 @@ public class DubboSpringInitContext implements DubboSpringInitContextInterface {
         instance.markAsBound();
     }
 
-    public BeanDefinitionRegistryInterface getRegistry() {
+    public BeanDefinitionRegistry getRegistry() {
         return instance.getRegistry();
     }
 
-    public ConfigurableListableBeanFactoryInterface getBeanFactory() {
+    public ConfigurableListableBeanFactory getBeanFactory() {
         return instance.getBeanFactory();
     }
 
-    public ApplicationContextInterface getApplicationContext() {
+    public ApplicationContext getApplicationContext() {
         return instance.getApplicationContext();
     }
 
@@ -34,7 +34,7 @@ public class DubboSpringInitContext implements DubboSpringInitContextInterface {
     }
 
     public void setModuleModel(ModuleModelInterface moduleModel) {
-        instance.setModuleModel(moduleModel);
+        instance.setModuleModel(moduleModel.getInternalInstance(), moduleModel);
     }
 
     public boolean isKeepRunningOnSpringClosed() {
@@ -49,9 +49,17 @@ public class DubboSpringInitContext implements DubboSpringInitContextInterface {
         return instance.getModuleAttributes();
     }
 
-    public void setModuleAttribute(StringInterface key, ObjectInterface value) {
+    public void setModuleAttribute(String key, Object value) {
         instance.setModuleAttribute(key, value);
     }
 
     protected DubboSpringInitContextInterface instance;
+
+    public DubboSpringInitContextInterface getInternalInstance() {
+        return instance;
+    }
+
+    public DubboSpringInitContextInterface getInternalInstance() {
+        return instance;
+    }
 }
