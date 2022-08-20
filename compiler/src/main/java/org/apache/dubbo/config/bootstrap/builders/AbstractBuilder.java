@@ -18,8 +18,4 @@ public class AbstractBuilder<C extends AbstractConfigInterface, B extends Abstra
     public AbstractBuilderInterface getInternalInstance() {
         return instance;
     }
-
-    public AbstractBuilderInterface getInternalInstance() {
-        return instance;
-    }
 }

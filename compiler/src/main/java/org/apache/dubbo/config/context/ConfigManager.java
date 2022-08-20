@@ -11,7 +11,7 @@ import org.apache.dubbo.config.context.AbstractConfigManager;
 public class ConfigManager extends AbstractConfigManager implements ConfigManagerInterface {
 
     public void setApplication(ApplicationConfigInterface application) {
-        instance.setApplication(application.getInternalInstance(), application);
+        instance.setApplication(application.getInternalInstance());
     }
 
     public Optional<ApplicationConfigInterface> getApplication() {
@@ -23,7 +23,7 @@ public class ConfigManager extends AbstractConfigManager implements ConfigManage
     }
 
     public void setMonitor(MonitorConfigInterface monitor) {
-        instance.setMonitor(monitor.getInternalInstance(), monitor);
+        instance.setMonitor(monitor.getInternalInstance());
     }
 
     public Optional<MonitorConfigInterface> getMonitor() {
@@ -31,7 +31,7 @@ public class ConfigManager extends AbstractConfigManager implements ConfigManage
     }
 
     public void setMetrics(MetricsConfigInterface metrics) {
-        instance.setMetrics(metrics.getInternalInstance(), metrics);
+        instance.setMetrics(metrics.getInternalInstance());
     }
 
     public Optional<MetricsConfigInterface> getMetrics() {
@@ -39,7 +39,7 @@ public class ConfigManager extends AbstractConfigManager implements ConfigManage
     }
 
     public void setSsl(SslConfigInterface sslConfig) {
-        instance.setSsl(sslConfig.getInternalInstance(), sslConfig);
+        instance.setSsl(sslConfig.getInternalInstance());
     }
 
     public Optional<SslConfigInterface> getSsl() {
@@ -47,7 +47,7 @@ public class ConfigManager extends AbstractConfigManager implements ConfigManage
     }
 
     public void addConfigCenter(ConfigCenterConfigInterface configCenter) {
-        instance.addConfigCenter(configCenter.getInternalInstance(), configCenter);
+        instance.addConfigCenter(configCenter.getInternalInstance());
     }
 
     public void addConfigCenters(Iterable<ConfigCenterConfigInterface> configCenters) {
@@ -67,7 +67,7 @@ public class ConfigManager extends AbstractConfigManager implements ConfigManage
     }
 
     public void addMetadataReport(MetadataReportConfigInterface metadataReportConfig) {
-        instance.addMetadataReport(metadataReportConfig.getInternalInstance(), metadataReportConfig);
+        instance.addMetadataReport(metadataReportConfig.getInternalInstance());
     }
 
     public void addMetadataReports(Iterable<MetadataReportConfigInterface> metadataReportConfigs) {
@@ -83,7 +83,7 @@ public class ConfigManager extends AbstractConfigManager implements ConfigManage
     }
 
     public void addProtocol(ProtocolConfigInterface protocolConfig) {
-        instance.addProtocol(protocolConfig.getInternalInstance(), protocolConfig);
+        instance.addProtocol(protocolConfig.getInternalInstance());
     }
 
     public void addProtocols(Iterable<ProtocolConfigInterface> protocolConfigs) {
@@ -107,7 +107,7 @@ public class ConfigManager extends AbstractConfigManager implements ConfigManage
     }
 
     public void addRegistry(RegistryConfigInterface registryConfig) {
-        instance.addRegistry(registryConfig.getInternalInstance(), registryConfig);
+        instance.addRegistry(registryConfig.getInternalInstance());
     }
 
     public void addRegistries(Iterable<RegistryConfigInterface> registryConfigs) {
@@ -136,10 +136,6 @@ public class ConfigManager extends AbstractConfigManager implements ConfigManage
 
     public ConfigModeInterface getConfigMode() {
         return instance.getConfigMode();
-    }
-
-    public ConfigManagerInterface getInternalInstance() {
-        return instance;
     }
 
     public ConfigManagerInterface getInternalInstance() {

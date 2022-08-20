@@ -70,10 +70,6 @@ public class TypeDefinition implements TypeDefinitionInterface {
         return instance;
     }
 
-    public TypeDefinitionInterface getInternalInstance() {
-        return instance;
-    }
-
     public TypeDefinition() {
         instance = (TypeDefinitionInterface) DubboClassLoader.getInstance(TypeDefinition.class.getName());
     }

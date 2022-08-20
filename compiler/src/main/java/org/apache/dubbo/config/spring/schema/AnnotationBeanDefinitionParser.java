@@ -9,8 +9,4 @@ public class AnnotationBeanDefinitionParser extends AbstractSingleBeanDefinition
     public AnnotationBeanDefinitionParserInterface getInternalInstance() {
         return instance;
     }
-
-    public AnnotationBeanDefinitionParserInterface getInternalInstance() {
-        return instance;
-    }
 }

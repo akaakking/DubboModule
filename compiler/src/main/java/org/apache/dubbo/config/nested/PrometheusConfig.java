@@ -10,7 +10,7 @@ public class PrometheusConfig implements PrometheusConfigInterface {
     }
 
     public void setExporter(ExporterInterface exporter) {
-        instance.setExporter(exporter.getInternalInstance(), exporter);
+        instance.setExporter(exporter.getInternalInstance());
     }
 
     public PushgatewayInterface getPushgateway() {
@@ -18,14 +18,10 @@ public class PrometheusConfig implements PrometheusConfigInterface {
     }
 
     public void setPushgateway(PushgatewayInterface pushgateway) {
-        instance.setPushgateway(pushgateway.getInternalInstance(), pushgateway);
+        instance.setPushgateway(pushgateway.getInternalInstance());
     }
 
     protected PrometheusConfigInterface instance;
-
-    public PrometheusConfigInterface getInternalInstance() {
-        return instance;
-    }
 
     public PrometheusConfigInterface getInternalInstance() {
         return instance;

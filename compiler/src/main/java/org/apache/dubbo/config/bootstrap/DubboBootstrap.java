@@ -74,7 +74,7 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public void setTakeoverMode(BootstrapTakeoverModeInterface takeoverMode) {
-        instance.setTakeoverMode(takeoverMode.getInternalInstance(), takeoverMode);
+        instance.setTakeoverMode(takeoverMode.getInternalInstance());
     }
 
     public BootstrapTakeoverModeInterface getTakeoverMode() {
@@ -98,7 +98,7 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public DubboBootstrapInterface metadataReport(MetadataReportConfigInterface metadataReportConfig) {
-        return instance.metadataReport(metadataReportConfig.getInternalInstance(), metadataReportConfig);
+        return instance.metadataReport(metadataReportConfig.getInternalInstance());
     }
 
     public DubboBootstrapInterface metadataReports(List<MetadataReportConfigInterface> metadataReportConfigs) {
@@ -114,7 +114,7 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public DubboBootstrapInterface application(ApplicationConfigInterface applicationConfig) {
-        return instance.application(applicationConfig.getInternalInstance(), applicationConfig);
+        return instance.application(applicationConfig.getInternalInstance());
     }
 
     public DubboBootstrapInterface registry(Consumer<RegistryBuilderInterface> consumerBuilder) {
@@ -126,7 +126,7 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public DubboBootstrapInterface registry(RegistryConfigInterface registryConfig) {
-        return instance.registry(registryConfig.getInternalInstance(), registryConfig);
+        return instance.registry(registryConfig.getInternalInstance());
     }
 
     public DubboBootstrapInterface registries(List<RegistryConfigInterface> registryConfigs) {
@@ -142,7 +142,7 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public DubboBootstrapInterface protocol(ProtocolConfigInterface protocolConfig) {
-        return instance.protocol(protocolConfig.getInternalInstance(), protocolConfig);
+        return instance.protocol(protocolConfig.getInternalInstance());
     }
 
     public DubboBootstrapInterface protocols(List<ProtocolConfigInterface> protocolConfigs) {
@@ -166,7 +166,7 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public DubboBootstrapInterface service(ServiceConfigInterface<?> serviceConfig, ModuleModelInterface moduleModel) {
-        return instance.service(serviceConfig, moduleModel.getInternalInstance(), moduleModel);
+        return instance.service(serviceConfig, moduleModel.getInternalInstance());
     }
 
     public <S> DubboBootstrapInterface reference(Consumer<ReferenceBuilderInterface<S>> consumerBuilder) {
@@ -186,7 +186,7 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public DubboBootstrapInterface reference(ReferenceConfigInterface<?> referenceConfig, ModuleModelInterface moduleModel) {
-        return instance.reference(referenceConfig, moduleModel.getInternalInstance(), moduleModel);
+        return instance.reference(referenceConfig, moduleModel.getInternalInstance());
     }
 
     public DubboBootstrapInterface provider(Consumer<ProviderBuilderInterface> builderConsumer) {
@@ -198,7 +198,7 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public DubboBootstrapInterface provider(ProviderConfigInterface providerConfig) {
-        return instance.provider(providerConfig.getInternalInstance(), providerConfig);
+        return instance.provider(providerConfig.getInternalInstance());
     }
 
     public DubboBootstrapInterface providers(List<ProviderConfigInterface> providerConfigs) {
@@ -206,7 +206,7 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public DubboBootstrapInterface provider(ProviderConfigInterface providerConfig, ModuleModelInterface moduleModel) {
-        return instance.provider(providerConfig.getInternalInstance(), providerConfig, moduleModel.getInternalInstance(), moduleModel);
+        return instance.provider(providerConfig.getInternalInstance(), moduleModel.getInternalInstance());
     }
 
     public DubboBootstrapInterface consumer(Consumer<ConsumerBuilderInterface> builderConsumer) {
@@ -218,7 +218,7 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public DubboBootstrapInterface consumer(ConsumerConfigInterface consumerConfig) {
-        return instance.consumer(consumerConfig.getInternalInstance(), consumerConfig);
+        return instance.consumer(consumerConfig.getInternalInstance());
     }
 
     public DubboBootstrapInterface consumers(List<ConsumerConfigInterface> consumerConfigs) {
@@ -226,15 +226,15 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public DubboBootstrapInterface consumer(ConsumerConfigInterface consumerConfig, ModuleModelInterface moduleModel) {
-        return instance.consumer(consumerConfig.getInternalInstance(), consumerConfig, moduleModel.getInternalInstance(), moduleModel);
+        return instance.consumer(consumerConfig.getInternalInstance(), moduleModel.getInternalInstance());
     }
 
     public DubboBootstrapInterface module(ModuleConfigInterface moduleConfig) {
-        return instance.module(moduleConfig.getInternalInstance(), moduleConfig);
+        return instance.module(moduleConfig.getInternalInstance());
     }
 
     public DubboBootstrapInterface module(ModuleConfigInterface moduleConfig, ModuleModelInterface moduleModel) {
-        return instance.module(moduleConfig.getInternalInstance(), moduleConfig, moduleModel.getInternalInstance(), moduleModel);
+        return instance.module(moduleConfig.getInternalInstance(), moduleModel.getInternalInstance());
     }
 
     public DubboBootstrapInterface configCenter(Consumer<ConfigCenterBuilderInterface> consumerBuilder) {
@@ -246,7 +246,7 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public DubboBootstrapInterface configCenter(ConfigCenterConfigInterface configCenterConfig) {
-        return instance.configCenter(configCenterConfig.getInternalInstance(), configCenterConfig);
+        return instance.configCenter(configCenterConfig.getInternalInstance());
     }
 
     public DubboBootstrapInterface configCenters(List<ConfigCenterConfigInterface> configCenterConfigs) {
@@ -254,15 +254,15 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public DubboBootstrapInterface monitor(MonitorConfigInterface monitor) {
-        return instance.monitor(monitor.getInternalInstance(), monitor);
+        return instance.monitor(monitor.getInternalInstance());
     }
 
     public DubboBootstrapInterface metrics(MetricsConfigInterface metrics) {
-        return instance.metrics(metrics.getInternalInstance(), metrics);
+        return instance.metrics(metrics.getInternalInstance());
     }
 
     public DubboBootstrapInterface ssl(SslConfigInterface sslConfig) {
-        return instance.ssl(sslConfig.getInternalInstance(), sslConfig);
+        return instance.ssl(sslConfig.getInternalInstance());
     }
 
     public ModuleInterface newModule() {
@@ -270,7 +270,7 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     }
 
     public ModuleInterface newModule(ModuleConfigInterface moduleConfig) {
-        return instance.newModule(moduleConfig.getInternalInstance(), moduleConfig);
+        return instance.newModule(moduleConfig.getInternalInstance());
     }
 
     public DubboBootstrapInterface endModule() {
@@ -313,10 +313,6 @@ public class DubboBootstrap implements DubboBootstrapInterface {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(reset, boolean.class);
         method.invoke(destroy);
-    }
-
-    public DubboBootstrapInterface getInternalInstance() {
-        return instance;
     }
 
     public DubboBootstrapInterface getInternalInstance() {

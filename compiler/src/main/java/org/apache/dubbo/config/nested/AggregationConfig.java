@@ -34,8 +34,4 @@ public class AggregationConfig implements AggregationConfigInterface {
     public AggregationConfigInterface getInternalInstance() {
         return instance;
     }
-
-    public AggregationConfigInterface getInternalInstance() {
-        return instance;
-    }
 }

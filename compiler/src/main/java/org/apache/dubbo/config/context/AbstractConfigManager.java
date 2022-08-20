@@ -15,7 +15,7 @@ public class AbstractConfigManager extends LifecycleAdapter implements AbstractC
     }
 
     public <T extends AbstractConfigInterface> T addConfig(AbstractConfigInterface config) {
-        return instance.addConfig(config.getInternalInstance(), config);
+        return instance.addConfig(config.getInternalInstance());
     }
 
     public <C extends AbstractConfigInterface> Map<String, C> getConfigsMap(Class<C> cls) {
@@ -47,7 +47,7 @@ public class AbstractConfigManager extends LifecycleAdapter implements AbstractC
     }
 
     public boolean removeConfig(AbstractConfigInterface config) {
-        return instance.removeConfig(config.getInternalInstance(), config);
+        return instance.removeConfig(config.getInternalInstance());
     }
 
     public void destroy() {
@@ -60,10 +60,6 @@ public class AbstractConfigManager extends LifecycleAdapter implements AbstractC
 
     public boolean isInitialized() {
         return instance.isInitialized();
-    }
-
-    public AbstractConfigManagerInterface getInternalInstance() {
-        return instance;
     }
 
     public AbstractConfigManagerInterface getInternalInstance() {

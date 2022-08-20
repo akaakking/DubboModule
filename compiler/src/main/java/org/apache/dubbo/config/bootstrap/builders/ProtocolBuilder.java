@@ -164,8 +164,4 @@ public class ProtocolBuilder extends AbstractBuilder<ProtocolConfig, ProtocolBui
     public ProtocolBuilderInterface getInternalInstance() {
         return instance;
     }
-
-    public ProtocolBuilderInterface getInternalInstance() {
-        return instance;
-    }
 }

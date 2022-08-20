@@ -32,10 +32,6 @@ public class DubboBootstrapApplicationListener implements DubboBootstrapApplicat
         return instance;
     }
 
-    public DubboBootstrapApplicationListenerInterface getInternalInstance() {
-        return instance;
-    }
-
     public DubboBootstrapApplicationListener() {
         instance = (DubboBootstrapApplicationListenerInterface) DubboClassLoader.getInstance(DubboBootstrapApplicationListener.class.getName());
     }

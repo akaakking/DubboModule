@@ -61,7 +61,7 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
     }
 
     public void setRegistry(RegistryConfigInterface registry) {
-        instance.setRegistry(registry.getInternalInstance(), registry);
+        instance.setRegistry(registry.getInternalInstance());
     }
 
     public List<RegistryConfigInterface> getRegistries() {
@@ -89,7 +89,7 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
     }
 
     public void setMonitor(MonitorConfigInterface monitor) {
-        instance.setMonitor(monitor.getInternalInstance(), monitor);
+        instance.setMonitor(monitor.getInternalInstance());
     }
 
     public String getCompiler() {
@@ -302,10 +302,6 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
 
     public void refresh() {
         instance.refresh();
-    }
-
-    public ApplicationConfigInterface getInternalInstance() {
-        return instance;
     }
 
     public ApplicationConfigInterface getInternalInstance() {

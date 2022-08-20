@@ -7,7 +7,7 @@ import org.apache.dubbo.Interface.*;
 public class ExtensionDirector implements ExtensionDirectorInterface {
 
     public void addExtensionPostProcessor(ExtensionPostProcessorInterface processor) {
-        instance.addExtensionPostProcessor(processor.getInternalInstance(), processor);
+        instance.addExtensionPostProcessor(processor.getInternalInstance());
     }
 
     public List<ExtensionPostProcessorInterface> getExtensionPostProcessors() {
@@ -35,10 +35,6 @@ public class ExtensionDirector implements ExtensionDirectorInterface {
     }
 
     protected ExtensionDirectorInterface instance;
-
-    public ExtensionDirectorInterface getInternalInstance() {
-        return instance;
-    }
 
     public ExtensionDirectorInterface getInternalInstance() {
         return instance;

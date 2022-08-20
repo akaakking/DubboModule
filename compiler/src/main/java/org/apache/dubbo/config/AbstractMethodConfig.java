@@ -114,8 +114,4 @@ public class AbstractMethodConfig extends AbstractConfig implements AbstractMeth
     public AbstractMethodConfigInterface getInternalInstance() {
         return instance;
     }
-
-    public AbstractMethodConfigInterface getInternalInstance() {
-        return instance;
-    }
 }

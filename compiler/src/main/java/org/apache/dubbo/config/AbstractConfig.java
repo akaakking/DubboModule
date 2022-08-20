@@ -18,7 +18,7 @@ public class AbstractConfig implements AbstractConfigInterface {
     }
 
     public void setScopeModel(ScopeModelInterface scopeModel) {
-        instance.setScopeModel(scopeModel.getInternalInstance(), scopeModel);
+        instance.setScopeModel(scopeModel.getInternalInstance());
     }
 
     public String getId() {
@@ -42,7 +42,7 @@ public class AbstractConfig implements AbstractConfigInterface {
     }
 
     public void overrideWithConfig(AbstractConfigInterface newOne, boolean overrideAll) {
-        instance.overrideWithConfig(newOne.getInternalInstance(), newOne, overrideAll);
+        instance.overrideWithConfig(newOne.getInternalInstance(), overrideAll);
     }
 
     public void refresh() {
@@ -113,10 +113,6 @@ public class AbstractConfig implements AbstractConfigInterface {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(getTypePrefix, Class.class);
         return method.invoke(cls);
-    }
-
-    public AbstractConfigInterface getInternalInstance() {
-        return instance;
     }
 
     public AbstractConfigInterface getInternalInstance() {

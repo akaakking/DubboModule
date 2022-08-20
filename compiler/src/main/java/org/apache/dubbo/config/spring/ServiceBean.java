@@ -46,10 +46,6 @@ public class ServiceBean<T> extends ServiceConfig<T> implements ServiceBeanInter
         return instance;
     }
 
-    public ServiceBeanInterface getInternalInstance() {
-        return instance;
-    }
-
     public ServiceBean() {
         instance = (ServiceBeanInterface) DubboClassLoader.getInstance(ServiceBean.class.getName());
     }

@@ -303,10 +303,6 @@ public class ProtocolConfig extends AbstractConfig implements ProtocolConfigInte
         return instance;
     }
 
-    public ProtocolConfigInterface getInternalInstance() {
-        return instance;
-    }
-
     public ProtocolConfig() {
         instance = (ProtocolConfigInterface) DubboClassLoader.getInstance(ProtocolConfig.class.getName());
     }

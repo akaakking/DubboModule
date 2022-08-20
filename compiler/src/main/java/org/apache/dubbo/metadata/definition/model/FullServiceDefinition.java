@@ -22,8 +22,4 @@ public class FullServiceDefinition extends ServiceDefinition implements FullServ
     public FullServiceDefinitionInterface getInternalInstance() {
         return instance;
     }
-
-    public FullServiceDefinitionInterface getInternalInstance() {
-        return instance;
-    }
 }

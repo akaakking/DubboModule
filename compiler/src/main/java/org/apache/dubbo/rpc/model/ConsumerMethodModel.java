@@ -44,10 +44,6 @@ public class ConsumerMethodModel implements ConsumerMethodModelInterface {
         return instance;
     }
 
-    public ConsumerMethodModelInterface getInternalInstance() {
-        return instance;
-    }
-
     public ConsumerMethodModel(Method method) {
         Class[] params = new Class[]{Method.class};
         Object[] args = new Object[]{method};

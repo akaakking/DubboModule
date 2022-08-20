@@ -45,8 +45,4 @@ public class ConsumerBuilder extends AbstractReferenceBuilder<ConsumerConfig, Co
     public ConsumerBuilderInterface getInternalInstance() {
         return instance;
     }
-
-    public ConsumerBuilderInterface getInternalInstance() {
-        return instance;
-    }
 }

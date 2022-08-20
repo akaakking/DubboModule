@@ -68,8 +68,4 @@ public class ServiceDefinition implements ServiceDefinitionInterface {
     public ServiceDefinitionInterface getInternalInstance() {
         return instance;
     }
-
-    public ServiceDefinitionInterface getInternalInstance() {
-        return instance;
-    }
 }

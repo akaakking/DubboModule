@@ -32,10 +32,6 @@ public class InmemoryConfiguration implements InmemoryConfigurationInterface {
         return instance;
     }
 
-    public InmemoryConfigurationInterface getInternalInstance() {
-        return instance;
-    }
-
     public InmemoryConfiguration() {
         instance = (InmemoryConfigurationInterface) DubboClassLoader.getInstance(InmemoryConfiguration.class.getName());
     }

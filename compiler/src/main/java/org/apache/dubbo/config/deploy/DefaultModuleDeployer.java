@@ -47,10 +47,6 @@ public class DefaultModuleDeployer extends AbstractDeployer<ModuleModel> impleme
         return instance;
     }
 
-    public DefaultModuleDeployerInterface getInternalInstance() {
-        return instance;
-    }
-
     public DefaultModuleDeployer(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};

@@ -48,10 +48,6 @@ public class CompositeReferenceCache implements CompositeReferenceCacheInterface
         return instance;
     }
 
-    public CompositeReferenceCacheInterface getInternalInstance() {
-        return instance;
-    }
-
     public CompositeReferenceCache(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};

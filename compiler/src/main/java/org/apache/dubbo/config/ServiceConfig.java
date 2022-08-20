@@ -29,15 +29,11 @@ public class ServiceConfig<T> extends ServiceConfigBase<T> implements ServiceCon
     }
 
     public void addServiceListener(ServiceListenerInterface listener) {
-        instance.addServiceListener(listener.getInternalInstance(), listener);
+        instance.addServiceListener(listener.getInternalInstance());
     }
 
     public Callable<Void> getDestroyRunner() {
         return instance.getDestroyRunner();
-    }
-
-    public ServiceConfigInterface getInternalInstance() {
-        return instance;
     }
 
     public ServiceConfigInterface getInternalInstance() {

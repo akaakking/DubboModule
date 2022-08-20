@@ -15,10 +15,6 @@ public class DubboConfigInitEvent extends ApplicationEvent implements DubboConfi
         return instance;
     }
 
-    public DubboConfigInitEventInterface getInternalInstance() {
-        return instance;
-    }
-
     public DubboConfigInitEvent(ApplicationContext source) {
         Class[] params = new Class[]{ApplicationContext.class};
         Object[] args = new Object[]{source};

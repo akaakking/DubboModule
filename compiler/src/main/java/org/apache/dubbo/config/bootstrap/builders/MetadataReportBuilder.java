@@ -68,8 +68,4 @@ public class MetadataReportBuilder extends AbstractBuilder<MetadataReportConfig,
     public MetadataReportBuilderInterface getInternalInstance() {
         return instance;
     }
-
-    public MetadataReportBuilderInterface getInternalInstance() {
-        return instance;
-    }
 }

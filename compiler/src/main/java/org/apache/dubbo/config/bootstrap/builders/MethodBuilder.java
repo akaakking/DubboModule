@@ -68,7 +68,7 @@ public class MethodBuilder extends AbstractMethodBuilder<MethodConfig, MethodBui
     }
 
     public MethodBuilderInterface addArgument(ArgumentConfigInterface argument) {
-        return instance.addArgument(argument.getInternalInstance(), argument);
+        return instance.addArgument(argument.getInternalInstance());
     }
 
     public MethodBuilderInterface service(String service) {
@@ -81,10 +81,6 @@ public class MethodBuilder extends AbstractMethodBuilder<MethodConfig, MethodBui
 
     public MethodConfigInterface build() {
         return instance.build();
-    }
-
-    public MethodBuilderInterface getInternalInstance() {
-        return instance;
     }
 
     public MethodBuilderInterface getInternalInstance() {

@@ -24,10 +24,6 @@ public class ServiceRepository implements ServiceRepositoryInterface {
         return instance;
     }
 
-    public ServiceRepositoryInterface getInternalInstance() {
-        return instance;
-    }
-
     public ServiceRepository(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};

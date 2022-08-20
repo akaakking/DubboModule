@@ -6,22 +6,18 @@ import org.apache.dubbo.Interface.*;
 public class SpringScopeModelInitializer implements SpringScopeModelInitializerInterface {
 
     public void initializeFrameworkModel(FrameworkModelInterface frameworkModel) {
-        instance.initializeFrameworkModel(frameworkModel.getInternalInstance(), frameworkModel);
+        instance.initializeFrameworkModel(frameworkModel.getInternalInstance());
     }
 
     public void initializeApplicationModel(ApplicationModelInterface applicationModel) {
-        instance.initializeApplicationModel(applicationModel.getInternalInstance(), applicationModel);
+        instance.initializeApplicationModel(applicationModel.getInternalInstance());
     }
 
     public void initializeModuleModel(ModuleModelInterface moduleModel) {
-        instance.initializeModuleModel(moduleModel.getInternalInstance(), moduleModel);
+        instance.initializeModuleModel(moduleModel.getInternalInstance());
     }
 
     protected SpringScopeModelInitializerInterface instance;
-
-    public SpringScopeModelInitializerInterface getInternalInstance() {
-        return instance;
-    }
 
     public SpringScopeModelInitializerInterface getInternalInstance() {
         return instance;

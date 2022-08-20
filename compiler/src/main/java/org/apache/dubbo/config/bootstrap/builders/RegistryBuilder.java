@@ -148,8 +148,4 @@ public class RegistryBuilder extends AbstractBuilder<RegistryConfig, RegistryBui
     public RegistryBuilderInterface getInternalInstance() {
         return instance;
     }
-
-    public RegistryBuilderInterface getInternalInstance() {
-        return instance;
-    }
 }

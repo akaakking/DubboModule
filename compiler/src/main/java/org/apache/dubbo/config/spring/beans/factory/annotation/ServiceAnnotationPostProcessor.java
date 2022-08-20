@@ -52,10 +52,6 @@ public class ServiceAnnotationPostProcessor implements ServiceAnnotationPostProc
         return instance;
     }
 
-    public ServiceAnnotationPostProcessorInterface getInternalInstance() {
-        return instance;
-    }
-
     public ServiceAnnotationPostProcessor(String packagesToScan) {
         Class[] params = new Class[]{String.class};
         Object[] args = new Object[]{packagesToScan};

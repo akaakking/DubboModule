@@ -60,7 +60,7 @@ public class AbstractServiceBuilder<T extends AbstractServiceConfigInterface, B 
     }
 
     public B addProtocol(ProtocolConfigInterface protocol) {
-        return instance.addProtocol(protocol.getInternalInstance(), protocol);
+        return instance.addProtocol(protocol.getInternalInstance());
     }
 
     public B protocolIds(String protocolIds) {
@@ -85,10 +85,6 @@ public class AbstractServiceBuilder<T extends AbstractServiceConfigInterface, B 
 
     public void build(T instance) {
         instance.build(instance);
-    }
-
-    public AbstractServiceBuilderInterface getInternalInstance() {
-        return instance;
     }
 
     public AbstractServiceBuilderInterface getInternalInstance() {

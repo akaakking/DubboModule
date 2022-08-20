@@ -121,8 +121,4 @@ public class AbstractReferenceConfig extends AbstractInterfaceConfig implements 
     public AbstractReferenceConfigInterface getInternalInstance() {
         return instance;
     }
-
-    public AbstractReferenceConfigInterface getInternalInstance() {
-        return instance;
-    }
 }

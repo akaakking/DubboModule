@@ -19,10 +19,6 @@ public class DubboBeanDefinitionParser implements DubboBeanDefinitionParserInter
         return instance;
     }
 
-    public DubboBeanDefinitionParserInterface getInternalInstance() {
-        return instance;
-    }
-
     public DubboBeanDefinitionParser(Class<?> beanClass) {
         Class[] params = new Class[]{ClassClass<?>.class};
         Object[] args = new Object[]{beanClass};

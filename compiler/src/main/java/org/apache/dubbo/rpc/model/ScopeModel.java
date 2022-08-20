@@ -17,7 +17,7 @@ public class ScopeModel implements ScopeModelInterface {
     }
 
     public void addDestroyListener(ScopeModelDestroyListenerInterface listener) {
-        instance.addDestroyListener(listener.getInternalInstance(), listener);
+        instance.addDestroyListener(listener.getInternalInstance());
     }
 
     public Map<String, Object> getAttributes() {
@@ -93,10 +93,6 @@ public class ScopeModel implements ScopeModelInterface {
     }
 
     protected ScopeModelInterface instance;
-
-    public ScopeModelInterface getInternalInstance() {
-        return instance;
-    }
 
     public ScopeModelInterface getInternalInstance() {
         return instance;

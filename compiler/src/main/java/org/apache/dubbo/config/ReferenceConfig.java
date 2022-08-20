@@ -41,10 +41,6 @@ public class ReferenceConfig<T> extends ReferenceConfigBase<T> implements Refere
         return instance;
     }
 
-    public ReferenceConfigInterface getInternalInstance() {
-        return instance;
-    }
-
     public ReferenceConfig() {
         instance = (ReferenceConfigInterface) DubboClassLoader.getInstance(ReferenceConfig.class.getName());
     }

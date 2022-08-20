@@ -19,8 +19,4 @@ public class SystemConfiguration implements SystemConfigurationInterface {
     public SystemConfigurationInterface getInternalInstance() {
         return instance;
     }
-
-    public SystemConfigurationInterface getInternalInstance() {
-        return instance;
-    }
 }

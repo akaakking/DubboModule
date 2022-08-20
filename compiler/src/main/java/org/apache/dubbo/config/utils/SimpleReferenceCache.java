@@ -84,8 +84,4 @@ public class SimpleReferenceCache implements SimpleReferenceCacheInterface {
     public SimpleReferenceCacheInterface getInternalInstance() {
         return instance;
     }
-
-    public SimpleReferenceCacheInterface getInternalInstance() {
-        return instance;
-    }
 }

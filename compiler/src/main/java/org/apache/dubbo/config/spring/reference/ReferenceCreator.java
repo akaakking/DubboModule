@@ -26,8 +26,4 @@ public class ReferenceCreator implements ReferenceCreatorInterface {
     public ReferenceCreatorInterface getInternalInstance() {
         return instance;
     }
-
-    public ReferenceCreatorInterface getInternalInstance() {
-        return instance;
-    }
 }

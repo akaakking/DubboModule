@@ -23,10 +23,6 @@ public class DubboApplicationStateEvent extends ApplicationEvent implements Dubb
         return instance;
     }
 
-    public DubboApplicationStateEventInterface getInternalInstance() {
-        return instance;
-    }
-
     public DubboApplicationStateEvent(ApplicationModelInterface applicationModel, DeployStateInterface state) {
         Class[] params = new Class[]{ApplicationModelInterface.class, DeployStateInterface.class};
         Object[] args = new Object[]{applicationModel, state};

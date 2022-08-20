@@ -10,14 +10,10 @@ public class FrameworkModelCleaner implements FrameworkModelCleanerInterface {
     }
 
     public void onDestroy(FrameworkModelInterface frameworkModel) {
-        instance.onDestroy(frameworkModel.getInternalInstance(), frameworkModel);
+        instance.onDestroy(frameworkModel.getInternalInstance());
     }
 
     protected FrameworkModelCleanerInterface instance;
-
-    public FrameworkModelCleanerInterface getInternalInstance() {
-        return instance;
-    }
 
     public FrameworkModelCleanerInterface getInternalInstance() {
         return instance;

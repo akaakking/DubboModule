@@ -20,8 +20,4 @@ public class DubboConfigDefaultPropertyValueBeanPostProcessor extends GenericBea
     public DubboConfigDefaultPropertyValueBeanPostProcessorInterface getInternalInstance() {
         return instance;
     }
-
-    public DubboConfigDefaultPropertyValueBeanPostProcessorInterface getInternalInstance() {
-        return instance;
-    }
 }

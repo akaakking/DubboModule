@@ -20,19 +20,19 @@ public class ExtensionLoader<T> implements ExtensionLoaderInterface<T> {
     }
 
     public List<T> getActivateExtension(URLInterface url, String key) {
-        return instance.getActivateExtension(url.getInternalInstance(), url, key);
+        return instance.getActivateExtension(url.getInternalInstance(), key);
     }
 
     public List<T> getActivateExtension(URLInterface url, String[] values) {
-        return instance.getActivateExtension(url.getInternalInstance(), url, values);
+        return instance.getActivateExtension(url.getInternalInstance(), values);
     }
 
     public List<T> getActivateExtension(URLInterface url, String key, String group) {
-        return instance.getActivateExtension(url.getInternalInstance(), url, key, group);
+        return instance.getActivateExtension(url.getInternalInstance(), key, group);
     }
 
     public List<T> getActivateExtension(URLInterface url, String[] values, String group) {
-        return instance.getActivateExtension(url.getInternalInstance(), url, values, group);
+        return instance.getActivateExtension(url.getInternalInstance(), values, group);
     }
 
     public List<T> getActivateExtensions() {
@@ -123,10 +123,6 @@ public class ExtensionLoader<T> implements ExtensionLoaderInterface<T> {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(resetExtensionLoader, Class.class);
         method.invoke(type);
-    }
-
-    public ExtensionLoaderInterface getInternalInstance() {
-        return instance;
     }
 
     public ExtensionLoaderInterface getInternalInstance() {

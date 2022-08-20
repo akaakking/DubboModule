@@ -35,10 +35,6 @@ public class AnnotationPropertyValuesAdapter implements AnnotationPropertyValues
         return instance;
     }
 
-    public AnnotationPropertyValuesAdapterInterface getInternalInstance() {
-        return instance;
-    }
-
     public AnnotationPropertyValuesAdapter(Map<String, Object> attributes, PropertyResolver propertyResolver, String ignoreAttributeNames) {
         Class[] params = new Class[]{MapMap<String,Object>.class, PropertyResolver.class, String.class};
         Object[] args = new Object[]{attributes, propertyResolver, ignoreAttributeNames};

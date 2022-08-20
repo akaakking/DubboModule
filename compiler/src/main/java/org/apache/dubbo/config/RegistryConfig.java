@@ -271,10 +271,6 @@ public class RegistryConfig extends AbstractConfig implements RegistryConfigInte
         return instance;
     }
 
-    public RegistryConfigInterface getInternalInstance() {
-        return instance;
-    }
-
     public RegistryConfig() {
         instance = (RegistryConfigInterface) DubboClassLoader.getInstance(RegistryConfig.class.getName());
     }

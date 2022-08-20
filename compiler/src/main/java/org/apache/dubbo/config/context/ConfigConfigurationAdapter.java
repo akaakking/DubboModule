@@ -20,10 +20,6 @@ public class ConfigConfigurationAdapter implements ConfigConfigurationAdapterInt
         return instance;
     }
 
-    public ConfigConfigurationAdapterInterface getInternalInstance() {
-        return instance;
-    }
-
     public ConfigConfigurationAdapter(AbstractConfigInterface config, String prefix) {
         Class[] params = new Class[]{AbstractConfigInterface.class, String.class};
         Object[] args = new Object[]{config, prefix};

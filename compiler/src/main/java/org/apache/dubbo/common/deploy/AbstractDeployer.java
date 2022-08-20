@@ -63,8 +63,4 @@ public class AbstractDeployer<E extends ScopeModelInterface> implements Abstract
     public AbstractDeployerInterface getInternalInstance() {
         return instance;
     }
-
-    public AbstractDeployerInterface getInternalInstance() {
-        return instance;
-    }
 }

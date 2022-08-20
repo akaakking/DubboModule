@@ -54,10 +54,6 @@ public class ConsumerModel extends ServiceModel implements ConsumerModelInterfac
         return instance;
     }
 
-    public ConsumerModelInterface getInternalInstance() {
-        return instance;
-    }
-
     public ConsumerModel(String serviceKey, Object proxyObject, ServiceDescriptorInterface serviceDescriptor, Map<String, AsyncMethodInfo> methodConfigs, ClassLoader interfaceClassLoader) {
         Class[] params = new Class[]{String.class, Object.class, ServiceDescriptorInterface.class, MapMap<String,AsyncMethodInfo>.class, ClassLoader.class};
         Object[] args = new Object[]{serviceKey, proxyObject, serviceDescriptor, methodConfigs, interfaceClassLoader};

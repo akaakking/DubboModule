@@ -35,8 +35,4 @@ public class SpringExtensionInjector implements SpringExtensionInjectorInterface
     public SpringExtensionInjectorInterface getInternalInstance() {
         return instance;
     }
-
-    public SpringExtensionInjectorInterface getInternalInstance() {
-        return instance;
-    }
 }

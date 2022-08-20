@@ -159,10 +159,6 @@ public class ConfigCenterConfig extends AbstractConfig implements ConfigCenterCo
         return instance;
     }
 
-    public ConfigCenterConfigInterface getInternalInstance() {
-        return instance;
-    }
-
     public ConfigCenterConfig() {
         instance = (ConfigCenterConfigInterface) DubboClassLoader.getInstance(ConfigCenterConfig.class.getName());
     }

@@ -38,10 +38,6 @@ public class ProviderMethodModel implements ProviderMethodModelInterface {
         return instance;
     }
 
-    public ProviderMethodModelInterface getInternalInstance() {
-        return instance;
-    }
-
     public ProviderMethodModel(Method method) {
         Class[] params = new Class[]{Method.class};
         Object[] args = new Object[]{method};

@@ -18,7 +18,7 @@ public class DelegateProviderMetaDataInvoker<T> implements DelegateProviderMetaD
     }
 
     public ResultInterface invoke(InvocationInterface invocation) {
-        return instance.invoke(invocation.getInternalInstance(), invocation);
+        return instance.invoke(invocation.getInternalInstance());
     }
 
     public void destroy() {
@@ -30,10 +30,6 @@ public class DelegateProviderMetaDataInvoker<T> implements DelegateProviderMetaD
     }
 
     protected DelegateProviderMetaDataInvokerInterface instance;
-
-    public DelegateProviderMetaDataInvokerInterface getInternalInstance() {
-        return instance;
-    }
 
     public DelegateProviderMetaDataInvokerInterface getInternalInstance() {
         return instance;

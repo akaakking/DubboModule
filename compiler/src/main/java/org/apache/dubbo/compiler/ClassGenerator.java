@@ -4,6 +4,7 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
+import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
@@ -40,13 +41,15 @@ public class ClassGenerator {
     }
 
     void generateClass(JavaClass javaClass,CompilationUnit cu) {
+        if (javaClass.isInterface()) {
+            return;
+        }
+
         ClassOrInterfaceDeclaration coid = interface2Class(javaClass,cu);
 
         methodGenerator.visit(cu,null);
 
         addStaticMethod(javaClass,coid);
-
-        addGetInstanceMethod(javaClass,coid);
 
         addGetInstanceMethod(javaClass,coid);
 
@@ -78,12 +81,12 @@ public class ClassGenerator {
                 klassNameExpr.setName("Class klass = DubboClassLoader");
                 MethodCallExpr klassMethodCallExpr = new MethodCallExpr(klassNameExpr,"getKlass");
                 klassMethodCallExpr.addArgument(javaClass.getName() + ".class.getName()");
-                blockStmt.addStatement(klassNameExpr);
+                blockStmt.addStatement(klassMethodCallExpr);
 
                 NameExpr getMethodnameExpr = new NameExpr();
                 getMethodnameExpr.setName("Method method = klass");
                 MethodCallExpr getMethodnameCallExpr = new MethodCallExpr(getMethodnameExpr,"getMethod");
-                getMethodnameCallExpr.addArgument(method.getName());
+                getMethodnameCallExpr.addArgument("\"" + method.getName() + "\"");
                 for (JavaParameter parameter : method.getParameters()) {
                     if (this.generator.checkName(parameter.getJavaClass())) {
                         getMethodnameCallExpr.addArgument(this.generator.addInterface(parameter.getType().getValue()) + ".class");
@@ -119,10 +122,12 @@ public class ClassGenerator {
 
     // 不给interface,abstact加construct
     private void addConstruct(JavaClass javaClass,ClassOrInterfaceDeclaration coid) {
-        if (javaClass.isInterface() || javaClass.isAbstract()) {
+        if (javaClass.isAbstract()) {
+            coid.addConstructor(Modifier.Keyword.PROTECTED);
             return;
         }
 
+        boolean hasEmptyConstruct = false;
         for (JavaConstructor constructor : javaClass.getConstructors()) {
             if (!constructor.isPublic()) {
                 continue;
@@ -136,7 +141,12 @@ public class ClassGenerator {
             for (JavaParameter parameter : constructor.getParameters()) {
                 Parameter parserParameter = new Parameter();
                 parserParameter.setName(parameter.getName());
-                args.add(parameter.getName());
+
+                if (parameter.getType().toString().endsWith("Interface")) {
+                    args.add(parameter.getName() + ".getInternalInterface()");
+                } else {
+                    args.add(parameter.getName());
+                }
 
                 if (this.generator.checkName(parameter.getType().getBinaryName())) {
                     parserParameter.setType(this.generator.addInterface(
@@ -179,14 +189,41 @@ public class ClassGenerator {
                 methodCallExpr.addArgument("params");
                 methodCallExpr.addArgument("args");
                 blockStmt.addStatement(new ExpressionStmt(methodCallExpr));
+                assigninstance(javaClass,blockStmt);
             } else {
-                NameExpr nameExpr = new NameExpr();
-                nameExpr.setName("instance = (" +className +  "Interface) DubboClassLoader");
-                MethodCallExpr methodCallExpr = new MethodCallExpr(nameExpr,"getInstance");
-                methodCallExpr.addArgument(className + ".class.getName()");
-                blockStmt.addStatement(new ExpressionStmt(methodCallExpr));
+                hasEmptyConstruct = true;
+                addEmptyConstruct(javaClass,parserCd);
             }
         }
+
+        if (!hasEmptyConstruct) {
+            addEmptyConstruct(javaClass,coid.addConstructor());
+        }
+    }
+
+
+    // super.instance = instance
+    private void assigninstance(JavaClass javaClass,BlockStmt blockStmt) {
+        if (javaClass.getSuperJavaClass() == null
+                || javaClass.getSuperJavaClass().getFullyQualifiedName().equals("java.lang.Object")) {
+            return;
+        }
+
+        AssignExpr assignExpr = new AssignExpr(new NameExpr("super.instance"),new NameExpr("instance"), AssignExpr.Operator.ASSIGN);
+        blockStmt.addStatement(new ExpressionStmt(assignExpr));
+    }
+
+    private void addEmptyConstruct(JavaClass javaClass,ConstructorDeclaration methodDeclaration) {
+        BlockStmt blockStmt = new BlockStmt();
+        methodDeclaration.setProtected(true);
+        methodDeclaration.setBody(blockStmt);
+        String className = javaClass.getSimpleName();
+        NameExpr nameExpr = new NameExpr();
+        nameExpr.setName("instance = (" +className +  "Interface) DubboClassLoader");
+        MethodCallExpr methodCallExpr = new MethodCallExpr(nameExpr,"getInstance");
+        methodCallExpr.addArgument(className + ".class.getName()");
+        blockStmt.addStatement(new ExpressionStmt(methodCallExpr));
+        assigninstance(javaClass,blockStmt);
     }
 
     private String replaceGeneric(String param) {
@@ -194,10 +231,7 @@ public class ClassGenerator {
     }
 
     private void addField(JavaClass javaClass,ClassOrInterfaceDeclaration coid) {
-        if (javaClass.getSuperJavaClass() == null
-                        || javaClass.getSuperJavaClass().getFullyQualifiedName().equals("java.lang.Object")) {
             coid.addField(javaClass.getName() + "Interface","instance", Modifier.Keyword.PROTECTED);
-        }
     }
 
     private ClassOrInterfaceDeclaration interface2Class(JavaClass  javaClass,CompilationUnit cu) {
@@ -209,8 +243,8 @@ public class ClassGenerator {
         coid.setName(javaClass.getName());
         coid.setPublic(true);
         coid.setInterface(false);
-        for (ClassOrInterfaceType implementedType : new ArrayList<>(coid.getImplementedTypes())) {
-            implementedType.remove();
+        for (ClassOrInterfaceType extendsType : new ArrayList<>(coid.getExtendedTypes())) {
+            extendsType.remove();
         }
 
         ClassOrInterfaceType classOrInterfaceType = new ClassOrInterfaceType();
@@ -276,8 +310,9 @@ public class ClassGenerator {
                 for (Parameter parameter : n.getParameters()) {
                     if (parameter.getType().toString().endsWith("Interface")) {
                         methodCallExpr.addArgument(parameter.getNameAsString() + ".getInternalInstance()");
+                    } else {
+                        methodCallExpr.addArgument(parameter.getNameAsString());
                     }
-                    methodCallExpr.addArgument(parameter.getNameAsString());
                 }
             }
 

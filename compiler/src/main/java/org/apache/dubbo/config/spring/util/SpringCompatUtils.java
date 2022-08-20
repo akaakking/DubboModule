@@ -43,8 +43,4 @@ public class SpringCompatUtils implements SpringCompatUtilsInterface {
     public SpringCompatUtilsInterface getInternalInstance() {
         return instance;
     }
-
-    public SpringCompatUtilsInterface getInternalInstance() {
-        return instance;
-    }
 }

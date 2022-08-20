@@ -102,10 +102,6 @@ public class URLAddress implements URLAddressInterface {
         return instance;
     }
 
-    public URLAddressInterface getInternalInstance() {
-        return instance;
-    }
-
     public URLAddress(String host, int port) {
         Class[] params = new Class[]{String.class, int.class};
         Object[] args = new Object[]{host, port};

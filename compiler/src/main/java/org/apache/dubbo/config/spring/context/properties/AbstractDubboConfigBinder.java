@@ -31,8 +31,4 @@ public class AbstractDubboConfigBinder implements AbstractDubboConfigBinderInter
     public AbstractDubboConfigBinderInterface getInternalInstance() {
         return instance;
     }
-
-    public AbstractDubboConfigBinderInterface getInternalInstance() {
-        return instance;
-    }
 }

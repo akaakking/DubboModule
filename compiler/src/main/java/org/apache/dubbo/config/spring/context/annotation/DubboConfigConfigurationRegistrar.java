@@ -17,8 +17,4 @@ public class DubboConfigConfigurationRegistrar implements DubboConfigConfigurati
     public DubboConfigConfigurationRegistrarInterface getInternalInstance() {
         return instance;
     }
-
-    public DubboConfigConfigurationRegistrarInterface getInternalInstance() {
-        return instance;
-    }
 }

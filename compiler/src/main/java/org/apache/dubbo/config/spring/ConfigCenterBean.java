@@ -39,10 +39,6 @@ public class ConfigCenterBean extends ConfigCenterConfig implements ConfigCenter
         return instance;
     }
 
-    public ConfigCenterBeanInterface getInternalInstance() {
-        return instance;
-    }
-
     public ConfigCenterBean() {
         instance = (ConfigCenterBeanInterface) DubboClassLoader.getInstance(ConfigCenterBean.class.getName());
     }

@@ -50,7 +50,7 @@ public class BaseServiceMetadata implements BaseServiceMetadataInterface {
     }
 
     public void setServiceModel(ServiceModelInterface serviceModel) {
-        instance.setServiceModel(serviceModel.getInternalInstance(), serviceModel);
+        instance.setServiceModel(serviceModel.getInternalInstance());
     }
 
     protected BaseServiceMetadataInterface instance;
@@ -89,10 +89,6 @@ public class BaseServiceMetadata implements BaseServiceMetadataInterface {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(keyWithoutGroup, String.class, String.class);
         return method.invoke(interfaceName, version);
-    }
-
-    public BaseServiceMetadataInterface getInternalInstance() {
-        return instance;
     }
 
     public BaseServiceMetadataInterface getInternalInstance() {

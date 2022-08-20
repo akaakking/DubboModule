@@ -45,7 +45,7 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
     }
 
     public void removeModule(ModuleModelInterface moduleModel) {
-        instance.removeModule(moduleModel.getInternalInstance(), moduleModel);
+        instance.removeModule(moduleModel.getInternalInstance());
     }
 
     public List<ModuleModelInterface> getModuleModels() {
@@ -65,15 +65,15 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
     }
 
     public void setEnvironment(EnvironmentInterface environment) {
-        instance.setEnvironment(environment.getInternalInstance(), environment);
+        instance.setEnvironment(environment.getInternalInstance());
     }
 
     public void setConfigManager(ConfigManagerInterface configManager) {
-        instance.setConfigManager(configManager.getInternalInstance(), configManager);
+        instance.setConfigManager(configManager.getInternalInstance());
     }
 
     public void setServiceRepository(ServiceRepositoryInterface serviceRepository) {
-        instance.setServiceRepository(serviceRepository.getInternalInstance(), serviceRepository);
+        instance.setServiceRepository(serviceRepository.getInternalInstance());
     }
 
     public void addClassLoader(ClassLoader classLoader) {
@@ -89,7 +89,7 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
     }
 
     public void setDeployer(ApplicationDeployerInterface deployer) {
-        instance.setDeployer(deployer.getInternalInstance(), deployer);
+        instance.setDeployer(deployer.getInternalInstance());
     }
 
     public static ApplicationModelInterface ofNullable(ApplicationModelInterface applicationModel) {
@@ -174,10 +174,6 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(reset);
         method.invoke();
-    }
-
-    public ApplicationModelInterface getInternalInstance() {
-        return instance;
     }
 
     public ApplicationModelInterface getInternalInstance() {

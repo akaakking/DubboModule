@@ -17,8 +17,4 @@ public class DubboComponentScanRegistrar implements DubboComponentScanRegistrarI
     public DubboComponentScanRegistrarInterface getInternalInstance() {
         return instance;
     }
-
-    public DubboComponentScanRegistrarInterface getInternalInstance() {
-        return instance;
-    }
 }

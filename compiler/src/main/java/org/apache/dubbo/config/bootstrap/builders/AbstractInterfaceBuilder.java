@@ -24,7 +24,7 @@ public class AbstractInterfaceBuilder<T extends AbstractInterfaceConfigInterface
     }
 
     public B monitor(MonitorConfigInterface monitor) {
-        return instance.monitor(monitor.getInternalInstance(), monitor);
+        return instance.monitor(monitor.getInternalInstance());
     }
 
     public B monitor(String monitor) {
@@ -60,11 +60,11 @@ public class AbstractInterfaceBuilder<T extends AbstractInterfaceConfigInterface
     }
 
     public B application(ApplicationConfigInterface application) {
-        return instance.application(application.getInternalInstance(), application);
+        return instance.application(application.getInternalInstance());
     }
 
     public B module(ModuleConfigInterface module) {
-        return instance.module(module.getInternalInstance(), module);
+        return instance.module(module.getInternalInstance());
     }
 
     public B addRegistries(List<RegistryConfigInterface> registries) {
@@ -72,7 +72,7 @@ public class AbstractInterfaceBuilder<T extends AbstractInterfaceConfigInterface
     }
 
     public B addRegistry(RegistryConfigInterface registry) {
-        return instance.addRegistry(registry.getInternalInstance(), registry);
+        return instance.addRegistry(registry.getInternalInstance());
     }
 
     public B registryIds(String registryIds) {
@@ -88,11 +88,11 @@ public class AbstractInterfaceBuilder<T extends AbstractInterfaceConfigInterface
     }
 
     public B metadataReportConfig(MetadataReportConfigInterface metadataReportConfig) {
-        return instance.metadataReportConfig(metadataReportConfig.getInternalInstance(), metadataReportConfig);
+        return instance.metadataReportConfig(metadataReportConfig.getInternalInstance());
     }
 
     public B configCenter(ConfigCenterConfigInterface configCenter) {
-        return instance.configCenter(configCenter.getInternalInstance(), configCenter);
+        return instance.configCenter(configCenter.getInternalInstance());
     }
 
     public B callbacks(Integer callbacks) {
@@ -109,10 +109,6 @@ public class AbstractInterfaceBuilder<T extends AbstractInterfaceConfigInterface
 
     public void build(T instance) {
         instance.build(instance);
-    }
-
-    public AbstractInterfaceBuilderInterface getInternalInstance() {
-        return instance;
     }
 
     public AbstractInterfaceBuilderInterface getInternalInstance() {

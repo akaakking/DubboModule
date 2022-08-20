@@ -8,7 +8,10 @@ import org.apache.dubbo.common.URL;
 
 public class InstanceAddressURL extends URL implements InstanceAddressURLInterface {
 
+    protected InstanceAddressURLInterface instance;
+
     public ServiceInstanceInterface getInstance() {
+        super.instance = instance;
         return instance.getInstance();
     }
 
@@ -178,10 +181,6 @@ public class InstanceAddressURL extends URL implements InstanceAddressURLInterfa
 
     public String toString() {
         return instance.toString();
-    }
-
-    public InstanceAddressURLInterface getInternalInstance() {
-        return instance;
     }
 
     public InstanceAddressURLInterface getInternalInstance() {

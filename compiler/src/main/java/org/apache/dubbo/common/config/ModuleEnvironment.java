@@ -14,7 +14,7 @@ public class ModuleEnvironment extends Environment implements ModuleEnvironmentI
     }
 
     public ConfigurationInterface getPrefixedConfiguration(AbstractConfigInterface config, String prefix) {
-        return instance.getPrefixedConfiguration(config.getInternalInstance(), config, prefix);
+        return instance.getPrefixedConfiguration(config.getInternalInstance(), prefix);
     }
 
     public CompositeConfigurationInterface getConfiguration() {
@@ -22,7 +22,7 @@ public class ModuleEnvironment extends Environment implements ModuleEnvironmentI
     }
 
     public List<Map<String, String>> getConfigurationMaps(AbstractConfigInterface config, String prefix) {
-        return instance.getConfigurationMaps(config.getInternalInstance(), config, prefix);
+        return instance.getConfigurationMaps(config.getInternalInstance(), prefix);
     }
 
     public ConfigurationInterface getDynamicGlobalConfiguration() {
@@ -34,7 +34,7 @@ public class ModuleEnvironment extends Environment implements ModuleEnvironmentI
     }
 
     public void setDynamicConfiguration(DynamicConfigurationInterface dynamicConfiguration) {
-        instance.setDynamicConfiguration(dynamicConfiguration.getInternalInstance(), dynamicConfiguration);
+        instance.setDynamicConfiguration(dynamicConfiguration.getInternalInstance());
     }
 
     public void destroy() {
@@ -111,10 +111,6 @@ public class ModuleEnvironment extends Environment implements ModuleEnvironmentI
 
     public void refreshClassLoaders() {
         instance.refreshClassLoaders();
-    }
-
-    public ModuleEnvironmentInterface getInternalInstance() {
-        return instance;
     }
 
     public ModuleEnvironmentInterface getInternalInstance() {

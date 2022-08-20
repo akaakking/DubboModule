@@ -34,7 +34,7 @@ public class DubboSpringInitContext implements DubboSpringInitContextInterface {
     }
 
     public void setModuleModel(ModuleModelInterface moduleModel) {
-        instance.setModuleModel(moduleModel.getInternalInstance(), moduleModel);
+        instance.setModuleModel(moduleModel.getInternalInstance());
     }
 
     public boolean isKeepRunningOnSpringClosed() {
@@ -54,10 +54,6 @@ public class DubboSpringInitContext implements DubboSpringInitContextInterface {
     }
 
     protected DubboSpringInitContextInterface instance;
-
-    public DubboSpringInitContextInterface getInternalInstance() {
-        return instance;
-    }
 
     public DubboSpringInitContextInterface getInternalInstance() {
         return instance;

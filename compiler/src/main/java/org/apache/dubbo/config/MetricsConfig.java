@@ -31,7 +31,7 @@ public class MetricsConfig extends AbstractConfig implements MetricsConfigInterf
     }
 
     public void setPrometheus(PrometheusConfigInterface prometheus) {
-        instance.setPrometheus(prometheus.getInternalInstance(), prometheus);
+        instance.setPrometheus(prometheus.getInternalInstance());
     }
 
     public AggregationConfigInterface getAggregation() {
@@ -39,11 +39,7 @@ public class MetricsConfig extends AbstractConfig implements MetricsConfigInterf
     }
 
     public void setAggregation(AggregationConfigInterface aggregation) {
-        instance.setAggregation(aggregation.getInternalInstance(), aggregation);
-    }
-
-    public MetricsConfigInterface getInternalInstance() {
-        return instance;
+        instance.setAggregation(aggregation.getInternalInstance());
     }
 
     public MetricsConfigInterface getInternalInstance() {

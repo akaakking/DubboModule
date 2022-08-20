@@ -26,7 +26,7 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
     }
 
     public Optional<String> getContextPath(ProtocolConfigInterface protocolConfig) {
-        return instance.getContextPath(protocolConfig.getInternalInstance(), protocolConfig);
+        return instance.getContextPath(protocolConfig.getInternalInstance());
     }
 
     public Map<String, String> getMetaData() {
@@ -66,7 +66,7 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
     }
 
     public void setProvider(ProviderConfigInterface provider) {
-        instance.setProvider(provider.getInternalInstance(), provider);
+        instance.setProvider(provider.getInternalInstance());
     }
 
     public String getProviderIds() {
@@ -123,10 +123,6 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
 
     public boolean isUnexported() {
         return instance.isUnexported();
-    }
-
-    public ServiceConfigBaseInterface getInternalInstance() {
-        return instance;
     }
 
     public ServiceConfigBaseInterface getInternalInstance() {

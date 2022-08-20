@@ -13,8 +13,4 @@ public class DefaultDubboConfigBinder extends AbstractDubboConfigBinder implemen
     public DefaultDubboConfigBinderInterface getInternalInstance() {
         return instance;
     }
-
-    public DefaultDubboConfigBinderInterface getInternalInstance() {
-        return instance;
-    }
 }

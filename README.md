@@ -252,7 +252,11 @@ DubboClassLoader.getInstance(); //
 
 1.   注解没有添加 todo   已做
 2.   abstract innerclass  enum这些没想好怎么处理
+     1.   abstact的继承问题，继承外部的abstract类是否有意义。
+
 3.   对内部api里外部api的引用做统计
 4.   修改源码
-5.   带有spi注解的
+5.   带有spi注解的接口
+6.   空构造
+7.   强转
 

@@ -25,8 +25,4 @@ public class EnvironmentUtils implements EnvironmentUtilsInterface {
     public EnvironmentUtilsInterface getInternalInstance() {
         return instance;
     }
-
-    public EnvironmentUtilsInterface getInternalInstance() {
-        return instance;
-    }
 }

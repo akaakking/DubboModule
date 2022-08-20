@@ -60,10 +60,6 @@ public class ScopeBeanFactory implements ScopeBeanFactoryInterface {
         return instance;
     }
 
-    public ScopeBeanFactoryInterface getInternalInstance() {
-        return instance;
-    }
-
     public ScopeBeanFactory(ScopeBeanFactoryInterface parent, ExtensionAccessorInterface extensionAccessor) {
         Class[] params = new Class[]{ScopeBeanFactoryInterface.class, ExtensionAccessorInterface.class};
         Object[] args = new Object[]{parent, extensionAccessor};

@@ -105,8 +105,4 @@ public class ProviderBuilder extends AbstractServiceBuilder<ProviderConfig, Prov
     public ProviderBuilderInterface getInternalInstance() {
         return instance;
     }
-
-    public ProviderBuilderInterface getInternalInstance() {
-        return instance;
-    }
 }

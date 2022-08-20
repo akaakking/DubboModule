@@ -205,8 +205,4 @@ public class ConfigValidationUtils implements ConfigValidationUtilsInterface {
     public ConfigValidationUtilsInterface getInternalInstance() {
         return instance;
     }
-
-    public ConfigValidationUtilsInterface getInternalInstance() {
-        return instance;
-    }
 }

@@ -20,8 +20,4 @@ public class DubboNamespaceHandler extends NamespaceHandlerSupport implements Du
     public DubboNamespaceHandlerInterface getInternalInstance() {
         return instance;
     }
-
-    public DubboNamespaceHandlerInterface getInternalInstance() {
-        return instance;
-    }
 }

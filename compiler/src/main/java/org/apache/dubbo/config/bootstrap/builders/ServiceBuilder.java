@@ -28,7 +28,7 @@ public class ServiceBuilder<U> extends AbstractServiceBuilder<ServiceConfig<U>, 
     }
 
     public ServiceBuilderInterface<U> addMethod(MethodConfigInterface method) {
-        return instance.addMethod(method.getInternalInstance(), method);
+        return instance.addMethod(method.getInternalInstance());
     }
 
     public ServiceBuilderInterface<U> addMethods(List<? extends MethodConfigInterface> methods) {
@@ -36,7 +36,7 @@ public class ServiceBuilder<U> extends AbstractServiceBuilder<ServiceConfig<U>, 
     }
 
     public ServiceBuilderInterface<U> provider(ProviderConfigInterface provider) {
-        return instance.provider(provider.getInternalInstance(), provider);
+        return instance.provider(provider.getInternalInstance());
     }
 
     public ServiceBuilderInterface<U> providerIds(String providerIds) {
@@ -55,10 +55,6 @@ public class ServiceBuilder<U> extends AbstractServiceBuilder<ServiceConfig<U>, 
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(newBuilder);
         return method.invoke();
-    }
-
-    public ServiceBuilderInterface getInternalInstance() {
-        return instance;
     }
 
     public ServiceBuilderInterface getInternalInstance() {

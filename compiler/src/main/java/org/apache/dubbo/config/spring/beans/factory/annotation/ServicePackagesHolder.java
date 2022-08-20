@@ -26,8 +26,4 @@ public class ServicePackagesHolder implements ServicePackagesHolderInterface {
     public ServicePackagesHolderInterface getInternalInstance() {
         return instance;
     }
-
-    public ServicePackagesHolderInterface getInternalInstance() {
-        return instance;
-    }
 }

@@ -27,8 +27,4 @@ public class DubboInfraBeanRegisterPostProcessor implements DubboInfraBeanRegist
     public DubboInfraBeanRegisterPostProcessorInterface getInternalInstance() {
         return instance;
     }
-
-    public DubboInfraBeanRegisterPostProcessorInterface getInternalInstance() {
-        return instance;
-    }
 }

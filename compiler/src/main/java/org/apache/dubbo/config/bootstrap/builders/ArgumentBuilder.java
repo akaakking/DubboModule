@@ -26,8 +26,4 @@ public class ArgumentBuilder implements ArgumentBuilderInterface {
     public ArgumentBuilderInterface getInternalInstance() {
         return instance;
     }
-
-    public ArgumentBuilderInterface getInternalInstance() {
-        return instance;
-    }
 }

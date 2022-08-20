@@ -7,11 +7,11 @@ import org.apache.dubbo.Interface.*;
 public class FrameworkServiceRepository implements FrameworkServiceRepositoryInterface {
 
     public void registerProvider(ProviderModelInterface providerModel) {
-        instance.registerProvider(providerModel.getInternalInstance(), providerModel);
+        instance.registerProvider(providerModel.getInternalInstance());
     }
 
     public void unregisterProvider(ProviderModelInterface providerModel) {
-        instance.unregisterProvider(providerModel.getInternalInstance(), providerModel);
+        instance.unregisterProvider(providerModel.getInternalInstance());
     }
 
     public ProviderModelInterface lookupExportedServiceWithoutGroup(String key) {
@@ -23,7 +23,7 @@ public class FrameworkServiceRepository implements FrameworkServiceRepositoryInt
     }
 
     public void registerProviderUrl(URLInterface url) {
-        instance.registerProviderUrl(url.getInternalInstance(), url);
+        instance.registerProviderUrl(url.getInternalInstance());
     }
 
     public ProviderModelInterface lookupExportedService(String serviceKey) {
@@ -43,10 +43,6 @@ public class FrameworkServiceRepository implements FrameworkServiceRepositoryInt
     }
 
     protected FrameworkServiceRepositoryInterface instance;
-
-    public FrameworkServiceRepositoryInterface getInternalInstance() {
-        return instance;
-    }
 
     public FrameworkServiceRepositoryInterface getInternalInstance() {
         return instance;

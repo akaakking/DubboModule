@@ -14,10 +14,6 @@ public class ServiceBeanExportedEvent extends ApplicationEvent implements Servic
         return instance;
     }
 
-    public ServiceBeanExportedEventInterface getInternalInstance() {
-        return instance;
-    }
-
     public ServiceBeanExportedEvent(ServiceBeanInterface serviceBean) {
         Class[] params = new Class[]{ServiceBeanInterface.class};
         Object[] args = new Object[]{serviceBean};

@@ -10,8 +10,4 @@ public class DubboConfigConfiguration implements DubboConfigConfigurationInterfa
     public DubboConfigConfigurationInterface getInternalInstance() {
         return instance;
     }
-
-    public DubboConfigConfigurationInterface getInternalInstance() {
-        return instance;
-    }
 }

@@ -117,8 +117,4 @@ public class URLParam implements URLParamInterface {
     public URLParamInterface getInternalInstance() {
         return instance;
     }
-
-    public URLParamInterface getInternalInstance() {
-        return instance;
-    }
 }

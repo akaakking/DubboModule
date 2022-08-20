@@ -57,10 +57,6 @@ public class FrameworkModel extends ScopeModel implements FrameworkModelInterfac
         return instance;
     }
 
-    public FrameworkModelInterface getInternalInstance() {
-        return instance;
-    }
-
     public FrameworkModel() {
         instance = (FrameworkModelInterface) DubboClassLoader.getInstance(FrameworkModel.class.getName());
     }

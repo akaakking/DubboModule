@@ -19,10 +19,6 @@ public class DubboClassPathBeanDefinitionScanner extends ClassPathBeanDefinition
         return instance;
     }
 
-    public DubboClassPathBeanDefinitionScannerInterface getInternalInstance() {
-        return instance;
-    }
-
     public DubboClassPathBeanDefinitionScanner(BeanDefinitionRegistry registry, boolean useDefaultFilters, Environment environment, ResourceLoader resourceLoader) {
         Class[] params = new Class[]{BeanDefinitionRegistry.class, boolean.class, Environment.class, ResourceLoader.class};
         Object[] args = new Object[]{registry, useDefaultFilters, environment, resourceLoader};

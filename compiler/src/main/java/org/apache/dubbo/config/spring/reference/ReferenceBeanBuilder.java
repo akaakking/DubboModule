@@ -32,7 +32,7 @@ public class ReferenceBeanBuilder implements ReferenceBeanBuilderInterface {
     }
 
     public ReferenceBeanBuilderInterface setConsumer(ConsumerConfigInterface consumer) {
-        return instance.setConsumer(consumer.getInternalInstance(), consumer);
+        return instance.setConsumer(consumer.getInternalInstance());
     }
 
     public ReferenceBeanBuilderInterface setConsumer(String consumer) {
@@ -124,7 +124,7 @@ public class ReferenceBeanBuilder implements ReferenceBeanBuilderInterface {
     }
 
     public ReferenceBeanBuilderInterface setRegistry(RegistryConfigInterface registry) {
-        return instance.setRegistry(registry.getInternalInstance(), registry);
+        return instance.setRegistry(registry.getInternalInstance());
     }
 
     public ReferenceBeanBuilderInterface setRegistries(List<? extends RegistryConfigInterface> registries) {
@@ -136,7 +136,7 @@ public class ReferenceBeanBuilder implements ReferenceBeanBuilderInterface {
     }
 
     public ReferenceBeanBuilderInterface setMonitor(MonitorConfigInterface monitor) {
-        return instance.setMonitor(monitor.getInternalInstance(), monitor);
+        return instance.setMonitor(monitor.getInternalInstance());
     }
 
     public ReferenceBeanBuilderInterface setMonitor(String monitor) {
@@ -204,10 +204,6 @@ public class ReferenceBeanBuilder implements ReferenceBeanBuilderInterface {
     }
 
     protected ReferenceBeanBuilderInterface instance;
-
-    public ReferenceBeanBuilderInterface getInternalInstance() {
-        return instance;
-    }
 
     public ReferenceBeanBuilderInterface getInternalInstance() {
         return instance;

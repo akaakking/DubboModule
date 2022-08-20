@@ -59,8 +59,4 @@ public class AsyncMethodInfo implements AsyncMethodInfoInterface {
     public AsyncMethodInfoInterface getInternalInstance() {
         return instance;
     }
-
-    public AsyncMethodInfoInterface getInternalInstance() {
-        return instance;
-    }
 }

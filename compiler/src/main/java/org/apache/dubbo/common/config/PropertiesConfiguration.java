@@ -41,10 +41,6 @@ public class PropertiesConfiguration implements PropertiesConfigurationInterface
         return instance;
     }
 
-    public PropertiesConfigurationInterface getInternalInstance() {
-        return instance;
-    }
-
     public PropertiesConfiguration(ScopeModelInterface scopeModel) {
         Class[] params = new Class[]{ScopeModelInterface.class};
         Object[] args = new Object[]{scopeModel};

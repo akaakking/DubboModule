@@ -16,7 +16,7 @@ public class ProviderModel extends ServiceModel implements ProviderModelInterfac
     }
 
     public void addStatedUrl(RegisterStatedURLInterface url) {
-        instance.addStatedUrl(url.getInternalInstance(), url);
+        instance.addStatedUrl(url.getInternalInstance());
     }
 
     public List<ProviderMethodModelInterface> getAllMethodModels() {
@@ -45,10 +45,6 @@ public class ProviderModel extends ServiceModel implements ProviderModelInterfac
 
     public int hashCode() {
         return instance.hashCode();
-    }
-
-    public ProviderModelInterface getInternalInstance() {
-        return instance;
     }
 
     public ProviderModelInterface getInternalInstance() {

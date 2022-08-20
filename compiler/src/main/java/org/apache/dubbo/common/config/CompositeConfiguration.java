@@ -14,15 +14,15 @@ public class CompositeConfiguration implements CompositeConfigurationInterface {
     }
 
     public void addConfiguration(ConfigurationInterface configuration) {
-        instance.addConfiguration(configuration.getInternalInstance(), configuration);
+        instance.addConfiguration(configuration.getInternalInstance());
     }
 
     public void addConfigurationFirst(ConfigurationInterface configuration) {
-        instance.addConfigurationFirst(configuration.getInternalInstance(), configuration);
+        instance.addConfigurationFirst(configuration.getInternalInstance());
     }
 
     public void addConfiguration(int pos, ConfigurationInterface configuration) {
-        instance.addConfiguration(pos, configuration.getInternalInstance(), configuration);
+        instance.addConfiguration(pos, configuration.getInternalInstance());
     }
 
     public Object getInternalProperty(String key) {
@@ -30,10 +30,6 @@ public class CompositeConfiguration implements CompositeConfigurationInterface {
     }
 
     protected CompositeConfigurationInterface instance;
-
-    public CompositeConfigurationInterface getInternalInstance() {
-        return instance;
-    }
 
     public CompositeConfigurationInterface getInternalInstance() {
         return instance;

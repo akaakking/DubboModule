@@ -57,8 +57,4 @@ public class ServiceBeanNameBuilder implements ServiceBeanNameBuilderInterface {
     public ServiceBeanNameBuilderInterface getInternalInstance() {
         return instance;
     }
-
-    public ServiceBeanNameBuilderInterface getInternalInstance() {
-        return instance;
-    }
 }

@@ -87,14 +87,10 @@ public class ReferenceBean<T> implements ReferenceBeanInterface<T> {
     }
 
     public void setKeyAndReferenceConfig(String key, ReferenceConfigInterface referenceConfig) {
-        instance.setKeyAndReferenceConfig(key, referenceConfig.getInternalInstance(), referenceConfig);
+        instance.setKeyAndReferenceConfig(key, referenceConfig.getInternalInstance());
     }
 
     protected ReferenceBeanInterface instance;
-
-    public ReferenceBeanInterface getInternalInstance() {
-        return instance;
-    }
 
     public ReferenceBeanInterface getInternalInstance() {
         return instance;

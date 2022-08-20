@@ -59,10 +59,6 @@ public class ServiceMetadata extends BaseServiceMetadata implements ServiceMetad
         return instance;
     }
 
-    public ServiceMetadataInterface getInternalInstance() {
-        return instance;
-    }
-
     public ServiceMetadata(String serviceInterfaceName, String group, String version, Class<?> serviceType) {
         Class[] params = new Class[]{String.class, String.class, String.class, ClassClass<?>.class};
         Object[] args = new Object[]{serviceInterfaceName, group, version, serviceType};

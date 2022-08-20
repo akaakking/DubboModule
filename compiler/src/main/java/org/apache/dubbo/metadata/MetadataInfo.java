@@ -14,11 +14,11 @@ public class MetadataInfo implements MetadataInfoInterface {
     }
 
     public void addService(URLInterface url) {
-        instance.addService(url.getInternalInstance(), url);
+        instance.addService(url.getInternalInstance());
     }
 
     public void removeService(URLInterface url) {
-        instance.removeService(url.getInternalInstance(), url);
+        instance.removeService(url.getInternalInstance());
     }
 
     public String getRevision() {
@@ -82,11 +82,11 @@ public class MetadataInfo implements MetadataInfoInterface {
     }
 
     public void addSubscribedURL(URLInterface url) {
-        instance.addSubscribedURL(url.getInternalInstance(), url);
+        instance.addSubscribedURL(url.getInternalInstance());
     }
 
     public boolean removeSubscribedURL(URLInterface url) {
-        return instance.removeSubscribedURL(url.getInternalInstance(), url);
+        return instance.removeSubscribedURL(url.getInternalInstance());
     }
 
     public ConcurrentNavigableMap<String, SortedSet<URLInterface>> getSubscribedServiceURLs() {
@@ -118,10 +118,6 @@ public class MetadataInfo implements MetadataInfoInterface {
     }
 
     protected MetadataInfoInterface instance;
-
-    public MetadataInfoInterface getInternalInstance() {
-        return instance;
-    }
 
     public MetadataInfoInterface getInternalInstance() {
         return instance;

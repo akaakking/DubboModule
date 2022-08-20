@@ -27,10 +27,6 @@ public class ConfigItem implements ConfigItemInterface {
         return instance;
     }
 
-    public ConfigItemInterface getInternalInstance() {
-        return instance;
-    }
-
     public ConfigItem(String content, Object ticket) {
         Class[] params = new Class[]{String.class, Object.class};
         Object[] args = new Object[]{content, ticket};

@@ -39,10 +39,6 @@ public class ConfigChangedEvent extends EventObject implements ConfigChangedEven
         return instance;
     }
 
-    public ConfigChangedEventInterface getInternalInstance() {
-        return instance;
-    }
-
     public ConfigChangedEvent(String key, String group, String content) {
         Class[] params = new Class[]{String.class, String.class, String.class};
         Object[] args = new Object[]{key, group, content};

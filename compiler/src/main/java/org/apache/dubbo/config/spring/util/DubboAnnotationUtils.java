@@ -37,8 +37,4 @@ public class DubboAnnotationUtils implements DubboAnnotationUtilsInterface {
     public DubboAnnotationUtilsInterface getInternalInstance() {
         return instance;
     }
-
-    public DubboAnnotationUtilsInterface getInternalInstance() {
-        return instance;
-    }
 }

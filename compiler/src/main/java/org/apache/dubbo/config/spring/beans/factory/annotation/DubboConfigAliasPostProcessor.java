@@ -30,8 +30,4 @@ public class DubboConfigAliasPostProcessor implements DubboConfigAliasPostProces
     public DubboConfigAliasPostProcessorInterface getInternalInstance() {
         return instance;
     }
-
-    public DubboConfigAliasPostProcessorInterface getInternalInstance() {
-        return instance;
-    }
 }

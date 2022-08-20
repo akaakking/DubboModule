@@ -30,8 +30,4 @@ public class DubboSpringInitializer implements DubboSpringInitializerInterface {
     public DubboSpringInitializerInterface getInternalInstance() {
         return instance;
     }
-
-    public DubboSpringInitializerInterface getInternalInstance() {
-        return instance;
-    }
 }

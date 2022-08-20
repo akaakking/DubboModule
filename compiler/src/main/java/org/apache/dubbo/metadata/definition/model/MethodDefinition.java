@@ -64,8 +64,4 @@ public class MethodDefinition implements MethodDefinitionInterface {
     public MethodDefinitionInterface getInternalInstance() {
         return instance;
     }
-
-    public MethodDefinitionInterface getInternalInstance() {
-        return instance;
-    }
 }

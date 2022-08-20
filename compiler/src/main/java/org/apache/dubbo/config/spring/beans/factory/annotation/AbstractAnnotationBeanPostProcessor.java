@@ -36,8 +36,4 @@ public class AbstractAnnotationBeanPostProcessor extends InstantiationAwareBeanP
     public AbstractAnnotationBeanPostProcessorInterface getInternalInstance() {
         return instance;
     }
-
-    public AbstractAnnotationBeanPostProcessorInterface getInternalInstance() {
-        return instance;
-    }
 }

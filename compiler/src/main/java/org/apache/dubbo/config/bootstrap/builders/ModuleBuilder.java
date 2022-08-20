@@ -28,11 +28,11 @@ public class ModuleBuilder extends AbstractBuilder<ModuleConfig, ModuleBuilder> 
     }
 
     public ModuleBuilderInterface addRegistry(RegistryConfigInterface registry) {
-        return instance.addRegistry(registry.getInternalInstance(), registry);
+        return instance.addRegistry(registry.getInternalInstance());
     }
 
     public ModuleBuilderInterface monitor(MonitorConfigInterface monitor) {
-        return instance.monitor(monitor.getInternalInstance(), monitor);
+        return instance.monitor(monitor.getInternalInstance());
     }
 
     public ModuleBuilderInterface isDefault(Boolean isDefault) {
@@ -41,10 +41,6 @@ public class ModuleBuilder extends AbstractBuilder<ModuleConfig, ModuleBuilder> 
 
     public ModuleConfigInterface build() {
         return instance.build();
-    }
-
-    public ModuleBuilderInterface getInternalInstance() {
-        return instance;
     }
 
     public ModuleBuilderInterface getInternalInstance() {

@@ -19,8 +19,4 @@ public class EnvironmentConfiguration implements EnvironmentConfigurationInterfa
     public EnvironmentConfigurationInterface getInternalInstance() {
         return instance;
     }
-
-    public EnvironmentConfigurationInterface getInternalInstance() {
-        return instance;
-    }
 }

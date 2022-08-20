@@ -26,10 +26,6 @@ public class DubboShutdownHook extends Thread implements DubboShutdownHookInterf
         return instance;
     }
 
-    public DubboShutdownHookInterface getInternalInstance() {
-        return instance;
-    }
-
     public DubboShutdownHook(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};

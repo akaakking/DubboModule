@@ -12,6 +12,8 @@ import org.apache.dubbo.Interface.*;
 
 public class URL implements URLInterface {
 
+    protected URLInterface instance;
+
     public URLAddressInterface getUrlAddress() {
         return instance.getUrlAddress();
     }
@@ -153,7 +155,7 @@ public class URL implements URLInterface {
     }
 
     public URLInterface setScopeModel(ScopeModelInterface scopeModel) {
-        return instance.setScopeModel(scopeModel.getInternalInstance(), scopeModel);
+        return instance.setScopeModel(scopeModel.getInternalInstance());
     }
 
     public ScopeModelInterface getScopeModel() {
@@ -177,7 +179,7 @@ public class URL implements URLInterface {
     }
 
     public URLInterface setServiceModel(ServiceModelInterface serviceModel) {
-        return instance.setServiceModel(serviceModel.getInternalInstance(), serviceModel);
+        return instance.setServiceModel(serviceModel.getInternalInstance());
     }
 
     public ServiceModelInterface getServiceModel() {
@@ -472,7 +474,7 @@ public class URL implements URLInterface {
         return instance.toParameterString(parameters);
     }
 
-    public URL toJavaURL() {
+    public java.net.URL toJavaURL() {
         return instance.toJavaURL();
     }
 
@@ -780,7 +782,7 @@ public class URL implements URLInterface {
         return instance.toSerializableURL();
     }
 
-    protected URLInterface instance;
+
 
     public static URLInterface cacheableValueOf(String url) {
         Class klass = DubboClassLoader;
@@ -840,10 +842,6 @@ public class URL implements URLInterface {
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(putMethodParameter, String.class, String.class, String.class, Map.class);
         method.invoke(method, key, value, methodParameters);
-    }
-
-    public URLInterface getInternalInstance() {
-        return instance;
     }
 
     public URLInterface getInternalInstance() {

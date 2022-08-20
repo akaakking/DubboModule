@@ -24,10 +24,6 @@ public class Status implements StatusInterface {
         return instance;
     }
 
-    public StatusInterface getInternalInstance() {
-        return instance;
-    }
-
     public Status(LevelInterface level) {
         Class[] params = new Class[]{LevelInterface.class};
         Object[] args = new Object[]{level};

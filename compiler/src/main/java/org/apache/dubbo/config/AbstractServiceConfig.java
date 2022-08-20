@@ -96,7 +96,7 @@ public class AbstractServiceConfig extends AbstractInterfaceConfig implements Ab
     }
 
     public void setProtocol(ProtocolConfigInterface protocol) {
-        instance.setProtocol(protocol.getInternalInstance(), protocol);
+        instance.setProtocol(protocol.getInternalInstance());
     }
 
     public String getProtocolIds() {
@@ -169,10 +169,6 @@ public class AbstractServiceConfig extends AbstractInterfaceConfig implements Ab
 
     public void setExportAsync(Boolean exportAsync) {
         instance.setExportAsync(exportAsync);
-    }
-
-    public AbstractServiceConfigInterface getInternalInstance() {
-        return instance;
     }
 
     public AbstractServiceConfigInterface getInternalInstance() {

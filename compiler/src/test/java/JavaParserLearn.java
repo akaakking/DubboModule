@@ -3,10 +3,7 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
-import com.github.javaparser.ast.expr.MethodCallExpr;
-import com.github.javaparser.ast.expr.NameExpr;
-import com.github.javaparser.ast.expr.NormalAnnotationExpr;
-import com.github.javaparser.ast.expr.VariableDeclarationExpr;
+import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.ReturnStmt;
@@ -463,6 +460,11 @@ public class JavaParserLearn {
             method.setBody(blockStmt);
             MethodCallExpr methodCallExpr = new MethodCallExpr(new NameExpr("instance"),"get");
             methodCallExpr.addArgument("name.getInstance()");
+            methodCallExpr.addArgument("\"fds\"");
+
+
+            AssignExpr assignExpr = new AssignExpr(new NameExpr("super.instance"),new NameExpr("instance"), AssignExpr.Operator.ASSIGN);
+            blockStmt.addStatement(new ExpressionStmt(assignExpr));
             blockStmt.addStatement(new ExpressionStmt(methodCallExpr));
         }
 

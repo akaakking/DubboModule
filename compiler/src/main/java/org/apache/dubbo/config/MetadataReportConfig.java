@@ -167,10 +167,6 @@ public class MetadataReportConfig extends AbstractConfig implements MetadataRepo
         return instance;
     }
 
-    public MetadataReportConfigInterface getInternalInstance() {
-        return instance;
-    }
-
     public MetadataReportConfig() {
         instance = (MetadataReportConfigInterface) DubboClassLoader.getInstance(MetadataReportConfig.class.getName());
     }

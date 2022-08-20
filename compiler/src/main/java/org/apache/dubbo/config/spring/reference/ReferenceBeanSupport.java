@@ -56,8 +56,4 @@ public class ReferenceBeanSupport implements ReferenceBeanSupportInterface {
     public ReferenceBeanSupportInterface getInternalInstance() {
         return instance;
     }
-
-    public ReferenceBeanSupportInterface getInternalInstance() {
-        return instance;
-    }
 }

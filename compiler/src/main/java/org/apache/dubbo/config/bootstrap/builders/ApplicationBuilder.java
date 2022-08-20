@@ -45,7 +45,7 @@ public class ApplicationBuilder extends AbstractBuilder<ApplicationConfig, Appli
     }
 
     public ApplicationBuilderInterface addRegistry(RegistryConfigInterface registry) {
-        return instance.addRegistry(registry.getInternalInstance(), registry);
+        return instance.addRegistry(registry.getInternalInstance());
     }
 
     public ApplicationBuilderInterface addRegistries(List<? extends RegistryConfigInterface> registries) {
@@ -57,7 +57,7 @@ public class ApplicationBuilder extends AbstractBuilder<ApplicationConfig, Appli
     }
 
     public ApplicationBuilderInterface monitor(MonitorConfigInterface monitor) {
-        return instance.monitor(monitor.getInternalInstance(), monitor);
+        return instance.monitor(monitor.getInternalInstance());
     }
 
     public ApplicationBuilderInterface monitor(String monitor) {
@@ -120,10 +120,6 @@ public class ApplicationBuilder extends AbstractBuilder<ApplicationConfig, Appli
         Class klass = DubboClassLoader;
         Method method = klass.getMethod(newBuilder);
         return method.invoke();
-    }
-
-    public ApplicationBuilderInterface getInternalInstance() {
-        return instance;
     }
 
     public ApplicationBuilderInterface getInternalInstance() {

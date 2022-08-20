@@ -75,17 +75,17 @@ public class InterfaceGenerator {
         JavaType javaType = javaClass.getSuperClass();
         if (javaType != null && !javaType.getFullyQualifiedName().equals("java.lang.Object")) {
             if (this.generator.checkName(javaType.getBinaryName())) {
-                coid.addImplementedType(this.generator.addInterface(this.generator.shortName(javaType.getGenericValue())));
+                coid.addExtendedType(this.generator.addInterface(this.generator.shortName(javaType.getGenericValue())));
             } else {
-                coid.addImplementedType(javaType.getGenericValue());
+                coid.addExtendedType(javaType.getGenericValue());
             }
         }
 
         for (JavaType implement : javaClass.getImplements()) {
             if (this.generator.checkName(implement.getFullyQualifiedName())) {
-                coid.addImplementedType(this.generator.addInterface(this.generator.shortName(implement.getGenericValue())));
+                coid.addExtendedType(this.generator.addInterface(this.generator.shortName(implement.getGenericValue())));
             } else {
-                coid.addImplementedType(implement.getGenericValue());
+                coid.addExtendedType(implement.getGenericValue());
             }
         }
     }

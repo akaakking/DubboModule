@@ -11,23 +11,23 @@ public class ModuleServiceRepository implements ModuleServiceRepositoryInterface
     }
 
     public void registerConsumer(String serviceKey, ServiceDescriptorInterface serviceDescriptor, ReferenceConfigBaseInterface<?> rc, Object proxy, ServiceMetadataInterface serviceMetadata) {
-        instance.registerConsumer(serviceKey, serviceDescriptor.getInternalInstance(), serviceDescriptor, rc, proxy, serviceMetadata.getInternalInstance(), serviceMetadata);
+        instance.registerConsumer(serviceKey, serviceDescriptor.getInternalInstance(), rc, proxy, serviceMetadata.getInternalInstance());
     }
 
     public void registerConsumer(ConsumerModelInterface consumerModel) {
-        instance.registerConsumer(consumerModel.getInternalInstance(), consumerModel);
+        instance.registerConsumer(consumerModel.getInternalInstance());
     }
 
     public void registerProvider(String serviceKey, Object serviceInstance, ServiceDescriptorInterface serviceModel, ServiceConfigBaseInterface<?> serviceConfig, ServiceMetadataInterface serviceMetadata) {
-        instance.registerProvider(serviceKey, serviceInstance, serviceModel.getInternalInstance(), serviceModel, serviceConfig, serviceMetadata.getInternalInstance(), serviceMetadata);
+        instance.registerProvider(serviceKey, serviceInstance, serviceModel.getInternalInstance(), serviceConfig, serviceMetadata.getInternalInstance());
     }
 
     public void registerProvider(ProviderModelInterface providerModel) {
-        instance.registerProvider(providerModel.getInternalInstance(), providerModel);
+        instance.registerProvider(providerModel.getInternalInstance());
     }
 
     public ServiceDescriptorInterface registerService(ServiceDescriptorInterface serviceDescriptor) {
-        return instance.registerService(serviceDescriptor.getInternalInstance(), serviceDescriptor);
+        return instance.registerService(serviceDescriptor.getInternalInstance());
     }
 
     public ServiceDescriptorInterface registerService(Class<?> interfaceClazz) {
@@ -35,7 +35,7 @@ public class ModuleServiceRepository implements ModuleServiceRepositoryInterface
     }
 
     public ServiceDescriptorInterface registerService(Class<?> interfaceClazz, ServiceDescriptorInterface serviceDescriptor) {
-        return instance.registerService(interfaceClazz, serviceDescriptor.getInternalInstance(), serviceDescriptor);
+        return instance.registerService(interfaceClazz, serviceDescriptor.getInternalInstance());
     }
 
     public ServiceDescriptorInterface registerService(String path, Class<?> interfaceClass) {
@@ -59,11 +59,11 @@ public class ModuleServiceRepository implements ModuleServiceRepositoryInterface
     }
 
     public void unregisterProvider(ProviderModelInterface providerModel) {
-        instance.unregisterProvider(providerModel.getInternalInstance(), providerModel);
+        instance.unregisterProvider(providerModel.getInternalInstance());
     }
 
     public void unregisterConsumer(ConsumerModelInterface consumerModel) {
-        instance.unregisterConsumer(consumerModel.getInternalInstance(), consumerModel);
+        instance.unregisterConsumer(consumerModel.getInternalInstance());
     }
 
     public List<ServiceDescriptorInterface> getAllServices() {
@@ -107,10 +107,6 @@ public class ModuleServiceRepository implements ModuleServiceRepositoryInterface
     }
 
     protected ModuleServiceRepositoryInterface instance;
-
-    public ModuleServiceRepositoryInterface getInternalInstance() {
-        return instance;
-    }
 
     public ModuleServiceRepositoryInterface getInternalInstance() {
         return instance;

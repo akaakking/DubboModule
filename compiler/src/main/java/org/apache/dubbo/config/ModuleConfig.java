@@ -44,7 +44,7 @@ public class ModuleConfig extends AbstractConfig implements ModuleConfigInterfac
     }
 
     public void setRegistry(RegistryConfigInterface registry) {
-        instance.setRegistry(registry.getInternalInstance(), registry);
+        instance.setRegistry(registry.getInternalInstance());
     }
 
     public List<RegistryConfigInterface> getRegistries() {
@@ -60,7 +60,7 @@ public class ModuleConfig extends AbstractConfig implements ModuleConfigInterfac
     }
 
     public void setMonitor(MonitorConfigInterface monitor) {
-        instance.setMonitor(monitor.getInternalInstance(), monitor);
+        instance.setMonitor(monitor.getInternalInstance());
     }
 
     public void setMonitor(String monitor) {
@@ -105,10 +105,6 @@ public class ModuleConfig extends AbstractConfig implements ModuleConfigInterfac
 
     public void setExportAsync(Boolean exportAsync) {
         instance.setExportAsync(exportAsync);
-    }
-
-    public ModuleConfigInterface getInternalInstance() {
-        return instance;
     }
 
     public ModuleConfigInterface getInternalInstance() {
