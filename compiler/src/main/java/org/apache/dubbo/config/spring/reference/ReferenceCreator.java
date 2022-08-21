@@ -18,12 +18,16 @@ public class ReferenceCreator implements ReferenceCreatorInterface {
     protected ReferenceCreatorInterface instance;
 
     public static ReferenceCreatorInterface create(Map<String, Object> attributes, ApplicationContext applicationContext) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(create, Map.class, ApplicationContext.class);
+        Class klass = DubboClassLoader.getKlass(ReferenceCreator.class.getName());
+        Method method = klass.getMethod("create", Map.class, ApplicationContext.class);
         return method.invoke(attributes, applicationContext);
     }
 
     public ReferenceCreatorInterface getInternalInstance() {
         return instance;
+    }
+
+    protected ReferenceCreator() {
+        instance = (ReferenceCreatorInterface) DubboClassLoader.getInstance(ReferenceCreator.class.getName());
     }
 }

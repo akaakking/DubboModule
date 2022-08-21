@@ -65,4 +65,7 @@ public class AbstractConfigManager extends LifecycleAdapter implements AbstractC
     public AbstractConfigManagerInterface getInternalInstance() {
         return instance;
     }
+
+    protected AbstractConfigManager() {
+    }
 }

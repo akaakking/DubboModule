@@ -60,8 +60,8 @@ public class DefaultApplicationDeployer extends AbstractDeployer<ApplicationMode
     }
 
     public static ApplicationDeployerInterface get(ScopeModelInterface moduleOrApplicationModel) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(get, ScopeModelInterface.class);
+        Class klass = DubboClassLoader.getKlass(DefaultApplicationDeployer.class.getName());
+        Method method = klass.getMethod("get", ScopeModelInterface.class);
         return method.invoke(moduleOrApplicationModel);
     }
 
@@ -73,5 +73,11 @@ public class DefaultApplicationDeployer extends AbstractDeployer<ApplicationMode
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (DefaultApplicationDeployerInterface) DubboClassLoader.getInstance(DefaultApplicationDeployer.class.getName(), params, args);
+        super.instance = instance;
+    }
+
+    protected DefaultApplicationDeployer() {
+        instance = (DefaultApplicationDeployerInterface) DubboClassLoader.getInstance(DefaultApplicationDeployer.class.getName());
+        super.instance = instance;
     }
 }

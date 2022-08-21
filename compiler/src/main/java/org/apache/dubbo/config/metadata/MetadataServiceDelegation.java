@@ -76,4 +76,8 @@ public class MetadataServiceDelegation implements MetadataServiceDelegationInter
         Object[] args = new Object[]{applicationModel};
         instance = (MetadataServiceDelegationInterface) DubboClassLoader.getInstance(MetadataServiceDelegation.class.getName(), params, args);
     }
+
+    protected MetadataServiceDelegation() {
+        instance = (MetadataServiceDelegationInterface) DubboClassLoader.getInstance(MetadataServiceDelegation.class.getName());
+    }
 }

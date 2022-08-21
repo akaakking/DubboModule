@@ -121,5 +121,11 @@ public class ModuleEnvironment extends Environment implements ModuleEnvironmentI
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ModuleEnvironmentInterface) DubboClassLoader.getInstance(ModuleEnvironment.class.getName(), params, args);
+        super.instance = instance;
+    }
+
+    protected ModuleEnvironment() {
+        instance = (ModuleEnvironmentInterface) DubboClassLoader.getInstance(ModuleEnvironment.class.getName());
+        super.instance = instance;
     }
 }

@@ -86,4 +86,9 @@ public class MethodBuilder extends AbstractMethodBuilder<MethodConfig, MethodBui
     public MethodBuilderInterface getInternalInstance() {
         return instance;
     }
+
+    protected MethodBuilder() {
+        instance = (MethodBuilderInterface) DubboClassLoader.getInstance(MethodBuilder.class.getName());
+        super.instance = instance;
+    }
 }

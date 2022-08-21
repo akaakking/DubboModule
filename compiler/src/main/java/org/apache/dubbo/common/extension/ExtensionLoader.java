@@ -102,30 +102,34 @@ public class ExtensionLoader<T> implements ExtensionLoaderInterface<T> {
     protected ExtensionLoaderInterface instance;
 
     public static void setLoadingStrategies(LoadingStrategyInterface strategies) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(setLoadingStrategies, LoadingStrategyInterface.class);
+        Class klass = DubboClassLoader.getKlass(ExtensionLoader.class.getName());
+        Method method = klass.getMethod("setLoadingStrategies", LoadingStrategyInterface.class);
         method.invoke(strategies);
     }
 
     public static List<LoadingStrategyInterface> getLoadingStrategies() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getLoadingStrategies);
+        Class klass = DubboClassLoader.getKlass(ExtensionLoader.class.getName());
+        Method method = klass.getMethod("getLoadingStrategies");
         return method.invoke();
     }
 
     public static <T> ExtensionLoaderInterface<T> getExtensionLoader(Class<T> type) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getExtensionLoader, Class.class);
+        Class klass = DubboClassLoader.getKlass(ExtensionLoader.class.getName());
+        Method method = klass.getMethod("getExtensionLoader", Class.class);
         return method.invoke(type);
     }
 
     public static void resetExtensionLoader(Class type) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(resetExtensionLoader, Class.class);
+        Class klass = DubboClassLoader.getKlass(ExtensionLoader.class.getName());
+        Method method = klass.getMethod("resetExtensionLoader", Class.class);
         method.invoke(type);
     }
 
     public ExtensionLoaderInterface getInternalInstance() {
         return instance;
+    }
+
+    protected ExtensionLoader() {
+        instance = (ExtensionLoaderInterface) DubboClassLoader.getInstance(ExtensionLoader.class.getName());
     }
 }

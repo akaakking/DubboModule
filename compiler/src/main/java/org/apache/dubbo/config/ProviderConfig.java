@@ -238,13 +238,15 @@ public class ProviderConfig extends AbstractServiceConfig implements ProviderCon
         return instance;
     }
 
-    public ProviderConfig() {
+    public protected ProviderConfig() {
         instance = (ProviderConfigInterface) DubboClassLoader.getInstance(ProviderConfig.class.getName());
+        super.instance = instance;
     }
 
     public ProviderConfig(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ProviderConfigInterface) DubboClassLoader.getInstance(ProviderConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 }

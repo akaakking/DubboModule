@@ -46,4 +46,8 @@ public class ExporterDeployListener implements ExporterDeployListenerInterface {
     public ExporterDeployListenerInterface getInternalInstance() {
         return instance;
     }
+
+    protected ExporterDeployListener() {
+        instance = (ExporterDeployListenerInterface) DubboClassLoader.getInstance(ExporterDeployListener.class.getName());
+    }
 }

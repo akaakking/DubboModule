@@ -93,86 +93,86 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
     }
 
     public static ApplicationModelInterface ofNullable(ApplicationModelInterface applicationModel) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(ofNullable, ApplicationModelInterface.class);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("ofNullable", ApplicationModelInterface.class);
         return method.invoke(applicationModel);
     }
 
     public static ApplicationModelInterface defaultModel() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(defaultModel);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("defaultModel");
         return method.invoke();
     }
 
     public static Collection<ConsumerModelInterface> allConsumerModels() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(allConsumerModels);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("allConsumerModels");
         return method.invoke();
     }
 
     public static Collection<ProviderModelInterface> allProviderModels() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(allProviderModels);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("allProviderModels");
         return method.invoke();
     }
 
     public static ProviderModelInterface getProviderModel(String serviceKey) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getProviderModel, String.class);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("getProviderModel", String.class);
         return method.invoke(serviceKey);
     }
 
     public static ConsumerModelInterface getConsumerModel(String serviceKey) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getConsumerModel, String.class);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("getConsumerModel", String.class);
         return method.invoke(serviceKey);
     }
 
     public static EnvironmentInterface getEnvironment() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getEnvironment);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("getEnvironment");
         return method.invoke();
     }
 
     public static ConfigManagerInterface getConfigManager() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getConfigManager);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("getConfigManager");
         return method.invoke();
     }
 
     public static ServiceRepositoryInterface getServiceRepository() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getServiceRepository);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("getServiceRepository");
         return method.invoke();
     }
 
     public static ExecutorRepositoryInterface getExecutorRepository() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getExecutorRepository);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("getExecutorRepository");
         return method.invoke();
     }
 
     public static ApplicationConfigInterface getApplicationConfig() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getApplicationConfig);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("getApplicationConfig");
         return method.invoke();
     }
 
     public static String getName() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getName);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("getName");
         return method.invoke();
     }
 
     public static String getApplication() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getApplication);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("getApplication");
         return method.invoke();
     }
 
     public static void reset() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(reset);
+        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        Method method = klass.getMethod("reset");
         method.invoke();
     }
 
@@ -184,11 +184,18 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
         Class[] params = new Class[]{FrameworkModelInterface.class};
         Object[] args = new Object[]{frameworkModel};
         instance = (ApplicationModelInterface) DubboClassLoader.getInstance(ApplicationModel.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ApplicationModel(FrameworkModelInterface frameworkModel, boolean isInternal) {
         Class[] params = new Class[]{FrameworkModelInterface.class, boolean.class};
         Object[] args = new Object[]{frameworkModel, isInternal};
         instance = (ApplicationModelInterface) DubboClassLoader.getInstance(ApplicationModel.class.getName(), params, args);
+        super.instance = instance;
+    }
+
+    protected ApplicationModel() {
+        instance = (ApplicationModelInterface) DubboClassLoader.getInstance(ApplicationModel.class.getName());
+        super.instance = instance;
     }
 }

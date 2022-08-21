@@ -140,12 +140,17 @@ public class RegistryBuilder extends AbstractBuilder<RegistryConfig, RegistryBui
     }
 
     public static RegistryBuilderInterface newBuilder() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(newBuilder);
+        Class klass = DubboClassLoader.getKlass(RegistryBuilder.class.getName());
+        Method method = klass.getMethod("newBuilder");
         return method.invoke();
     }
 
     public RegistryBuilderInterface getInternalInstance() {
         return instance;
+    }
+
+    protected RegistryBuilder() {
+        instance = (RegistryBuilderInterface) DubboClassLoader.getInstance(RegistryBuilder.class.getName());
+        super.instance = instance;
     }
 }

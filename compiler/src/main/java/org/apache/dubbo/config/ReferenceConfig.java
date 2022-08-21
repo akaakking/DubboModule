@@ -41,25 +41,29 @@ public class ReferenceConfig<T> extends ReferenceConfigBase<T> implements Refere
         return instance;
     }
 
-    public ReferenceConfig() {
+    public protected ReferenceConfig() {
         instance = (ReferenceConfigInterface) DubboClassLoader.getInstance(ReferenceConfig.class.getName());
+        super.instance = instance;
     }
 
     public ReferenceConfig(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ReferenceConfigInterface) DubboClassLoader.getInstance(ReferenceConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ReferenceConfig(Reference reference) {
         Class[] params = new Class[]{Reference.class};
         Object[] args = new Object[]{reference};
         instance = (ReferenceConfigInterface) DubboClassLoader.getInstance(ReferenceConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ReferenceConfig(ModuleModelInterface moduleModel, Reference reference) {
         Class[] params = new Class[]{ModuleModelInterface.class, Reference.class};
         Object[] args = new Object[]{moduleModel, reference};
         instance = (ReferenceConfigInterface) DubboClassLoader.getInstance(ReferenceConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 }

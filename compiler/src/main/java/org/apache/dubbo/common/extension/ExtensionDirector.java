@@ -45,4 +45,8 @@ public class ExtensionDirector implements ExtensionDirectorInterface {
         Object[] args = new Object[]{parent, scope, scopeModel};
         instance = (ExtensionDirectorInterface) DubboClassLoader.getInstance(ExtensionDirector.class.getName(), params, args);
     }
+
+    protected ExtensionDirector() {
+        instance = (ExtensionDirectorInterface) DubboClassLoader.getInstance(ExtensionDirector.class.getName());
+    }
 }

@@ -55,14 +55,14 @@ public class TypeDefinition implements TypeDefinitionInterface {
     protected TypeDefinitionInterface instance;
 
     public static String[] formatTypes(String[] types) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(formatTypes, String[].class);
+        Class klass = DubboClassLoader.getKlass(TypeDefinition.class.getName());
+        Method method = klass.getMethod("formatTypes", String[].class);
         return method.invoke(types);
     }
 
     public static String formatType(String type) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(formatType, String.class);
+        Class klass = DubboClassLoader.getKlass(TypeDefinition.class.getName());
+        Method method = klass.getMethod("formatType", String.class);
         return method.invoke(type);
     }
 
@@ -70,7 +70,7 @@ public class TypeDefinition implements TypeDefinitionInterface {
         return instance;
     }
 
-    public TypeDefinition() {
+    public protected TypeDefinition() {
         instance = (TypeDefinitionInterface) DubboClassLoader.getInstance(TypeDefinition.class.getName());
     }
 

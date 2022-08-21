@@ -26,4 +26,8 @@ public class ArgumentBuilder implements ArgumentBuilderInterface {
     public ArgumentBuilderInterface getInternalInstance() {
         return instance;
     }
+
+    protected ArgumentBuilder() {
+        instance = (ArgumentBuilderInterface) DubboClassLoader.getInstance(ArgumentBuilder.class.getName());
+    }
 }

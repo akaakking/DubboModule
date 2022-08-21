@@ -68,4 +68,8 @@ public class ServiceDefinition implements ServiceDefinitionInterface {
     public ServiceDefinitionInterface getInternalInstance() {
         return instance;
     }
+
+    protected ServiceDefinition() {
+        instance = (ServiceDefinitionInterface) DubboClassLoader.getInstance(ServiceDefinition.class.getName());
+    }
 }

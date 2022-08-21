@@ -105,4 +105,9 @@ public class ProviderBuilder extends AbstractServiceBuilder<ProviderConfig, Prov
     public ProviderBuilderInterface getInternalInstance() {
         return instance;
     }
+
+    protected ProviderBuilder() {
+        instance = (ProviderBuilderInterface) DubboClassLoader.getInstance(ProviderBuilder.class.getName());
+        super.instance = instance;
+    }
 }

@@ -56,42 +56,46 @@ public class BaseServiceMetadata implements BaseServiceMetadataInterface {
     protected BaseServiceMetadataInterface instance;
 
     public static String buildServiceKey(String path, String group, String version) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(buildServiceKey, String.class, String.class, String.class);
+        Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
+        Method method = klass.getMethod("buildServiceKey", String.class, String.class, String.class);
         return method.invoke(path, group, version);
     }
 
     public static String versionFromServiceKey(String serviceKey) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(versionFromServiceKey, String.class);
+        Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
+        Method method = klass.getMethod("versionFromServiceKey", String.class);
         return method.invoke(serviceKey);
     }
 
     public static String groupFromServiceKey(String serviceKey) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(groupFromServiceKey, String.class);
+        Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
+        Method method = klass.getMethod("groupFromServiceKey", String.class);
         return method.invoke(serviceKey);
     }
 
     public static String interfaceFromServiceKey(String serviceKey) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(interfaceFromServiceKey, String.class);
+        Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
+        Method method = klass.getMethod("interfaceFromServiceKey", String.class);
         return method.invoke(serviceKey);
     }
 
     public static BaseServiceMetadataInterface revertDisplayServiceKey(String displayKey) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(revertDisplayServiceKey, String.class);
+        Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
+        Method method = klass.getMethod("revertDisplayServiceKey", String.class);
         return method.invoke(displayKey);
     }
 
     public static String keyWithoutGroup(String interfaceName, String version) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(keyWithoutGroup, String.class, String.class);
+        Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
+        Method method = klass.getMethod("keyWithoutGroup", String.class, String.class);
         return method.invoke(interfaceName, version);
     }
 
     public BaseServiceMetadataInterface getInternalInstance() {
         return instance;
+    }
+
+    protected BaseServiceMetadata() {
+        instance = (BaseServiceMetadataInterface) DubboClassLoader.getInstance(BaseServiceMetadata.class.getName());
     }
 }

@@ -32,7 +32,7 @@ public class InmemoryConfiguration implements InmemoryConfigurationInterface {
         return instance;
     }
 
-    public InmemoryConfiguration() {
+    public protected InmemoryConfiguration() {
         instance = (InmemoryConfigurationInterface) DubboClassLoader.getInstance(InmemoryConfiguration.class.getName());
     }
 

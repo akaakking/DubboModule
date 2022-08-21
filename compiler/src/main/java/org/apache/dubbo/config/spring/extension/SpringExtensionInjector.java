@@ -21,18 +21,22 @@ public class SpringExtensionInjector implements SpringExtensionInjectorInterface
     protected SpringExtensionInjectorInterface instance;
 
     public static void addApplicationContext(ApplicationContext context) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(addApplicationContext, ApplicationContext.class);
+        Class klass = DubboClassLoader.getKlass(SpringExtensionInjector.class.getName());
+        Method method = klass.getMethod("addApplicationContext", ApplicationContext.class);
         method.invoke(context);
     }
 
     public static SpringExtensionInjectorInterface get(ExtensionAccessorInterface extensionAccessor) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(get, ExtensionAccessorInterface.class);
+        Class klass = DubboClassLoader.getKlass(SpringExtensionInjector.class.getName());
+        Method method = klass.getMethod("get", ExtensionAccessorInterface.class);
         return method.invoke(extensionAccessor);
     }
 
     public SpringExtensionInjectorInterface getInternalInstance() {
         return instance;
+    }
+
+    protected SpringExtensionInjector() {
+        instance = (SpringExtensionInjectorInterface) DubboClassLoader.getInstance(SpringExtensionInjector.class.getName());
     }
 }

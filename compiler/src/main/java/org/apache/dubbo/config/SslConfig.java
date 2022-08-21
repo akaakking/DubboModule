@@ -123,13 +123,15 @@ public class SslConfig extends AbstractConfig implements SslConfigInterface {
         return instance;
     }
 
-    public SslConfig() {
+    public protected SslConfig() {
         instance = (SslConfigInterface) DubboClassLoader.getInstance(SslConfig.class.getName());
+        super.instance = instance;
     }
 
     public SslConfig(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (SslConfigInterface) DubboClassLoader.getInstance(SslConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 }

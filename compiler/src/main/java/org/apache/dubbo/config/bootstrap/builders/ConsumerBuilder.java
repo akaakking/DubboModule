@@ -45,4 +45,9 @@ public class ConsumerBuilder extends AbstractReferenceBuilder<ConsumerConfig, Co
     public ConsumerBuilderInterface getInternalInstance() {
         return instance;
     }
+
+    protected ConsumerBuilder() {
+        instance = (ConsumerBuilderInterface) DubboClassLoader.getInstance(ConsumerBuilder.class.getName());
+        super.instance = instance;
+    }
 }

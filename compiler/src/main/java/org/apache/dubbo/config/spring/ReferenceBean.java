@@ -96,7 +96,7 @@ public class ReferenceBean<T> implements ReferenceBeanInterface<T> {
         return instance;
     }
 
-    public ReferenceBean() {
+    public protected ReferenceBean() {
         instance = (ReferenceBeanInterface) DubboClassLoader.getInstance(ReferenceBean.class.getName());
     }
 

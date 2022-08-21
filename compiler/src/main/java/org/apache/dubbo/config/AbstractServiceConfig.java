@@ -174,4 +174,7 @@ public class AbstractServiceConfig extends AbstractInterfaceConfig implements Ab
     public AbstractServiceConfigInterface getInternalInstance() {
         return instance;
     }
+
+    protected AbstractServiceConfig() {
+    }
 }

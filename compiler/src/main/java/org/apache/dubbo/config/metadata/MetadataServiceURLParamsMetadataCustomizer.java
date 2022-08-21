@@ -14,4 +14,8 @@ public class MetadataServiceURLParamsMetadataCustomizer implements MetadataServi
     public MetadataServiceURLParamsMetadataCustomizerInterface getInternalInstance() {
         return instance;
     }
+
+    protected MetadataServiceURLParamsMetadataCustomizer() {
+        instance = (MetadataServiceURLParamsMetadataCustomizerInterface) DubboClassLoader.getInstance(MetadataServiceURLParamsMetadataCustomizer.class.getName());
+    }
 }

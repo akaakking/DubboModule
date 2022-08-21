@@ -24,4 +24,8 @@ public class DubboBeanDefinitionParser implements DubboBeanDefinitionParserInter
         Object[] args = new Object[]{beanClass};
         instance = (DubboBeanDefinitionParserInterface) DubboClassLoader.getInstance(DubboBeanDefinitionParser.class.getName(), params, args);
     }
+
+    protected DubboBeanDefinitionParser() {
+        instance = (DubboBeanDefinitionParserInterface) DubboClassLoader.getInstance(DubboBeanDefinitionParser.class.getName());
+    }
 }

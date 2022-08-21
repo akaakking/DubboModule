@@ -34,4 +34,8 @@ public class AggregationConfig implements AggregationConfigInterface {
     public AggregationConfigInterface getInternalInstance() {
         return instance;
     }
+
+    protected AggregationConfig() {
+        instance = (AggregationConfigInterface) DubboClassLoader.getInstance(AggregationConfig.class.getName());
+    }
 }

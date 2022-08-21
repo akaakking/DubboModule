@@ -29,4 +29,8 @@ public class ServiceRepository implements ServiceRepositoryInterface {
         Object[] args = new Object[]{applicationModel};
         instance = (ServiceRepositoryInterface) DubboClassLoader.getInstance(ServiceRepository.class.getName(), params, args);
     }
+
+    protected ServiceRepository() {
+        instance = (ServiceRepositoryInterface) DubboClassLoader.getInstance(ServiceRepository.class.getName());
+    }
 }

@@ -40,25 +40,29 @@ public class ServiceConfig<T> extends ServiceConfigBase<T> implements ServiceCon
         return instance;
     }
 
-    public ServiceConfig() {
+    public protected ServiceConfig() {
         instance = (ServiceConfigInterface) DubboClassLoader.getInstance(ServiceConfig.class.getName());
+        super.instance = instance;
     }
 
     public ServiceConfig(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ServiceConfigInterface) DubboClassLoader.getInstance(ServiceConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ServiceConfig(Service service) {
         Class[] params = new Class[]{Service.class};
         Object[] args = new Object[]{service};
         instance = (ServiceConfigInterface) DubboClassLoader.getInstance(ServiceConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ServiceConfig(ModuleModelInterface moduleModel, Service service) {
         Class[] params = new Class[]{ModuleModelInterface.class, Service.class};
         Object[] args = new Object[]{moduleModel, service};
         instance = (ServiceConfigInterface) DubboClassLoader.getInstance(ServiceConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 }

@@ -70,4 +70,7 @@ public class AbstractMethodBuilder<T extends AbstractMethodConfigInterface, B ex
     public AbstractMethodBuilderInterface getInternalInstance() {
         return instance;
     }
+
+    protected AbstractMethodBuilder() {
+    }
 }

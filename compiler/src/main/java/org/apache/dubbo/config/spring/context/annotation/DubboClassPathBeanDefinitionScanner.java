@@ -23,11 +23,18 @@ public class DubboClassPathBeanDefinitionScanner extends ClassPathBeanDefinition
         Class[] params = new Class[]{BeanDefinitionRegistry.class, boolean.class, Environment.class, ResourceLoader.class};
         Object[] args = new Object[]{registry, useDefaultFilters, environment, resourceLoader};
         instance = (DubboClassPathBeanDefinitionScannerInterface) DubboClassLoader.getInstance(DubboClassPathBeanDefinitionScanner.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public DubboClassPathBeanDefinitionScanner(BeanDefinitionRegistry registry, Environment environment, ResourceLoader resourceLoader) {
         Class[] params = new Class[]{BeanDefinitionRegistry.class, Environment.class, ResourceLoader.class};
         Object[] args = new Object[]{registry, environment, resourceLoader};
         instance = (DubboClassPathBeanDefinitionScannerInterface) DubboClassLoader.getInstance(DubboClassPathBeanDefinitionScanner.class.getName(), params, args);
+        super.instance = instance;
+    }
+
+    protected DubboClassPathBeanDefinitionScanner() {
+        instance = (DubboClassPathBeanDefinitionScannerInterface) DubboClassLoader.getInstance(DubboClassPathBeanDefinitionScanner.class.getName());
+        super.instance = instance;
     }
 }

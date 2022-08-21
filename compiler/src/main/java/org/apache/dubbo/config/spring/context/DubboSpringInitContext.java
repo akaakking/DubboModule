@@ -58,4 +58,8 @@ public class DubboSpringInitContext implements DubboSpringInitContextInterface {
     public DubboSpringInitContextInterface getInternalInstance() {
         return instance;
     }
+
+    protected DubboSpringInitContext() {
+        instance = (DubboSpringInitContextInterface) DubboClassLoader.getInstance(DubboSpringInitContext.class.getName());
+    }
 }

@@ -18,4 +18,8 @@ public class DubboBootstrapStartStopListenerSpringAdapter implements DubboBootst
     public DubboBootstrapStartStopListenerSpringAdapterInterface getInternalInstance() {
         return instance;
     }
+
+    protected DubboBootstrapStartStopListenerSpringAdapter() {
+        instance = (DubboBootstrapStartStopListenerSpringAdapterInterface) DubboClassLoader.getInstance(DubboBootstrapStartStopListenerSpringAdapter.class.getName());
+    }
 }

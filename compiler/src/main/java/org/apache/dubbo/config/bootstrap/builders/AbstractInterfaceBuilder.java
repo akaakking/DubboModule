@@ -114,4 +114,7 @@ public class AbstractInterfaceBuilder<T extends AbstractInterfaceConfigInterface
     public AbstractInterfaceBuilderInterface getInternalInstance() {
         return instance;
     }
+
+    protected AbstractInterfaceBuilder() {
+    }
 }

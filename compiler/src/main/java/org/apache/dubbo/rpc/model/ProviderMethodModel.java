@@ -43,4 +43,8 @@ public class ProviderMethodModel implements ProviderMethodModelInterface {
         Object[] args = new Object[]{method};
         instance = (ProviderMethodModelInterface) DubboClassLoader.getInstance(ProviderMethodModel.class.getName(), params, args);
     }
+
+    protected ProviderMethodModel() {
+        instance = (ProviderMethodModelInterface) DubboClassLoader.getInstance(ProviderMethodModel.class.getName());
+    }
 }

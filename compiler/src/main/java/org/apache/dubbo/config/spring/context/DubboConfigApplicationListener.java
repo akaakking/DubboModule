@@ -21,4 +21,8 @@ public class DubboConfigApplicationListener implements DubboConfigApplicationLis
     public DubboConfigApplicationListenerInterface getInternalInstance() {
         return instance;
     }
+
+    protected DubboConfigApplicationListener() {
+        instance = (DubboConfigApplicationListenerInterface) DubboClassLoader.getInstance(DubboConfigApplicationListener.class.getName());
+    }
 }

@@ -33,7 +33,7 @@ public class ConfigItem implements ConfigItemInterface {
         instance = (ConfigItemInterface) DubboClassLoader.getInstance(ConfigItem.class.getName(), params, args);
     }
 
-    public ConfigItem() {
+    public protected ConfigItem() {
         instance = (ConfigItemInterface) DubboClassLoader.getInstance(ConfigItem.class.getName());
     }
 }

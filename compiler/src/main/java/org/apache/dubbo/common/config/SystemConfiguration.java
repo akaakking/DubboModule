@@ -19,4 +19,8 @@ public class SystemConfiguration implements SystemConfigurationInterface {
     public SystemConfigurationInterface getInternalInstance() {
         return instance;
     }
+
+    protected SystemConfiguration() {
+        instance = (SystemConfigurationInterface) DubboClassLoader.getInstance(SystemConfiguration.class.getName());
+    }
 }

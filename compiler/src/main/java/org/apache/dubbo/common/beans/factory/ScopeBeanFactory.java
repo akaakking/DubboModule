@@ -65,4 +65,8 @@ public class ScopeBeanFactory implements ScopeBeanFactoryInterface {
         Object[] args = new Object[]{parent, extensionAccessor};
         instance = (ScopeBeanFactoryInterface) DubboClassLoader.getInstance(ScopeBeanFactory.class.getName(), params, args);
     }
+
+    protected ScopeBeanFactory() {
+        instance = (ScopeBeanFactoryInterface) DubboClassLoader.getInstance(ScopeBeanFactory.class.getName());
+    }
 }

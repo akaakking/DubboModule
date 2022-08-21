@@ -13,4 +13,9 @@ public class DefaultDubboConfigBinder extends AbstractDubboConfigBinder implemen
     public DefaultDubboConfigBinderInterface getInternalInstance() {
         return instance;
     }
+
+    protected DefaultDubboConfigBinder() {
+        instance = (DefaultDubboConfigBinderInterface) DubboClassLoader.getInstance(DefaultDubboConfigBinder.class.getName());
+        super.instance = instance;
+    }
 }

@@ -53,4 +53,8 @@ public class CompositeReferenceCache implements CompositeReferenceCacheInterface
         Object[] args = new Object[]{applicationModel};
         instance = (CompositeReferenceCacheInterface) DubboClassLoader.getInstance(CompositeReferenceCache.class.getName(), params, args);
     }
+
+    protected CompositeReferenceCache() {
+        instance = (CompositeReferenceCacheInterface) DubboClassLoader.getInstance(CompositeReferenceCache.class.getName());
+    }
 }

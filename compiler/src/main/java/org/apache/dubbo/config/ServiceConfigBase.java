@@ -128,4 +128,7 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
     public ServiceConfigBaseInterface getInternalInstance() {
         return instance;
     }
+
+    protected ServiceConfigBase() {
+    }
 }

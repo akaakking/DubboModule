@@ -10,4 +10,8 @@ public class DubboConfigConfiguration implements DubboConfigConfigurationInterfa
     public DubboConfigConfigurationInterface getInternalInstance() {
         return instance;
     }
+
+    protected DubboConfigConfiguration() {
+        instance = (DubboConfigConfigurationInterface) DubboClassLoader.getInstance(DubboConfigConfiguration.class.getName());
+    }
 }

@@ -69,4 +69,8 @@ public class ServiceAnnotationPostProcessor implements ServiceAnnotationPostProc
         Object[] args = new Object[]{packagesToScan};
         instance = (ServiceAnnotationPostProcessorInterface) DubboClassLoader.getInstance(ServiceAnnotationPostProcessor.class.getName(), params, args);
     }
+
+    protected ServiceAnnotationPostProcessor() {
+        instance = (ServiceAnnotationPostProcessorInterface) DubboClassLoader.getInstance(ServiceAnnotationPostProcessor.class.getName());
+    }
 }

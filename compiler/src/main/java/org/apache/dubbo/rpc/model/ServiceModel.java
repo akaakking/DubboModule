@@ -108,4 +108,8 @@ public class ServiceModel implements ServiceModelInterface {
         Object[] args = new Object[]{proxyObject, serviceKey, serviceModel, moduleModel, serviceMetadata, interfaceClassLoader};
         instance = (ServiceModelInterface) DubboClassLoader.getInstance(ServiceModel.class.getName(), params, args);
     }
+
+    protected ServiceModel() {
+        instance = (ServiceModelInterface) DubboClassLoader.getInstance(ServiceModel.class.getName());
+    }
 }

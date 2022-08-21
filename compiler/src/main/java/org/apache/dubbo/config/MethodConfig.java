@@ -165,8 +165,8 @@ public class MethodConfig extends AbstractMethodConfig implements MethodConfigIn
     }
 
     public static List<MethodConfigInterface> constructMethodConfig(Method[] methods) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(constructMethodConfig, Method[].class);
+        Class klass = DubboClassLoader.getKlass(MethodConfig.class.getName());
+        Method method = klass.getMethod("constructMethodConfig", Method[].class);
         return method.invoke(methods);
     }
 
@@ -174,19 +174,22 @@ public class MethodConfig extends AbstractMethodConfig implements MethodConfigIn
         return instance;
     }
 
-    public MethodConfig() {
+    public protected MethodConfig() {
         instance = (MethodConfigInterface) DubboClassLoader.getInstance(MethodConfig.class.getName());
+        super.instance = instance;
     }
 
     public MethodConfig(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (MethodConfigInterface) DubboClassLoader.getInstance(MethodConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public MethodConfig(Method method) {
         Class[] params = new Class[]{Method.class};
         Object[] args = new Object[]{method};
         instance = (MethodConfigInterface) DubboClassLoader.getInstance(MethodConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 }

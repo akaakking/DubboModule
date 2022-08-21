@@ -43,11 +43,18 @@ public class ConfigChangedEvent extends EventObject implements ConfigChangedEven
         Class[] params = new Class[]{String.class, String.class, String.class};
         Object[] args = new Object[]{key, group, content};
         instance = (ConfigChangedEventInterface) DubboClassLoader.getInstance(ConfigChangedEvent.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ConfigChangedEvent(String key, String group, String content, ConfigChangeTypeInterface changeType) {
         Class[] params = new Class[]{String.class, String.class, String.class, ConfigChangeTypeInterface.class};
         Object[] args = new Object[]{key, group, content, changeType};
         instance = (ConfigChangedEventInterface) DubboClassLoader.getInstance(ConfigChangedEvent.class.getName(), params, args);
+        super.instance = instance;
+    }
+
+    protected ConfigChangedEvent() {
+        instance = (ConfigChangedEventInterface) DubboClassLoader.getInstance(ConfigChangedEvent.class.getName());
+        super.instance = instance;
     }
 }

@@ -123,7 +123,7 @@ public class MetadataInfo implements MetadataInfoInterface {
         return instance;
     }
 
-    public MetadataInfo() {
+    public protected MetadataInfo() {
         instance = (MetadataInfoInterface) DubboClassLoader.getInstance(MetadataInfo.class.getName());
     }
 

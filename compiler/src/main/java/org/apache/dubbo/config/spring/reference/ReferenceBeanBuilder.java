@@ -208,4 +208,8 @@ public class ReferenceBeanBuilder implements ReferenceBeanBuilderInterface {
     public ReferenceBeanBuilderInterface getInternalInstance() {
         return instance;
     }
+
+    protected ReferenceBeanBuilder() {
+        instance = (ReferenceBeanBuilderInterface) DubboClassLoader.getInstance(ReferenceBeanBuilder.class.getName());
+    }
 }

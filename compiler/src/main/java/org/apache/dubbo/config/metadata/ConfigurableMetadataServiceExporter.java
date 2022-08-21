@@ -37,4 +37,8 @@ public class ConfigurableMetadataServiceExporter implements ConfigurableMetadata
         Object[] args = new Object[]{applicationModel, metadataService};
         instance = (ConfigurableMetadataServiceExporterInterface) DubboClassLoader.getInstance(ConfigurableMetadataServiceExporter.class.getName(), params, args);
     }
+
+    protected ConfigurableMetadataServiceExporter() {
+        instance = (ConfigurableMetadataServiceExporterInterface) DubboClassLoader.getInstance(ConfigurableMetadataServiceExporter.class.getName());
+    }
 }

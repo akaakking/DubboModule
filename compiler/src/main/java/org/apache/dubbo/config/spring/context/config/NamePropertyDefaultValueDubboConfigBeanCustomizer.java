@@ -18,4 +18,8 @@ public class NamePropertyDefaultValueDubboConfigBeanCustomizer implements NamePr
     public NamePropertyDefaultValueDubboConfigBeanCustomizerInterface getInternalInstance() {
         return instance;
     }
+
+    protected NamePropertyDefaultValueDubboConfigBeanCustomizer() {
+        instance = (NamePropertyDefaultValueDubboConfigBeanCustomizerInterface) DubboClassLoader.getInstance(NamePropertyDefaultValueDubboConfigBeanCustomizer.class.getName());
+    }
 }

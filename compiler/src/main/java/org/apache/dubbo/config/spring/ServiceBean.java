@@ -46,25 +46,29 @@ public class ServiceBean<T> extends ServiceConfig<T> implements ServiceBeanInter
         return instance;
     }
 
-    public ServiceBean() {
+    public protected ServiceBean() {
         instance = (ServiceBeanInterface) DubboClassLoader.getInstance(ServiceBean.class.getName());
+        super.instance = instance;
     }
 
     public ServiceBean(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ServiceBeanInterface) DubboClassLoader.getInstance(ServiceBean.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ServiceBean(Service service) {
         Class[] params = new Class[]{Service.class};
         Object[] args = new Object[]{service};
         instance = (ServiceBeanInterface) DubboClassLoader.getInstance(ServiceBean.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ServiceBean(ModuleModelInterface moduleModel, Service service) {
         Class[] params = new Class[]{ModuleModelInterface.class, Service.class};
         Object[] args = new Object[]{moduleModel, service};
         instance = (ServiceBeanInterface) DubboClassLoader.getInstance(ServiceBean.class.getName(), params, args);
+        super.instance = instance;
     }
 }

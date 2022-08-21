@@ -156,12 +156,17 @@ public class ProtocolBuilder extends AbstractBuilder<ProtocolConfig, ProtocolBui
     }
 
     public static ProtocolBuilderInterface newBuilder() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(newBuilder);
+        Class klass = DubboClassLoader.getKlass(ProtocolBuilder.class.getName());
+        Method method = klass.getMethod("newBuilder");
         return method.invoke();
     }
 
     public ProtocolBuilderInterface getInternalInstance() {
         return instance;
+    }
+
+    protected ProtocolBuilder() {
+        instance = (ProtocolBuilderInterface) DubboClassLoader.getInstance(ProtocolBuilder.class.getName());
+        super.instance = instance;
     }
 }

@@ -281,12 +281,15 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public static void appendRuntimeParameters(Map<String, String> map) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(appendRuntimeParameters, Map.class);
+        Class klass = DubboClassLoader.getKlass(AbstractInterfaceConfig.class.getName());
+        Method method = klass.getMethod("appendRuntimeParameters", Map.class);
         method.invoke(map);
     }
 
     public AbstractInterfaceConfigInterface getInternalInstance() {
         return instance;
+    }
+
+    protected AbstractInterfaceConfig() {
     }
 }

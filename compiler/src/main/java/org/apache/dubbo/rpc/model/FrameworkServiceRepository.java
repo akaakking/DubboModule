@@ -53,4 +53,8 @@ public class FrameworkServiceRepository implements FrameworkServiceRepositoryInt
         Object[] args = new Object[]{frameworkModel};
         instance = (FrameworkServiceRepositoryInterface) DubboClassLoader.getInstance(FrameworkServiceRepository.class.getName(), params, args);
     }
+
+    protected FrameworkServiceRepository() {
+        instance = (FrameworkServiceRepositoryInterface) DubboClassLoader.getInstance(FrameworkServiceRepository.class.getName());
+    }
 }

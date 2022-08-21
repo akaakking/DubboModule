@@ -40,4 +40,8 @@ public class DelegateProviderMetaDataInvoker<T> implements DelegateProviderMetaD
         Object[] args = new Object[]{invoker, metadata};
         instance = (DelegateProviderMetaDataInvokerInterface) DubboClassLoader.getInstance(DelegateProviderMetaDataInvoker.class.getName(), params, args);
     }
+
+    protected DelegateProviderMetaDataInvoker() {
+        instance = (DelegateProviderMetaDataInvokerInterface) DubboClassLoader.getInstance(DelegateProviderMetaDataInvoker.class.getName());
+    }
 }

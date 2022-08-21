@@ -133,5 +133,11 @@ public class Environment extends LifecycleAdapter implements EnvironmentInterfac
         Class[] params = new Class[]{ScopeModelInterface.class};
         Object[] args = new Object[]{scopeModel};
         instance = (EnvironmentInterface) DubboClassLoader.getInstance(Environment.class.getName(), params, args);
+        super.instance = instance;
+    }
+
+    protected Environment() {
+        instance = (EnvironmentInterface) DubboClassLoader.getInstance(Environment.class.getName());
+        super.instance = instance;
     }
 }

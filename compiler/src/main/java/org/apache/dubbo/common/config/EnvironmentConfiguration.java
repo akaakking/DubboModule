@@ -19,4 +19,8 @@ public class EnvironmentConfiguration implements EnvironmentConfigurationInterfa
     public EnvironmentConfigurationInterface getInternalInstance() {
         return instance;
     }
+
+    protected EnvironmentConfiguration() {
+        instance = (EnvironmentConfigurationInterface) DubboClassLoader.getInstance(EnvironmentConfiguration.class.getName());
+    }
 }

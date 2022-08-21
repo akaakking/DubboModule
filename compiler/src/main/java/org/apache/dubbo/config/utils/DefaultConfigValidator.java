@@ -14,4 +14,8 @@ public class DefaultConfigValidator implements DefaultConfigValidatorInterface {
     public DefaultConfigValidatorInterface getInternalInstance() {
         return instance;
     }
+
+    protected DefaultConfigValidator() {
+        instance = (DefaultConfigValidatorInterface) DubboClassLoader.getInstance(DefaultConfigValidator.class.getName());
+    }
 }

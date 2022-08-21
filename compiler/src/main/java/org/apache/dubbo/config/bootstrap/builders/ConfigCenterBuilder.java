@@ -70,4 +70,9 @@ public class ConfigCenterBuilder extends AbstractBuilder<ConfigCenterConfig, Con
     public ConfigCenterBuilderInterface getInternalInstance() {
         return instance;
     }
+
+    protected ConfigCenterBuilder() {
+        instance = (ConfigCenterBuilderInterface) DubboClassLoader.getInstance(ConfigCenterBuilder.class.getName());
+        super.instance = instance;
+    }
 }

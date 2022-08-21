@@ -79,25 +79,29 @@ public class MonitorConfig extends AbstractConfig implements MonitorConfigInterf
         return instance;
     }
 
-    public MonitorConfig() {
+    public protected MonitorConfig() {
         instance = (MonitorConfigInterface) DubboClassLoader.getInstance(MonitorConfig.class.getName());
+        super.instance = instance;
     }
 
     public MonitorConfig(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (MonitorConfigInterface) DubboClassLoader.getInstance(MonitorConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public MonitorConfig(String address) {
         Class[] params = new Class[]{String.class};
         Object[] args = new Object[]{address};
         instance = (MonitorConfigInterface) DubboClassLoader.getInstance(MonitorConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public MonitorConfig(ApplicationModelInterface applicationModel, String address) {
         Class[] params = new Class[]{ApplicationModelInterface.class, String.class};
         Object[] args = new Object[]{applicationModel, address};
         instance = (MonitorConfigInterface) DubboClassLoader.getInstance(MonitorConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 }

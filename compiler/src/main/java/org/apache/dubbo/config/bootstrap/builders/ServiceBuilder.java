@@ -52,12 +52,17 @@ public class ServiceBuilder<U> extends AbstractServiceBuilder<ServiceConfig<U>, 
     }
 
     public static <T> ServiceBuilderInterface<T> newBuilder() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(newBuilder);
+        Class klass = DubboClassLoader.getKlass(ServiceBuilder.class.getName());
+        Method method = klass.getMethod("newBuilder");
         return method.invoke();
     }
 
     public ServiceBuilderInterface getInternalInstance() {
         return instance;
+    }
+
+    protected ServiceBuilder() {
+        instance = (ServiceBuilderInterface) DubboClassLoader.getInstance(ServiceBuilder.class.getName());
+        super.instance = instance;
     }
 }

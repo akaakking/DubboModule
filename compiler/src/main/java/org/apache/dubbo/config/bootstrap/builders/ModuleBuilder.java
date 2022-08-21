@@ -46,4 +46,9 @@ public class ModuleBuilder extends AbstractBuilder<ModuleConfig, ModuleBuilder> 
     public ModuleBuilderInterface getInternalInstance() {
         return instance;
     }
+
+    protected ModuleBuilder() {
+        instance = (ModuleBuilderInterface) DubboClassLoader.getInstance(ModuleBuilder.class.getName());
+        super.instance = instance;
+    }
 }

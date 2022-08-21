@@ -190,5 +190,11 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ModuleConfigManagerInterface) DubboClassLoader.getInstance(ModuleConfigManager.class.getName(), params, args);
+        super.instance = instance;
+    }
+
+    protected ModuleConfigManager() {
+        instance = (ModuleConfigManagerInterface) DubboClassLoader.getInstance(ModuleConfigManager.class.getName());
+        super.instance = instance;
     }
 }

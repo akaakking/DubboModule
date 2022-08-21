@@ -58,30 +58,34 @@ public class SimpleReferenceCache implements SimpleReferenceCacheInterface {
     protected SimpleReferenceCacheInterface instance;
 
     public static SimpleReferenceCacheInterface getCache() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getCache);
+        Class klass = DubboClassLoader.getKlass(SimpleReferenceCache.class.getName());
+        Method method = klass.getMethod("getCache");
         return method.invoke();
     }
 
     public static SimpleReferenceCacheInterface newCache() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(newCache);
+        Class klass = DubboClassLoader.getKlass(SimpleReferenceCache.class.getName());
+        Method method = klass.getMethod("newCache");
         return method.invoke();
     }
 
     public static SimpleReferenceCacheInterface getCache(String name) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getCache, String.class);
+        Class klass = DubboClassLoader.getKlass(SimpleReferenceCache.class.getName());
+        Method method = klass.getMethod("getCache", String.class);
         return method.invoke(name);
     }
 
     public static SimpleReferenceCacheInterface getCache(String name, KeyGeneratorInterface keyGenerator) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getCache, String.class, KeyGeneratorInterface.class);
+        Class klass = DubboClassLoader.getKlass(SimpleReferenceCache.class.getName());
+        Method method = klass.getMethod("getCache", String.class, KeyGeneratorInterface.class);
         return method.invoke(name, keyGenerator);
     }
 
     public SimpleReferenceCacheInterface getInternalInstance() {
         return instance;
+    }
+
+    protected SimpleReferenceCache() {
+        instance = (SimpleReferenceCacheInterface) DubboClassLoader.getInstance(SimpleReferenceCache.class.getName());
     }
 }

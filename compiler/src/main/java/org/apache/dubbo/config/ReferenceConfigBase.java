@@ -97,18 +97,21 @@ public class ReferenceConfigBase<T> extends AbstractReferenceConfig implements R
     }
 
     public static Class<?> determineInterfaceClass(String generic, String interfaceName) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(determineInterfaceClass, String.class, String.class);
+        Class klass = DubboClassLoader.getKlass(ReferenceConfigBase.class.getName());
+        Method method = klass.getMethod("determineInterfaceClass", String.class, String.class);
         return method.invoke(generic, interfaceName);
     }
 
     public static Class<?> determineInterfaceClass(String generic, String interfaceName, ClassLoader classLoader) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(determineInterfaceClass, String.class, String.class, ClassLoader.class);
+        Class klass = DubboClassLoader.getKlass(ReferenceConfigBase.class.getName());
+        Method method = klass.getMethod("determineInterfaceClass", String.class, String.class, ClassLoader.class);
         return method.invoke(generic, interfaceName, classLoader);
     }
 
     public ReferenceConfigBaseInterface getInternalInstance() {
         return instance;
+    }
+
+    protected ReferenceConfigBase() {
     }
 }

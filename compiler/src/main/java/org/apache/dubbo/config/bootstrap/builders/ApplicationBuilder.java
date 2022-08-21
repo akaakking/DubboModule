@@ -117,12 +117,17 @@ public class ApplicationBuilder extends AbstractBuilder<ApplicationConfig, Appli
     }
 
     public static ApplicationBuilderInterface newBuilder() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(newBuilder);
+        Class klass = DubboClassLoader.getKlass(ApplicationBuilder.class.getName());
+        Method method = klass.getMethod("newBuilder");
         return method.invoke();
     }
 
     public ApplicationBuilderInterface getInternalInstance() {
         return instance;
+    }
+
+    protected ApplicationBuilder() {
+        instance = (ApplicationBuilderInterface) DubboClassLoader.getInstance(ApplicationBuilder.class.getName());
+        super.instance = instance;
     }
 }

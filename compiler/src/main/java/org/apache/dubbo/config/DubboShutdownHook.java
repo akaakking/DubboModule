@@ -30,5 +30,11 @@ public class DubboShutdownHook extends Thread implements DubboShutdownHookInterf
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (DubboShutdownHookInterface) DubboClassLoader.getInstance(DubboShutdownHook.class.getName(), params, args);
+        super.instance = instance;
+    }
+
+    protected DubboShutdownHook() {
+        instance = (DubboShutdownHookInterface) DubboClassLoader.getInstance(DubboShutdownHook.class.getName());
+        super.instance = instance;
     }
 }

@@ -30,4 +30,8 @@ public class DubboConfigAliasPostProcessor implements DubboConfigAliasPostProces
     public DubboConfigAliasPostProcessorInterface getInternalInstance() {
         return instance;
     }
+
+    protected DubboConfigAliasPostProcessor() {
+        instance = (DubboConfigAliasPostProcessorInterface) DubboClassLoader.getInstance(DubboConfigAliasPostProcessor.class.getName());
+    }
 }

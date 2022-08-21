@@ -50,11 +50,18 @@ public class ModuleModel extends ScopeModel implements ModuleModelInterface {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (ModuleModelInterface) DubboClassLoader.getInstance(ModuleModel.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ModuleModel(ApplicationModelInterface applicationModel, boolean isInternal) {
         Class[] params = new Class[]{ApplicationModelInterface.class, boolean.class};
         Object[] args = new Object[]{applicationModel, isInternal};
         instance = (ModuleModelInterface) DubboClassLoader.getInstance(ModuleModel.class.getName(), params, args);
+        super.instance = instance;
+    }
+
+    protected ModuleModel() {
+        instance = (ModuleModelInterface) DubboClassLoader.getInstance(ModuleModel.class.getName());
+        super.instance = instance;
     }
 }

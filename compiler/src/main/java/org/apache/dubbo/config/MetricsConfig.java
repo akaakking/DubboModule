@@ -46,13 +46,15 @@ public class MetricsConfig extends AbstractConfig implements MetricsConfigInterf
         return instance;
     }
 
-    public MetricsConfig() {
+    public protected MetricsConfig() {
         instance = (MetricsConfigInterface) DubboClassLoader.getInstance(MetricsConfig.class.getName());
+        super.instance = instance;
     }
 
     public MetricsConfig(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (MetricsConfigInterface) DubboClassLoader.getInstance(MetricsConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 }

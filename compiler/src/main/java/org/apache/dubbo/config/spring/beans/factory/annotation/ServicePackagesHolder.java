@@ -26,4 +26,8 @@ public class ServicePackagesHolder implements ServicePackagesHolderInterface {
     public ServicePackagesHolderInterface getInternalInstance() {
         return instance;
     }
+
+    protected ServicePackagesHolder() {
+        instance = (ServicePackagesHolderInterface) DubboClassLoader.getInstance(ServicePackagesHolder.class.getName());
+    }
 }

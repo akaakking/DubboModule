@@ -121,4 +121,7 @@ public class AbstractReferenceConfig extends AbstractInterfaceConfig implements 
     public AbstractReferenceConfigInterface getInternalInstance() {
         return instance;
     }
+
+    protected AbstractReferenceConfig() {
+    }
 }

@@ -10,24 +10,28 @@ public class DubboSpringInitializer implements DubboSpringInitializerInterface {
     protected DubboSpringInitializerInterface instance;
 
     public static void initialize(BeanDefinitionRegistry registry) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(initialize, BeanDefinitionRegistry.class);
+        Class klass = DubboClassLoader.getKlass(DubboSpringInitializer.class.getName());
+        Method method = klass.getMethod("initialize", BeanDefinitionRegistry.class);
         method.invoke(registry);
     }
 
     public static boolean remove(BeanDefinitionRegistry registry) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(remove, BeanDefinitionRegistry.class);
+        Class klass = DubboClassLoader.getKlass(DubboSpringInitializer.class.getName());
+        Method method = klass.getMethod("remove", BeanDefinitionRegistry.class);
         return method.invoke(registry);
     }
 
     public static boolean remove(ApplicationContext springContext) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(remove, ApplicationContext.class);
+        Class klass = DubboClassLoader.getKlass(DubboSpringInitializer.class.getName());
+        Method method = klass.getMethod("remove", ApplicationContext.class);
         return method.invoke(springContext);
     }
 
     public DubboSpringInitializerInterface getInternalInstance() {
         return instance;
+    }
+
+    protected DubboSpringInitializer() {
+        instance = (DubboSpringInitializerInterface) DubboClassLoader.getInstance(DubboSpringInitializer.class.getName());
     }
 }

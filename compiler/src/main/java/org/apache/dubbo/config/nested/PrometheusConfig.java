@@ -26,4 +26,8 @@ public class PrometheusConfig implements PrometheusConfigInterface {
     public PrometheusConfigInterface getInternalInstance() {
         return instance;
     }
+
+    protected PrometheusConfig() {
+        instance = (PrometheusConfigInterface) DubboClassLoader.getInstance(PrometheusConfig.class.getName());
+    }
 }

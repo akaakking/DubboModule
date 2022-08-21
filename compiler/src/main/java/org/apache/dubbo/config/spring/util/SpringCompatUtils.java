@@ -11,36 +11,40 @@ public class SpringCompatUtils implements SpringCompatUtilsInterface {
     protected SpringCompatUtilsInterface instance;
 
     public static <T> T getPropertyValue(PropertyValues pvs, String propertyName) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getPropertyValue, PropertyValues.class, String.class);
+        Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
+        Method method = klass.getMethod("getPropertyValue", PropertyValues.class, String.class);
         return method.invoke(pvs, propertyName);
     }
 
     public static boolean isFactoryMethodMetadataEnabled() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(isFactoryMethodMetadataEnabled);
+        Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
+        Method method = klass.getMethod("isFactoryMethodMetadataEnabled");
         return method.invoke();
     }
 
     public static String getFactoryMethodReturnType(AnnotatedBeanDefinition annotatedBeanDefinition) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getFactoryMethodReturnType, AnnotatedBeanDefinition.class);
+        Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
+        Method method = klass.getMethod("getFactoryMethodReturnType", AnnotatedBeanDefinition.class);
         return method.invoke(annotatedBeanDefinition);
     }
 
     public static MethodMetadata getFactoryMethodMetadata(AnnotatedBeanDefinition annotatedBeanDefinition) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getFactoryMethodMetadata, AnnotatedBeanDefinition.class);
+        Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
+        Method method = klass.getMethod("getFactoryMethodMetadata", AnnotatedBeanDefinition.class);
         return method.invoke(annotatedBeanDefinition);
     }
 
     public static Class getGenericTypeOfReturnType(MethodMetadata factoryMethodMetadata) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getGenericTypeOfReturnType, MethodMetadata.class);
+        Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
+        Method method = klass.getMethod("getGenericTypeOfReturnType", MethodMetadata.class);
         return method.invoke(factoryMethodMetadata);
     }
 
     public SpringCompatUtilsInterface getInternalInstance() {
         return instance;
+    }
+
+    protected SpringCompatUtils() {
+        instance = (SpringCompatUtilsInterface) DubboClassLoader.getInstance(SpringCompatUtils.class.getName());
     }
 }

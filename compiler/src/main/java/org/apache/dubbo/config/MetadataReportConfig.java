@@ -167,25 +167,29 @@ public class MetadataReportConfig extends AbstractConfig implements MetadataRepo
         return instance;
     }
 
-    public MetadataReportConfig() {
+    public protected MetadataReportConfig() {
         instance = (MetadataReportConfigInterface) DubboClassLoader.getInstance(MetadataReportConfig.class.getName());
+        super.instance = instance;
     }
 
     public MetadataReportConfig(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (MetadataReportConfigInterface) DubboClassLoader.getInstance(MetadataReportConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public MetadataReportConfig(String address) {
         Class[] params = new Class[]{String.class};
         Object[] args = new Object[]{address};
         instance = (MetadataReportConfigInterface) DubboClassLoader.getInstance(MetadataReportConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public MetadataReportConfig(ApplicationModelInterface applicationModel, String address) {
         Class[] params = new Class[]{ApplicationModelInterface.class, String.class};
         Object[] args = new Object[]{applicationModel, address};
         instance = (MetadataReportConfigInterface) DubboClassLoader.getInstance(MetadataReportConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 }

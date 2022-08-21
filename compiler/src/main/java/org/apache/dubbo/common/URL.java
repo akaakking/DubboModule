@@ -12,8 +12,6 @@ import org.apache.dubbo.Interface.*;
 
 public class URL implements URLInterface {
 
-    protected URLInterface instance;
-
     public URLAddressInterface getUrlAddress() {
         return instance.getUrlAddress();
     }
@@ -474,7 +472,7 @@ public class URL implements URLInterface {
         return instance.toParameterString(parameters);
     }
 
-    public java.net.URL toJavaURL() {
+    public URL toJavaURL() {
         return instance.toJavaURL();
     }
 
@@ -782,65 +780,65 @@ public class URL implements URLInterface {
         return instance.toSerializableURL();
     }
 
-
+    protected URLInterface instance;
 
     public static URLInterface cacheableValueOf(String url) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(cacheableValueOf, String.class);
+        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        Method method = klass.getMethod("cacheableValueOf", String.class);
         return method.invoke(url);
     }
 
     public static URLInterface valueOf(String url) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(valueOf, String.class);
+        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        Method method = klass.getMethod("valueOf", String.class);
         return method.invoke(url);
     }
 
     public static URLInterface valueOf(String url, ScopeModelInterface scopeModel) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(valueOf, String.class, ScopeModelInterface.class);
+        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        Method method = klass.getMethod("valueOf", String.class, ScopeModelInterface.class);
         return method.invoke(url, scopeModel);
     }
 
     public static URLInterface valueOf(String url, boolean encoded) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(valueOf, String.class, boolean.class);
+        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        Method method = klass.getMethod("valueOf", String.class, boolean.class);
         return method.invoke(url, encoded);
     }
 
     public static URLInterface valueOf(String url, String reserveParams) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(valueOf, String.class, String.class);
+        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        Method method = klass.getMethod("valueOf", String.class, String.class);
         return method.invoke(url, reserveParams);
     }
 
     public static URLInterface valueOf(URLInterface url, String[] reserveParams, String[] reserveParamPrefixes) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(valueOf, URLInterface.class, String[].class, String[].class);
+        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        Method method = klass.getMethod("valueOf", URLInterface.class, String[].class, String[].class);
         return method.invoke(url, reserveParams, reserveParamPrefixes);
     }
 
     public static String encode(String value) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(encode, String.class);
+        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        Method method = klass.getMethod("encode", String.class);
         return method.invoke(value);
     }
 
     public static String decode(String value) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(decode, String.class);
+        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        Method method = klass.getMethod("decode", String.class);
         return method.invoke(value);
     }
 
     public static String buildKey(String path, String group, String version) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(buildKey, String.class, String.class, String.class);
+        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        Method method = klass.getMethod("buildKey", String.class, String.class, String.class);
         return method.invoke(path, group, version);
     }
 
     public static void putMethodParameter(String method, String key, String value, Map<String, Map<String, String>> methodParameters) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(putMethodParameter, String.class, String.class, String.class, Map.class);
+        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        Method method = klass.getMethod("putMethodParameter", String.class, String.class, String.class, Map.class);
         method.invoke(method, key, value, methodParameters);
     }
 
@@ -912,5 +910,9 @@ public class URL implements URLInterface {
         Class[] params = new Class[]{String.class, String.class, String.class, String.class, int.class, String.class, MapMap<String,String>.class};
         Object[] args = new Object[]{protocol, username, password, host, port, path, parameters};
         instance = (URLInterface) DubboClassLoader.getInstance(URL.class.getName(), params, args);
+    }
+
+    protected URL() {
+        instance = (URLInterface) DubboClassLoader.getInstance(URL.class.getName());
     }
 }

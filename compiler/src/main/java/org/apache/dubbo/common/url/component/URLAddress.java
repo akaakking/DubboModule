@@ -93,8 +93,8 @@ public class URLAddress implements URLAddressInterface {
     protected URLAddressInterface instance;
 
     public static URLAddressInterface parse(String rawAddress, String defaultProtocol, boolean encoded) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(parse, String.class, String.class, boolean.class);
+        Class klass = DubboClassLoader.getKlass(URLAddress.class.getName());
+        Method method = klass.getMethod("parse", String.class, String.class, boolean.class);
         return method.invoke(rawAddress, defaultProtocol, encoded);
     }
 
@@ -112,5 +112,9 @@ public class URLAddress implements URLAddressInterface {
         Class[] params = new Class[]{String.class, int.class, String.class};
         Object[] args = new Object[]{host, port, rawAddress};
         instance = (URLAddressInterface) DubboClassLoader.getInstance(URLAddress.class.getName(), params, args);
+    }
+
+    protected URLAddress() {
+        instance = (URLAddressInterface) DubboClassLoader.getInstance(URLAddress.class.getName());
     }
 }

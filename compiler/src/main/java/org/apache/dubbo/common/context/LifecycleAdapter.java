@@ -22,4 +22,7 @@ public class LifecycleAdapter implements LifecycleAdapterInterface {
     public LifecycleAdapterInterface getInternalInstance() {
         return instance;
     }
+
+    protected LifecycleAdapter() {
+    }
 }

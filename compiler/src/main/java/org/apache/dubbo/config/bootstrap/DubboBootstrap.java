@@ -280,42 +280,46 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     protected DubboBootstrapInterface instance;
 
     public static DubboBootstrapInterface getInstance() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getInstance);
+        Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
+        Method method = klass.getMethod("getInstance");
         return method.invoke();
     }
 
     public static DubboBootstrapInterface getInstance(ApplicationModelInterface applicationModel) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getInstance, ApplicationModelInterface.class);
+        Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
+        Method method = klass.getMethod("getInstance", ApplicationModelInterface.class);
         return method.invoke(applicationModel);
     }
 
     public static DubboBootstrapInterface newInstance() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(newInstance);
+        Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
+        Method method = klass.getMethod("newInstance");
         return method.invoke();
     }
 
     public static DubboBootstrapInterface newInstance(FrameworkModelInterface frameworkModel) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(newInstance, FrameworkModelInterface.class);
+        Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
+        Method method = klass.getMethod("newInstance", FrameworkModelInterface.class);
         return method.invoke(frameworkModel);
     }
 
     public static void reset() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(reset);
+        Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
+        Method method = klass.getMethod("reset");
         method.invoke();
     }
 
     public static void reset(boolean destroy) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(reset, boolean.class);
+        Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
+        Method method = klass.getMethod("reset", boolean.class);
         method.invoke(destroy);
     }
 
     public DubboBootstrapInterface getInternalInstance() {
         return instance;
+    }
+
+    protected DubboBootstrap() {
+        instance = (DubboBootstrapInterface) DubboClassLoader.getInstance(DubboBootstrap.class.getName());
     }
 }

@@ -11,18 +11,21 @@ public class EnvironmentUtils implements EnvironmentUtilsInterface {
     protected EnvironmentUtilsInterface instance;
 
     public static Map<String, Object> extractProperties(ConfigurableEnvironment environment) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(extractProperties, ConfigurableEnvironment.class);
+        Class klass = DubboClassLoader.getKlass(EnvironmentUtils.class.getName());
+        Method method = klass.getMethod("extractProperties", ConfigurableEnvironment.class);
         return method.invoke(environment);
     }
 
     public static SortedMap<String, String> filterDubboProperties(ConfigurableEnvironment environment) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(filterDubboProperties, ConfigurableEnvironment.class);
+        Class klass = DubboClassLoader.getKlass(EnvironmentUtils.class.getName());
+        Method method = klass.getMethod("filterDubboProperties", ConfigurableEnvironment.class);
         return method.invoke(environment);
     }
 
     public EnvironmentUtilsInterface getInternalInstance() {
         return instance;
+    }
+
+    protected EnvironmentUtils() {
     }
 }

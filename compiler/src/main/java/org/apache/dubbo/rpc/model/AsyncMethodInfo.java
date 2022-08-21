@@ -59,4 +59,8 @@ public class AsyncMethodInfo implements AsyncMethodInfoInterface {
     public AsyncMethodInfoInterface getInternalInstance() {
         return instance;
     }
+
+    protected AsyncMethodInfo() {
+        instance = (AsyncMethodInfoInterface) DubboClassLoader.getInstance(AsyncMethodInfo.class.getName());
+    }
 }

@@ -86,13 +86,15 @@ public class ConsumerConfig extends AbstractReferenceConfig implements ConsumerC
         return instance;
     }
 
-    public ConsumerConfig() {
+    public protected ConsumerConfig() {
         instance = (ConsumerConfigInterface) DubboClassLoader.getInstance(ConsumerConfig.class.getName());
+        super.instance = instance;
     }
 
     public ConsumerConfig(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ConsumerConfigInterface) DubboClassLoader.getInstance(ConsumerConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 }

@@ -22,4 +22,8 @@ public class SpringScopeModelInitializer implements SpringScopeModelInitializerI
     public SpringScopeModelInitializerInterface getInternalInstance() {
         return instance;
     }
+
+    protected SpringScopeModelInitializer() {
+        instance = (SpringScopeModelInitializerInterface) DubboClassLoader.getInstance(SpringScopeModelInitializer.class.getName());
+    }
 }

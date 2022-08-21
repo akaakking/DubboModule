@@ -57,7 +57,8 @@ public class ReferenceAnnotationBeanPostProcessor extends AbstractAnnotationBean
         return instance;
     }
 
-    public ReferenceAnnotationBeanPostProcessor() {
+    public protected ReferenceAnnotationBeanPostProcessor() {
         instance = (ReferenceAnnotationBeanPostProcessorInterface) DubboClassLoader.getInstance(ReferenceAnnotationBeanPostProcessor.class.getName());
+        super.instance = instance;
     }
 }

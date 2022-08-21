@@ -55,17 +55,25 @@ public class ProviderModel extends ServiceModel implements ProviderModelInterfac
         Class[] params = new Class[]{String.class, Object.class, ServiceDescriptorInterface.class, ClassLoader.class};
         Object[] args = new Object[]{serviceKey, serviceInstance, serviceDescriptor, interfaceClassLoader};
         instance = (ProviderModelInterface) DubboClassLoader.getInstance(ProviderModel.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ProviderModel(String serviceKey, Object serviceInstance, ServiceDescriptorInterface serviceDescriptor, ServiceMetadataInterface serviceMetadata, ClassLoader interfaceClassLoader) {
         Class[] params = new Class[]{String.class, Object.class, ServiceDescriptorInterface.class, ServiceMetadataInterface.class, ClassLoader.class};
         Object[] args = new Object[]{serviceKey, serviceInstance, serviceDescriptor, serviceMetadata, interfaceClassLoader};
         instance = (ProviderModelInterface) DubboClassLoader.getInstance(ProviderModel.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ProviderModel(String serviceKey, Object serviceInstance, ServiceDescriptorInterface serviceModel, ModuleModelInterface moduleModel, ServiceMetadataInterface serviceMetadata, ClassLoader interfaceClassLoader) {
         Class[] params = new Class[]{String.class, Object.class, ServiceDescriptorInterface.class, ModuleModelInterface.class, ServiceMetadataInterface.class, ClassLoader.class};
         Object[] args = new Object[]{serviceKey, serviceInstance, serviceModel, moduleModel, serviceMetadata, interfaceClassLoader};
         instance = (ProviderModelInterface) DubboClassLoader.getInstance(ProviderModel.class.getName(), params, args);
+        super.instance = instance;
+    }
+
+    protected ProviderModel() {
+        instance = (ProviderModelInterface) DubboClassLoader.getInstance(ProviderModel.class.getName());
+        super.instance = instance;
     }
 }

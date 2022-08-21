@@ -271,37 +271,43 @@ public class RegistryConfig extends AbstractConfig implements RegistryConfigInte
         return instance;
     }
 
-    public RegistryConfig() {
+    public protected RegistryConfig() {
         instance = (RegistryConfigInterface) DubboClassLoader.getInstance(RegistryConfig.class.getName());
+        super.instance = instance;
     }
 
     public RegistryConfig(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (RegistryConfigInterface) DubboClassLoader.getInstance(RegistryConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public RegistryConfig(String address) {
         Class[] params = new Class[]{String.class};
         Object[] args = new Object[]{address};
         instance = (RegistryConfigInterface) DubboClassLoader.getInstance(RegistryConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public RegistryConfig(ApplicationModelInterface applicationModel, String address) {
         Class[] params = new Class[]{ApplicationModelInterface.class, String.class};
         Object[] args = new Object[]{applicationModel, address};
         instance = (RegistryConfigInterface) DubboClassLoader.getInstance(RegistryConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public RegistryConfig(String address, String protocol) {
         Class[] params = new Class[]{String.class, String.class};
         Object[] args = new Object[]{address, protocol};
         instance = (RegistryConfigInterface) DubboClassLoader.getInstance(RegistryConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public RegistryConfig(ApplicationModelInterface applicationModel, String address, String protocol) {
         Class[] params = new Class[]{ApplicationModelInterface.class, String.class, String.class};
         Object[] args = new Object[]{applicationModel, address, protocol};
         instance = (RegistryConfigInterface) DubboClassLoader.getInstance(RegistryConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 }

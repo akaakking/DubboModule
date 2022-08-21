@@ -46,4 +46,8 @@ public class PropertiesConfiguration implements PropertiesConfigurationInterface
         Object[] args = new Object[]{scopeModel};
         instance = (PropertiesConfigurationInterface) DubboClassLoader.getInstance(PropertiesConfiguration.class.getName(), params, args);
     }
+
+    protected PropertiesConfiguration() {
+        instance = (PropertiesConfigurationInterface) DubboClassLoader.getInstance(PropertiesConfiguration.class.getName());
+    }
 }

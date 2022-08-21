@@ -53,4 +53,7 @@ public class AbstractReferenceBuilder<T extends AbstractReferenceConfigInterface
     public AbstractReferenceBuilderInterface getInternalInstance() {
         return instance;
     }
+
+    protected AbstractReferenceBuilder() {
+    }
 }

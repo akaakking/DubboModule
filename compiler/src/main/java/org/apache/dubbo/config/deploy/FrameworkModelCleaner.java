@@ -18,4 +18,8 @@ public class FrameworkModelCleaner implements FrameworkModelCleanerInterface {
     public FrameworkModelCleanerInterface getInternalInstance() {
         return instance;
     }
+
+    protected FrameworkModelCleaner() {
+        instance = (FrameworkModelCleanerInterface) DubboClassLoader.getInstance(FrameworkModelCleaner.class.getName());
+    }
 }

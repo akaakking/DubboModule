@@ -25,36 +25,40 @@ public class ServiceBeanNameBuilder implements ServiceBeanNameBuilderInterface {
     protected ServiceBeanNameBuilderInterface instance;
 
     public static ServiceBeanNameBuilder create(AnnotationAttributes attributes, Class<?> defaultInterfaceClass, Environment environment) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(create, AnnotationAttributes.class, Class.class, Environment.class);
+        Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
+        Method method = klass.getMethod("create", AnnotationAttributes.class, Class.class, Environment.class);
         return method.invoke(attributes, defaultInterfaceClass, environment);
     }
 
     public static ServiceBeanNameBuilder create(Class<?> interfaceClass, Environment environment) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(create, Class.class, Environment.class);
+        Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
+        Method method = klass.getMethod("create", Class.class, Environment.class);
         return method.invoke(interfaceClass, environment);
     }
 
     public static ServiceBeanNameBuilder create(String interfaceClass, Environment environment) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(create, String.class, Environment.class);
+        Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
+        Method method = klass.getMethod("create", String.class, Environment.class);
         return method.invoke(interfaceClass, environment);
     }
 
     public static ServiceBeanNameBuilder create(Service service, Class<?> interfaceClass, Environment environment) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(create, Service.class, Class.class, Environment.class);
+        Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
+        Method method = klass.getMethod("create", Service.class, Class.class, Environment.class);
         return method.invoke(service, interfaceClass, environment);
     }
 
     public static ServiceBeanNameBuilder create(Reference reference, Class<?> interfaceClass, Environment environment) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(create, Reference.class, Class.class, Environment.class);
+        Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
+        Method method = klass.getMethod("create", Reference.class, Class.class, Environment.class);
         return method.invoke(reference, interfaceClass, environment);
     }
 
     public ServiceBeanNameBuilderInterface getInternalInstance() {
         return instance;
+    }
+
+    protected ServiceBeanNameBuilder() {
+        instance = (ServiceBeanNameBuilderInterface) DubboClassLoader.getInstance(ServiceBeanNameBuilder.class.getName());
     }
 }

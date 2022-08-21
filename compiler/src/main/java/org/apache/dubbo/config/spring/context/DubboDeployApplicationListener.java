@@ -27,4 +27,8 @@ public class DubboDeployApplicationListener implements DubboDeployApplicationLis
     public DubboDeployApplicationListenerInterface getInternalInstance() {
         return instance;
     }
+
+    protected DubboDeployApplicationListener() {
+        instance = (DubboDeployApplicationListenerInterface) DubboClassLoader.getInstance(DubboDeployApplicationListener.class.getName());
+    }
 }

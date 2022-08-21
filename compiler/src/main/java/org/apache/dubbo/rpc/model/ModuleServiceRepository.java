@@ -117,4 +117,8 @@ public class ModuleServiceRepository implements ModuleServiceRepositoryInterface
         Object[] args = new Object[]{moduleModel};
         instance = (ModuleServiceRepositoryInterface) DubboClassLoader.getInstance(ModuleServiceRepository.class.getName(), params, args);
     }
+
+    protected ModuleServiceRepository() {
+        instance = (ModuleServiceRepositoryInterface) DubboClassLoader.getInstance(ModuleServiceRepository.class.getName());
+    }
 }

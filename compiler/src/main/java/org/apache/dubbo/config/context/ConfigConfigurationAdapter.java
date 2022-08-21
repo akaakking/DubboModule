@@ -25,4 +25,8 @@ public class ConfigConfigurationAdapter implements ConfigConfigurationAdapterInt
         Object[] args = new Object[]{config, prefix};
         instance = (ConfigConfigurationAdapterInterface) DubboClassLoader.getInstance(ConfigConfigurationAdapter.class.getName(), params, args);
     }
+
+    protected ConfigConfigurationAdapter() {
+        instance = (ConfigConfigurationAdapterInterface) DubboClassLoader.getInstance(ConfigConfigurationAdapter.class.getName());
+    }
 }

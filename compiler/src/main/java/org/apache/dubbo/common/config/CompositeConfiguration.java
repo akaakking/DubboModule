@@ -35,7 +35,7 @@ public class CompositeConfiguration implements CompositeConfigurationInterface {
         return instance;
     }
 
-    public CompositeConfiguration() {
+    public protected CompositeConfiguration() {
         instance = (CompositeConfigurationInterface) DubboClassLoader.getInstance(CompositeConfiguration.class.getName());
     }
 

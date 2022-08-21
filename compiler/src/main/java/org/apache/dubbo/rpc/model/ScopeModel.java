@@ -97,4 +97,7 @@ public class ScopeModel implements ScopeModelInterface {
     public ScopeModelInterface getInternalInstance() {
         return instance;
     }
+
+    protected ScopeModel() {
+    }
 }

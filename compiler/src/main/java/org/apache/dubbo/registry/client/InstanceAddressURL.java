@@ -8,10 +8,7 @@ import org.apache.dubbo.common.URL;
 
 public class InstanceAddressURL extends URL implements InstanceAddressURLInterface {
 
-    protected InstanceAddressURLInterface instance;
-
     public ServiceInstanceInterface getInstance() {
-        super.instance = instance;
         return instance.getInstance();
     }
 
@@ -191,11 +188,20 @@ public class InstanceAddressURL extends URL implements InstanceAddressURLInterfa
         Class[] params = new Class[]{ServiceInstanceInterface.class, MetadataInfoInterface.class};
         Object[] args = new Object[]{instance, metadataInfo};
         instance = (InstanceAddressURLInterface) DubboClassLoader.getInstance(InstanceAddressURL.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public InstanceAddressURL(ServiceInstanceInterface instance, MetadataInfoInterface metadataInfo, String protocol) {
         Class[] params = new Class[]{ServiceInstanceInterface.class, MetadataInfoInterface.class, String.class};
         Object[] args = new Object[]{instance, metadataInfo, protocol};
         instance = (InstanceAddressURLInterface) DubboClassLoader.getInstance(InstanceAddressURL.class.getName(), params, args);
+        super.instance = instance;
     }
+
+    protected InstanceAddressURL() {
+        instance = (InstanceAddressURLInterface) DubboClassLoader.getInstance(InstanceAddressURL.class.getName());
+        super.instance = instance;
+    }
+
+    protected InstanceAddressURLInterface instance;
 }

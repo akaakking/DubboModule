@@ -90,4 +90,7 @@ public class AbstractServiceBuilder<T extends AbstractServiceConfigInterface, B 
     public AbstractServiceBuilderInterface getInternalInstance() {
         return instance;
     }
+
+    protected AbstractServiceBuilder() {
+    }
 }

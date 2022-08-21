@@ -63,9 +63,11 @@ public class ServiceMetadata extends BaseServiceMetadata implements ServiceMetad
         Class[] params = new Class[]{String.class, String.class, String.class, ClassClass<?>.class};
         Object[] args = new Object[]{serviceInterfaceName, group, version, serviceType};
         instance = (ServiceMetadataInterface) DubboClassLoader.getInstance(ServiceMetadata.class.getName(), params, args);
+        super.instance = instance;
     }
 
-    public ServiceMetadata() {
+    public protected ServiceMetadata() {
         instance = (ServiceMetadataInterface) DubboClassLoader.getInstance(ServiceMetadata.class.getName());
+        super.instance = instance;
     }
 }

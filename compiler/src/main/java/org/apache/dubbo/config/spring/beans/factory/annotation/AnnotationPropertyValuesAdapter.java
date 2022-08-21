@@ -52,4 +52,8 @@ public class AnnotationPropertyValuesAdapter implements AnnotationPropertyValues
         Object[] args = new Object[]{annotation, propertyResolver, ignoreAttributeNames};
         instance = (AnnotationPropertyValuesAdapterInterface) DubboClassLoader.getInstance(AnnotationPropertyValuesAdapter.class.getName(), params, args);
     }
+
+    protected AnnotationPropertyValuesAdapter() {
+        instance = (AnnotationPropertyValuesAdapterInterface) DubboClassLoader.getInstance(AnnotationPropertyValuesAdapter.class.getName());
+    }
 }

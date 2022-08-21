@@ -52,12 +52,17 @@ public class ReferenceBuilder<T> extends AbstractReferenceBuilder<ReferenceConfi
     }
 
     public static <T> ReferenceBuilderInterface<T> newBuilder() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(newBuilder);
+        Class klass = DubboClassLoader.getKlass(ReferenceBuilder.class.getName());
+        Method method = klass.getMethod("newBuilder");
         return method.invoke();
     }
 
     public ReferenceBuilderInterface getInternalInstance() {
         return instance;
+    }
+
+    protected ReferenceBuilder() {
+        instance = (ReferenceBuilderInterface) DubboClassLoader.getInstance(ReferenceBuilder.class.getName());
+        super.instance = instance;
     }
 }

@@ -36,20 +36,20 @@ public class FrameworkModel extends ScopeModel implements FrameworkModelInterfac
     }
 
     public static FrameworkModelInterface defaultModel() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(defaultModel);
+        Class klass = DubboClassLoader.getKlass(FrameworkModel.class.getName());
+        Method method = klass.getMethod("defaultModel");
         return method.invoke();
     }
 
     public static List<FrameworkModelInterface> getAllInstances() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getAllInstances);
+        Class klass = DubboClassLoader.getKlass(FrameworkModel.class.getName());
+        Method method = klass.getMethod("getAllInstances");
         return method.invoke();
     }
 
     public static void destroyAll() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(destroyAll);
+        Class klass = DubboClassLoader.getKlass(FrameworkModel.class.getName());
+        Method method = klass.getMethod("destroyAll");
         method.invoke();
     }
 
@@ -57,7 +57,8 @@ public class FrameworkModel extends ScopeModel implements FrameworkModelInterfac
         return instance;
     }
 
-    public FrameworkModel() {
+    public protected FrameworkModel() {
         instance = (FrameworkModelInterface) DubboClassLoader.getInstance(FrameworkModel.class.getName());
+        super.instance = instance;
     }
 }

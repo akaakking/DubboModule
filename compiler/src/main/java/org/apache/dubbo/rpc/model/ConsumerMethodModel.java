@@ -49,4 +49,8 @@ public class ConsumerMethodModel implements ConsumerMethodModelInterface {
         Object[] args = new Object[]{method};
         instance = (ConsumerMethodModelInterface) DubboClassLoader.getInstance(ConsumerMethodModel.class.getName(), params, args);
     }
+
+    protected ConsumerMethodModel() {
+        instance = (ConsumerMethodModelInterface) DubboClassLoader.getInstance(ConsumerMethodModel.class.getName());
+    }
 }

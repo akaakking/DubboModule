@@ -37,7 +37,7 @@ public class ArgumentConfig implements ArgumentConfigInterface {
         return instance;
     }
 
-    public ArgumentConfig() {
+    public protected ArgumentConfig() {
         instance = (ArgumentConfigInterface) DubboClassLoader.getInstance(ArgumentConfig.class.getName());
     }
 

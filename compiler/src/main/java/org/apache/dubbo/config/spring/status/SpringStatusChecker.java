@@ -27,4 +27,8 @@ public class SpringStatusChecker implements SpringStatusCheckerInterface {
         Object[] args = new Object[]{applicationContext};
         instance = (SpringStatusCheckerInterface) DubboClassLoader.getInstance(SpringStatusChecker.class.getName(), params, args);
     }
+
+    protected SpringStatusChecker() {
+        instance = (SpringStatusCheckerInterface) DubboClassLoader.getInstance(SpringStatusChecker.class.getName());
+    }
 }

@@ -42,4 +42,8 @@ public class ReferenceBeanManager implements ReferenceBeanManagerInterface {
     public ReferenceBeanManagerInterface getInternalInstance() {
         return instance;
     }
+
+    protected ReferenceBeanManager() {
+        instance = (ReferenceBeanManagerInterface) DubboClassLoader.getInstance(ReferenceBeanManager.class.getName());
+    }
 }

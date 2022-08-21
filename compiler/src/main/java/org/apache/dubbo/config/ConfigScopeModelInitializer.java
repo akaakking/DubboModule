@@ -22,4 +22,8 @@ public class ConfigScopeModelInitializer implements ConfigScopeModelInitializerI
     public ConfigScopeModelInitializerInterface getInternalInstance() {
         return instance;
     }
+
+    protected ConfigScopeModelInitializer() {
+        instance = (ConfigScopeModelInitializerInterface) DubboClassLoader.getInstance(ConfigScopeModelInitializer.class.getName());
+    }
 }

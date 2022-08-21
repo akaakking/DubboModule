@@ -197,7 +197,9 @@ public class ClassGenerator {
         }
 
         if (!hasEmptyConstruct) {
-            addEmptyConstruct(javaClass,coid.addConstructor());
+            ConstructorDeclaration constructor = coid.addConstructor();
+            constructor.setProtected(true);
+            addEmptyConstruct(javaClass,constructor);
         }
     }
 
@@ -215,7 +217,6 @@ public class ClassGenerator {
 
     private void addEmptyConstruct(JavaClass javaClass,ConstructorDeclaration methodDeclaration) {
         BlockStmt blockStmt = new BlockStmt();
-        methodDeclaration.setProtected(true);
         methodDeclaration.setBody(blockStmt);
         String className = javaClass.getSimpleName();
         NameExpr nameExpr = new NameExpr();
@@ -262,9 +263,9 @@ public class ClassGenerator {
         if (javaClass.getSuperJavaClass() != null && !javaClass.getSuperJavaClass().getFullyQualifiedName().startsWith("java.lang.Object")) {
             coid.addExtendedType(javaClass.getSuperClass().getGenericValue());
             this.generator.importList.add(javaClass.getSuperJavaClass().getBinaryName());
-        } else {
-            addField(javaClass,coid);
         }
+
+        addField(javaClass,coid);
 
         coid.addImplementedType(classOrInterfaceType);
         return coid;
@@ -286,14 +287,6 @@ public class ClassGenerator {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-    }
-
-    public String getBaseDir() {
-        return baseDir;
-    }
-
-    public void setBaseDir(String baseDir) {
-        this.baseDir = baseDir;
     }
 
     private class MethodGenerator extends ModifierVisitor {

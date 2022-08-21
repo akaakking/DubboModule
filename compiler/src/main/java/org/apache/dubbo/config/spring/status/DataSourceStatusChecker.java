@@ -27,4 +27,8 @@ public class DataSourceStatusChecker implements DataSourceStatusCheckerInterface
         Object[] args = new Object[]{context};
         instance = (DataSourceStatusCheckerInterface) DubboClassLoader.getInstance(DataSourceStatusChecker.class.getName(), params, args);
     }
+
+    protected DataSourceStatusChecker() {
+        instance = (DataSourceStatusCheckerInterface) DubboClassLoader.getInstance(DataSourceStatusChecker.class.getName());
+    }
 }

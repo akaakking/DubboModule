@@ -64,4 +64,8 @@ public class MethodDefinition implements MethodDefinitionInterface {
     public MethodDefinitionInterface getInternalInstance() {
         return instance;
     }
+
+    protected MethodDefinition() {
+        instance = (MethodDefinitionInterface) DubboClassLoader.getInstance(MethodDefinition.class.getName());
+    }
 }

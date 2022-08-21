@@ -21,12 +21,16 @@ public class DubboSpringInitCustomizerHolder implements DubboSpringInitCustomize
     protected DubboSpringInitCustomizerHolderInterface instance;
 
     public static DubboSpringInitCustomizerHolderInterface get() {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(get);
+        Class klass = DubboClassLoader.getKlass(DubboSpringInitCustomizerHolder.class.getName());
+        Method method = klass.getMethod("get");
         return method.invoke();
     }
 
     public DubboSpringInitCustomizerHolderInterface getInternalInstance() {
         return instance;
+    }
+
+    protected DubboSpringInitCustomizerHolder() {
+        instance = (DubboSpringInitCustomizerHolderInterface) DubboClassLoader.getInstance(DubboSpringInitCustomizerHolder.class.getName());
     }
 }

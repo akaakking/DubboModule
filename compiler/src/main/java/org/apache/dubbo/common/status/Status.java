@@ -41,4 +41,8 @@ public class Status implements StatusInterface {
         Object[] args = new Object[]{level, message, description};
         instance = (StatusInterface) DubboClassLoader.getInstance(Status.class.getName(), params, args);
     }
+
+    protected Status() {
+        instance = (StatusInterface) DubboClassLoader.getInstance(Status.class.getName());
+    }
 }

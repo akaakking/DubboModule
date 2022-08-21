@@ -80,42 +80,45 @@ public class AbstractConfig implements AbstractConfigInterface {
     protected AbstractConfigInterface instance;
 
     public static String getTagName(Class<?> cls) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getTagName, Class.class);
+        Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
+        Method method = klass.getMethod("getTagName", Class.class);
         return method.invoke(cls);
     }
 
     public static String getPluralTagName(Class<?> cls) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getPluralTagName, Class.class);
+        Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
+        Method method = klass.getMethod("getPluralTagName", Class.class);
         return method.invoke(cls);
     }
 
     public static void appendParameters(Map<String, String> parameters, Object config) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(appendParameters, Map.class, Object.class);
+        Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
+        Method method = klass.getMethod("appendParameters", Map.class, Object.class);
         method.invoke(parameters, config);
     }
 
     public static void appendParameters(Map<String, String> parameters, Object config, String prefix) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(appendParameters, Map.class, Object.class, String.class);
+        Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
+        Method method = klass.getMethod("appendParameters", Map.class, Object.class, String.class);
         method.invoke(parameters, config, prefix);
     }
 
     public static void appendAttributes(Map<String, String> parameters, Object config) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(appendAttributes, Map.class, Object.class);
+        Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
+        Method method = klass.getMethod("appendAttributes", Map.class, Object.class);
         method.invoke(parameters, config);
     }
 
     public static String getTypePrefix(Class<? extends AbstractConfigInterface> cls) {
-        Class klass = DubboClassLoader;
-        Method method = klass.getMethod(getTypePrefix, Class.class);
+        Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
+        Method method = klass.getMethod("getTypePrefix", Class.class);
         return method.invoke(cls);
     }
 
     public AbstractConfigInterface getInternalInstance() {
         return instance;
+    }
+
+    protected AbstractConfig() {
     }
 }

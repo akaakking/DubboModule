@@ -308,25 +308,29 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
         return instance;
     }
 
-    public ApplicationConfig() {
+    public protected ApplicationConfig() {
         instance = (ApplicationConfigInterface) DubboClassLoader.getInstance(ApplicationConfig.class.getName());
+        super.instance = instance;
     }
 
     public ApplicationConfig(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (ApplicationConfigInterface) DubboClassLoader.getInstance(ApplicationConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ApplicationConfig(String name) {
         Class[] params = new Class[]{String.class};
         Object[] args = new Object[]{name};
         instance = (ApplicationConfigInterface) DubboClassLoader.getInstance(ApplicationConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 
     public ApplicationConfig(ApplicationModelInterface applicationModel, String name) {
         Class[] params = new Class[]{ApplicationModelInterface.class, String.class};
         Object[] args = new Object[]{applicationModel, name};
         instance = (ApplicationConfigInterface) DubboClassLoader.getInstance(ApplicationConfig.class.getName(), params, args);
+        super.instance = instance;
     }
 }

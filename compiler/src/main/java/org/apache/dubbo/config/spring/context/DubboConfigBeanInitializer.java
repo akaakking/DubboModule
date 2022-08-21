@@ -21,4 +21,8 @@ public class DubboConfigBeanInitializer implements DubboConfigBeanInitializerInt
     public DubboConfigBeanInitializerInterface getInternalInstance() {
         return instance;
     }
+
+    protected DubboConfigBeanInitializer() {
+        instance = (DubboConfigBeanInitializerInterface) DubboClassLoader.getInstance(DubboConfigBeanInitializer.class.getName());
+    }
 }

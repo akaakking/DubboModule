@@ -146,5 +146,11 @@ public class ConfigManager extends AbstractConfigManager implements ConfigManage
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (ConfigManagerInterface) DubboClassLoader.getInstance(ConfigManager.class.getName(), params, args);
+        super.instance = instance;
+    }
+
+    protected ConfigManager() {
+        instance = (ConfigManagerInterface) DubboClassLoader.getInstance(ConfigManager.class.getName());
+        super.instance = instance;
     }
 }

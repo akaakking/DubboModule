@@ -54,4 +54,9 @@ public class MonitorBuilder extends AbstractBuilder<MonitorConfig, MonitorBuilde
     public MonitorBuilderInterface getInternalInstance() {
         return instance;
     }
+
+    protected MonitorBuilder() {
+        instance = (MonitorBuilderInterface) DubboClassLoader.getInstance(MonitorBuilder.class.getName());
+        super.instance = instance;
+    }
 }
