@@ -75,11 +75,13 @@ public class MonitorConfig extends AbstractConfig implements MonitorConfigInterf
         return instance.isValid();
     }
 
+    protected MonitorConfigInterface instance;
+
     public MonitorConfigInterface getInternalInstance() {
         return instance;
     }
 
-    public protected MonitorConfig() {
+    public MonitorConfig() {
         instance = (MonitorConfigInterface) DubboClassLoader.getInstance(MonitorConfig.class.getName());
         super.instance = instance;
     }

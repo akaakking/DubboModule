@@ -33,5 +33,6 @@ public class AbstractDubboConfigBinder implements AbstractDubboConfigBinderInter
     }
 
     protected AbstractDubboConfigBinder() {
+        instance = (AbstractDubboConfigBinderInterface) DubboClassLoader.getInstance(AbstractDubboConfigBinder.class.getName());
     }
 }

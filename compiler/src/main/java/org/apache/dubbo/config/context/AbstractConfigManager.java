@@ -15,7 +15,7 @@ public class AbstractConfigManager extends LifecycleAdapter implements AbstractC
     }
 
     public <T extends AbstractConfigInterface> T addConfig(AbstractConfigInterface config) {
-        return instance.addConfig(config.getInternalInstance());
+        return instance.addConfig(((AbstractConfig) config).getInternalInstance());
     }
 
     public <C extends AbstractConfigInterface> Map<String, C> getConfigsMap(Class<C> cls) {
@@ -47,7 +47,7 @@ public class AbstractConfigManager extends LifecycleAdapter implements AbstractC
     }
 
     public boolean removeConfig(AbstractConfigInterface config) {
-        return instance.removeConfig(config.getInternalInstance());
+        return instance.removeConfig(((AbstractConfig) config).getInternalInstance());
     }
 
     public void destroy() {
@@ -62,10 +62,14 @@ public class AbstractConfigManager extends LifecycleAdapter implements AbstractC
         return instance.isInitialized();
     }
 
+    protected AbstractConfigManagerInterface instance;
+
     public AbstractConfigManagerInterface getInternalInstance() {
         return instance;
     }
 
     protected AbstractConfigManager() {
+        instance = (AbstractConfigManagerInterface) DubboClassLoader.getInstance(AbstractConfigManager.class.getName());
+        super.instance = instance;
     }
 }

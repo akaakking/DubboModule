@@ -55,6 +55,8 @@ public class ServiceMetadata extends BaseServiceMetadata implements ServiceMetad
         instance.setTarget(target);
     }
 
+    protected ServiceMetadataInterface instance;
+
     public ServiceMetadataInterface getInternalInstance() {
         return instance;
     }
@@ -66,7 +68,7 @@ public class ServiceMetadata extends BaseServiceMetadata implements ServiceMetad
         super.instance = instance;
     }
 
-    public protected ServiceMetadata() {
+    public ServiceMetadata() {
         instance = (ServiceMetadataInterface) DubboClassLoader.getInstance(ServiceMetadata.class.getName());
         super.instance = instance;
     }

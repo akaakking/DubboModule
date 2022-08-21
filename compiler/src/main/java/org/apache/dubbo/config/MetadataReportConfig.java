@@ -163,11 +163,13 @@ public class MetadataReportConfig extends AbstractConfig implements MetadataRepo
         instance.setReportDefinition(reportDefinition);
     }
 
+    protected MetadataReportConfigInterface instance;
+
     public MetadataReportConfigInterface getInternalInstance() {
         return instance;
     }
 
-    public protected MetadataReportConfig() {
+    public MetadataReportConfig() {
         instance = (MetadataReportConfigInterface) DubboClassLoader.getInstance(MetadataReportConfig.class.getName());
         super.instance = instance;
     }

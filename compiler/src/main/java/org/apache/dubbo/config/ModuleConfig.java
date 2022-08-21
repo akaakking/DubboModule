@@ -44,7 +44,7 @@ public class ModuleConfig extends AbstractConfig implements ModuleConfigInterfac
     }
 
     public void setRegistry(RegistryConfigInterface registry) {
-        instance.setRegistry(registry.getInternalInstance());
+        instance.setRegistry(((RegistryConfig) registry).getInternalInstance());
     }
 
     public List<RegistryConfigInterface> getRegistries() {
@@ -60,7 +60,7 @@ public class ModuleConfig extends AbstractConfig implements ModuleConfigInterfac
     }
 
     public void setMonitor(MonitorConfigInterface monitor) {
-        instance.setMonitor(monitor.getInternalInstance());
+        instance.setMonitor(((MonitorConfig) monitor).getInternalInstance());
     }
 
     public void setMonitor(String monitor) {
@@ -107,11 +107,13 @@ public class ModuleConfig extends AbstractConfig implements ModuleConfigInterfac
         instance.setExportAsync(exportAsync);
     }
 
+    protected ModuleConfigInterface instance;
+
     public ModuleConfigInterface getInternalInstance() {
         return instance;
     }
 
-    public protected ModuleConfig() {
+    public ModuleConfig() {
         instance = (ModuleConfigInterface) DubboClassLoader.getInstance(ModuleConfig.class.getName());
         super.instance = instance;
     }

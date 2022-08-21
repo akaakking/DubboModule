@@ -102,6 +102,8 @@ public class ProviderBuilder extends AbstractServiceBuilder<ProviderConfig, Prov
         return instance.build();
     }
 
+    protected ProviderBuilderInterface instance;
+
     public ProviderBuilderInterface getInternalInstance() {
         return instance;
     }

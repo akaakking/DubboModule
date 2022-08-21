@@ -20,5 +20,6 @@ public class AbstractBuilder<C extends AbstractConfigInterface, B extends Abstra
     }
 
     protected AbstractBuilder() {
+        instance = (AbstractBuilderInterface) DubboClassLoader.getInstance(AbstractBuilder.class.getName());
     }
 }

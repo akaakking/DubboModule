@@ -45,7 +45,7 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
     }
 
     public void removeModule(ModuleModelInterface moduleModel) {
-        instance.removeModule(moduleModel.getInternalInstance());
+        instance.removeModule(((ModuleModel) moduleModel).getInternalInstance());
     }
 
     public List<ModuleModelInterface> getModuleModels() {
@@ -65,15 +65,15 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
     }
 
     public void setEnvironment(EnvironmentInterface environment) {
-        instance.setEnvironment(environment.getInternalInstance());
+        instance.setEnvironment(((Environment) environment).getInternalInstance());
     }
 
     public void setConfigManager(ConfigManagerInterface configManager) {
-        instance.setConfigManager(configManager.getInternalInstance());
+        instance.setConfigManager(((ConfigManager) configManager).getInternalInstance());
     }
 
     public void setServiceRepository(ServiceRepositoryInterface serviceRepository) {
-        instance.setServiceRepository(serviceRepository.getInternalInstance());
+        instance.setServiceRepository(((ServiceRepository) serviceRepository).getInternalInstance());
     }
 
     public void addClassLoader(ClassLoader classLoader) {
@@ -89,8 +89,10 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
     }
 
     public void setDeployer(ApplicationDeployerInterface deployer) {
-        instance.setDeployer(deployer.getInternalInstance());
+        instance.setDeployer(((ApplicationDeployer) deployer).getInternalInstance());
     }
+
+    protected ApplicationModelInterface instance;
 
     public static ApplicationModelInterface ofNullable(ApplicationModelInterface applicationModel) {
         Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());

@@ -67,6 +67,8 @@ public class ConfigCenterBuilder extends AbstractBuilder<ConfigCenterConfig, Con
         return instance.build();
     }
 
+    protected ConfigCenterBuilderInterface instance;
+
     public ConfigCenterBuilderInterface getInternalInstance() {
         return instance;
     }

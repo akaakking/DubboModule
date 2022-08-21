@@ -31,7 +31,7 @@ public class MetricsConfig extends AbstractConfig implements MetricsConfigInterf
     }
 
     public void setPrometheus(PrometheusConfigInterface prometheus) {
-        instance.setPrometheus(prometheus.getInternalInstance());
+        instance.setPrometheus(((PrometheusConfig) prometheus).getInternalInstance());
     }
 
     public AggregationConfigInterface getAggregation() {
@@ -39,14 +39,16 @@ public class MetricsConfig extends AbstractConfig implements MetricsConfigInterf
     }
 
     public void setAggregation(AggregationConfigInterface aggregation) {
-        instance.setAggregation(aggregation.getInternalInstance());
+        instance.setAggregation(((AggregationConfig) aggregation).getInternalInstance());
     }
+
+    protected MetricsConfigInterface instance;
 
     public MetricsConfigInterface getInternalInstance() {
         return instance;
     }
 
-    public protected MetricsConfig() {
+    public MetricsConfig() {
         instance = (MetricsConfigInterface) DubboClassLoader.getInstance(MetricsConfig.class.getName());
         super.instance = instance;
     }

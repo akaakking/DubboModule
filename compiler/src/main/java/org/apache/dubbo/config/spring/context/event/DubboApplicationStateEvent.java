@@ -19,6 +19,8 @@ public class DubboApplicationStateEvent extends ApplicationEvent implements Dubb
         return instance.getCause();
     }
 
+    protected DubboApplicationStateEventInterface instance;
+
     public DubboApplicationStateEventInterface getInternalInstance() {
         return instance;
     }

@@ -17,6 +17,8 @@ public class DubboConfigDefaultPropertyValueBeanPostProcessor extends GenericBea
         return instance.getOrder();
     }
 
+    protected DubboConfigDefaultPropertyValueBeanPostProcessorInterface instance;
+
     public DubboConfigDefaultPropertyValueBeanPostProcessorInterface getInternalInstance() {
         return instance;
     }

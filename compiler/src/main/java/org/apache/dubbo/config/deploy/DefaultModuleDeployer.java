@@ -43,6 +43,8 @@ public class DefaultModuleDeployer extends AbstractDeployer<ModuleModel> impleme
         instance.prepare();
     }
 
+    protected DefaultModuleDeployerInterface instance;
+
     public DefaultModuleDeployerInterface getInternalInstance() {
         return instance;
     }

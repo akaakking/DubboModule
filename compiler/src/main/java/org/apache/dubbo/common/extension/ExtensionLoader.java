@@ -20,19 +20,19 @@ public class ExtensionLoader<T> implements ExtensionLoaderInterface<T> {
     }
 
     public List<T> getActivateExtension(URLInterface url, String key) {
-        return instance.getActivateExtension(url.getInternalInstance(), key);
+        return instance.getActivateExtension(((URL) url).getInternalInstance(), key);
     }
 
     public List<T> getActivateExtension(URLInterface url, String[] values) {
-        return instance.getActivateExtension(url.getInternalInstance(), values);
+        return instance.getActivateExtension(((URL) url).getInternalInstance(), values);
     }
 
     public List<T> getActivateExtension(URLInterface url, String key, String group) {
-        return instance.getActivateExtension(url.getInternalInstance(), key, group);
+        return instance.getActivateExtension(((URL) url).getInternalInstance(), key, group);
     }
 
     public List<T> getActivateExtension(URLInterface url, String[] values, String group) {
-        return instance.getActivateExtension(url.getInternalInstance(), values, group);
+        return instance.getActivateExtension(((URL) url).getInternalInstance(), values, group);
     }
 
     public List<T> getActivateExtensions() {

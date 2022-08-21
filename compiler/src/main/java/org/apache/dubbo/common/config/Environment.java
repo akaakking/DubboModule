@@ -54,7 +54,7 @@ public class Environment extends LifecycleAdapter implements EnvironmentInterfac
     }
 
     public ConfigurationInterface getPrefixedConfiguration(AbstractConfigInterface config, String prefix) {
-        return instance.getPrefixedConfiguration(config.getInternalInstance(), prefix);
+        return instance.getPrefixedConfiguration(((AbstractConfig) config).getInternalInstance(), prefix);
     }
 
     public CompositeConfigurationInterface getConfiguration() {
@@ -62,7 +62,7 @@ public class Environment extends LifecycleAdapter implements EnvironmentInterfac
     }
 
     public List<Map<String, String>> getConfigurationMaps(AbstractConfigInterface config, String prefix) {
-        return instance.getConfigurationMaps(config.getInternalInstance(), prefix);
+        return instance.getConfigurationMaps(((AbstractConfig) config).getInternalInstance(), prefix);
     }
 
     public List<Map<String, String>> getConfigurationMaps() {
@@ -122,8 +122,10 @@ public class Environment extends LifecycleAdapter implements EnvironmentInterfac
     }
 
     public void setDynamicConfiguration(DynamicConfigurationInterface defaultDynamicConfiguration) {
-        instance.setDynamicConfiguration(defaultDynamicConfiguration.getInternalInstance());
+        instance.setDynamicConfiguration(((DynamicConfiguration) defaultDynamicConfiguration).getInternalInstance());
     }
+
+    protected EnvironmentInterface instance;
 
     public EnvironmentInterface getInternalInstance() {
         return instance;

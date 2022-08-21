@@ -31,16 +31,18 @@ public class ModuleModel extends ScopeModel implements ModuleModelInterface {
     }
 
     public void setDeployer(ModuleDeployerInterface deployer) {
-        instance.setDeployer(deployer.getInternalInstance());
+        instance.setDeployer(((ModuleDeployer) deployer).getInternalInstance());
     }
 
     public void setModuleEnvironment(ModuleEnvironmentInterface moduleEnvironment) {
-        instance.setModuleEnvironment(moduleEnvironment.getInternalInstance());
+        instance.setModuleEnvironment(((ModuleEnvironment) moduleEnvironment).getInternalInstance());
     }
 
     public ConsumerModelInterface registerInternalConsumer(Class<?> internalService, URLInterface url) {
-        return instance.registerInternalConsumer(internalService, url.getInternalInstance());
+        return instance.registerInternalConsumer(internalService, ((URL) url).getInternalInstance());
     }
+
+    protected ModuleModelInterface instance;
 
     public ModuleModelInterface getInternalInstance() {
         return instance;

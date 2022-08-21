@@ -10,7 +10,7 @@ import org.apache.dubbo.Interface.*;
 public class ReferenceBeanManager implements ReferenceBeanManagerInterface {
 
     public void addReference(ReferenceBeanInterface referenceBean) {
-        instance.addReference(referenceBean.getInternalInstance());
+        instance.addReference(((ReferenceBean) referenceBean).getInternalInstance());
     }
 
     public void registerReferenceKeyAndBeanName(String referenceKey, String referenceBeanNameOrAlias) {

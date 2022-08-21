@@ -10,6 +10,8 @@ public class DefaultDubboConfigBinder extends AbstractDubboConfigBinder implemen
         instance.bind(prefix, dubboConfig);
     }
 
+    protected DefaultDubboConfigBinderInterface instance;
+
     public DefaultDubboConfigBinderInterface getInternalInstance() {
         return instance;
     }

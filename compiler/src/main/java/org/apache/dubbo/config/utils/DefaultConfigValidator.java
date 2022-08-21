@@ -6,7 +6,7 @@ import org.apache.dubbo.Interface.*;
 public class DefaultConfigValidator implements DefaultConfigValidatorInterface {
 
     public void validate(AbstractConfigInterface config) {
-        instance.validate(config.getInternalInstance());
+        instance.validate(((AbstractConfig) config).getInternalInstance());
     }
 
     protected DefaultConfigValidatorInterface instance;

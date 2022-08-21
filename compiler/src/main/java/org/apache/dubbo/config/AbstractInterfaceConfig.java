@@ -97,7 +97,7 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void setApplication(ApplicationConfigInterfaceInterface application) {
-        instance.setApplication(application.getInternalInstance());
+        instance.setApplication(((ApplicationConfigInterface) application).getInternalInstance());
     }
 
     public ModuleConfigInterface getModule() {
@@ -105,7 +105,7 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void setModule(ModuleConfigInterface module) {
-        instance.setModule(module.getInternalInstance());
+        instance.setModule(((ModuleConfig) module).getInternalInstance());
     }
 
     public RegistryConfigInterface getRegistry() {
@@ -113,7 +113,7 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void setRegistry(RegistryConfigInterfaceInterface registry) {
-        instance.setRegistry(registry.getInternalInstance());
+        instance.setRegistry(((RegistryConfigInterface) registry).getInternalInstance());
     }
 
     public List<RegistryConfigInterface> getRegistries() {
@@ -141,7 +141,7 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void addMethod(MethodConfigInterface methodConfig) {
-        instance.addMethod(methodConfig.getInternalInstance());
+        instance.addMethod(((MethodConfig) methodConfig).getInternalInstance());
     }
 
     public MonitorConfigInterface getMonitor() {
@@ -153,7 +153,7 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void setMonitor(MonitorConfigInterface monitor) {
-        instance.setMonitor(monitor.getInternalInstance());
+        instance.setMonitor(((MonitorConfig) monitor).getInternalInstance());
     }
 
     public String getOwner() {
@@ -169,7 +169,7 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void setConfigCenter(ConfigCenterConfigInterface configCenter) {
-        instance.setConfigCenter(configCenter.getInternalInstance());
+        instance.setConfigCenter(((ConfigCenterConfig) configCenter).getInternalInstance());
     }
 
     public Integer getCallbacks() {
@@ -209,7 +209,7 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public void setMetadataReportConfig(MetadataReportConfigInterfaceInterface metadataReportConfig) {
-        instance.setMetadataReportConfig(metadataReportConfig.getInternalInstance());
+        instance.setMetadataReportConfig(((MetadataReportConfigInterface) metadataReportConfig).getInternalInstance());
     }
 
     public String getTag() {
@@ -241,11 +241,11 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     public String getGroup(AbstractInterfaceConfigInterface interfaceConfig) {
-        return instance.getGroup(interfaceConfig.getInternalInstance());
+        return instance.getGroup(((AbstractInterfaceConfig) interfaceConfig).getInternalInstance());
     }
 
     public String getVersion(AbstractInterfaceConfigInterface interfaceConfig) {
-        return instance.getVersion(interfaceConfig.getInternalInstance());
+        return instance.getVersion(((AbstractInterfaceConfig) interfaceConfig).getInternalInstance());
     }
 
     public String getVersion() {
@@ -280,6 +280,8 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
         instance.setInterfaceClassLoader(interfaceClassLoader);
     }
 
+    protected AbstractInterfaceConfigInterface instance;
+
     public static void appendRuntimeParameters(Map<String, String> map) {
         Class klass = DubboClassLoader.getKlass(AbstractInterfaceConfig.class.getName());
         Method method = klass.getMethod("appendRuntimeParameters", Map.class);
@@ -291,5 +293,7 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     }
 
     protected AbstractInterfaceConfig() {
+        instance = (AbstractInterfaceConfigInterface) DubboClassLoader.getInstance(AbstractInterfaceConfig.class.getName());
+        super.instance = instance;
     }
 }

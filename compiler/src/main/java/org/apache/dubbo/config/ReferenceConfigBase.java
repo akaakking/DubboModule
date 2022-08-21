@@ -57,7 +57,7 @@ public class ReferenceConfigBase<T> extends AbstractReferenceConfig implements R
     }
 
     public void setConsumer(ConsumerConfigInterface consumer) {
-        instance.setConsumer(consumer.getInternalInstance());
+        instance.setConsumer(((ConsumerConfig) consumer).getInternalInstance());
     }
 
     public String getProtocol() {
@@ -96,6 +96,8 @@ public class ReferenceConfigBase<T> extends AbstractReferenceConfig implements R
         instance.destroy();
     }
 
+    protected ReferenceConfigBaseInterface instance;
+
     public static Class<?> determineInterfaceClass(String generic, String interfaceName) {
         Class klass = DubboClassLoader.getKlass(ReferenceConfigBase.class.getName());
         Method method = klass.getMethod("determineInterfaceClass", String.class, String.class);
@@ -113,5 +115,7 @@ public class ReferenceConfigBase<T> extends AbstractReferenceConfig implements R
     }
 
     protected ReferenceConfigBase() {
+        instance = (ReferenceConfigBaseInterface) DubboClassLoader.getInstance(ReferenceConfigBase.class.getName());
+        super.instance = instance;
     }
 }

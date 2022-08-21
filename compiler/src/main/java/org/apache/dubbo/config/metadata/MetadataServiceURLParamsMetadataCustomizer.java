@@ -6,7 +6,7 @@ import org.apache.dubbo.Interface.*;
 public class MetadataServiceURLParamsMetadataCustomizer implements MetadataServiceURLParamsMetadataCustomizerInterface {
 
     public void customize(ServiceInstanceInterface serviceInstance, ApplicationModelInterface applicationModel) {
-        instance.customize(serviceInstance.getInternalInstance(), applicationModel.getInternalInstance());
+        instance.customize(((ServiceInstance) serviceInstance).getInternalInstance(), ((ApplicationModel) applicationModel).getInternalInstance());
     }
 
     protected MetadataServiceURLParamsMetadataCustomizerInterface instance;

@@ -35,11 +35,13 @@ public class ConfigCenterBean extends ConfigCenterConfig implements ConfigCenter
         instance.setIncludeSpringEnv(includeSpringEnv);
     }
 
+    protected ConfigCenterBeanInterface instance;
+
     public ConfigCenterBeanInterface getInternalInstance() {
         return instance;
     }
 
-    public protected ConfigCenterBean() {
+    public ConfigCenterBean() {
         instance = (ConfigCenterBeanInterface) DubboClassLoader.getInstance(ConfigCenterBean.class.getName());
         super.instance = instance;
     }

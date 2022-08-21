@@ -6,15 +6,15 @@ import org.apache.dubbo.Interface.*;
 public class ExporterDeployListener implements ExporterDeployListenerInterface {
 
     public void onStarting(ApplicationModelInterface scopeModel) {
-        instance.onStarting(scopeModel.getInternalInstance());
+        instance.onStarting(((ApplicationModel) scopeModel).getInternalInstance());
     }
 
     public void onStarted(ApplicationModelInterface applicationModel) {
-        instance.onStarted(applicationModel.getInternalInstance());
+        instance.onStarted(((ApplicationModel) applicationModel).getInternalInstance());
     }
 
     public void onStopping(ApplicationModelInterface scopeModel) {
-        instance.onStopping(scopeModel.getInternalInstance());
+        instance.onStopping(((ApplicationModel) scopeModel).getInternalInstance());
     }
 
     public ConfigurableMetadataServiceExporterInterface getMetadataServiceExporter() {
@@ -22,19 +22,19 @@ public class ExporterDeployListener implements ExporterDeployListenerInterface {
     }
 
     public void setMetadataServiceExporter(ConfigurableMetadataServiceExporterInterface metadataServiceExporter) {
-        instance.setMetadataServiceExporter(metadataServiceExporter.getInternalInstance());
+        instance.setMetadataServiceExporter(((ConfigurableMetadataServiceExporter) metadataServiceExporter).getInternalInstance());
     }
 
     public void onModuleStarted(ApplicationModelInterface applicationModel) {
-        instance.onModuleStarted(applicationModel.getInternalInstance());
+        instance.onModuleStarted(((ApplicationModel) applicationModel).getInternalInstance());
     }
 
     public void onStopped(ApplicationModelInterface scopeModel) {
-        instance.onStopped(scopeModel.getInternalInstance());
+        instance.onStopped(((ApplicationModel) scopeModel).getInternalInstance());
     }
 
     public void onFailure(ApplicationModelInterface scopeModel, Throwable cause) {
-        instance.onFailure(scopeModel.getInternalInstance(), cause);
+        instance.onFailure(((ApplicationModel) scopeModel).getInternalInstance(), cause);
     }
 
     public int getPriority() {

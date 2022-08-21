@@ -6,6 +6,8 @@ import org.apache.dubbo.Interface.*;
 
 public class AnnotationBeanDefinitionParser extends AbstractSingleBeanDefinitionParser implements AnnotationBeanDefinitionParserInterface {
 
+    protected AnnotationBeanDefinitionParserInterface instance;
+
     public AnnotationBeanDefinitionParserInterface getInternalInstance() {
         return instance;
     }

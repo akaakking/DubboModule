@@ -111,10 +111,14 @@ public class AbstractMethodConfig extends AbstractConfig implements AbstractMeth
         instance.setParameters(parameters);
     }
 
+    protected AbstractMethodConfigInterface instance;
+
     public AbstractMethodConfigInterface getInternalInstance() {
         return instance;
     }
 
     protected AbstractMethodConfig() {
+        instance = (AbstractMethodConfigInterface) DubboClassLoader.getInstance(AbstractMethodConfig.class.getName());
+        super.instance = instance;
     }
 }

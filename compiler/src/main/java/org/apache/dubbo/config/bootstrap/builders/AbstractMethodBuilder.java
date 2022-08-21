@@ -67,10 +67,14 @@ public class AbstractMethodBuilder<T extends AbstractMethodConfigInterface, B ex
         instance.build(instance);
     }
 
+    protected AbstractMethodBuilderInterface instance;
+
     public AbstractMethodBuilderInterface getInternalInstance() {
         return instance;
     }
 
     protected AbstractMethodBuilder() {
+        instance = (AbstractMethodBuilderInterface) DubboClassLoader.getInstance(AbstractMethodBuilder.class.getName());
+        super.instance = instance;
     }
 }

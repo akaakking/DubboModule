@@ -180,6 +180,8 @@ public class InstanceAddressURL extends URL implements InstanceAddressURLInterfa
         return instance.toString();
     }
 
+    protected InstanceAddressURLInterface instance;
+
     public InstanceAddressURLInterface getInternalInstance() {
         return instance;
     }
@@ -202,6 +204,4 @@ public class InstanceAddressURL extends URL implements InstanceAddressURLInterfa
         instance = (InstanceAddressURLInterface) DubboClassLoader.getInstance(InstanceAddressURL.class.getName());
         super.instance = instance;
     }
-
-    protected InstanceAddressURLInterface instance;
 }

@@ -51,6 +51,8 @@ public class MonitorBuilder extends AbstractBuilder<MonitorConfig, MonitorBuilde
         return instance.build();
     }
 
+    protected MonitorBuilderInterface instance;
+
     public MonitorBuilderInterface getInternalInstance() {
         return instance;
     }

@@ -161,8 +161,10 @@ public class MethodConfig extends AbstractMethodConfig implements MethodConfigIn
     }
 
     public void addArgument(ArgumentConfigInterface argumentConfig) {
-        instance.addArgument(argumentConfig.getInternalInstance());
+        instance.addArgument(((ArgumentConfig) argumentConfig).getInternalInstance());
     }
+
+    protected MethodConfigInterface instance;
 
     public static List<MethodConfigInterface> constructMethodConfig(Method[] methods) {
         Class klass = DubboClassLoader.getKlass(MethodConfig.class.getName());
@@ -174,7 +176,7 @@ public class MethodConfig extends AbstractMethodConfig implements MethodConfigIn
         return instance;
     }
 
-    public protected MethodConfig() {
+    public MethodConfig() {
         instance = (MethodConfigInterface) DubboClassLoader.getInstance(MethodConfig.class.getName());
         super.instance = instance;
     }

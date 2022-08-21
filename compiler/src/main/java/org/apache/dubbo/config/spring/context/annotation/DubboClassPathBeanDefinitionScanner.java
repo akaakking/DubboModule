@@ -15,6 +15,8 @@ public class DubboClassPathBeanDefinitionScanner extends ClassPathBeanDefinition
         return instance.findCandidateComponents(basePackage);
     }
 
+    protected DubboClassPathBeanDefinitionScannerInterface instance;
+
     public DubboClassPathBeanDefinitionScannerInterface getInternalInstance() {
         return instance;
     }

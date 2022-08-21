@@ -82,11 +82,13 @@ public class ConsumerConfig extends AbstractReferenceConfig implements ConsumerC
         instance.setReferBackground(referBackground);
     }
 
+    protected ConsumerConfigInterface instance;
+
     public ConsumerConfigInterface getInternalInstance() {
         return instance;
     }
 
-    public protected ConsumerConfig() {
+    public ConsumerConfig() {
         instance = (ConsumerConfigInterface) DubboClassLoader.getInstance(ConsumerConfig.class.getName());
         super.instance = instance;
     }

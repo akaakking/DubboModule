@@ -234,11 +234,13 @@ public class ProviderConfig extends AbstractServiceConfig implements ProviderCon
         instance.setExportBackground(exportBackground);
     }
 
+    protected ProviderConfigInterface instance;
+
     public ProviderConfigInterface getInternalInstance() {
         return instance;
     }
 
-    public protected ProviderConfig() {
+    public ProviderConfig() {
         instance = (ProviderConfigInterface) DubboClassLoader.getInstance(ProviderConfig.class.getName());
         super.instance = instance;
     }

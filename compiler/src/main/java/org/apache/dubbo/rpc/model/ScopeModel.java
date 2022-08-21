@@ -17,7 +17,7 @@ public class ScopeModel implements ScopeModelInterface {
     }
 
     public void addDestroyListener(ScopeModelDestroyListenerInterface listener) {
-        instance.addDestroyListener(listener.getInternalInstance());
+        instance.addDestroyListener(((ScopeModelDestroyListener) listener).getInternalInstance());
     }
 
     public Map<String, Object> getAttributes() {
@@ -99,5 +99,6 @@ public class ScopeModel implements ScopeModelInterface {
     }
 
     protected ScopeModel() {
+        instance = (ScopeModelInterface) DubboClassLoader.getInstance(ScopeModel.class.getName());
     }
 }

@@ -22,6 +22,8 @@ public class DubboShutdownHook extends Thread implements DubboShutdownHookInterf
         return instance.getRegistered();
     }
 
+    protected DubboShutdownHookInterface instance;
+
     public DubboShutdownHookInterface getInternalInstance() {
         return instance;
     }

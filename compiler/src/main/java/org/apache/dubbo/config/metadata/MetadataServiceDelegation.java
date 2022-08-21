@@ -18,7 +18,7 @@ public class MetadataServiceDelegation implements MetadataServiceDelegationInter
     }
 
     public void setMetadataURL(URLInterface url) {
-        instance.setMetadataURL(url.getInternalInstance());
+        instance.setMetadataURL(((URL) url).getInternalInstance());
     }
 
     public SortedSet<String> getSubscribedURLs() {
@@ -58,7 +58,7 @@ public class MetadataServiceDelegation implements MetadataServiceDelegationInter
     }
 
     public String getAndListenInstanceMetadata(String consumerId, InstanceMetadataChangedListenerInterface listener) {
-        return instance.getAndListenInstanceMetadata(consumerId, listener.getInternalInstance());
+        return instance.getAndListenInstanceMetadata(consumerId, ((InstanceMetadataChangedListener) listener).getInternalInstance());
     }
 
     public void destroy() {

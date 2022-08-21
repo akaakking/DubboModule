@@ -118,10 +118,14 @@ public class AbstractReferenceConfig extends AbstractInterfaceConfig implements 
         instance.setReferAsync(referAsync);
     }
 
+    protected AbstractReferenceConfigInterface instance;
+
     public AbstractReferenceConfigInterface getInternalInstance() {
         return instance;
     }
 
     protected AbstractReferenceConfig() {
+        instance = (AbstractReferenceConfigInterface) DubboClassLoader.getInstance(AbstractReferenceConfig.class.getName());
+        super.instance = instance;
     }
 }

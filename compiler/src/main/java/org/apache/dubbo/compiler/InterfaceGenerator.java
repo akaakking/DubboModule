@@ -74,19 +74,11 @@ public class InterfaceGenerator {
     private void addImpls(ClassOrInterfaceDeclaration coid, JavaClass javaClass) {
         JavaType javaType = javaClass.getSuperClass();
         if (javaType != null && !javaType.getFullyQualifiedName().equals("java.lang.Object")) {
-            if (this.generator.checkName(javaType.getBinaryName())) {
-                coid.addExtendedType(this.generator.addInterface(this.generator.shortName(javaType.getGenericValue())));
-            } else {
-                coid.addExtendedType(javaType.getGenericValue());
-            }
+            coid.addExtendedType(this.generator.dealType(javaType));
         }
 
         for (JavaType implement : javaClass.getImplements()) {
-            if (this.generator.checkName(implement.getFullyQualifiedName())) {
-                coid.addExtendedType(this.generator.addInterface(this.generator.shortName(implement.getGenericValue())));
-            } else {
-                coid.addExtendedType(implement.getGenericValue());
-            }
+            coid.addExtendedType(this.generator.dealType(implement));
         }
     }
 

@@ -14,11 +14,11 @@ public class MetadataInfo implements MetadataInfoInterface {
     }
 
     public void addService(URLInterface url) {
-        instance.addService(url.getInternalInstance());
+        instance.addService(((URL) url).getInternalInstance());
     }
 
     public void removeService(URLInterface url) {
-        instance.removeService(url.getInternalInstance());
+        instance.removeService(((URL) url).getInternalInstance());
     }
 
     public String getRevision() {
@@ -82,11 +82,11 @@ public class MetadataInfo implements MetadataInfoInterface {
     }
 
     public void addSubscribedURL(URLInterface url) {
-        instance.addSubscribedURL(url.getInternalInstance());
+        instance.addSubscribedURL(((URL) url).getInternalInstance());
     }
 
     public boolean removeSubscribedURL(URLInterface url) {
-        return instance.removeSubscribedURL(url.getInternalInstance());
+        return instance.removeSubscribedURL(((URL) url).getInternalInstance());
     }
 
     public ConcurrentNavigableMap<String, SortedSet<URLInterface>> getSubscribedServiceURLs() {
@@ -123,7 +123,7 @@ public class MetadataInfo implements MetadataInfoInterface {
         return instance;
     }
 
-    public protected MetadataInfo() {
+    public MetadataInfo() {
         instance = (MetadataInfoInterface) DubboClassLoader.getInstance(MetadataInfo.class.getName());
     }
 

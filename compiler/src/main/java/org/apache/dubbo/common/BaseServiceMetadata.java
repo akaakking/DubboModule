@@ -50,7 +50,7 @@ public class BaseServiceMetadata implements BaseServiceMetadataInterface {
     }
 
     public void setServiceModel(ServiceModelInterface serviceModel) {
-        instance.setServiceModel(serviceModel.getInternalInstance());
+        instance.setServiceModel(((ServiceModel) serviceModel).getInternalInstance());
     }
 
     protected BaseServiceMetadataInterface instance;

@@ -32,7 +32,7 @@ public class DubboBootstrapApplicationListener implements DubboBootstrapApplicat
         return instance;
     }
 
-    public protected DubboBootstrapApplicationListener() {
+    public DubboBootstrapApplicationListener() {
         instance = (DubboBootstrapApplicationListenerInterface) DubboClassLoader.getInstance(DubboBootstrapApplicationListener.class.getName());
     }
 

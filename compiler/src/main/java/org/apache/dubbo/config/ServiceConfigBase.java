@@ -26,7 +26,7 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
     }
 
     public Optional<String> getContextPath(ProtocolConfigInterface protocolConfig) {
-        return instance.getContextPath(protocolConfig.getInternalInstance());
+        return instance.getContextPath(((ProtocolConfig) protocolConfig).getInternalInstance());
     }
 
     public Map<String, String> getMetaData() {
@@ -66,7 +66,7 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
     }
 
     public void setProvider(ProviderConfigInterface provider) {
-        instance.setProvider(provider.getInternalInstance());
+        instance.setProvider(((ProviderConfig) provider).getInternalInstance());
     }
 
     public String getProviderIds() {
@@ -125,10 +125,14 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
         return instance.isUnexported();
     }
 
+    protected ServiceConfigBaseInterface instance;
+
     public ServiceConfigBaseInterface getInternalInstance() {
         return instance;
     }
 
     protected ServiceConfigBase() {
+        instance = (ServiceConfigBaseInterface) DubboClassLoader.getInstance(ServiceConfigBase.class.getName());
+        super.instance = instance;
     }
 }

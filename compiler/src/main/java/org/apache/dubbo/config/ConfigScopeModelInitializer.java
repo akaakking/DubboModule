@@ -6,15 +6,15 @@ import org.apache.dubbo.Interface.*;
 public class ConfigScopeModelInitializer implements ConfigScopeModelInitializerInterface {
 
     public void initializeFrameworkModel(FrameworkModelInterface frameworkModel) {
-        instance.initializeFrameworkModel(frameworkModel.getInternalInstance());
+        instance.initializeFrameworkModel(((FrameworkModel) frameworkModel).getInternalInstance());
     }
 
     public void initializeApplicationModel(ApplicationModelInterface applicationModel) {
-        instance.initializeApplicationModel(applicationModel.getInternalInstance());
+        instance.initializeApplicationModel(((ApplicationModel) applicationModel).getInternalInstance());
     }
 
     public void initializeModuleModel(ModuleModelInterface moduleModel) {
-        instance.initializeModuleModel(moduleModel.getInternalInstance());
+        instance.initializeModuleModel(((ModuleModel) moduleModel).getInternalInstance());
     }
 
     protected ConfigScopeModelInitializerInterface instance;

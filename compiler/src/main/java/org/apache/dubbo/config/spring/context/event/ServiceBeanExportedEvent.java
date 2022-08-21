@@ -10,6 +10,8 @@ public class ServiceBeanExportedEvent extends ApplicationEvent implements Servic
         return instance.getServiceBean();
     }
 
+    protected ServiceBeanExportedEventInterface instance;
+
     public ServiceBeanExportedEventInterface getInternalInstance() {
         return instance;
     }

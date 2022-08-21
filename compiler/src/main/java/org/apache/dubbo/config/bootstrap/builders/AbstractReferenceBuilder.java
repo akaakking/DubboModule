@@ -50,10 +50,14 @@ public class AbstractReferenceBuilder<T extends AbstractReferenceConfigInterface
         instance.build(instance);
     }
 
+    protected AbstractReferenceBuilderInterface instance;
+
     public AbstractReferenceBuilderInterface getInternalInstance() {
         return instance;
     }
 
     protected AbstractReferenceBuilder() {
+        instance = (AbstractReferenceBuilderInterface) DubboClassLoader.getInstance(AbstractReferenceBuilder.class.getName());
+        super.instance = instance;
     }
 }

@@ -299,11 +299,13 @@ public class ProtocolConfig extends AbstractConfig implements ProtocolConfigInte
         return instance.isValid();
     }
 
+    protected ProtocolConfigInterface instance;
+
     public ProtocolConfigInterface getInternalInstance() {
         return instance;
     }
 
-    public protected ProtocolConfig() {
+    public ProtocolConfig() {
         instance = (ProtocolConfigInterface) DubboClassLoader.getInstance(ProtocolConfig.class.getName());
         super.instance = instance;
     }

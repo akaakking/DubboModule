@@ -52,12 +52,14 @@ public class DefaultApplicationDeployer extends AbstractDeployer<ApplicationMode
     }
 
     public void notifyModuleChanged(ModuleModelInterface moduleModel, DeployStateInterface state) {
-        instance.notifyModuleChanged(moduleModel.getInternalInstance(), state.getInternalInstance());
+        instance.notifyModuleChanged(((ModuleModel) moduleModel).getInternalInstance(), ((DeployState) state).getInternalInstance());
     }
 
     public void checkState(ModuleModelInterface moduleModel, DeployStateInterface moduleState) {
-        instance.checkState(moduleModel.getInternalInstance(), moduleState.getInternalInstance());
+        instance.checkState(((ModuleModel) moduleModel).getInternalInstance(), ((DeployState) moduleState).getInternalInstance());
     }
+
+    protected DefaultApplicationDeployerInterface instance;
 
     public static ApplicationDeployerInterface get(ScopeModelInterface moduleOrApplicationModel) {
         Class klass = DubboClassLoader.getKlass(DefaultApplicationDeployer.class.getName());

@@ -24,5 +24,6 @@ public class LifecycleAdapter implements LifecycleAdapterInterface {
     }
 
     protected LifecycleAdapter() {
+        instance = (LifecycleAdapterInterface) DubboClassLoader.getInstance(LifecycleAdapter.class.getName());
     }
 }

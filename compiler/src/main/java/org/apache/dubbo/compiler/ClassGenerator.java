@@ -123,7 +123,7 @@ public class ClassGenerator {
     // 不给interface,abstact加construct
     private void addConstruct(JavaClass javaClass,ClassOrInterfaceDeclaration coid) {
         if (javaClass.isAbstract()) {
-            coid.addConstructor(Modifier.Keyword.PROTECTED);
+            addEmptyConstruct(javaClass,coid.addConstructor(Modifier.Keyword.PROTECTED));
             return;
         }
 
@@ -142,8 +142,10 @@ public class ClassGenerator {
                 Parameter parserParameter = new Parameter();
                 parserParameter.setName(parameter.getName());
 
-                if (parameter.getType().toString().endsWith("Interface")) {
-                    args.add(parameter.getName() + ".getInternalInterface()");
+                String typeName = parameter.getType().getValue();
+                if (typeName.endsWith("Interface")) {
+                    args.add("((" + typeName.substring(0,typeName.length() - "Interface".length())
+                            + ")" + parameter.getName() + ").getInternalInterface()");
                 } else {
                     args.add(parameter.getName());
                 }
@@ -202,7 +204,6 @@ public class ClassGenerator {
             addEmptyConstruct(javaClass,constructor);
         }
     }
-
 
     // super.instance = instance
     private void assigninstance(JavaClass javaClass,BlockStmt blockStmt) {
@@ -301,8 +302,10 @@ public class ClassGenerator {
 
             if (n.getParameters() != null && !n.getParameters().isEmpty()) {
                 for (Parameter parameter : n.getParameters()) {
-                    if (parameter.getType().toString().endsWith("Interface")) {
-                        methodCallExpr.addArgument(parameter.getNameAsString() + ".getInternalInstance()");
+                    String typeName = parameter.getType().toString();
+                    if (typeName.endsWith("Interface")) {
+                        methodCallExpr.addArgument("((" + typeName.substring(0,typeName.length() - "Interface".length()) + ")"
+                                + parameter.getNameAsString()  + ").getInternalInstance()");
                     } else {
                         methodCallExpr.addArgument(parameter.getNameAsString());
                     }

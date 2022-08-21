@@ -6,7 +6,7 @@ import org.apache.dubbo.Interface.*;
 public class NamePropertyDefaultValueDubboConfigBeanCustomizer implements NamePropertyDefaultValueDubboConfigBeanCustomizerInterface {
 
     public void customize(String beanName, AbstractConfigInterface dubboConfigBean) {
-        instance.customize(beanName, dubboConfigBean.getInternalInstance());
+        instance.customize(beanName, ((AbstractConfig) dubboConfigBean).getInternalInstance());
     }
 
     public int getOrder() {

@@ -35,6 +35,8 @@ public class ConfigChangedEvent extends EventObject implements ConfigChangedEven
         return instance.hashCode();
     }
 
+    protected ConfigChangedEventInterface instance;
+
     public ConfigChangedEventInterface getInternalInstance() {
         return instance;
     }

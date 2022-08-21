@@ -32,11 +32,11 @@ public class ReferenceBuilder<T> extends AbstractReferenceBuilder<ReferenceConfi
     }
 
     public ReferenceBuilderInterface<T> addMethod(MethodConfigInterface method) {
-        return instance.addMethod(method.getInternalInstance());
+        return instance.addMethod(((MethodConfig) method).getInternalInstance());
     }
 
     public ReferenceBuilderInterface<T> consumer(ConsumerConfigInterface consumer) {
-        return instance.consumer(consumer.getInternalInstance());
+        return instance.consumer(((ConsumerConfig) consumer).getInternalInstance());
     }
 
     public ReferenceBuilderInterface<T> protocol(String protocol) {
@@ -50,6 +50,8 @@ public class ReferenceBuilder<T> extends AbstractReferenceBuilder<ReferenceConfi
     public ReferenceConfigInterface<T> build() {
         return instance.build();
     }
+
+    protected ReferenceBuilderInterface instance;
 
     public static <T> ReferenceBuilderInterface<T> newBuilder() {
         Class klass = DubboClassLoader.getKlass(ReferenceBuilder.class.getName());

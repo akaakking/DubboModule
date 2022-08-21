@@ -96,7 +96,7 @@ public class AbstractServiceConfig extends AbstractInterfaceConfig implements Ab
     }
 
     public void setProtocol(ProtocolConfigInterface protocol) {
-        instance.setProtocol(protocol.getInternalInstance());
+        instance.setProtocol(((ProtocolConfig) protocol).getInternalInstance());
     }
 
     public String getProtocolIds() {
@@ -171,10 +171,14 @@ public class AbstractServiceConfig extends AbstractInterfaceConfig implements Ab
         instance.setExportAsync(exportAsync);
     }
 
+    protected AbstractServiceConfigInterface instance;
+
     public AbstractServiceConfigInterface getInternalInstance() {
         return instance;
     }
 
     protected AbstractServiceConfig() {
+        instance = (AbstractServiceConfigInterface) DubboClassLoader.getInstance(AbstractServiceConfig.class.getName());
+        super.instance = instance;
     }
 }

@@ -65,5 +65,6 @@ public class AbstractDeployer<E extends ScopeModelInterface> implements Abstract
     }
 
     protected AbstractDeployer() {
+        instance = (AbstractDeployerInterface) DubboClassLoader.getInstance(AbstractDeployer.class.getName());
     }
 }

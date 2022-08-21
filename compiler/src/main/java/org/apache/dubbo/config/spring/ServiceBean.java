@@ -42,11 +42,13 @@ public class ServiceBean<T> extends ServiceConfig<T> implements ServiceBeanInter
         instance.setApplicationEventPublisher(applicationEventPublisher);
     }
 
+    protected ServiceBeanInterface instance;
+
     public ServiceBeanInterface getInternalInstance() {
         return instance;
     }
 
-    public protected ServiceBean() {
+    public ServiceBean() {
         instance = (ServiceBeanInterface) DubboClassLoader.getInstance(ServiceBean.class.getName());
         super.instance = instance;
     }

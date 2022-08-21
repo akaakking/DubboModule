@@ -59,6 +59,8 @@ public class MetadataReportBuilder extends AbstractBuilder<MetadataReportConfig,
         return instance.build();
     }
 
+    protected MetadataReportBuilderInterface instance;
+
     public static MetadataReportBuilderInterface newBuilder() {
         Class klass = DubboClassLoader.getKlass(MetadataReportBuilder.class.getName());
         Method method = klass.getMethod("newBuilder");

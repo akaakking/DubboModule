@@ -17,6 +17,8 @@ public class DubboNamespaceHandler extends NamespaceHandlerSupport implements Du
         return instance.parse(element, parserContext);
     }
 
+    protected DubboNamespaceHandlerInterface instance;
+
     public DubboNamespaceHandlerInterface getInternalInstance() {
         return instance;
     }

@@ -10,6 +10,8 @@ public class DubboBootstrapStatedEvent extends ApplicationEvent implements Dubbo
         return instance.getDubboBootstrap();
     }
 
+    protected DubboBootstrapStatedEventInterface instance;
+
     public DubboBootstrapStatedEventInterface getInternalInstance() {
         return instance;
     }

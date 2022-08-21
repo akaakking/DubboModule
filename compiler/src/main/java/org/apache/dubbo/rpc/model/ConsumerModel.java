@@ -50,6 +50,8 @@ public class ConsumerModel extends ServiceModel implements ConsumerModelInterfac
         return instance.hashCode();
     }
 
+    protected ConsumerModelInterface instance;
+
     public ConsumerModelInterface getInternalInstance() {
         return instance;
     }

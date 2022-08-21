@@ -12,7 +12,7 @@ public class ServiceModel implements ServiceModelInterface {
     }
 
     public void setConfig(AbstractInterfaceConfigInterface config) {
-        instance.setConfig(config.getInternalInstance());
+        instance.setConfig(((AbstractInterfaceConfig) config).getInternalInstance());
     }
 
     public ReferenceConfigBaseInterface<?> getReferenceConfig() {

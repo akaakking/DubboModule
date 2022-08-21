@@ -13,7 +13,7 @@ public class DubboConfigApplicationListener implements DubboConfigApplicationLis
     }
 
     public void onApplicationEvent(DubboConfigInitEventInterface event) {
-        instance.onApplicationEvent(event.getInternalInstance());
+        instance.onApplicationEvent(((DubboConfigInitEvent) event).getInternalInstance());
     }
 
     protected DubboConfigApplicationListenerInterface instance;

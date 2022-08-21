@@ -60,7 +60,7 @@ public class AbstractServiceBuilder<T extends AbstractServiceConfigInterface, B 
     }
 
     public B addProtocol(ProtocolConfigInterface protocol) {
-        return instance.addProtocol(protocol.getInternalInstance());
+        return instance.addProtocol(((ProtocolConfig) protocol).getInternalInstance());
     }
 
     public B protocolIds(String protocolIds) {
@@ -87,10 +87,14 @@ public class AbstractServiceBuilder<T extends AbstractServiceConfigInterface, B 
         instance.build(instance);
     }
 
+    protected AbstractServiceBuilderInterface instance;
+
     public AbstractServiceBuilderInterface getInternalInstance() {
         return instance;
     }
 
     protected AbstractServiceBuilder() {
+        instance = (AbstractServiceBuilderInterface) DubboClassLoader.getInstance(AbstractServiceBuilder.class.getName());
+        super.instance = instance;
     }
 }

@@ -29,18 +29,20 @@ public class ServiceConfig<T> extends ServiceConfigBase<T> implements ServiceCon
     }
 
     public void addServiceListener(ServiceListenerInterface listener) {
-        instance.addServiceListener(listener.getInternalInstance());
+        instance.addServiceListener(((ServiceListener) listener).getInternalInstance());
     }
 
     public Callable<Void> getDestroyRunner() {
         return instance.getDestroyRunner();
     }
 
+    protected ServiceConfigInterface instance;
+
     public ServiceConfigInterface getInternalInstance() {
         return instance;
     }
 
-    public protected ServiceConfig() {
+    public ServiceConfig() {
         instance = (ServiceConfigInterface) DubboClassLoader.getInstance(ServiceConfig.class.getName());
         super.instance = instance;
     }

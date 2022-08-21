@@ -153,7 +153,7 @@ public class URL implements URLInterface {
     }
 
     public URLInterface setScopeModel(ScopeModelInterface scopeModel) {
-        return instance.setScopeModel(scopeModel.getInternalInstance());
+        return instance.setScopeModel(((ScopeModel) scopeModel).getInternalInstance());
     }
 
     public ScopeModelInterface getScopeModel() {
@@ -177,7 +177,7 @@ public class URL implements URLInterface {
     }
 
     public URLInterface setServiceModel(ServiceModelInterface serviceModel) {
-        return instance.setServiceModel(serviceModel.getInternalInstance());
+        return instance.setServiceModel(((ServiceModel) serviceModel).getInternalInstance());
     }
 
     public ServiceModelInterface getServiceModel() {

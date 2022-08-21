@@ -87,7 +87,7 @@ public class ReferenceBean<T> implements ReferenceBeanInterface<T> {
     }
 
     public void setKeyAndReferenceConfig(String key, ReferenceConfigInterface referenceConfig) {
-        instance.setKeyAndReferenceConfig(key, referenceConfig.getInternalInstance());
+        instance.setKeyAndReferenceConfig(key, ((ReferenceConfig) referenceConfig).getInternalInstance());
     }
 
     protected ReferenceBeanInterface instance;
@@ -96,7 +96,7 @@ public class ReferenceBean<T> implements ReferenceBeanInterface<T> {
         return instance;
     }
 
-    public protected ReferenceBean() {
+    public ReferenceBean() {
         instance = (ReferenceBeanInterface) DubboClassLoader.getInstance(ReferenceBean.class.getName());
     }
 

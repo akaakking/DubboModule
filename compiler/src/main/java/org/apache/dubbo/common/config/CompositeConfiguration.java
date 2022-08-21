@@ -14,15 +14,15 @@ public class CompositeConfiguration implements CompositeConfigurationInterface {
     }
 
     public void addConfiguration(ConfigurationInterface configuration) {
-        instance.addConfiguration(configuration.getInternalInstance());
+        instance.addConfiguration(((Configuration) configuration).getInternalInstance());
     }
 
     public void addConfigurationFirst(ConfigurationInterface configuration) {
-        instance.addConfigurationFirst(configuration.getInternalInstance());
+        instance.addConfigurationFirst(((Configuration) configuration).getInternalInstance());
     }
 
     public void addConfiguration(int pos, ConfigurationInterface configuration) {
-        instance.addConfiguration(pos, configuration.getInternalInstance());
+        instance.addConfiguration(pos, ((Configuration) configuration).getInternalInstance());
     }
 
     public Object getInternalProperty(String key) {
@@ -35,7 +35,7 @@ public class CompositeConfiguration implements CompositeConfigurationInterface {
         return instance;
     }
 
-    public protected CompositeConfiguration() {
+    public CompositeConfiguration() {
         instance = (CompositeConfigurationInterface) DubboClassLoader.getInstance(CompositeConfiguration.class.getName());
     }
 

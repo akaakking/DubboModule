@@ -11,7 +11,7 @@ import org.apache.dubbo.config.context.AbstractConfigManager;
 public class ModuleConfigManager extends AbstractConfigManager implements ModuleConfigManagerInterface {
 
     public void setModule(ModuleConfigInterface module) {
-        instance.setModule(module.getInternalInstance());
+        instance.setModule(((ModuleConfig) module).getInternalInstance());
     }
 
     public Optional<ModuleConfigInterface> getModule() {
@@ -51,7 +51,7 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
     }
 
     public void addProvider(ProviderConfigInterface providerConfig) {
-        instance.addProvider(providerConfig.getInternalInstance());
+        instance.addProvider(((ProviderConfig) providerConfig).getInternalInstance());
     }
 
     public void addProviders(Iterable<ProviderConfigInterface> providerConfigs) {
@@ -71,7 +71,7 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
     }
 
     public void addConsumer(ConsumerConfigInterface consumerConfig) {
-        instance.addConsumer(consumerConfig.getInternalInstance());
+        instance.addConsumer(((ConsumerConfig) consumerConfig).getInternalInstance());
     }
 
     public void addConsumers(Iterable<ConsumerConfigInterface> consumerConfigs) {
@@ -181,6 +181,8 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
     public Collection<RegistryConfigInterface> getRegistries() {
         return instance.getRegistries();
     }
+
+    protected ModuleConfigManagerInterface instance;
 
     public ModuleConfigManagerInterface getInternalInstance() {
         return instance;

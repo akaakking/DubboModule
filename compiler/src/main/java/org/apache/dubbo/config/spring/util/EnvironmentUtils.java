@@ -27,5 +27,6 @@ public class EnvironmentUtils implements EnvironmentUtilsInterface {
     }
 
     protected EnvironmentUtils() {
+        instance = (EnvironmentUtilsInterface) DubboClassLoader.getInstance(EnvironmentUtils.class.getName());
     }
 }

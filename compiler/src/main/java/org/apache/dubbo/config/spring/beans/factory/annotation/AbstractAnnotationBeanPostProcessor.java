@@ -33,10 +33,14 @@ public class AbstractAnnotationBeanPostProcessor extends InstantiationAwareBeanP
         instance.setEnvironment(environment);
     }
 
+    protected AbstractAnnotationBeanPostProcessorInterface instance;
+
     public AbstractAnnotationBeanPostProcessorInterface getInternalInstance() {
         return instance;
     }
 
     protected AbstractAnnotationBeanPostProcessor() {
+        instance = (AbstractAnnotationBeanPostProcessorInterface) DubboClassLoader.getInstance(AbstractAnnotationBeanPostProcessor.class.getName());
+        super.instance = instance;
     }
 }

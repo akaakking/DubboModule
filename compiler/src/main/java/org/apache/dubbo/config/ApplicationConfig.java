@@ -61,7 +61,7 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
     }
 
     public void setRegistry(RegistryConfigInterface registry) {
-        instance.setRegistry(registry.getInternalInstance());
+        instance.setRegistry(((RegistryConfig) registry).getInternalInstance());
     }
 
     public List<RegistryConfigInterface> getRegistries() {
@@ -89,7 +89,7 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
     }
 
     public void setMonitor(MonitorConfigInterface monitor) {
-        instance.setMonitor(monitor.getInternalInstance());
+        instance.setMonitor(((MonitorConfig) monitor).getInternalInstance());
     }
 
     public String getCompiler() {
@@ -304,11 +304,13 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
         instance.refresh();
     }
 
+    protected ApplicationConfigInterface instance;
+
     public ApplicationConfigInterface getInternalInstance() {
         return instance;
     }
 
-    public protected ApplicationConfig() {
+    public ApplicationConfig() {
         instance = (ApplicationConfigInterface) DubboClassLoader.getInstance(ApplicationConfig.class.getName());
         super.instance = instance;
     }
