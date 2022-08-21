@@ -1,8 +1,19 @@
 package org.apache.dubbo.config.context;
 
+import org.apache.dubbo.config.ApplicationConfig;
 import java.util.Optional;
+import org.apache.dubbo.config.MonitorConfig;
+import org.apache.dubbo.config.MetricsConfig;
+import org.apache.dubbo.config.SslConfig;
+import org.apache.dubbo.config.ConfigCenterConfig;
+import java.lang.Iterable;
 import java.util.Collection;
+import java.lang.String;
+import org.apache.dubbo.config.MetadataReportConfig;
+import org.apache.dubbo.config.ProtocolConfig;
 import java.util.List;
+import java.lang.Class;
+import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.context.ConfigMode;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -148,11 +159,11 @@ public class ConfigManager extends AbstractConfigManager implements ConfigManage
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (ConfigManagerInterface) DubboClassLoader.getInstance(ConfigManager.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected ConfigManager() {
         instance = (ConfigManagerInterface) DubboClassLoader.getInstance(ConfigManager.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

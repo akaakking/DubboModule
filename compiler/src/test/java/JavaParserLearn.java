@@ -458,18 +458,29 @@ public class JavaParserLearn {
         for (MethodDeclaration method : coid.getMethods()) {
             BlockStmt blockStmt = new BlockStmt();
             method.setBody(blockStmt);
-            MethodCallExpr methodCallExpr = new MethodCallExpr(new NameExpr("instance"),"get");
+            MethodCallExpr methodCallExpr = new MethodCallExpr(new NameExpr("try { \n           instance"),"get");
             methodCallExpr.addArgument("name.getInstance()");
             methodCallExpr.addArgument("\"fds\"");
 
 
-            AssignExpr assignExpr = new AssignExpr(new NameExpr("super.instance"),new NameExpr("instance"), AssignExpr.Operator.ASSIGN);
-            blockStmt.addStatement(new ExpressionStmt(assignExpr));
+            AssignExpr assignExpr = new AssignExpr(new NameExpr("super.instance"),new NameExpr("instance} catch (NoSuchMethodException e) {\n" +
+                    "            e.printStackTrace();\n" +
+                    "        } catch (InvocationTargetException e) {\n" +
+                    "            e.printStackTrace();\n" +
+                    "        } catch (IllegalAccessException e) {\n" +
+                    "            e.printStackTrace();\n" +
+                    "        }"), AssignExpr.Operator.ASSIGN);
+
             blockStmt.addStatement(new ExpressionStmt(methodCallExpr));
-        }
+            blockStmt.addStatement(new ExpressionStmt(assignExpr));
+            blockStmt.addStatement(new NameExpr("fdsf"));
+            blockStmt.addStatement(new ReturnStmt("null"));
+        };
+
+
 
         System.out.println(cu);
-    }
+    };;
 
     @Test
     public void gene() {

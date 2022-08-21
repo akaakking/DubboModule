@@ -2,9 +2,14 @@ package org.apache.dubbo.config;
 
 import java.util.List;
 import java.util.Map;
+import java.lang.Class;
+import java.lang.String;
+import org.apache.dubbo.config.ConsumerConfig;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.AbstractReferenceConfig;
+import java.lang.reflect.Method;
+import java.lang.ClassLoader;
 
 public class ReferenceConfigBase<T> extends AbstractReferenceConfig implements ReferenceConfigBaseInterface<T> {
 
@@ -99,15 +104,33 @@ public class ReferenceConfigBase<T> extends AbstractReferenceConfig implements R
     protected ReferenceConfigBaseInterface instance;
 
     public static Class<?> determineInterfaceClass(String generic, String interfaceName) {
-        Class klass = DubboClassLoader.getKlass(ReferenceConfigBase.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ReferenceConfigBase.class.getName());
         Method method = klass.getMethod("determineInterfaceClass", String.class, String.class);
-        return method.invoke(generic, interfaceName);
+        return (Class<?>)method.invoke(generic, interfaceName);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static Class<?> determineInterfaceClass(String generic, String interfaceName, ClassLoader classLoader) {
-        Class klass = DubboClassLoader.getKlass(ReferenceConfigBase.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ReferenceConfigBase.class.getName());
         Method method = klass.getMethod("determineInterfaceClass", String.class, String.class, ClassLoader.class);
-        return method.invoke(generic, interfaceName, classLoader);
+        return (Class<?>)method.invoke(generic, interfaceName, classLoader);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public ReferenceConfigBaseInterface getInternalInstance() {
@@ -116,6 +139,6 @@ public class ReferenceConfigBase<T> extends AbstractReferenceConfig implements R
 
     protected ReferenceConfigBase() {
         instance = (ReferenceConfigBaseInterface) DubboClassLoader.getInstance(ReferenceConfigBase.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

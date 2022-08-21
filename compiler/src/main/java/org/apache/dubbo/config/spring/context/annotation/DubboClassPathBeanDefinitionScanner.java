@@ -3,6 +3,7 @@ package org.apache.dubbo.config.spring.context.annotation;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import java.util.Set;
 import org.springframework.beans.factory.config.BeanDefinition;
+import java.lang.String;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -25,18 +26,18 @@ public class DubboClassPathBeanDefinitionScanner extends ClassPathBeanDefinition
         Class[] params = new Class[]{BeanDefinitionRegistry.class, boolean.class, Environment.class, ResourceLoader.class};
         Object[] args = new Object[]{registry, useDefaultFilters, environment, resourceLoader};
         instance = (DubboClassPathBeanDefinitionScannerInterface) DubboClassLoader.getInstance(DubboClassPathBeanDefinitionScanner.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public DubboClassPathBeanDefinitionScanner(BeanDefinitionRegistry registry, Environment environment, ResourceLoader resourceLoader) {
         Class[] params = new Class[]{BeanDefinitionRegistry.class, Environment.class, ResourceLoader.class};
         Object[] args = new Object[]{registry, environment, resourceLoader};
         instance = (DubboClassPathBeanDefinitionScannerInterface) DubboClassLoader.getInstance(DubboClassPathBeanDefinitionScanner.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected DubboClassPathBeanDefinitionScanner() {
         instance = (DubboClassPathBeanDefinitionScannerInterface) DubboClassLoader.getInstance(DubboClassPathBeanDefinitionScanner.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

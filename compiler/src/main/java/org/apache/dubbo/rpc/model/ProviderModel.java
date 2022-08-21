@@ -1,6 +1,9 @@
 package org.apache.dubbo.rpc.model;
 
 import java.util.List;
+import org.apache.dubbo.rpc.model.ProviderModel.RegisterStatedURL;
+import java.lang.String;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.rpc.model.ServiceModel;
@@ -57,25 +60,25 @@ public class ProviderModel extends ServiceModel implements ProviderModelInterfac
         Class[] params = new Class[]{String.class, Object.class, ServiceDescriptorInterface.class, ClassLoader.class};
         Object[] args = new Object[]{serviceKey, serviceInstance, serviceDescriptor, interfaceClassLoader};
         instance = (ProviderModelInterface) DubboClassLoader.getInstance(ProviderModel.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ProviderModel(String serviceKey, Object serviceInstance, ServiceDescriptorInterface serviceDescriptor, ServiceMetadataInterface serviceMetadata, ClassLoader interfaceClassLoader) {
         Class[] params = new Class[]{String.class, Object.class, ServiceDescriptorInterface.class, ServiceMetadataInterface.class, ClassLoader.class};
         Object[] args = new Object[]{serviceKey, serviceInstance, serviceDescriptor, serviceMetadata, interfaceClassLoader};
         instance = (ProviderModelInterface) DubboClassLoader.getInstance(ProviderModel.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ProviderModel(String serviceKey, Object serviceInstance, ServiceDescriptorInterface serviceModel, ModuleModelInterface moduleModel, ServiceMetadataInterface serviceMetadata, ClassLoader interfaceClassLoader) {
         Class[] params = new Class[]{String.class, Object.class, ServiceDescriptorInterface.class, ModuleModelInterface.class, ServiceMetadataInterface.class, ClassLoader.class};
         Object[] args = new Object[]{serviceKey, serviceInstance, serviceModel, moduleModel, serviceMetadata, interfaceClassLoader};
         instance = (ProviderModelInterface) DubboClassLoader.getInstance(ProviderModel.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected ProviderModel() {
         instance = (ProviderModelInterface) DubboClassLoader.getInstance(ProviderModel.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

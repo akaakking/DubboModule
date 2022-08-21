@@ -1,5 +1,8 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.Integer;
+import java.lang.String;
+import java.lang.Boolean;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

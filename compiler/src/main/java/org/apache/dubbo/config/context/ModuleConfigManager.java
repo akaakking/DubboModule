@@ -1,8 +1,16 @@
 package org.apache.dubbo.config.context;
 
+import org.apache.dubbo.config.ModuleConfig;
 import java.util.Optional;
+import org.apache.dubbo.config.ServiceConfigBase;
+import java.lang.Iterable;
 import java.util.Collection;
+import java.lang.String;
+import org.apache.dubbo.config.ReferenceConfigBase;
+import org.apache.dubbo.config.ProviderConfig;
+import org.apache.dubbo.config.ConsumerConfig;
 import java.util.Map;
+import java.lang.Class;
 import java.util.List;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -192,11 +200,11 @@ public class ModuleConfigManager extends AbstractConfigManager implements Module
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ModuleConfigManagerInterface) DubboClassLoader.getInstance(ModuleConfigManager.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected ModuleConfigManager() {
         instance = (ModuleConfigManagerInterface) DubboClassLoader.getInstance(ModuleConfigManager.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

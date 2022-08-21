@@ -1,14 +1,25 @@
 package org.apache.dubbo.common;
 
 import java.io.Serializable;
+import java.lang.String;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.lang.Class;
+import T;
+import org.apache.dubbo.rpc.model.ScopeModel;
+import org.apache.dubbo.rpc.model.ServiceModel;
+import java.lang.Enum;
+import java.lang.Number;
+import java.lang.CharSequence;
 import java.util.Collection;
 import java.net.URL;
 import java.net.InetSocketAddress;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
+import org.apache.dubbo.common.URL;
 
 public class URL implements URLInterface {
 
@@ -783,63 +794,152 @@ public class URL implements URLInterface {
     protected URLInterface instance;
 
     public static URLInterface cacheableValueOf(String url) {
-        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URL.class.getName());
         Method method = klass.getMethod("cacheableValueOf", String.class);
-        return method.invoke(url);
+        return (URLInterface)method.invoke(url);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static URLInterface valueOf(String url) {
-        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URL.class.getName());
         Method method = klass.getMethod("valueOf", String.class);
-        return method.invoke(url);
+        return (URLInterface)method.invoke(url);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static URLInterface valueOf(String url, ScopeModelInterface scopeModel) {
-        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URL.class.getName());
         Method method = klass.getMethod("valueOf", String.class, ScopeModelInterface.class);
-        return method.invoke(url, scopeModel);
+        return (URLInterface)method.invoke(url, scopeModel);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static URLInterface valueOf(String url, boolean encoded) {
-        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URL.class.getName());
         Method method = klass.getMethod("valueOf", String.class, boolean.class);
-        return method.invoke(url, encoded);
+        return (URLInterface)method.invoke(url, encoded);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static URLInterface valueOf(String url, String reserveParams) {
-        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URL.class.getName());
         Method method = klass.getMethod("valueOf", String.class, String.class);
-        return method.invoke(url, reserveParams);
+        return (URLInterface)method.invoke(url, reserveParams);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static URLInterface valueOf(URLInterface url, String[] reserveParams, String[] reserveParamPrefixes) {
-        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URL.class.getName());
         Method method = klass.getMethod("valueOf", URLInterface.class, String[].class, String[].class);
-        return method.invoke(url, reserveParams, reserveParamPrefixes);
+        return (URLInterface)method.invoke(url, reserveParams, reserveParamPrefixes);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static String encode(String value) {
-        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URL.class.getName());
         Method method = klass.getMethod("encode", String.class);
-        return method.invoke(value);
+        return (String)method.invoke(value);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static String decode(String value) {
-        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URL.class.getName());
         Method method = klass.getMethod("decode", String.class);
-        return method.invoke(value);
+        return (String)method.invoke(value);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static String buildKey(String path, String group, String version) {
-        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URL.class.getName());
         Method method = klass.getMethod("buildKey", String.class, String.class, String.class);
-        return method.invoke(path, group, version);
+        return (String)method.invoke(path, group, version);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static void putMethodParameter(String method, String key, String value, Map<String, Map<String, String>> methodParameters) {
-        Class klass = DubboClassLoader.getKlass(URL.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URL.class.getName());
         Method method = klass.getMethod("putMethodParameter", String.class, String.class, String.class, Map.class);
         method.invoke(method, key, value, methodParameters);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
     }
 
     public URLInterface getInternalInstance() {

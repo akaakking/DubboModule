@@ -1,5 +1,8 @@
 package org.apache.dubbo.config;
 
+import java.lang.String;
+import java.lang.Integer;
+import java.lang.Boolean;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -307,41 +310,41 @@ public class ProtocolConfig extends AbstractConfig implements ProtocolConfigInte
 
     public ProtocolConfig() {
         instance = (ProtocolConfigInterface) DubboClassLoader.getInstance(ProtocolConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ProtocolConfig(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (ProtocolConfigInterface) DubboClassLoader.getInstance(ProtocolConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ProtocolConfig(String name) {
         Class[] params = new Class[]{String.class};
         Object[] args = new Object[]{name};
         instance = (ProtocolConfigInterface) DubboClassLoader.getInstance(ProtocolConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ProtocolConfig(ApplicationModelInterface applicationModel, String name) {
         Class[] params = new Class[]{ApplicationModelInterface.class, String.class};
         Object[] args = new Object[]{applicationModel, name};
         instance = (ProtocolConfigInterface) DubboClassLoader.getInstance(ProtocolConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ProtocolConfig(String name, int port) {
         Class[] params = new Class[]{String.class, int.class};
         Object[] args = new Object[]{name, port};
         instance = (ProtocolConfigInterface) DubboClassLoader.getInstance(ProtocolConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ProtocolConfig(ApplicationModelInterface applicationModel, String name, int port) {
         Class[] params = new Class[]{ApplicationModelInterface.class, String.class, int.class};
         Object[] args = new Object[]{applicationModel, name, port};
         instance = (ProtocolConfigInterface) DubboClassLoader.getInstance(ProtocolConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

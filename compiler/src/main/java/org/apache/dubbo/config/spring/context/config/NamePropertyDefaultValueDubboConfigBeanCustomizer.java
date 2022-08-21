@@ -1,5 +1,7 @@
 package org.apache.dubbo.config.spring.context.config;
 
+import java.lang.String;
+import org.apache.dubbo.config.AbstractConfig;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

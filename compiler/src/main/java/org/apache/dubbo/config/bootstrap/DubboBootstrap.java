@@ -3,9 +3,27 @@ package org.apache.dubbo.config.bootstrap;
 import java.util.concurrent.Future;
 import org.apache.dubbo.config.bootstrap.BootstrapTakeoverMode;
 import java.util.function.Consumer;
+import java.lang.String;
+import org.apache.dubbo.config.MetadataReportConfig;
 import java.util.List;
+import org.apache.dubbo.config.ApplicationConfig;
+import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.config.ProtocolConfig;
+import org.apache.dubbo.config.ServiceConfig;
+import org.apache.dubbo.rpc.model.ModuleModel;
+import org.apache.dubbo.config.ReferenceConfig;
+import org.apache.dubbo.config.ProviderConfig;
+import org.apache.dubbo.config.ConsumerConfig;
+import org.apache.dubbo.config.ModuleConfig;
+import org.apache.dubbo.config.ConfigCenterConfig;
+import org.apache.dubbo.config.MonitorConfig;
+import org.apache.dubbo.config.MetricsConfig;
+import org.apache.dubbo.config.SslConfig;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
+import org.apache.dubbo.rpc.model.ApplicationModel;
+import org.apache.dubbo.rpc.model.FrameworkModel;
 
 public class DubboBootstrap implements DubboBootstrapInterface {
 
@@ -280,39 +298,91 @@ public class DubboBootstrap implements DubboBootstrapInterface {
     protected DubboBootstrapInterface instance;
 
     public static DubboBootstrapInterface getInstance() {
-        Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
         Method method = klass.getMethod("getInstance");
-        return method.invoke();
+        return (DubboBootstrapInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static DubboBootstrapInterface getInstance(ApplicationModelInterface applicationModel) {
-        Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
         Method method = klass.getMethod("getInstance", ApplicationModelInterface.class);
-        return method.invoke(applicationModel);
+        return (DubboBootstrapInterface)method.invoke(applicationModel);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static DubboBootstrapInterface newInstance() {
-        Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
         Method method = klass.getMethod("newInstance");
-        return method.invoke();
+        return (DubboBootstrapInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static DubboBootstrapInterface newInstance(FrameworkModelInterface frameworkModel) {
-        Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
         Method method = klass.getMethod("newInstance", FrameworkModelInterface.class);
-        return method.invoke(frameworkModel);
+        return (DubboBootstrapInterface)method.invoke(frameworkModel);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static void reset() {
-        Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
         Method method = klass.getMethod("reset");
         method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
     }
 
     public static void reset(boolean destroy) {
-        Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(DubboBootstrap.class.getName());
         Method method = klass.getMethod("reset", boolean.class);
         method.invoke(destroy);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
     }
 
     public DubboBootstrapInterface getInternalInstance() {

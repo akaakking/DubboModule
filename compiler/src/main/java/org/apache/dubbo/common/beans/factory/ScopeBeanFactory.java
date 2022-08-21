@@ -1,6 +1,10 @@
 package org.apache.dubbo.common.beans.factory;
 
+import java.lang.Class;
+import java.lang.String;
+import java.lang.Object;
 import java.util.function.Function;
+import T;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

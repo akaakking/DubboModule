@@ -1,9 +1,12 @@
 package org.apache.dubbo.metadata;
 
 import java.io.Serializable;
+import org.apache.dubbo.common.URL;
+import java.lang.String;
 import java.util.Map;
 import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.SortedSet;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

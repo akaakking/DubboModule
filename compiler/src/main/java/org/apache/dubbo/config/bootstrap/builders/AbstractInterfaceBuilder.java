@@ -1,6 +1,16 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.String;
+import java.lang.Boolean;
+import org.apache.dubbo.config.MonitorConfig;
+import java.lang.Integer;
+import org.apache.dubbo.config.ApplicationConfig;
+import org.apache.dubbo.config.ModuleConfig;
 import java.util.List;
+import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.config.MetadataReportConfig;
+import org.apache.dubbo.config.ConfigCenterConfig;
+import T;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.bootstrap.builders.AbstractMethodBuilder;
@@ -119,6 +129,6 @@ public class AbstractInterfaceBuilder<T extends AbstractInterfaceConfigInterface
 
     protected AbstractInterfaceBuilder() {
         instance = (AbstractInterfaceBuilderInterface) DubboClassLoader.getInstance(AbstractInterfaceBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

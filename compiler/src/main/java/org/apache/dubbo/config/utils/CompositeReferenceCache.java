@@ -1,5 +1,8 @@
 package org.apache.dubbo.config.utils;
 
+import org.apache.dubbo.config.ReferenceConfigBase;
+import java.lang.String;
+import java.lang.Class;
 import java.util.List;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;

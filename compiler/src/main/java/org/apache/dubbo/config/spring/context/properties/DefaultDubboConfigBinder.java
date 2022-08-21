@@ -1,5 +1,7 @@
 package org.apache.dubbo.config.spring.context.properties;
 
+import java.lang.String;
+import C;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.spring.context.properties.AbstractDubboConfigBinder;
@@ -18,6 +20,6 @@ public class DefaultDubboConfigBinder extends AbstractDubboConfigBinder implemen
 
     protected DefaultDubboConfigBinder() {
         instance = (DefaultDubboConfigBinderInterface) DubboClassLoader.getInstance(DefaultDubboConfigBinder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

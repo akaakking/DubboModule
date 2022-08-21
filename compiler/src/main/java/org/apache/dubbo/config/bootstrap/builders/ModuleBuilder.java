@@ -1,6 +1,10 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.String;
 import java.util.List;
+import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.config.MonitorConfig;
+import java.lang.Boolean;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.bootstrap.builders.AbstractBuilder;
@@ -51,6 +55,6 @@ public class ModuleBuilder extends AbstractBuilder<ModuleConfig, ModuleBuilder> 
 
     protected ModuleBuilder() {
         instance = (ModuleBuilderInterface) DubboClassLoader.getInstance(ModuleBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

@@ -2,7 +2,9 @@ package org.apache.dubbo.config.spring.util;
 
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
 import org.springframework.beans.PropertyValues;
+import java.lang.String;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.core.type.MethodMetadata;
 
@@ -11,33 +13,78 @@ public class SpringCompatUtils implements SpringCompatUtilsInterface {
     protected SpringCompatUtilsInterface instance;
 
     public static <T> T getPropertyValue(PropertyValues pvs, String propertyName) {
-        Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
         Method method = klass.getMethod("getPropertyValue", PropertyValues.class, String.class);
-        return method.invoke(pvs, propertyName);
+        return (T)method.invoke(pvs, propertyName);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static boolean isFactoryMethodMetadataEnabled() {
-        Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
         Method method = klass.getMethod("isFactoryMethodMetadataEnabled");
-        return method.invoke();
+        return (boolean)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static String getFactoryMethodReturnType(AnnotatedBeanDefinition annotatedBeanDefinition) {
-        Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
         Method method = klass.getMethod("getFactoryMethodReturnType", AnnotatedBeanDefinition.class);
-        return method.invoke(annotatedBeanDefinition);
+        return (String)method.invoke(annotatedBeanDefinition);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static MethodMetadata getFactoryMethodMetadata(AnnotatedBeanDefinition annotatedBeanDefinition) {
-        Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
         Method method = klass.getMethod("getFactoryMethodMetadata", AnnotatedBeanDefinition.class);
-        return method.invoke(annotatedBeanDefinition);
+        return (MethodMetadata)method.invoke(annotatedBeanDefinition);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static Class getGenericTypeOfReturnType(MethodMetadata factoryMethodMetadata) {
-        Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(SpringCompatUtils.class.getName());
         Method method = klass.getMethod("getGenericTypeOfReturnType", MethodMetadata.class);
-        return method.invoke(factoryMethodMetadata);
+        return (Class)method.invoke(factoryMethodMetadata);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public SpringCompatUtilsInterface getInternalInstance() {

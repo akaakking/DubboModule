@@ -1,5 +1,8 @@
 package org.apache.dubbo.config;
 
+import java.lang.String;
+import org.apache.dubbo.config.nested.PrometheusConfig;
+import org.apache.dubbo.config.nested.AggregationConfig;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.AbstractConfig;
@@ -50,13 +53,13 @@ public class MetricsConfig extends AbstractConfig implements MetricsConfigInterf
 
     public MetricsConfig() {
         instance = (MetricsConfigInterface) DubboClassLoader.getInstance(MetricsConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public MetricsConfig(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (MetricsConfigInterface) DubboClassLoader.getInstance(MetricsConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

@@ -1,6 +1,9 @@
 package org.apache.dubbo.config;
 
 import java.io.Serializable;
+import java.lang.Integer;
+import java.lang.String;
+import java.lang.Boolean;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.annotation.Argument;

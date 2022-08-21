@@ -20,11 +20,11 @@ public class DubboBootstrapStatedEvent extends ApplicationEvent implements Dubbo
         Class[] params = new Class[]{DubboBootstrapInterface.class};
         Object[] args = new Object[]{bootstrap};
         instance = (DubboBootstrapStatedEventInterface) DubboClassLoader.getInstance(DubboBootstrapStatedEvent.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected DubboBootstrapStatedEvent() {
         instance = (DubboBootstrapStatedEventInterface) DubboClassLoader.getInstance(DubboBootstrapStatedEvent.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

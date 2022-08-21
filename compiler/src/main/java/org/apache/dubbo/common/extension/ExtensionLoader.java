@@ -1,9 +1,15 @@
 package org.apache.dubbo.common.extension;
 
+import T;
+import java.lang.Class;
 import java.util.List;
+import org.apache.dubbo.common.URL;
+import java.lang.String;
 import java.util.Set;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
+import org.apache.dubbo.common.extension.LoadingStrategy;
 
 public class ExtensionLoader<T> implements ExtensionLoaderInterface<T> {
 
@@ -102,27 +108,61 @@ public class ExtensionLoader<T> implements ExtensionLoaderInterface<T> {
     protected ExtensionLoaderInterface instance;
 
     public static void setLoadingStrategies(LoadingStrategyInterface strategies) {
-        Class klass = DubboClassLoader.getKlass(ExtensionLoader.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ExtensionLoader.class.getName());
         Method method = klass.getMethod("setLoadingStrategies", LoadingStrategyInterface.class);
         method.invoke(strategies);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
     }
 
     public static List<LoadingStrategyInterface> getLoadingStrategies() {
-        Class klass = DubboClassLoader.getKlass(ExtensionLoader.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ExtensionLoader.class.getName());
         Method method = klass.getMethod("getLoadingStrategies");
-        return method.invoke();
+        return (List<LoadingStrategyInterface>)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static <T> ExtensionLoaderInterface<T> getExtensionLoader(Class<T> type) {
-        Class klass = DubboClassLoader.getKlass(ExtensionLoader.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ExtensionLoader.class.getName());
         Method method = klass.getMethod("getExtensionLoader", Class.class);
-        return method.invoke(type);
+        return (ExtensionLoaderInterface<T>)method.invoke(type);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static void resetExtensionLoader(Class type) {
-        Class klass = DubboClassLoader.getKlass(ExtensionLoader.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ExtensionLoader.class.getName());
         Method method = klass.getMethod("resetExtensionLoader", Class.class);
         method.invoke(type);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
     }
 
     public ExtensionLoaderInterface getInternalInstance() {

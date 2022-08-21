@@ -1,9 +1,14 @@
 package org.apache.dubbo.config.utils;
 
+import org.apache.dubbo.config.ReferenceConfigBase;
+import java.lang.String;
+import java.lang.Class;
 import java.util.List;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
+import org.apache.dubbo.config.utils.SimpleReferenceCache.KeyGenerator;
 
 public class SimpleReferenceCache implements SimpleReferenceCacheInterface {
 
@@ -58,27 +63,63 @@ public class SimpleReferenceCache implements SimpleReferenceCacheInterface {
     protected SimpleReferenceCacheInterface instance;
 
     public static SimpleReferenceCacheInterface getCache() {
-        Class klass = DubboClassLoader.getKlass(SimpleReferenceCache.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(SimpleReferenceCache.class.getName());
         Method method = klass.getMethod("getCache");
-        return method.invoke();
+        return (SimpleReferenceCacheInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static SimpleReferenceCacheInterface newCache() {
-        Class klass = DubboClassLoader.getKlass(SimpleReferenceCache.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(SimpleReferenceCache.class.getName());
         Method method = klass.getMethod("newCache");
-        return method.invoke();
+        return (SimpleReferenceCacheInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static SimpleReferenceCacheInterface getCache(String name) {
-        Class klass = DubboClassLoader.getKlass(SimpleReferenceCache.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(SimpleReferenceCache.class.getName());
         Method method = klass.getMethod("getCache", String.class);
-        return method.invoke(name);
+        return (SimpleReferenceCacheInterface)method.invoke(name);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static SimpleReferenceCacheInterface getCache(String name, KeyGeneratorInterface keyGenerator) {
-        Class klass = DubboClassLoader.getKlass(SimpleReferenceCache.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(SimpleReferenceCache.class.getName());
         Method method = klass.getMethod("getCache", String.class, KeyGeneratorInterface.class);
-        return method.invoke(name, keyGenerator);
+        return (SimpleReferenceCacheInterface)method.invoke(name, keyGenerator);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public SimpleReferenceCacheInterface getInternalInstance() {

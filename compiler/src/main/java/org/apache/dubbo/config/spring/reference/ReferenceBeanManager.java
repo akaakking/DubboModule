@@ -1,6 +1,8 @@
 package org.apache.dubbo.config.spring.reference;
 
 import org.springframework.context.ApplicationContextAware;
+import org.apache.dubbo.config.spring.ReferenceBean;
+import java.lang.String;
 import java.util.List;
 import java.util.Collection;
 import org.springframework.context.ApplicationContext;

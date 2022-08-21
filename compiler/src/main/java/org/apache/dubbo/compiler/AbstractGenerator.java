@@ -14,6 +14,7 @@ import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.type.TypeParameter;
 import com.google.common.collect.Sets;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.*;
 import org.junit.Test;
@@ -151,6 +152,9 @@ public abstract class AbstractGenerator{
     }
 
     void addParams(MethodDeclaration parserMethodDeclaration,JavaParameter javaParameter) {
+        if (!isPrimitive(javaParameter.getFullyQualifiedName())) {
+            this.importList.add(removeBrackets(javaParameter.getFullyQualifiedName()));
+        }
         Parameter parameter = new Parameter();
         parameter.setName(javaParameter.getName());
         parameter.setType(dealType(javaParameter.getType()));
@@ -158,7 +162,23 @@ public abstract class AbstractGenerator{
         parserMethodDeclaration.addParameter(parameter);
     }
 
+    String removeBrackets(String str) {
+        if (str.contains("<")) {
+            str = str.substring(0,str.indexOf("<"));
+        }
+
+        if (str.contains("[")) {
+            str = str.substring(0,str.indexOf("["));
+        }
+
+        return str;
+    }
+
     void addReturnType(MethodDeclaration parserMethodDeclaration,JavaMethod method) {
+        if (method.getReturns().isVoid()) {
+            return;
+        }
+
         JavaType javaType = method.getReturnType();
 
         if (checkName(javaType.getBinaryName()) && !method.getReturns().isEnum()) {
@@ -173,7 +193,7 @@ public abstract class AbstractGenerator{
 
     void addImports(CompilationUnit cu) {
         for (String importName : this.importList) {
-            cu.addImport(importName);
+            cu.addImport(removeBrackets(importName));
         }
     }
 

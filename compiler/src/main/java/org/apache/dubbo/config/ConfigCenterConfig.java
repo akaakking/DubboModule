@@ -1,6 +1,10 @@
 package org.apache.dubbo.config;
 
 import java.util.Map;
+import java.lang.String;
+import java.lang.Integer;
+import java.lang.Boolean;
+import java.lang.Long;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.AbstractConfig;
@@ -163,13 +167,13 @@ public class ConfigCenterConfig extends AbstractConfig implements ConfigCenterCo
 
     public ConfigCenterConfig() {
         instance = (ConfigCenterConfigInterface) DubboClassLoader.getInstance(ConfigCenterConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ConfigCenterConfig(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (ConfigCenterConfigInterface) DubboClassLoader.getInstance(ConfigCenterConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

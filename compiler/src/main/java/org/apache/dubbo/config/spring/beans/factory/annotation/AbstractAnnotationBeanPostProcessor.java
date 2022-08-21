@@ -7,6 +7,7 @@ import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.BeanFactory;
+import java.lang.ClassLoader;
 import org.springframework.core.env.Environment;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -41,6 +42,6 @@ public class AbstractAnnotationBeanPostProcessor extends InstantiationAwareBeanP
 
     protected AbstractAnnotationBeanPostProcessor() {
         instance = (AbstractAnnotationBeanPostProcessorInterface) DubboClassLoader.getInstance(AbstractAnnotationBeanPostProcessor.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

@@ -1,6 +1,9 @@
 package org.apache.dubbo.rpc.model;
 
+import org.apache.dubbo.rpc.model.ProviderModel;
+import java.lang.String;
 import java.util.List;
+import org.apache.dubbo.common.URL;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

@@ -21,11 +21,11 @@ public class DubboConfigInitEvent extends ApplicationEvent implements DubboConfi
         Class[] params = new Class[]{ApplicationContext.class};
         Object[] args = new Object[]{source};
         instance = (DubboConfigInitEventInterface) DubboClassLoader.getInstance(DubboConfigInitEvent.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected DubboConfigInitEvent() {
         instance = (DubboConfigInitEventInterface) DubboClassLoader.getInstance(DubboConfigInitEvent.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

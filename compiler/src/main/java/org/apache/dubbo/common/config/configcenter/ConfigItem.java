@@ -1,5 +1,7 @@
 package org.apache.dubbo.common.config.configcenter;
 
+import java.lang.String;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

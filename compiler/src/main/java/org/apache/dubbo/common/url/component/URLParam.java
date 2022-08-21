@@ -1,8 +1,11 @@
 package org.apache.dubbo.common.url.component;
 
+import java.lang.String;
 import java.util.Map;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
 
 public class URLParam implements URLParamInterface {
 
@@ -85,33 +88,78 @@ public class URLParam implements URLParamInterface {
     protected URLParamInterface instance;
 
     public static Map<String, Map<String, String>> initMethodParameters(Map<String, String> parameters) {
-        Class klass = DubboClassLoader.getKlass(URLParam.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URLParam.class.getName());
         Method method = klass.getMethod("initMethodParameters", Map.class);
-        return method.invoke(parameters);
+        return (Map<String, Map<String, String>>)method.invoke(parameters);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static URLParamInterface parse(Map<String, String> params) {
-        Class klass = DubboClassLoader.getKlass(URLParam.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URLParam.class.getName());
         Method method = klass.getMethod("parse", Map.class);
-        return method.invoke(params);
+        return (URLParamInterface)method.invoke(params);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static URLParamInterface parse(String rawParam, boolean encoded, Map<String, String> extraParameters) {
-        Class klass = DubboClassLoader.getKlass(URLParam.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URLParam.class.getName());
         Method method = klass.getMethod("parse", String.class, boolean.class, Map.class);
-        return method.invoke(rawParam, encoded, extraParameters);
+        return (URLParamInterface)method.invoke(rawParam, encoded, extraParameters);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static URLParamInterface parse(String rawParam) {
-        Class klass = DubboClassLoader.getKlass(URLParam.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URLParam.class.getName());
         Method method = klass.getMethod("parse", String.class);
-        return method.invoke(rawParam);
+        return (URLParamInterface)method.invoke(rawParam);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static URLParamInterface parse(Map<String, String> params, String rawParam) {
-        Class klass = DubboClassLoader.getKlass(URLParam.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URLParam.class.getName());
         Method method = klass.getMethod("parse", Map.class, String.class);
-        return method.invoke(params, rawParam);
+        return (URLParamInterface)method.invoke(params, rawParam);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public URLParamInterface getInternalInstance() {

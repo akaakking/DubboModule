@@ -1,6 +1,8 @@
 package org.apache.dubbo.rpc.model;
 
 import java.lang.reflect.Method;
+import java.lang.String;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

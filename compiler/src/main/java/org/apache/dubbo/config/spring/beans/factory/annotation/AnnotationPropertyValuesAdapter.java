@@ -2,6 +2,7 @@ package org.apache.dubbo.config.spring.beans.factory.annotation;
 
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.PropertyValue;
+import java.lang.String;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import java.util.Map;

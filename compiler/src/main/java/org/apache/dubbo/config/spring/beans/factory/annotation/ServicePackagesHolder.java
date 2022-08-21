@@ -1,5 +1,6 @@
 package org.apache.dubbo.config.spring.beans.factory.annotation;
 
+import java.lang.String;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

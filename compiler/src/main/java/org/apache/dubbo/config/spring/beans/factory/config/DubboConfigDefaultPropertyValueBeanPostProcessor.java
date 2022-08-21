@@ -4,6 +4,8 @@ import com.alibaba.spring.beans.factory.config.GenericBeanPostProcessorAdapter;
 import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcessor;
 import org.springframework.core.PriorityOrdered;
 import org.springframework.beans.factory.support.RootBeanDefinition;
+import java.lang.Class;
+import java.lang.String;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 
@@ -25,6 +27,6 @@ public class DubboConfigDefaultPropertyValueBeanPostProcessor extends GenericBea
 
     protected DubboConfigDefaultPropertyValueBeanPostProcessor() {
         instance = (DubboConfigDefaultPropertyValueBeanPostProcessorInterface) DubboClassLoader.getInstance(DubboConfigDefaultPropertyValueBeanPostProcessor.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

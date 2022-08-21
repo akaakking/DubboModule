@@ -1,5 +1,6 @@
 package org.apache.dubbo.config.context;
 
+import java.lang.String;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;

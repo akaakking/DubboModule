@@ -1,6 +1,10 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.Integer;
+import java.lang.String;
+import java.lang.Boolean;
 import java.util.Map;
+import T;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.bootstrap.builders.AbstractBuilder;
@@ -75,6 +79,6 @@ public class AbstractMethodBuilder<T extends AbstractMethodConfigInterface, B ex
 
     protected AbstractMethodBuilder() {
         instance = (AbstractMethodBuilderInterface) DubboClassLoader.getInstance(AbstractMethodBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

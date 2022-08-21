@@ -1,5 +1,6 @@
 package org.apache.dubbo.config.metadata;
 
+import org.apache.dubbo.config.metadata.MetadataServiceDelegation;
 import java.util.List;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;

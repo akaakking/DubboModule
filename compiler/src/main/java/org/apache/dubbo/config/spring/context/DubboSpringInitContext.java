@@ -3,7 +3,10 @@ package org.apache.dubbo.config.spring.context;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
+import org.apache.dubbo.rpc.model.ModuleModel;
 import java.util.Map;
+import java.lang.String;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

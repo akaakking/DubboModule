@@ -1,6 +1,7 @@
 package org.apache.dubbo.common.deploy;
 
 import org.apache.dubbo.common.deploy.DeployState;
+import org.apache.dubbo.common.deploy.DeployListener;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

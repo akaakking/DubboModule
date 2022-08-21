@@ -1,9 +1,15 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.String;
+import java.lang.Class;
+import U;
+import org.apache.dubbo.config.MethodConfig;
 import java.util.List;
+import org.apache.dubbo.config.ProviderConfig;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.bootstrap.builders.AbstractServiceBuilder;
+import java.lang.reflect.Method;
 
 public class ServiceBuilder<U> extends AbstractServiceBuilder<ServiceConfig<U>, ServiceBuilder<U>> implements ServiceBuilderInterface<U> {
 
@@ -54,9 +60,18 @@ public class ServiceBuilder<U> extends AbstractServiceBuilder<ServiceConfig<U>, 
     protected ServiceBuilderInterface instance;
 
     public static <T> ServiceBuilderInterface<T> newBuilder() {
-        Class klass = DubboClassLoader.getKlass(ServiceBuilder.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ServiceBuilder.class.getName());
         Method method = klass.getMethod("newBuilder");
-        return method.invoke();
+        return (ServiceBuilderInterface<T>)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public ServiceBuilderInterface getInternalInstance() {
@@ -65,6 +80,6 @@ public class ServiceBuilder<U> extends AbstractServiceBuilder<ServiceConfig<U>, 
 
     protected ServiceBuilder() {
         instance = (ServiceBuilderInterface) DubboClassLoader.getInstance(ServiceBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

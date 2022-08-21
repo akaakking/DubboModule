@@ -1,6 +1,10 @@
 package org.apache.dubbo.rpc.model;
 
+import org.apache.dubbo.config.AbstractInterfaceConfig;
+import java.lang.Object;
+import java.lang.ClassLoader;
 import java.util.Set;
+import java.lang.String;
 import java.util.concurrent.Callable;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;

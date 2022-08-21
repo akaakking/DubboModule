@@ -1,7 +1,9 @@
 package org.apache.dubbo.registry.client;
 
+import java.lang.String;
 import java.util.Map;
 import java.util.Set;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.common.URL;
@@ -190,18 +192,18 @@ public class InstanceAddressURL extends URL implements InstanceAddressURLInterfa
         Class[] params = new Class[]{ServiceInstanceInterface.class, MetadataInfoInterface.class};
         Object[] args = new Object[]{instance, metadataInfo};
         instance = (InstanceAddressURLInterface) DubboClassLoader.getInstance(InstanceAddressURL.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public InstanceAddressURL(ServiceInstanceInterface instance, MetadataInfoInterface metadataInfo, String protocol) {
         Class[] params = new Class[]{ServiceInstanceInterface.class, MetadataInfoInterface.class, String.class};
         Object[] args = new Object[]{instance, metadataInfo, protocol};
-        instance = (InstanceAddressURLInterface) DubboClassLoader.getInstance(InstanceAddressURL.class.getName(), params, args);
-        super.instance = instance;
+        this.instance = (InstanceAddressURLInterface) DubboClassLoader.getInstance(InstanceAddressURL.class.getName(), params, args);
+        super.instance = this.instance;
     }
 
     protected InstanceAddressURL() {
         instance = (InstanceAddressURLInterface) DubboClassLoader.getInstance(InstanceAddressURL.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

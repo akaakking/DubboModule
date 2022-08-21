@@ -1,7 +1,12 @@
 package org.apache.dubbo.config;
 
 import java.util.Optional;
+import org.apache.dubbo.config.ProtocolConfig;
 import java.util.Map;
+import java.lang.Class;
+import T;
+import java.lang.String;
+import org.apache.dubbo.config.ProviderConfig;
 import java.util.List;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -133,6 +138,6 @@ public class ServiceConfigBase<T> extends AbstractServiceConfig implements Servi
 
     protected ServiceConfigBase() {
         instance = (ServiceConfigBaseInterface) DubboClassLoader.getInstance(ServiceConfigBase.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

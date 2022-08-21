@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.ApplicationContext;
+import java.lang.String;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.context.ApplicationEventPublisher;
 import org.apache.dubbo.DubboClassLoader;
@@ -50,27 +51,27 @@ public class ServiceBean<T> extends ServiceConfig<T> implements ServiceBeanInter
 
     public ServiceBean() {
         instance = (ServiceBeanInterface) DubboClassLoader.getInstance(ServiceBean.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ServiceBean(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ServiceBeanInterface) DubboClassLoader.getInstance(ServiceBean.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ServiceBean(Service service) {
         Class[] params = new Class[]{Service.class};
         Object[] args = new Object[]{service};
         instance = (ServiceBeanInterface) DubboClassLoader.getInstance(ServiceBean.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ServiceBean(ModuleModelInterface moduleModel, Service service) {
         Class[] params = new Class[]{ModuleModelInterface.class, Service.class};
         Object[] args = new Object[]{moduleModel, service};
         instance = (ServiceBeanInterface) DubboClassLoader.getInstance(ServiceBean.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

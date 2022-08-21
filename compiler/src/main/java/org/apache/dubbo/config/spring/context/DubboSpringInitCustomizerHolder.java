@@ -1,8 +1,10 @@
 package org.apache.dubbo.config.spring.context;
 
+import org.apache.dubbo.config.spring.context.DubboSpringInitCustomizer;
 import java.util.Set;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
 
 public class DubboSpringInitCustomizerHolder implements DubboSpringInitCustomizerHolderInterface {
 
@@ -21,9 +23,18 @@ public class DubboSpringInitCustomizerHolder implements DubboSpringInitCustomize
     protected DubboSpringInitCustomizerHolderInterface instance;
 
     public static DubboSpringInitCustomizerHolderInterface get() {
-        Class klass = DubboClassLoader.getKlass(DubboSpringInitCustomizerHolder.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(DubboSpringInitCustomizerHolder.class.getName());
         Method method = klass.getMethod("get");
-        return method.invoke();
+        return (DubboSpringInitCustomizerHolderInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public DubboSpringInitCustomizerHolderInterface getInternalInstance() {

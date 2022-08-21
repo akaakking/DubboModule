@@ -1,8 +1,11 @@
 package org.apache.dubbo.common.config;
 
+import org.apache.dubbo.config.AbstractConfig;
+import java.lang.String;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import org.apache.dubbo.common.config.configcenter.DynamicConfiguration;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.common.config.Environment;
@@ -123,11 +126,11 @@ public class ModuleEnvironment extends Environment implements ModuleEnvironmentI
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ModuleEnvironmentInterface) DubboClassLoader.getInstance(ModuleEnvironment.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected ModuleEnvironment() {
         instance = (ModuleEnvironmentInterface) DubboClassLoader.getInstance(ModuleEnvironment.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

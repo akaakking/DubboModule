@@ -1,5 +1,7 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.String;
+import java.lang.Boolean;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -59,6 +61,6 @@ public class MonitorBuilder extends AbstractBuilder<MonitorConfig, MonitorBuilde
 
     protected MonitorBuilder() {
         instance = (MonitorBuilderInterface) DubboClassLoader.getInstance(MonitorBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

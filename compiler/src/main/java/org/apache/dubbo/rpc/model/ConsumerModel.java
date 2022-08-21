@@ -1,8 +1,10 @@
 package org.apache.dubbo.rpc.model;
 
+import java.lang.String;
 import java.util.Set;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.rpc.model.ServiceModel;
@@ -60,25 +62,25 @@ public class ConsumerModel extends ServiceModel implements ConsumerModelInterfac
         Class[] params = new Class[]{String.class, Object.class, ServiceDescriptorInterface.class, MapMap<String,AsyncMethodInfo>.class, ClassLoader.class};
         Object[] args = new Object[]{serviceKey, proxyObject, serviceDescriptor, methodConfigs, interfaceClassLoader};
         instance = (ConsumerModelInterface) DubboClassLoader.getInstance(ConsumerModel.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ConsumerModel(String serviceKey, Object proxyObject, ServiceDescriptorInterface serviceDescriptor, ServiceMetadataInterface metadata, Map<String, AsyncMethodInfo> methodConfigs, ClassLoader interfaceClassLoader) {
         Class[] params = new Class[]{String.class, Object.class, ServiceDescriptorInterface.class, ServiceMetadataInterface.class, MapMap<String,AsyncMethodInfo>.class, ClassLoader.class};
         Object[] args = new Object[]{serviceKey, proxyObject, serviceDescriptor, metadata, methodConfigs, interfaceClassLoader};
         instance = (ConsumerModelInterface) DubboClassLoader.getInstance(ConsumerModel.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ConsumerModel(String serviceKey, Object proxyObject, ServiceDescriptorInterface serviceDescriptor, ModuleModelInterface moduleModel, ServiceMetadataInterface metadata, Map<String, AsyncMethodInfo> methodConfigs, ClassLoader interfaceClassLoader) {
         Class[] params = new Class[]{String.class, Object.class, ServiceDescriptorInterface.class, ModuleModelInterface.class, ServiceMetadataInterface.class, MapMap<String,AsyncMethodInfo>.class, ClassLoader.class};
         Object[] args = new Object[]{serviceKey, proxyObject, serviceDescriptor, moduleModel, metadata, methodConfigs, interfaceClassLoader};
         instance = (ConsumerModelInterface) DubboClassLoader.getInstance(ConsumerModel.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected ConsumerModel() {
         instance = (ConsumerModelInterface) DubboClassLoader.getInstance(ConsumerModel.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

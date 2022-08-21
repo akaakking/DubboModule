@@ -1,5 +1,6 @@
 package org.apache.dubbo.config.deploy;
 
+import org.apache.dubbo.rpc.model.FrameworkModel;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

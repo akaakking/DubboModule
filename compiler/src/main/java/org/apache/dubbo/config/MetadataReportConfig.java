@@ -1,6 +1,9 @@
 package org.apache.dubbo.config;
 
+import java.lang.String;
+import java.lang.Integer;
 import java.util.Map;
+import java.lang.Boolean;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.AbstractConfig;
@@ -171,27 +174,27 @@ public class MetadataReportConfig extends AbstractConfig implements MetadataRepo
 
     public MetadataReportConfig() {
         instance = (MetadataReportConfigInterface) DubboClassLoader.getInstance(MetadataReportConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public MetadataReportConfig(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (MetadataReportConfigInterface) DubboClassLoader.getInstance(MetadataReportConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public MetadataReportConfig(String address) {
         Class[] params = new Class[]{String.class};
         Object[] args = new Object[]{address};
         instance = (MetadataReportConfigInterface) DubboClassLoader.getInstance(MetadataReportConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public MetadataReportConfig(ApplicationModelInterface applicationModel, String address) {
         Class[] params = new Class[]{ApplicationModelInterface.class, String.class};
         Object[] args = new Object[]{applicationModel, address};
         instance = (MetadataReportConfigInterface) DubboClassLoader.getInstance(MetadataReportConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

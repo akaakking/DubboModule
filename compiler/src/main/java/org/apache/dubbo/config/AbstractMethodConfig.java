@@ -1,5 +1,9 @@
 package org.apache.dubbo.config;
 
+import java.lang.Integer;
+import java.lang.String;
+import java.lang.Boolean;
+import java.lang.Object;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -119,6 +123,6 @@ public class AbstractMethodConfig extends AbstractConfig implements AbstractMeth
 
     protected AbstractMethodConfig() {
         instance = (AbstractMethodConfigInterface) DubboClassLoader.getInstance(AbstractMethodConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

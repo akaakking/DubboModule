@@ -1,6 +1,8 @@
 package org.apache.dubbo.common.extension;
 
+import org.apache.dubbo.common.extension.ExtensionPostProcessor;
 import java.util.List;
+import java.lang.Class;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

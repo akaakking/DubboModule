@@ -1,9 +1,15 @@
 package org.apache.dubbo.config;
 
 import java.util.List;
+import java.lang.String;
+import java.lang.Integer;
+import java.lang.Boolean;
+import java.lang.Object;
+import org.apache.dubbo.config.ArgumentConfig;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.AbstractMethodConfig;
+import java.lang.reflect.Method;
 import org.apache.dubbo.config.annotation.Method;
 
 public class MethodConfig extends AbstractMethodConfig implements MethodConfigInterface {
@@ -167,9 +173,18 @@ public class MethodConfig extends AbstractMethodConfig implements MethodConfigIn
     protected MethodConfigInterface instance;
 
     public static List<MethodConfigInterface> constructMethodConfig(Method[] methods) {
-        Class klass = DubboClassLoader.getKlass(MethodConfig.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(MethodConfig.class.getName());
         Method method = klass.getMethod("constructMethodConfig", Method[].class);
-        return method.invoke(methods);
+        return (List<MethodConfigInterface>)method.invoke(methods);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public MethodConfigInterface getInternalInstance() {
@@ -178,20 +193,20 @@ public class MethodConfig extends AbstractMethodConfig implements MethodConfigIn
 
     public MethodConfig() {
         instance = (MethodConfigInterface) DubboClassLoader.getInstance(MethodConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public MethodConfig(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (MethodConfigInterface) DubboClassLoader.getInstance(MethodConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public MethodConfig(Method method) {
         Class[] params = new Class[]{Method.class};
         Object[] args = new Object[]{method};
         instance = (MethodConfigInterface) DubboClassLoader.getInstance(MethodConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

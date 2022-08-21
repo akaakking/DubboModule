@@ -1,5 +1,7 @@
 package org.apache.dubbo.config.nested;
 
+import org.apache.dubbo.config.nested.PrometheusConfig.Exporter;
+import org.apache.dubbo.config.nested.PrometheusConfig.Pushgateway;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

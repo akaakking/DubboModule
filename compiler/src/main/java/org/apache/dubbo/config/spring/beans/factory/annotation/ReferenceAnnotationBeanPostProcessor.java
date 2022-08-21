@@ -5,8 +5,11 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
+import java.lang.Class;
+import java.lang.String;
 import org.springframework.beans.PropertyValues;
 import java.beans.PropertyDescriptor;
+import java.lang.Object;
 import java.util.Map;
 import java.lang.reflect.Member;
 import org.springframework.context.ApplicationContext;
@@ -61,6 +64,6 @@ public class ReferenceAnnotationBeanPostProcessor extends AbstractAnnotationBean
 
     public ReferenceAnnotationBeanPostProcessor() {
         instance = (ReferenceAnnotationBeanPostProcessorInterface) DubboClassLoader.getInstance(ReferenceAnnotationBeanPostProcessor.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

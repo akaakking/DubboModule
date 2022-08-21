@@ -1,5 +1,8 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.Boolean;
+import java.lang.String;
+import T;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.bootstrap.builders.AbstractInterfaceBuilder;
@@ -58,6 +61,6 @@ public class AbstractReferenceBuilder<T extends AbstractReferenceConfigInterface
 
     protected AbstractReferenceBuilder() {
         instance = (AbstractReferenceBuilderInterface) DubboClassLoader.getInstance(AbstractReferenceBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

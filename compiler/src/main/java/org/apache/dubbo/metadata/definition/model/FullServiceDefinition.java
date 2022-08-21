@@ -27,6 +27,6 @@ public class FullServiceDefinition extends ServiceDefinition implements FullServ
 
     protected FullServiceDefinition() {
         instance = (FullServiceDefinitionInterface) DubboClassLoader.getInstance(FullServiceDefinition.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

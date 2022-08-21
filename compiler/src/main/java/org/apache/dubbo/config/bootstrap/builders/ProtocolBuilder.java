@@ -1,9 +1,13 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.String;
+import java.lang.Integer;
+import java.lang.Boolean;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.bootstrap.builders.AbstractBuilder;
+import java.lang.reflect.Method;
 
 public class ProtocolBuilder extends AbstractBuilder<ProtocolConfig, ProtocolBuilder> implements ProtocolBuilderInterface {
 
@@ -158,9 +162,18 @@ public class ProtocolBuilder extends AbstractBuilder<ProtocolConfig, ProtocolBui
     protected ProtocolBuilderInterface instance;
 
     public static ProtocolBuilderInterface newBuilder() {
-        Class klass = DubboClassLoader.getKlass(ProtocolBuilder.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ProtocolBuilder.class.getName());
         Method method = klass.getMethod("newBuilder");
-        return method.invoke();
+        return (ProtocolBuilderInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public ProtocolBuilderInterface getInternalInstance() {
@@ -169,6 +182,6 @@ public class ProtocolBuilder extends AbstractBuilder<ProtocolConfig, ProtocolBui
 
     protected ProtocolBuilder() {
         instance = (ProtocolBuilderInterface) DubboClassLoader.getInstance(ProtocolBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

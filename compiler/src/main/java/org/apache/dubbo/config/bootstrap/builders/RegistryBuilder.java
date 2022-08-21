@@ -1,9 +1,13 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.String;
+import java.lang.Integer;
+import java.lang.Boolean;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.bootstrap.builders.AbstractBuilder;
+import java.lang.reflect.Method;
 
 public class RegistryBuilder extends AbstractBuilder<RegistryConfig, RegistryBuilder> implements RegistryBuilderInterface {
 
@@ -142,9 +146,18 @@ public class RegistryBuilder extends AbstractBuilder<RegistryConfig, RegistryBui
     protected RegistryBuilderInterface instance;
 
     public static RegistryBuilderInterface newBuilder() {
-        Class klass = DubboClassLoader.getKlass(RegistryBuilder.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(RegistryBuilder.class.getName());
         Method method = klass.getMethod("newBuilder");
-        return method.invoke();
+        return (RegistryBuilderInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public RegistryBuilderInterface getInternalInstance() {
@@ -153,6 +166,6 @@ public class RegistryBuilder extends AbstractBuilder<RegistryConfig, RegistryBui
 
     protected RegistryBuilder() {
         instance = (RegistryBuilderInterface) DubboClassLoader.getInstance(RegistryBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

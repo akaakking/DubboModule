@@ -1,8 +1,12 @@
 package org.apache.dubbo.config.spring.extension;
 
 import org.springframework.context.ApplicationContext;
+import java.lang.Class;
+import java.lang.String;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
+import org.apache.dubbo.common.extension.ExtensionAccessor;
 
 public class SpringExtensionInjector implements SpringExtensionInjectorInterface {
 
@@ -21,15 +25,32 @@ public class SpringExtensionInjector implements SpringExtensionInjectorInterface
     protected SpringExtensionInjectorInterface instance;
 
     public static void addApplicationContext(ApplicationContext context) {
-        Class klass = DubboClassLoader.getKlass(SpringExtensionInjector.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(SpringExtensionInjector.class.getName());
         Method method = klass.getMethod("addApplicationContext", ApplicationContext.class);
         method.invoke(context);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
     }
 
     public static SpringExtensionInjectorInterface get(ExtensionAccessorInterface extensionAccessor) {
-        Class klass = DubboClassLoader.getKlass(SpringExtensionInjector.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(SpringExtensionInjector.class.getName());
         Method method = klass.getMethod("get", ExtensionAccessorInterface.class);
-        return method.invoke(extensionAccessor);
+        return (SpringExtensionInjectorInterface)method.invoke(extensionAccessor);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public SpringExtensionInjectorInterface getInternalInstance() {

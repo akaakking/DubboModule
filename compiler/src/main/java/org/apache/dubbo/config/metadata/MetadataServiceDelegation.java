@@ -1,9 +1,12 @@
 package org.apache.dubbo.config.metadata;
 
+import org.apache.dubbo.common.URL;
 import java.util.SortedSet;
+import java.lang.String;
 import java.util.Set;
 import java.util.List;
 import java.util.Map;
+import org.apache.dubbo.metadata.InstanceMetadataChangedListener;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

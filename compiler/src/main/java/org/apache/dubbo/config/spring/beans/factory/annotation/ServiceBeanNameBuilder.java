@@ -1,10 +1,13 @@
 package org.apache.dubbo.config.spring.beans.factory.annotation;
 
 import org.apache.dubbo.config.spring.beans.factory.annotation.ServiceBeanNameBuilder;
+import java.lang.String;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.env.Environment;
+import java.lang.Class;
 import org.apache.dubbo.config.annotation.Service;
 import org.apache.dubbo.config.annotation.Reference;
 
@@ -25,33 +28,78 @@ public class ServiceBeanNameBuilder implements ServiceBeanNameBuilderInterface {
     protected ServiceBeanNameBuilderInterface instance;
 
     public static ServiceBeanNameBuilder create(AnnotationAttributes attributes, Class<?> defaultInterfaceClass, Environment environment) {
-        Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
         Method method = klass.getMethod("create", AnnotationAttributes.class, Class.class, Environment.class);
-        return method.invoke(attributes, defaultInterfaceClass, environment);
+        return (ServiceBeanNameBuilder)method.invoke(attributes, defaultInterfaceClass, environment);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static ServiceBeanNameBuilder create(Class<?> interfaceClass, Environment environment) {
-        Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
         Method method = klass.getMethod("create", Class.class, Environment.class);
-        return method.invoke(interfaceClass, environment);
+        return (ServiceBeanNameBuilder)method.invoke(interfaceClass, environment);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static ServiceBeanNameBuilder create(String interfaceClass, Environment environment) {
-        Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
         Method method = klass.getMethod("create", String.class, Environment.class);
-        return method.invoke(interfaceClass, environment);
+        return (ServiceBeanNameBuilder)method.invoke(interfaceClass, environment);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static ServiceBeanNameBuilder create(Service service, Class<?> interfaceClass, Environment environment) {
-        Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
         Method method = klass.getMethod("create", Service.class, Class.class, Environment.class);
-        return method.invoke(service, interfaceClass, environment);
+        return (ServiceBeanNameBuilder)method.invoke(service, interfaceClass, environment);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static ServiceBeanNameBuilder create(Reference reference, Class<?> interfaceClass, Environment environment) {
-        Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ServiceBeanNameBuilder.class.getName());
         Method method = klass.getMethod("create", Reference.class, Class.class, Environment.class);
-        return method.invoke(reference, interfaceClass, environment);
+        return (ServiceBeanNameBuilder)method.invoke(reference, interfaceClass, environment);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public ServiceBeanNameBuilderInterface getInternalInstance() {

@@ -1,5 +1,14 @@
 package org.apache.dubbo.rpc.model;
 
+import java.lang.String;
+import org.apache.dubbo.rpc.model.ServiceDescriptor;
+import org.apache.dubbo.config.ReferenceConfigBase;
+import java.lang.Object;
+import org.apache.dubbo.rpc.model.ServiceMetadata;
+import org.apache.dubbo.rpc.model.ConsumerModel;
+import org.apache.dubbo.config.ServiceConfigBase;
+import org.apache.dubbo.rpc.model.ProviderModel;
+import java.lang.Class;
 import java.util.List;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;

@@ -1,5 +1,7 @@
 package org.apache.dubbo.config.nested;
 
+import java.lang.Boolean;
+import java.lang.Integer;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

@@ -1,9 +1,13 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.String;
+import java.lang.Integer;
 import java.util.Map;
+import java.lang.Boolean;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.bootstrap.builders.AbstractBuilder;
+import java.lang.reflect.Method;
 
 public class MetadataReportBuilder extends AbstractBuilder<MetadataReportConfig, MetadataReportBuilder> implements MetadataReportBuilderInterface {
 
@@ -62,9 +66,18 @@ public class MetadataReportBuilder extends AbstractBuilder<MetadataReportConfig,
     protected MetadataReportBuilderInterface instance;
 
     public static MetadataReportBuilderInterface newBuilder() {
-        Class klass = DubboClassLoader.getKlass(MetadataReportBuilder.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(MetadataReportBuilder.class.getName());
         Method method = klass.getMethod("newBuilder");
-        return method.invoke();
+        return (MetadataReportBuilderInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public MetadataReportBuilderInterface getInternalInstance() {
@@ -73,6 +86,6 @@ public class MetadataReportBuilder extends AbstractBuilder<MetadataReportConfig,
 
     protected MetadataReportBuilder() {
         instance = (MetadataReportBuilderInterface) DubboClassLoader.getInstance(MetadataReportBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

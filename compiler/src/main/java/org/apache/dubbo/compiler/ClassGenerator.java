@@ -66,19 +66,22 @@ public class ClassGenerator {
         methodDeclaration.setBody(blockStmt);
         methodDeclaration.setType(javaClass.getName() + "Interface");
 
-        blockStmt.addStatement(new ReturnStmt(new NameExpr("instance")));
+        blockStmt.addStatement(new ReturnStmt(new NameExpr("this.instance")));
     }
 
     private void addStaticMethod(JavaClass javaClass,ClassOrInterfaceDeclaration coid) {
         for (JavaMethod method : javaClass.getMethods()) {
             if (method.isPublic() && method.isStatic()) {
+                this.generator.importList.add("java.lang.reflect.Method");
+                this.generator.importList.add("java.lang.reflect.InvocationTargetException");
                 MethodDeclaration methodDeclaration = coid.addMethod(method.getName(), Modifier.Keyword.PUBLIC);
                 methodDeclaration.setStatic(true);
                 BlockStmt blockStmt = new BlockStmt();
                 methodDeclaration.setBody(blockStmt);
+                this.generator.addReturnType(methodDeclaration,method);
 
                 NameExpr klassNameExpr = new NameExpr();
-                klassNameExpr.setName("Class klass = DubboClassLoader");
+                klassNameExpr.setName("try { \n          Class klass = DubboClassLoader");
                 MethodCallExpr klassMethodCallExpr = new MethodCallExpr(klassNameExpr,"getKlass");
                 klassMethodCallExpr.addArgument(javaClass.getName() + ".class.getName()");
                 blockStmt.addStatement(klassMethodCallExpr);
@@ -100,16 +103,36 @@ public class ClassGenerator {
                 NameExpr invokeNameExpr = new NameExpr();
                 if (method.getReturns().isVoid()) {
                     invokeNameExpr.setName("method");
-                } else {
-                    invokeNameExpr.setName("return method");
-                }
-                MethodCallExpr invokeCall = new MethodCallExpr(invokeNameExpr,"invoke");
-                for (JavaParameter parameter : method.getParameters()) {
-                    invokeCall.addArgument(parameter.getName());
-                }
-                blockStmt.addStatement(invokeCall);
+                    MethodCallExpr invokeCall = new MethodCallExpr(invokeNameExpr,"invoke");
+                    for (JavaParameter parameter : method.getParameters()) {
+                        invokeCall.addArgument(parameter.getName());
+                    }
+                    blockStmt.addStatement(invokeCall);
+                    blockStmt.addStatement(new NameExpr("        } catch (NoSuchMethodException e) {\n" +
+                            "            e.printStackTrace();\n" +
+                            "        } catch (InvocationTargetException e) {\n" +
+                            "            e.printStackTrace();\n" +
+                            "        } catch (IllegalAccessException e) {\n" +
+                            "            e.printStackTrace();\n" +
+                            "        }"));
 
-                this.generator.addReturnType(methodDeclaration,method);
+                } else {
+                    invokeNameExpr.setName("(" + methodDeclaration.getType().toString() + ")method");
+                    MethodCallExpr invokeCall = new MethodCallExpr(invokeNameExpr,"invoke");
+                    for (JavaParameter parameter : method.getParameters()) {
+                        invokeCall.addArgument(parameter.getName());
+                    }
+                    blockStmt.addStatement(new ReturnStmt(invokeCall));
+                    blockStmt.addStatement(new NameExpr("        } catch (NoSuchMethodException e) {\n" +
+                            "            e.printStackTrace();\n" +
+                            "        } catch (InvocationTargetException e) {\n" +
+                            "            e.printStackTrace();\n" +
+                            "        } catch (IllegalAccessException e) {\n" +
+                            "            e.printStackTrace();\n" +
+                            "        }"));
+                    blockStmt.addStatement(new ReturnStmt("null"));
+                }
+
 
                 for (JavaParameter parameter : method.getParameters()) {
                     this.generator.addParams(methodDeclaration,parameter);
@@ -185,7 +208,7 @@ public class ClassGenerator {
                 blockStmt.addStatement(new ExpressionStmt(new VariableDeclarationExpr(argsDeclarator)));
 
                 NameExpr nameExpr = new NameExpr();
-                nameExpr.setName("instance = (" +className +  "Interface) DubboClassLoader");
+                nameExpr.setName("this.instance = (" +className +  "Interface) DubboClassLoader");
                 MethodCallExpr methodCallExpr = new MethodCallExpr(nameExpr,"getInstance");
                 methodCallExpr.addArgument(className + ".class.getName()");
                 methodCallExpr.addArgument("params");
@@ -212,7 +235,7 @@ public class ClassGenerator {
             return;
         }
 
-        AssignExpr assignExpr = new AssignExpr(new NameExpr("super.instance"),new NameExpr("instance"), AssignExpr.Operator.ASSIGN);
+        AssignExpr assignExpr = new AssignExpr(new NameExpr("super.instance"),new NameExpr("this.instance"), AssignExpr.Operator.ASSIGN);
         blockStmt.addStatement(new ExpressionStmt(assignExpr));
     }
 
@@ -221,7 +244,7 @@ public class ClassGenerator {
         methodDeclaration.setBody(blockStmt);
         String className = javaClass.getSimpleName();
         NameExpr nameExpr = new NameExpr();
-        nameExpr.setName("instance = (" +className +  "Interface) DubboClassLoader");
+        nameExpr.setName("this.instance = (" +className +  "Interface) DubboClassLoader");
         MethodCallExpr methodCallExpr = new MethodCallExpr(nameExpr,"getInstance");
         methodCallExpr.addArgument(className + ".class.getName()");
         blockStmt.addStatement(new ExpressionStmt(methodCallExpr));

@@ -1,5 +1,8 @@
 package org.apache.dubbo.config.metadata;
 
+import org.apache.dubbo.rpc.model.ApplicationModel;
+import org.apache.dubbo.config.metadata.ConfigurableMetadataServiceExporter;
+import java.lang.Throwable;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

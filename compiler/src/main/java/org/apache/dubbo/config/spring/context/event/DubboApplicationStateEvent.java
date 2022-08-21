@@ -29,18 +29,18 @@ public class DubboApplicationStateEvent extends ApplicationEvent implements Dubb
         Class[] params = new Class[]{ApplicationModelInterface.class, DeployStateInterface.class};
         Object[] args = new Object[]{applicationModel, state};
         instance = (DubboApplicationStateEventInterface) DubboClassLoader.getInstance(DubboApplicationStateEvent.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public DubboApplicationStateEvent(ApplicationModelInterface applicationModel, DeployStateInterface state, Throwable cause) {
         Class[] params = new Class[]{ApplicationModelInterface.class, DeployStateInterface.class, Throwable.class};
         Object[] args = new Object[]{applicationModel, state, cause};
         instance = (DubboApplicationStateEventInterface) DubboClassLoader.getInstance(DubboApplicationStateEvent.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected DubboApplicationStateEvent() {
         instance = (DubboApplicationStateEventInterface) DubboClassLoader.getInstance(DubboApplicationStateEvent.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

@@ -1,6 +1,11 @@
 package org.apache.dubbo.config;
 
+import java.lang.String;
+import org.apache.dubbo.config.RegistryConfig;
 import java.util.List;
+import org.apache.dubbo.config.MonitorConfig;
+import java.lang.Boolean;
+import java.lang.Integer;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.AbstractConfig;
@@ -115,27 +120,27 @@ public class ModuleConfig extends AbstractConfig implements ModuleConfigInterfac
 
     public ModuleConfig() {
         instance = (ModuleConfigInterface) DubboClassLoader.getInstance(ModuleConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ModuleConfig(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ModuleConfigInterface) DubboClassLoader.getInstance(ModuleConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ModuleConfig(String name) {
         Class[] params = new Class[]{String.class};
         Object[] args = new Object[]{name};
         instance = (ModuleConfigInterface) DubboClassLoader.getInstance(ModuleConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ModuleConfig(ModuleModelInterface moduleModel, String name) {
         Class[] params = new Class[]{ModuleModelInterface.class, String.class};
         Object[] args = new Object[]{moduleModel, name};
         instance = (ModuleConfigInterface) DubboClassLoader.getInstance(ModuleConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

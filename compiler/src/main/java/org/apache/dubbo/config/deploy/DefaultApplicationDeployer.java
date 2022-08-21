@@ -1,9 +1,13 @@
 package org.apache.dubbo.config.deploy;
 
 import java.util.concurrent.Future;
+import org.apache.dubbo.rpc.model.ModuleModel;
+import org.apache.dubbo.common.deploy.DeployState;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.common.deploy.AbstractDeployer;
+import java.lang.reflect.Method;
+import org.apache.dubbo.rpc.model.ScopeModel;
 
 public class DefaultApplicationDeployer extends AbstractDeployer<ApplicationModel> implements DefaultApplicationDeployerInterface {
 
@@ -62,9 +66,18 @@ public class DefaultApplicationDeployer extends AbstractDeployer<ApplicationMode
     protected DefaultApplicationDeployerInterface instance;
 
     public static ApplicationDeployerInterface get(ScopeModelInterface moduleOrApplicationModel) {
-        Class klass = DubboClassLoader.getKlass(DefaultApplicationDeployer.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(DefaultApplicationDeployer.class.getName());
         Method method = klass.getMethod("get", ScopeModelInterface.class);
-        return method.invoke(moduleOrApplicationModel);
+        return (ApplicationDeployerInterface)method.invoke(moduleOrApplicationModel);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public DefaultApplicationDeployerInterface getInternalInstance() {
@@ -75,11 +88,11 @@ public class DefaultApplicationDeployer extends AbstractDeployer<ApplicationMode
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (DefaultApplicationDeployerInterface) DubboClassLoader.getInstance(DefaultApplicationDeployer.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected DefaultApplicationDeployer() {
         instance = (DefaultApplicationDeployerInterface) DubboClassLoader.getInstance(DefaultApplicationDeployer.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

@@ -2,6 +2,8 @@ package org.apache.dubbo.metadata.definition.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.lang.String;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

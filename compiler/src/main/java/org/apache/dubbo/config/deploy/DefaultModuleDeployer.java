@@ -53,11 +53,11 @@ public class DefaultModuleDeployer extends AbstractDeployer<ModuleModel> impleme
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (DefaultModuleDeployerInterface) DubboClassLoader.getInstance(DefaultModuleDeployer.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected DefaultModuleDeployer() {
         instance = (DefaultModuleDeployerInterface) DubboClassLoader.getInstance(DefaultModuleDeployer.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

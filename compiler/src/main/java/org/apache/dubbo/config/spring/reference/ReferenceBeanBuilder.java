@@ -1,6 +1,13 @@
 package org.apache.dubbo.config.spring.reference;
 
+import java.lang.String;
+import java.lang.Class;
+import org.apache.dubbo.config.ConsumerConfig;
+import java.lang.Boolean;
+import java.lang.Integer;
+import org.apache.dubbo.config.RegistryConfig;
 import java.util.List;
+import org.apache.dubbo.config.MonitorConfig;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;

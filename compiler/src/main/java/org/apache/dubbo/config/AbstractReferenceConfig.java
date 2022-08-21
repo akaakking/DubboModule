@@ -1,5 +1,7 @@
 package org.apache.dubbo.config;
 
+import java.lang.Boolean;
+import java.lang.String;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.AbstractInterfaceConfig;
@@ -126,6 +128,6 @@ public class AbstractReferenceConfig extends AbstractInterfaceConfig implements 
 
     protected AbstractReferenceConfig() {
         instance = (AbstractReferenceConfigInterface) DubboClassLoader.getInstance(AbstractReferenceConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

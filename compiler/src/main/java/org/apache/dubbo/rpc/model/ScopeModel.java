@@ -1,7 +1,12 @@
 package org.apache.dubbo.rpc.model;
 
+import org.apache.dubbo.rpc.model.ScopeModelDestroyListener;
 import java.util.Map;
+import java.lang.String;
+import java.lang.Class;
+import java.lang.Object;
 import org.apache.dubbo.common.extension.ExtensionScope;
+import java.lang.ClassLoader;
 import java.util.Set;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;

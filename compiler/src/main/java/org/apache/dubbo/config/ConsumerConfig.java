@@ -1,5 +1,8 @@
 package org.apache.dubbo.config;
 
+import java.lang.Integer;
+import java.lang.String;
+import java.lang.Boolean;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.AbstractReferenceConfig;
@@ -90,13 +93,13 @@ public class ConsumerConfig extends AbstractReferenceConfig implements ConsumerC
 
     public ConsumerConfig() {
         instance = (ConsumerConfigInterface) DubboClassLoader.getInstance(ConsumerConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ConsumerConfig(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ConsumerConfigInterface) DubboClassLoader.getInstance(ConsumerConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

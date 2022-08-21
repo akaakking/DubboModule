@@ -1,9 +1,14 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.String;
+import java.lang.Class;
 import java.util.List;
+import org.apache.dubbo.config.MethodConfig;
+import org.apache.dubbo.config.ConsumerConfig;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.bootstrap.builders.AbstractReferenceBuilder;
+import java.lang.reflect.Method;
 
 public class ReferenceBuilder<T> extends AbstractReferenceBuilder<ReferenceConfig<T>, ReferenceBuilder<T>> implements ReferenceBuilderInterface<T> {
 
@@ -54,9 +59,18 @@ public class ReferenceBuilder<T> extends AbstractReferenceBuilder<ReferenceConfi
     protected ReferenceBuilderInterface instance;
 
     public static <T> ReferenceBuilderInterface<T> newBuilder() {
-        Class klass = DubboClassLoader.getKlass(ReferenceBuilder.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ReferenceBuilder.class.getName());
         Method method = klass.getMethod("newBuilder");
-        return method.invoke();
+        return (ReferenceBuilderInterface<T>)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public ReferenceBuilderInterface getInternalInstance() {
@@ -65,6 +79,6 @@ public class ReferenceBuilder<T> extends AbstractReferenceBuilder<ReferenceConfi
 
     protected ReferenceBuilder() {
         instance = (ReferenceBuilderInterface) DubboClassLoader.getInstance(ReferenceBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

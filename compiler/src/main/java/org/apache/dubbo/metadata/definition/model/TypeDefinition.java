@@ -1,10 +1,14 @@
 package org.apache.dubbo.metadata.definition.model;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
+import java.lang.String;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
 
 public class TypeDefinition implements TypeDefinitionInterface {
 
@@ -55,15 +59,33 @@ public class TypeDefinition implements TypeDefinitionInterface {
     protected TypeDefinitionInterface instance;
 
     public static String[] formatTypes(String[] types) {
-        Class klass = DubboClassLoader.getKlass(TypeDefinition.class.getName());
-        Method method = klass.getMethod("formatTypes", String[].class);
-        return method.invoke(types);
+        try { 
+                    Class klass = DubboClassLoader.getKlass(TypeDefinition.class.getName());
+                    Method method = klass.getMethod("formatTypes", String[].class);
+        return (String[])method.invoke(types);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static String formatType(String type) {
-        Class klass = DubboClassLoader.getKlass(TypeDefinition.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(TypeDefinition.class.getName());
         Method method = klass.getMethod("formatType", String.class);
-        return method.invoke(type);
+        return (String)method.invoke(type);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public TypeDefinitionInterface getInternalInstance() {

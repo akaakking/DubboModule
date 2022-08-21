@@ -5,6 +5,7 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
+import java.lang.Boolean;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.ConfigCenterConfig;
@@ -43,13 +44,13 @@ public class ConfigCenterBean extends ConfigCenterConfig implements ConfigCenter
 
     public ConfigCenterBean() {
         instance = (ConfigCenterBeanInterface) DubboClassLoader.getInstance(ConfigCenterBean.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ConfigCenterBean(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (ConfigCenterBeanInterface) DubboClassLoader.getInstance(ConfigCenterBean.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

@@ -7,8 +7,11 @@ import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
+import java.lang.ClassLoader;
+import java.lang.String;
 import java.util.Map;
 import org.springframework.beans.MutablePropertyValues;
+import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

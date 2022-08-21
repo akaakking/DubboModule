@@ -1,6 +1,11 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.String;
+import java.lang.Boolean;
+import java.lang.Integer;
 import java.util.List;
+import org.apache.dubbo.config.ProtocolConfig;
+import T;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.bootstrap.builders.AbstractInterfaceBuilder;
@@ -95,6 +100,6 @@ public class AbstractServiceBuilder<T extends AbstractServiceConfigInterface, B 
 
     protected AbstractServiceBuilder() {
         instance = (AbstractServiceBuilderInterface) DubboClassLoader.getInstance(AbstractServiceBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

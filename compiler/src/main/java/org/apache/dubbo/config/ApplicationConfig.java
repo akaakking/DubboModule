@@ -1,6 +1,11 @@
 package org.apache.dubbo.config;
 
+import java.lang.String;
+import org.apache.dubbo.config.RegistryConfig;
 import java.util.List;
+import org.apache.dubbo.config.MonitorConfig;
+import java.lang.Boolean;
+import java.lang.Integer;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -312,27 +317,27 @@ public class ApplicationConfig extends AbstractConfig implements ApplicationConf
 
     public ApplicationConfig() {
         instance = (ApplicationConfigInterface) DubboClassLoader.getInstance(ApplicationConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ApplicationConfig(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (ApplicationConfigInterface) DubboClassLoader.getInstance(ApplicationConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ApplicationConfig(String name) {
         Class[] params = new Class[]{String.class};
         Object[] args = new Object[]{name};
         instance = (ApplicationConfigInterface) DubboClassLoader.getInstance(ApplicationConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ApplicationConfig(ApplicationModelInterface applicationModel, String name) {
         Class[] params = new Class[]{ApplicationModelInterface.class, String.class};
         Object[] args = new Object[]{applicationModel, name};
         instance = (ApplicationConfigInterface) DubboClassLoader.getInstance(ApplicationConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

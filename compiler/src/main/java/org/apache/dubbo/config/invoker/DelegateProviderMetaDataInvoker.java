@@ -1,5 +1,6 @@
 package org.apache.dubbo.config.invoker;
 
+import org.apache.dubbo.rpc.Invocation;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 

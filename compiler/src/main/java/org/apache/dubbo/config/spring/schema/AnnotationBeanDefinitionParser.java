@@ -14,6 +14,6 @@ public class AnnotationBeanDefinitionParser extends AbstractSingleBeanDefinition
 
     protected AnnotationBeanDefinitionParser() {
         instance = (AnnotationBeanDefinitionParserInterface) DubboClassLoader.getInstance(AnnotationBeanDefinitionParser.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

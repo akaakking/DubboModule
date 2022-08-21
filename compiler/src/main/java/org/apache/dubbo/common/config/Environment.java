@@ -1,8 +1,11 @@
 package org.apache.dubbo.common.config;
 
+import java.lang.String;
 import java.util.Map;
+import org.apache.dubbo.config.AbstractConfig;
 import java.util.List;
 import java.util.Optional;
+import org.apache.dubbo.common.config.configcenter.DynamicConfiguration;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.common.context.LifecycleAdapter;
@@ -135,11 +138,11 @@ public class Environment extends LifecycleAdapter implements EnvironmentInterfac
         Class[] params = new Class[]{ScopeModelInterface.class};
         Object[] args = new Object[]{scopeModel};
         instance = (EnvironmentInterface) DubboClassLoader.getInstance(Environment.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected Environment() {
         instance = (EnvironmentInterface) DubboClassLoader.getInstance(Environment.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

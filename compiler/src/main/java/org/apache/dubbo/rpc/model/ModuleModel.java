@@ -1,5 +1,10 @@
 package org.apache.dubbo.rpc.model;
 
+import java.lang.ClassLoader;
+import org.apache.dubbo.common.deploy.ModuleDeployer;
+import org.apache.dubbo.common.config.ModuleEnvironment;
+import java.lang.Class;
+import org.apache.dubbo.common.URL;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.rpc.model.ScopeModel;
@@ -52,18 +57,18 @@ public class ModuleModel extends ScopeModel implements ModuleModelInterface {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (ModuleModelInterface) DubboClassLoader.getInstance(ModuleModel.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ModuleModel(ApplicationModelInterface applicationModel, boolean isInternal) {
         Class[] params = new Class[]{ApplicationModelInterface.class, boolean.class};
         Object[] args = new Object[]{applicationModel, isInternal};
         instance = (ModuleModelInterface) DubboClassLoader.getInstance(ModuleModel.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected ModuleModel() {
         instance = (ModuleModelInterface) DubboClassLoader.getInstance(ModuleModel.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

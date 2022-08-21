@@ -1,10 +1,16 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.String;
+import org.apache.dubbo.config.RegistryConfig;
 import java.util.List;
+import org.apache.dubbo.config.MonitorConfig;
+import java.lang.Boolean;
+import java.lang.Integer;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.bootstrap.builders.AbstractBuilder;
+import java.lang.reflect.Method;
 
 public class ApplicationBuilder extends AbstractBuilder<ApplicationConfig, ApplicationBuilder> implements ApplicationBuilderInterface {
 
@@ -119,9 +125,18 @@ public class ApplicationBuilder extends AbstractBuilder<ApplicationConfig, Appli
     protected ApplicationBuilderInterface instance;
 
     public static ApplicationBuilderInterface newBuilder() {
-        Class klass = DubboClassLoader.getKlass(ApplicationBuilder.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationBuilder.class.getName());
         Method method = klass.getMethod("newBuilder");
-        return method.invoke();
+        return (ApplicationBuilderInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public ApplicationBuilderInterface getInternalInstance() {
@@ -130,6 +145,6 @@ public class ApplicationBuilder extends AbstractBuilder<ApplicationConfig, Appli
 
     protected ApplicationBuilder() {
         instance = (ApplicationBuilderInterface) DubboClassLoader.getInstance(ApplicationBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

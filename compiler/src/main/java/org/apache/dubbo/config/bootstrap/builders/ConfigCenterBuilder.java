@@ -1,5 +1,8 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.String;
+import java.lang.Long;
+import java.lang.Boolean;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -75,6 +78,6 @@ public class ConfigCenterBuilder extends AbstractBuilder<ConfigCenterConfig, Con
 
     protected ConfigCenterBuilder() {
         instance = (ConfigCenterBuilderInterface) DubboClassLoader.getInstance(ConfigCenterBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

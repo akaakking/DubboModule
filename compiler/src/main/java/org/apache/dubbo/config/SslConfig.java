@@ -1,5 +1,6 @@
 package org.apache.dubbo.config;
 
+import java.lang.String;
 import java.io.InputStream;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -127,13 +128,13 @@ public class SslConfig extends AbstractConfig implements SslConfigInterface {
 
     public SslConfig() {
         instance = (SslConfigInterface) DubboClassLoader.getInstance(SslConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public SslConfig(ApplicationModelInterface applicationModel) {
         Class[] params = new Class[]{ApplicationModelInterface.class};
         Object[] args = new Object[]{applicationModel};
         instance = (SslConfigInterface) DubboClassLoader.getInstance(SslConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

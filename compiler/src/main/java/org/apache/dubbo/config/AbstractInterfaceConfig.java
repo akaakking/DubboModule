@@ -1,9 +1,22 @@
 package org.apache.dubbo.config;
 
 import java.util.List;
+import java.lang.Boolean;
+import java.lang.String;
+import java.lang.Integer;
+import org.apache.dubbo.Interface.ApplicationConfigInterface;
+import org.apache.dubbo.config.ModuleConfig;
+import org.apache.dubbo.Interface.RegistryConfigInterface;
+import org.apache.dubbo.config.MethodConfig;
+import org.apache.dubbo.config.MonitorConfig;
+import org.apache.dubbo.config.ConfigCenterConfig;
+import org.apache.dubbo.Interface.MetadataReportConfigInterface;
+import org.apache.dubbo.config.AbstractInterfaceConfig;
+import java.lang.ClassLoader;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.AbstractMethodConfig;
+import java.lang.reflect.Method;
 import java.util.Map;
 
 public class AbstractInterfaceConfig extends AbstractMethodConfig implements AbstractInterfaceConfigInterface {
@@ -283,9 +296,17 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
     protected AbstractInterfaceConfigInterface instance;
 
     public static void appendRuntimeParameters(Map<String, String> map) {
-        Class klass = DubboClassLoader.getKlass(AbstractInterfaceConfig.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(AbstractInterfaceConfig.class.getName());
         Method method = klass.getMethod("appendRuntimeParameters", Map.class);
         method.invoke(map);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
     }
 
     public AbstractInterfaceConfigInterface getInternalInstance() {
@@ -294,6 +315,6 @@ public class AbstractInterfaceConfig extends AbstractMethodConfig implements Abs
 
     protected AbstractInterfaceConfig() {
         instance = (AbstractInterfaceConfigInterface) DubboClassLoader.getInstance(AbstractInterfaceConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

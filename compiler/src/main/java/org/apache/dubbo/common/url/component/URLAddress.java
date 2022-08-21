@@ -1,8 +1,11 @@
 package org.apache.dubbo.common.url.component;
 
 import java.io.Serializable;
+import java.lang.String;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
 
 public class URLAddress implements URLAddressInterface {
 
@@ -93,9 +96,18 @@ public class URLAddress implements URLAddressInterface {
     protected URLAddressInterface instance;
 
     public static URLAddressInterface parse(String rawAddress, String defaultProtocol, boolean encoded) {
-        Class klass = DubboClassLoader.getKlass(URLAddress.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(URLAddress.class.getName());
         Method method = klass.getMethod("parse", String.class, String.class, boolean.class);
-        return method.invoke(rawAddress, defaultProtocol, encoded);
+        return (URLAddressInterface)method.invoke(rawAddress, defaultProtocol, encoded);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public URLAddressInterface getInternalInstance() {

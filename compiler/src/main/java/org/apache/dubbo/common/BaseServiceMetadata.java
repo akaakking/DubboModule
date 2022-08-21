@@ -1,7 +1,10 @@
 package org.apache.dubbo.common;
 
+import java.lang.String;
+import org.apache.dubbo.rpc.model.ServiceModel;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
 
 public class BaseServiceMetadata implements BaseServiceMetadataInterface {
 
@@ -56,39 +59,93 @@ public class BaseServiceMetadata implements BaseServiceMetadataInterface {
     protected BaseServiceMetadataInterface instance;
 
     public static String buildServiceKey(String path, String group, String version) {
-        Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
         Method method = klass.getMethod("buildServiceKey", String.class, String.class, String.class);
-        return method.invoke(path, group, version);
+        return (String)method.invoke(path, group, version);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static String versionFromServiceKey(String serviceKey) {
-        Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
         Method method = klass.getMethod("versionFromServiceKey", String.class);
-        return method.invoke(serviceKey);
+        return (String)method.invoke(serviceKey);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static String groupFromServiceKey(String serviceKey) {
-        Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
         Method method = klass.getMethod("groupFromServiceKey", String.class);
-        return method.invoke(serviceKey);
+        return (String)method.invoke(serviceKey);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static String interfaceFromServiceKey(String serviceKey) {
-        Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
         Method method = klass.getMethod("interfaceFromServiceKey", String.class);
-        return method.invoke(serviceKey);
+        return (String)method.invoke(serviceKey);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static BaseServiceMetadataInterface revertDisplayServiceKey(String displayKey) {
-        Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
         Method method = klass.getMethod("revertDisplayServiceKey", String.class);
-        return method.invoke(displayKey);
+        return (BaseServiceMetadataInterface)method.invoke(displayKey);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static String keyWithoutGroup(String interfaceName, String version) {
-        Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(BaseServiceMetadata.class.getName());
         Method method = klass.getMethod("keyWithoutGroup", String.class, String.class);
-        return method.invoke(interfaceName, version);
+        return (String)method.invoke(interfaceName, version);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public BaseServiceMetadataInterface getInternalInstance() {

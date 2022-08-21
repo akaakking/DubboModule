@@ -1,10 +1,19 @@
 package org.apache.dubbo.rpc.model;
 
+import org.apache.dubbo.rpc.model.ModuleModel;
 import java.util.List;
+import org.apache.dubbo.common.config.Environment;
+import org.apache.dubbo.config.context.ConfigManager;
+import org.apache.dubbo.rpc.model.ServiceRepository;
+import java.lang.ClassLoader;
+import org.apache.dubbo.common.deploy.ApplicationDeployer;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.rpc.model.ScopeModel;
+import java.lang.reflect.Method;
+import org.apache.dubbo.rpc.model.ApplicationModel;
 import java.util.Collection;
+import java.lang.String;
 
 public class ApplicationModel extends ScopeModel implements ApplicationModelInterface {
 
@@ -95,87 +104,212 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
     protected ApplicationModelInterface instance;
 
     public static ApplicationModelInterface ofNullable(ApplicationModelInterface applicationModel) {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("ofNullable", ApplicationModelInterface.class);
-        return method.invoke(applicationModel);
+        return (ApplicationModelInterface)method.invoke(applicationModel);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static ApplicationModelInterface defaultModel() {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("defaultModel");
-        return method.invoke();
+        return (ApplicationModelInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static Collection<ConsumerModelInterface> allConsumerModels() {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("allConsumerModels");
-        return method.invoke();
+        return (Collection<ConsumerModelInterface>)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static Collection<ProviderModelInterface> allProviderModels() {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("allProviderModels");
-        return method.invoke();
+        return (Collection<ProviderModelInterface>)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static ProviderModelInterface getProviderModel(String serviceKey) {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("getProviderModel", String.class);
-        return method.invoke(serviceKey);
+        return (ProviderModelInterface)method.invoke(serviceKey);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static ConsumerModelInterface getConsumerModel(String serviceKey) {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("getConsumerModel", String.class);
-        return method.invoke(serviceKey);
+        return (ConsumerModelInterface)method.invoke(serviceKey);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static EnvironmentInterface getEnvironment() {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("getEnvironment");
-        return method.invoke();
+        return (EnvironmentInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static ConfigManagerInterface getConfigManager() {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("getConfigManager");
-        return method.invoke();
+        return (ConfigManagerInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static ServiceRepositoryInterface getServiceRepository() {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("getServiceRepository");
-        return method.invoke();
+        return (ServiceRepositoryInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static ExecutorRepositoryInterface getExecutorRepository() {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("getExecutorRepository");
-        return method.invoke();
+        return (ExecutorRepositoryInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static ApplicationConfigInterface getApplicationConfig() {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("getApplicationConfig");
-        return method.invoke();
+        return (ApplicationConfigInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static String getName() {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("getName");
-        return method.invoke();
+        return (String)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static String getApplication() {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("getApplication");
-        return method.invoke();
+        return (String)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static void reset() {
-        Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(ApplicationModel.class.getName());
         Method method = klass.getMethod("reset");
         method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
     }
 
     public ApplicationModelInterface getInternalInstance() {
@@ -186,18 +320,18 @@ public class ApplicationModel extends ScopeModel implements ApplicationModelInte
         Class[] params = new Class[]{FrameworkModelInterface.class};
         Object[] args = new Object[]{frameworkModel};
         instance = (ApplicationModelInterface) DubboClassLoader.getInstance(ApplicationModel.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ApplicationModel(FrameworkModelInterface frameworkModel, boolean isInternal) {
         Class[] params = new Class[]{FrameworkModelInterface.class, boolean.class};
         Object[] args = new Object[]{frameworkModel, isInternal};
         instance = (ApplicationModelInterface) DubboClassLoader.getInstance(ApplicationModel.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected ApplicationModel() {
         instance = (ApplicationModelInterface) DubboClassLoader.getInstance(ApplicationModel.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

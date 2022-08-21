@@ -1,11 +1,18 @@
 package org.apache.dubbo.config;
 
 import java.io.Serializable;
+import org.apache.dubbo.rpc.model.ScopeModel;
+import java.lang.String;
 import java.util.Map;
 import java.util.List;
 import org.apache.dubbo.config.context.ConfigMode;
+import org.apache.dubbo.config.AbstractConfig;
+import java.lang.Boolean;
+import java.lang.Object;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
+import java.lang.reflect.Method;
+import java.lang.Class;
 
 public class AbstractConfig implements AbstractConfigInterface {
 
@@ -80,39 +87,90 @@ public class AbstractConfig implements AbstractConfigInterface {
     protected AbstractConfigInterface instance;
 
     public static String getTagName(Class<?> cls) {
-        Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
         Method method = klass.getMethod("getTagName", Class.class);
-        return method.invoke(cls);
+        return (String)method.invoke(cls);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static String getPluralTagName(Class<?> cls) {
-        Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
         Method method = klass.getMethod("getPluralTagName", Class.class);
-        return method.invoke(cls);
+        return (String)method.invoke(cls);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static void appendParameters(Map<String, String> parameters, Object config) {
-        Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
         Method method = klass.getMethod("appendParameters", Map.class, Object.class);
         method.invoke(parameters, config);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
     }
 
     public static void appendParameters(Map<String, String> parameters, Object config, String prefix) {
-        Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
         Method method = klass.getMethod("appendParameters", Map.class, Object.class, String.class);
         method.invoke(parameters, config, prefix);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
     }
 
     public static void appendAttributes(Map<String, String> parameters, Object config) {
-        Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
         Method method = klass.getMethod("appendAttributes", Map.class, Object.class);
         method.invoke(parameters, config);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
     }
 
     public static String getTypePrefix(Class<? extends AbstractConfigInterface> cls) {
-        Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(AbstractConfig.class.getName());
         Method method = klass.getMethod("getTypePrefix", Class.class);
-        return method.invoke(cls);
+        return (String)method.invoke(cls);
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public AbstractConfigInterface getInternalInstance() {

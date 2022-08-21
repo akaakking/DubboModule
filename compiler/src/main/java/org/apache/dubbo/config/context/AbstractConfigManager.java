@@ -1,8 +1,11 @@
 package org.apache.dubbo.config.context;
 
+import org.apache.dubbo.config.AbstractConfig;
 import java.util.Map;
+import java.lang.Class;
 import java.util.Collection;
 import java.util.Optional;
+import java.lang.String;
 import java.util.List;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
@@ -70,6 +73,6 @@ public class AbstractConfigManager extends LifecycleAdapter implements AbstractC
 
     protected AbstractConfigManager() {
         instance = (AbstractConfigManagerInterface) DubboClassLoader.getInstance(AbstractConfigManager.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

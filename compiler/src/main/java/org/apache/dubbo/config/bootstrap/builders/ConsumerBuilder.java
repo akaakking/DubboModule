@@ -1,5 +1,8 @@
 package org.apache.dubbo.config.bootstrap.builders;
 
+import java.lang.Boolean;
+import java.lang.String;
+import java.lang.Integer;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.bootstrap.builders.AbstractReferenceBuilder;
@@ -50,6 +53,6 @@ public class ConsumerBuilder extends AbstractReferenceBuilder<ConsumerConfig, Co
 
     protected ConsumerBuilder() {
         instance = (ConsumerBuilderInterface) DubboClassLoader.getInstance(ConsumerBuilder.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

@@ -1,6 +1,10 @@
 package org.apache.dubbo.config;
 
+import java.lang.String;
+import java.lang.Integer;
+import java.lang.Boolean;
 import java.util.List;
+import org.apache.dubbo.config.ProtocolConfig;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.AbstractInterfaceConfig;
@@ -179,6 +183,6 @@ public class AbstractServiceConfig extends AbstractInterfaceConfig implements Ab
 
     protected AbstractServiceConfig() {
         instance = (AbstractServiceConfigInterface) DubboClassLoader.getInstance(AbstractServiceConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

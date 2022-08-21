@@ -1,6 +1,9 @@
 package org.apache.dubbo.rpc.model;
 
 import java.util.Map;
+import java.lang.String;
+import java.lang.Object;
+import java.lang.Class;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.common.BaseServiceMetadata;
@@ -65,11 +68,11 @@ public class ServiceMetadata extends BaseServiceMetadata implements ServiceMetad
         Class[] params = new Class[]{String.class, String.class, String.class, ClassClass<?>.class};
         Object[] args = new Object[]{serviceInterfaceName, group, version, serviceType};
         instance = (ServiceMetadataInterface) DubboClassLoader.getInstance(ServiceMetadata.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ServiceMetadata() {
         instance = (ServiceMetadataInterface) DubboClassLoader.getInstance(ServiceMetadata.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

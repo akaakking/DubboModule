@@ -1,5 +1,6 @@
 package org.apache.dubbo.common.config;
 
+import java.lang.String;
 import java.util.Properties;
 import java.util.Map;
 import org.apache.dubbo.DubboClassLoader;

@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.rpc.model.ScopeModel;
+import java.lang.reflect.Method;
 
 public class FrameworkModel extends ScopeModel implements FrameworkModelInterface {
 
@@ -38,21 +39,47 @@ public class FrameworkModel extends ScopeModel implements FrameworkModelInterfac
     protected FrameworkModelInterface instance;
 
     public static FrameworkModelInterface defaultModel() {
-        Class klass = DubboClassLoader.getKlass(FrameworkModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(FrameworkModel.class.getName());
         Method method = klass.getMethod("defaultModel");
-        return method.invoke();
+        return (FrameworkModelInterface)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static List<FrameworkModelInterface> getAllInstances() {
-        Class klass = DubboClassLoader.getKlass(FrameworkModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(FrameworkModel.class.getName());
         Method method = klass.getMethod("getAllInstances");
-        return method.invoke();
+        return (List<FrameworkModelInterface>)method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
+        return null;
     }
 
     public static void destroyAll() {
-        Class klass = DubboClassLoader.getKlass(FrameworkModel.class.getName());
+        try { 
+          Class klass = DubboClassLoader.getKlass(FrameworkModel.class.getName());
         Method method = klass.getMethod("destroyAll");
         method.invoke();
+                } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        };
     }
 
     public FrameworkModelInterface getInternalInstance() {
@@ -61,6 +88,6 @@ public class FrameworkModel extends ScopeModel implements FrameworkModelInterfac
 
     public FrameworkModel() {
         instance = (FrameworkModelInterface) DubboClassLoader.getInstance(FrameworkModel.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

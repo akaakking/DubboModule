@@ -20,11 +20,11 @@ public class ServiceBeanExportedEvent extends ApplicationEvent implements Servic
         Class[] params = new Class[]{ServiceBeanInterface.class};
         Object[] args = new Object[]{serviceBean};
         instance = (ServiceBeanExportedEventInterface) DubboClassLoader.getInstance(ServiceBeanExportedEvent.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     protected ServiceBeanExportedEvent() {
         instance = (ServiceBeanExportedEventInterface) DubboClassLoader.getInstance(ServiceBeanExportedEvent.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }

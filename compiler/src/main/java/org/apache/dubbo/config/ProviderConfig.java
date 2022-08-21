@@ -1,5 +1,8 @@
 package org.apache.dubbo.config;
 
+import java.lang.String;
+import java.lang.Integer;
+import java.lang.Boolean;
 import org.apache.dubbo.DubboClassLoader;
 import org.apache.dubbo.Interface.*;
 import org.apache.dubbo.config.AbstractServiceConfig;
@@ -242,13 +245,13 @@ public class ProviderConfig extends AbstractServiceConfig implements ProviderCon
 
     public ProviderConfig() {
         instance = (ProviderConfigInterface) DubboClassLoader.getInstance(ProviderConfig.class.getName());
-        super.instance = instance;
+        super.instance = this.instance;
     }
 
     public ProviderConfig(ModuleModelInterface moduleModel) {
         Class[] params = new Class[]{ModuleModelInterface.class};
         Object[] args = new Object[]{moduleModel};
         instance = (ProviderConfigInterface) DubboClassLoader.getInstance(ProviderConfig.class.getName(), params, args);
-        super.instance = instance;
+        super.instance = this.instance;
     }
 }
