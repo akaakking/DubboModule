@@ -1,5 +1,7 @@
 package org.apache.dubbo.compiler;
 
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.thoughtworks.qdox.model.JavaClass;
 
 import java.io.*;
@@ -13,20 +15,10 @@ import java.util.Set;
  * @Date 2022/8/19 下午12:30
  */
 public class DefaultAbstractGenerator extends AbstractGenerator {
-    public static final String ExportPackageInfoPath = "/home/wfh/DubboModule/compiler/src/main/resources/exportpackage";
 
     private String exportPackageInfoPath;
 
-    /**
-     * sourthCodeBasePath        /x/x/x/dubbo
-     * classOutPutDir            /x/x/x/src/main/java/
-     * exportPackageInfoPath     /x/x/x/src/resources/exportPackageInfo
-     *
-     * @param sorthCodeBasePath
-     * @param classOutPutDir
-     */
-    public DefaultAbstractGenerator(String sorthCodeBasePath, String classOutPutDir,String exportPackageInfoPath) {
-        super(sorthCodeBasePath, classOutPutDir);
+    public DefaultAbstractGenerator() {
         this.exportPackageInfoPath = exportPackageInfoPath;
     }
 
@@ -53,5 +45,51 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
     @Override
     protected void dealEnum(JavaClass javaClass) {
         directExport(javaClass);
+    }
+
+    @Override
+    protected void dealPublicClass(JavaClass javaClass) {
+        CompilationUnit cu = interfaceGenerator.generateInterface(javaClass);
+        classGenerator.generateClass(javaClass,cu);
+    }
+
+    // class和interface的生成策略不同在class会先生成一个interface。在生成class，而interface不会
+    // directexport主要存将来DubboclassLoad要委托给appclassLoad加载的Dubbo内部的类。、
+    // 分为三部分
+    // 1. interface
+    // 2. 直接暴露的Annotation
+    // 3. 直接暴露的Enum
+    // 4. 间接直接暴露的Interface
+    @Override
+    protected void dealPublicInterface(JavaClass javaClass) {
+        CompilationUnit cu = new CompilationUnit();
+
+
+        ClassOrInterfaceDeclaration coid = this.interfaceGenerator.addInterface(cu,javaClass,"org.apache.dubbo.Interface",javaClass.getName() + "Interface");
+
+        this.interfaceGenerator.addMethods(coid,javaClass);
+
+        this.addImports(cu);
+
+        overrideinterface(cu);
+    }
+
+    /**
+     * 需要区分的是将来是有两个输出目录的。
+     * 首先我们得将原来的代码copy一份这是内部的。将来嵌套在jar里   inner OutPutDir
+     * 还有一份是外部的 outwardoutputdir
+     * 可以就是说都做成tem的但是，这样不方便我查看。
+     * 可以将direct的暴露都理解为覆盖。但其实这种内外都有一份也行。
+     * 这就牵扯到对源码的修改部分。要不先把那个功能一做？
+     * ok 开干
+     *
+     * @param cu
+     */
+    private void overrideinterface(CompilationUnit cu) {
+        // todo cu save
+    }
+
+    public void setExportPackageInfoPath(String exportPackageInfoPath) {
+        this.exportPackageInfoPath = exportPackageInfoPath;
     }
 }

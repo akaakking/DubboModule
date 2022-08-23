@@ -1,31 +1,28 @@
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.DataKey;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.ReturnStmt;
+import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.type.TypeParameter;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.Visitable;
 import com.google.common.collect.Sets;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.*;
-import com.thoughtworks.qdox.model.impl.DefaultJavaParameterizedType;
-import com.thoughtworks.qdox.model.impl.DefaultJavaTypeVariable;
-import com.thoughtworks.qdox.type.TypeResolver;
 import org.junit.Test;
 
 import java.io.*;
 import java.util.*;
 
 /**
- * 最多看到5点注意搞清楚一件事
- * 能不能帮我们生成代码和改代码
+ * todo add comment here
  *
  * @Author wfh
  * @Date 2022/8/14 下午2:43
@@ -313,9 +310,21 @@ public class JavaParserLearn {
         }
     }
 
+
+
+
     @Test
     public void fsdf() {
-        System.out.println(addOrNot("java.util.Collection<org.apache.dubbo.config.ConfigCenterConfig>"));
+        JavaProjectBuilder jpb = new JavaProjectBuilder();
+        try {
+            jpb.addSource(new File("/home/wfh/tem/dubbo/dubbo-config/dubbo-config-api/src/main/java/org/apache/dubbo/config/bootstrap/builders/AbstractBuilder.java"));
+            for (JavaClass aClass : jpb.getClasses()) {
+                System.out.println(aClass.getFullyQualifiedName());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     String addOrNot(String name) {
@@ -343,268 +352,6 @@ public class JavaParserLearn {
 
 
 
-
-    private void addClass(CompilationUnit cu, JavaClass javaClass) {
-        cu.setPackageDeclaration("org.apache.dubbo.Interface");
-
-        ClassOrInterfaceDeclaration coid = cu.addClass("chilema");
-        coid.setInterface(true);
-
-        TypeParameter typeParameter = new TypeParameter();
-        typeParameter.setName("T");
-        ClassOrInterfaceType classOrInterfaceType = new ClassOrInterfaceType();
-        classOrInterfaceType.setName("AbstactConfig");
-        NodeList<ClassOrInterfaceType> nodeList = new NodeList<>();
-        nodeList.add(classOrInterfaceType);
-        typeParameter.setTypeBound(nodeList);
-
-        coid.addTypeParameter(typeParameter);
-
-        MethodDeclaration methodDeclaration = coid.addMethod("chifan");
-
-        methodDeclaration.addParameter("List<String>","strs");
-        methodDeclaration.setType("List"); // return type
-
-        System.out.println(methodDeclaration.getBody());
-
-        NodeList<TypeParameter> nodeList1 = new NodeList<>();
-        TypeParameter typeParameter1 = new TypeParameter();
-        nodeList1.add(typeParameter1);
-        typeParameter1.setName("T");
-        methodDeclaration.setTypeParameters(nodeList1); // 泛型
-        System.out.println(cu);
-    }
-
-    String dealType(String genericFullName,String genericValue) {
-        String brackets = "";
-
-        if (genericValue.contains("[")) {
-            brackets = genericValue.substring(genericValue.indexOf("["),genericValue.lastIndexOf("]")  + 1);
-            genericValue = genericValue.substring(0,genericValue.indexOf("["));
-            genericFullName = genericFullName.substring(0,genericFullName.indexOf("["));
-        }
-
-        Queue<String> suffixs = new LinkedList<>(); // ? extend
-        StringBuilder result = new StringBuilder();
-        int i = 0;
-
-
-        while (i < genericFullName.length()) {
-            int index1 = genericFullName.indexOf("<",i);
-            int index2 = genericFullName.indexOf(">",i);
-            int index3 = genericFullName.indexOf(" ",i);
-            int index4 = genericFullName.indexOf(",",i);
-            int index5 = genericFullName.indexOf("? extends ",i);
-
-            int min = min(index1,index2,index3,index4,index5);
-
-            if (i == min) {
-                if (i == index5) {
-                    i = i + 10;
-                } else {
-                    i = i + 1;
-                }
-            } else {
-                String s1 = genericFullName.substring(i, min);
-                if (checkName(s1)) {
-                    suffixs.add("Interface");
-                } else {
-                    suffixs.add("");
-                }
-                i = min;
-                if (i == index5) {
-                    i = i + 10;
-                } else {
-                    i = i + 1;
-                }
-            }
-        }
-
-        i = 0;
-
-        while (i < genericValue.length() - 1) {
-            int index1 = genericValue.indexOf("<",i);
-            int index2 = genericValue.indexOf(">",i);
-            int index3 = genericValue.indexOf(" ",i);
-            int index4 = genericValue.indexOf(",",i);
-            int index5 = genericValue.indexOf("? extends ",i);
-
-            int min = min(index1,index2,index3,index4,index5);
-
-            if (i == min) {
-                if (i == index5) {
-                    result.append(genericValue.substring(i,i + 10));
-                    i = i + 10;
-                } else {
-                    result.append(genericValue.substring(i,i + 1));
-                    i = i + 1;
-                }
-            } else {
-                String s1 = genericValue.substring(i, min);
-                result.append(s1).append(suffixs.poll());
-                i = min;
-            }
-        }
-
-        return result.append(">").append(brackets).toString();
-    }
-
-
-    @Test
-    public void gengg() {
-        CompilationUnit cu = StaticJavaParser.parse("public class A {public void add(String a){}}");
-        ClassOrInterfaceDeclaration coid = cu.getClassByName("A").get();
-
-        for (MethodDeclaration method : coid.getMethods()) {
-            BlockStmt blockStmt = new BlockStmt();
-            method.setBody(blockStmt);
-            MethodCallExpr methodCallExpr = new MethodCallExpr(new NameExpr("try { \n           instance"),"get");
-            methodCallExpr.addArgument("name.getInstance()");
-            methodCallExpr.addArgument("\"fds\"");
-
-
-            AssignExpr assignExpr = new AssignExpr(new NameExpr("super.instance"),new NameExpr("instance} catch (NoSuchMethodException e) {\n" +
-                    "            e.printStackTrace();\n" +
-                    "        } catch (InvocationTargetException e) {\n" +
-                    "            e.printStackTrace();\n" +
-                    "        } catch (IllegalAccessException e) {\n" +
-                    "            e.printStackTrace();\n" +
-                    "        }"), AssignExpr.Operator.ASSIGN);
-
-            blockStmt.addStatement(new ExpressionStmt(methodCallExpr));
-            blockStmt.addStatement(new ExpressionStmt(assignExpr));
-            blockStmt.addStatement(new NameExpr("fdsf"));
-            blockStmt.addStatement(new ReturnStmt("null"));
-        };
-
-
-
-        System.out.println(cu);
-    };;
-
-    @Test
-    public void gene() {
-//        String geneFull = "java.util.Map<? extends java.lang.String,java.uitl.Map<java.lang.String,java.lang.List<org.apache.dubbo.String>>>";
-//        String geneValue = "Map<String,Map<? extends String,List<String>>>";
-        String geneFull = "java.util.Map<java.lang.Class<?>,org.apache.dubbo.String>";
-        String geneValue = "Map<Class<?>,Map.String>";
-        System.out.println(dealType(geneFull, geneValue));
-
-//
-//        String kuohao = "";
-//
-//
-//        if (geneValue.contains("[")) {
-//            kuohao = geneValue.substring(geneValue.indexOf("["),geneValue.lastIndexOf("]")  + 1);
-//            geneValue = geneValue.substring(0,geneValue.indexOf("["));
-//            geneFull = geneFull.substring(0,geneFull.indexOf("["));
-//        }
-//
-//
-//        Queue<String> list1 = new LinkedList<>(); // ? extend
-//        Queue<String> list2 = new LinkedList<>();
-//        StringBuilder result = new StringBuilder();
-//        int i = 0;
-//
-//        while (i < geneFull.length()) {
-//            int index1 = geneFull.indexOf("<",i);
-//            int index2 = geneFull.indexOf(">",i);
-//            int index3 = geneFull.indexOf(" ",i);
-//            int index4 = geneFull.indexOf(",",i);
-//            int index5 = geneFull.indexOf("? extends ",i);
-//
-//            int min = min(index1,index2,index3,index4,index5);
-//
-//            if (i == min) {
-//                if (i == index5) {
-//                    i = i + 10;
-//                } else {
-//                    i = i + 1;
-//                }
-//            } else {
-//                String s1 = geneFull.substring(i, min);
-//                if (checkName(s1)) {
-//                    list1.add("Interface");
-//                } else {
-//                    list1.add("");
-//                }
-//                i = min;
-//                if (i == index5) {
-//                    i = i + 10;
-//                } else {
-//                    i = i + 1;
-//                }
-//            }
-//        }
-//
-//        i = 0;
-//
-//        while (i < geneValue.length() - 1) {
-//            int index1 = geneValue.indexOf("<",i);
-//            int index2 = geneValue.indexOf(">",i);
-//            int index3 = geneValue.indexOf(" ",i);
-//            int index4 = geneValue.indexOf(",",i);
-//            int index5 = geneValue.indexOf("? extends ",i);
-//
-//            int min = min(index1,index2,index3,index4,index5);
-//
-//            if (i == min) {
-//                if (i == index5) {
-//                    result.append(geneValue.substring(i,i + 10));
-//                    i = i + 10;
-//                } else {
-//                    result.append(geneValue.substring(i,i + 1));
-//                    i = i + 1;
-//                }
-//            } else {
-//                String s1 = geneValue.substring(i, min);
-//                result.append(s1).append(list1.poll());
-//                i = min;
-//            }
-//        }
-//
-//        System.out.println(result.append(">").append(kuohao));
-    }
-
-    // 求出最小非负
-    private int min(int... nums) {
-        int min = Integer.MAX_VALUE;
-        for (int i = 0; i<nums.length; i++) {
-            if (nums[i] >= 0  && nums[i] < min) {
-                min = nums[i];
-            }
-        }
-
-        return min;
-    }
-
-    @Test
-    public void fdsfsdfsdf() {
-        String a = ".fsdfdsfds";
-        System.out.println(a.indexOf(".f", 0));
-
-    }
-
-
-    @Test
-    public void gengdsf() {
-        JavaProjectBuilder jdb = new JavaProjectBuilder();
-        try {
-            jdb.addSource(new File("/home/wfh/DubboModule/dubbo/dubbo-rpc/dubbo-rpc-api/src/main/java/org/apache/dubbo/rpc/Invocation.java"));
-            for (JavaClass javaclass : jdb.getClasses()) {
-                for (JavaMethod method : javaclass.getMethods()) {
-                    for (JavaParameter parameter : method.getParameters()) {
-                        System.out.println(parameter.getType().getGenericValue());
-                    }
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     @Test
     public void gener() {
         CompilationUnit compilationUnit = new CompilationUnit();
@@ -615,30 +362,5 @@ public class JavaParserLearn {
         compilationUnit.addClass("Wang").setPublic(true);
         System.out.println(compilationUnit);
     }
-
-    private class RemoveFileds extends ModifierVisitor<Void> {
-        @Override
-        public Visitable visit(FieldDeclaration n, Void arg) {
-            super.visit(n, arg);
-            n.remove();
-            return n;
-        }
-    }
-
-    private class InterfaceMethod extends ModifierVisitor<Void> {
-
-        @Override
-        public Visitable visit(MethodDeclaration n, Void arg) {
-            super.visit(n, arg);
-            if (n.isPublic()) {
-                n.removeBody();
-            } else {
-                n.remove();
-            }
-            return n;
-        }
-    }
-
 }
 
-// 今天看能不能重新做一下，顺便把class也一搞，生成代码用模板，实在不是个好办法。

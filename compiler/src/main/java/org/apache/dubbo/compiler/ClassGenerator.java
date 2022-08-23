@@ -37,7 +37,7 @@ public class ClassGenerator {
 
     public ClassGenerator(AbstractGenerator generator) {
         this.generator = generator;
-        this.baseDir = generator.getOutputDir();
+        this.baseDir = generator.getClassOutPutDir();
     }
 
     void generateClass(JavaClass javaClass,CompilationUnit cu) {
@@ -143,7 +143,6 @@ public class ClassGenerator {
         }
     }
 
-    // 不给interface,abstact加construct
     private void addConstruct(JavaClass javaClass,ClassOrInterfaceDeclaration coid) {
         if (javaClass.isAbstract()) {
             addEmptyConstruct(javaClass,coid.addConstructor(Modifier.Keyword.PROTECTED));
@@ -307,7 +306,7 @@ public class ClassGenerator {
     }
 
     void createDir(JavaClass javaClass) {
-        File dir  = new File(baseDir + javaClass.getPackageName().replaceAll("\\.","/"));
+        File dir  = new File(this.baseDir + javaClass.getPackageName().replaceAll("\\.","/"));
         if (!dir.exists()) {
             dir.mkdirs();
         }

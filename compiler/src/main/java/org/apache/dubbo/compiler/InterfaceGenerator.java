@@ -1,25 +1,11 @@
 package org.apache.dubbo.compiler;
 
-import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.ImportDeclaration;
-import com.github.javaparser.ast.NodeList;
-import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.*;
-import com.github.javaparser.ast.body.Parameter;
-import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.type.TypeParameter;
-import com.github.javaparser.ast.visitor.ModifierVisitor;
-import com.github.javaparser.ast.visitor.Visitable;
 import com.thoughtworks.qdox.model.*;
-import org.junit.Test;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * //TODO add class commment here
@@ -39,7 +25,7 @@ public class InterfaceGenerator {
     CompilationUnit generateInterface(JavaClass javaClass) {
         CompilationUnit cu = new CompilationUnit();
 
-        ClassOrInterfaceDeclaration coid = addClass(cu,javaClass);
+        ClassOrInterfaceDeclaration coid = addInterface(cu,javaClass,"org.apache.dubbo.Interface",javaClass.getName() + "Interface");
 
         addMethods(coid,javaClass);
 
@@ -50,11 +36,10 @@ public class InterfaceGenerator {
         return cu;
     }
 
-    private ClassOrInterfaceDeclaration addClass(CompilationUnit cu, JavaClass javaClass) {
-        cu.setPackageDeclaration("org.apache.dubbo.Interface");
+    protected ClassOrInterfaceDeclaration addInterface(CompilationUnit cu, JavaClass javaClass, String packageName, String interfaceName) {
+        cu.setPackageDeclaration(packageName);
 
-        ClassOrInterfaceDeclaration coid = cu.addInterface(javaClass.getName() + "Interface");
-        coid.setInterface(true);
+        ClassOrInterfaceDeclaration coid = cu.addInterface(interfaceName);
 
         // deal class generic
         dealClassGeneric(coid,javaClass);
@@ -84,7 +69,7 @@ public class InterfaceGenerator {
 
 
 
-    private void addMethods(ClassOrInterfaceDeclaration coid,JavaClass javaClass) {
+    public void addMethods(ClassOrInterfaceDeclaration coid,JavaClass javaClass) {
         for (JavaMethod method : javaClass.getMethods()) {
             if (method.isStatic() || !method.isPublic()) {
                 continue;
@@ -109,7 +94,7 @@ public class InterfaceGenerator {
     }
 
     private void createInterfaceDir() {
-        this.interfaceDir = this.generator.getOutputDir() + "org/apache/dubbo/Interface/";
+        this.interfaceDir = this.generator.getInterfaceOutPutDir() + "org/apache/dubbo/Interface/";
 
         File file = new File(this.interfaceDir);
 

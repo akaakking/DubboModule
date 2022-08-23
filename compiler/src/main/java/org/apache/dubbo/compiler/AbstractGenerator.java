@@ -3,24 +3,18 @@ package org.apache.dubbo.compiler;
 
 
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
-import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.NormalAnnotationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.type.TypeParameter;
 import com.google.common.collect.Sets;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.*;
-import org.junit.Test;
 
 import java.io.*;
-import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -32,32 +26,30 @@ import java.util.*;
 public abstract class AbstractGenerator{
     protected final static JavaProjectBuilder jpb = new JavaProjectBuilder();
 
-    public final static String PROJECT_BASE_PATH    = "/home/wfh/DubboModule/dubbo";
-    public final static String OUTPUT_DIR           = "/home/wfh/DubboModule/compiler/src/main/java/";
-    public final static String EXTRA_EXPORT_INFO_PATH = "/home/wfh/DubboModule/compiler/src/main/resources/extraExportInfos";
-    public final static String DIRECT_EXPORT_CLASS_PATH = "/home/wfh/DubboModule/compiler/src/main/resources/directExportClasses";
+    protected String sourthCodePath;
+    protected String outputBaseDir;
+    // /.../java/
+    protected String interfaceOutPutDir;
+    // /.../java/
+    protected String classOutPutDir;
+    protected String extraExportInfoPath;
+    protected String directExportClassPath;
 
-    private String projectBasePath;
-    private String outputDir;
-    private String extraExportInfoPath = EXTRA_EXPORT_INFO_PATH;
-    private String directExportClassPath = DIRECT_EXPORT_CLASS_PATH;
-
+    protected final Set<String> EIASet = new HashSet<>();
     protected final Set<String> exportClasses = new HashSet<>();
     private final Set<String> extraExports = new HashSet<>();
     private final Set<File> sourceFile = new HashSet<>();
     private final Map<String,String> name2path = new HashMap<>();
     private final Set<String> directExportclasses = new HashSet<>();
     protected final List<String> importList = new ArrayList<>();
-    private InterfaceGenerator interfaceGenerator;
-    private ClassGenerator classGenerator;
+    protected InterfaceGenerator interfaceGenerator;
+    protected ClassGenerator classGenerator;
 
     /**
      * sourthCodeBasePath /x/x/x/dubbo
      * classOutPutDir     /x/x/x/src/main/java/
      */
-    public AbstractGenerator(String sorthCodeBasePath,String classOutPutDir) {
-        this.projectBasePath = sorthCodeBasePath;
-        this.outputDir = classOutPutDir;
+    public AbstractGenerator() {
     }
 
     protected abstract Set<String> provideExportClasses();
@@ -65,7 +57,6 @@ public abstract class AbstractGenerator{
 
     public void generate() {
         initEnvirenment();
-        initNamePathMap();
 
         Set<String> exportPackages = provideExportPackages();
         addExportPackages(exportPackages);
@@ -75,6 +66,27 @@ public abstract class AbstractGenerator{
         classGenerator = new ClassGenerator(this);
         interfaceGenerator = new InterfaceGenerator(this);
 
+        dealPackageExport(exportPackages);
+        dealClassesExport(exportClasses);
+
+        // 额外暴露和直接暴露都应该被记录，将来做过滤。
+        dealExtraExport();
+        saveDirectExportInfo();
+    }
+
+    private void dealClassesExport(Set<String> exportClasses) {
+        if (exportClasses == null) {
+            return;
+        }
+
+        for (String exportClass : exportClasses) {
+            JavaClass javaClass = jpb.getClassByName(exportClass);
+            dealJavaClass(javaClass);
+            this.importList.clear();
+        }
+    }
+
+    private void dealPackageExport(Set<String> exportPackages) {
         for (String exportPackage : exportPackages) {
             JavaPackage javaPackage = jpb.getPackageByName(exportPackage);
 
@@ -87,13 +99,10 @@ public abstract class AbstractGenerator{
             List<JavaClass> javaClasses = new LinkedList<>(javaClasses0);
 
             for (JavaClass javaClass : javaClasses) {
-                dealClass(javaClass);
+                dealJavaClass(javaClass);
                 this.importList.clear();
             }
         }
-
-        dealExtraExport();
-        saveDirectExportInfo();
     }
 
     void addMethodGeneric(MethodDeclaration parserMethodDeclaration, JavaMethod method) {
@@ -104,6 +113,7 @@ public abstract class AbstractGenerator{
     }
 
 
+    // todo xiangyinggaibian
     private void dealExtraExport() {
         Set<String> s1;
         Set<String> s2 = new HashSet<>();
@@ -113,7 +123,7 @@ public abstract class AbstractGenerator{
             s1 = new HashSet<>(s1);
             for (String s : s1) {
                 JavaClass javaClass = jpb.getClassByName(s);
-                dealClass(javaClass);
+                dealJavaClass(javaClass);
                 importList.clear();
             }
         }
@@ -180,15 +190,7 @@ public abstract class AbstractGenerator{
         }
 
         JavaType javaType = method.getReturnType();
-
-        if (checkName(javaType.getBinaryName()) && !method.getReturns().isEnum()) {
-            parserMethodDeclaration.setType(dealType(javaType));
-        } else {
-            parserMethodDeclaration.setType(dealType(javaType));
-            if (method.getReturns().isEnum()) {
-                this.importList.add(javaType.getBinaryName());
-            }
-        }
+        parserMethodDeclaration.setType(dealType(javaType));
     }
 
     void addImports(CompilationUnit cu) {
@@ -197,7 +199,15 @@ public abstract class AbstractGenerator{
         }
     }
 
-    void saveContent(String content,String outpath) {
+    public String getInterfaceOutPutDir() {
+        return interfaceOutPutDir;
+    }
+
+    public String getClassOutPutDir() {
+        return classOutPutDir;
+    }
+
+    void saveContent(String content, String outpath) {
         File file = new File(outpath);
 
         try {
@@ -217,6 +227,30 @@ public abstract class AbstractGenerator{
                 writer.close();
             }
         }
+    }
+
+    public void setSourthCodePath(String sourthCodePath) {
+        this.sourthCodePath = sourthCodePath;
+    }
+
+    public void setOutputBaseDir(String outputBaseDir) {
+        this.outputBaseDir = outputBaseDir;
+    }
+
+    public void setInterfaceOutPutDir(String interfaceOutPutDir) {
+        this.interfaceOutPutDir = interfaceOutPutDir;
+    }
+
+    public void setClassOutPutDir(String classOutPutDir) {
+        this.classOutPutDir = classOutPutDir;
+    }
+
+    public void setExtraExportInfoPath(String extraExportInfoPath) {
+        this.extraExportInfoPath = extraExportInfoPath;
+    }
+
+    public void setDirectExportClassPath(String directExportClassPath) {
+        this.directExportClassPath = directExportClassPath;
     }
 
     TypeParameter stuffTypeParameter(JavaTypeVariable<JavaGenericDeclaration> typeParameter) {
@@ -257,12 +291,7 @@ public abstract class AbstractGenerator{
     }
 
     boolean checkName(JavaClass javaClass) {
-        if (javaClass.isEnum()) {
-            this.importList.add(javaClass.getBinaryName());
-            return false;
-        } else{
-            return checkName(javaClass.getBinaryName());
-        }
+        return checkName(javaClass.getBinaryName());
     }
 
     // 外部来的有可能有相关问题
@@ -274,8 +303,18 @@ public abstract class AbstractGenerator{
         return oldName.substring(oldName.lastIndexOf(".") + 1);
     }
 
+
+
+    // 对外边的类做注解有没有意义？，我觉得直接暴露的是有意义的，但是直接暴露的基本没有。
+    // 总的来讲又回到了那个问题，接口暴露怎么设计。
+    // 接口的话可不可以这样，内外都一样，即参数都是Interface
+    //
     void copyAnnotationToMethod(JavaMethod javaMethod,MethodDeclaration methodDeclaration) {
         for (JavaAnnotation annotation : javaMethod.getAnnotations()) {
+            if (annotation.getType().toString().equals("java.lang.Override")) {
+                continue;
+            }
+
             NormalAnnotationExpr normalAnnotationExpr =  new NormalAnnotationExpr();
             copyAnnotation(annotation,normalAnnotationExpr);
             methodDeclaration.addAnnotation(normalAnnotationExpr);
@@ -291,6 +330,7 @@ public abstract class AbstractGenerator{
     }
 
     void copyAnnotation(JavaAnnotation javaAnnotation, NormalAnnotationExpr annotationExpr) {
+        this.importList.add(javaAnnotation.getType().toString());
 
         if (javaAnnotation.getType().toString().startsWith("org.apache.dubbo")
                                 || javaAnnotation.getType().toString().startsWith("com.alibaba.dubbo")) {
@@ -324,15 +364,10 @@ public abstract class AbstractGenerator{
         }
     }
 
-    // 检查全限定名并做相应处理 不加[ < 在包内的话返回true
+    // 检查全限定名并做相应处理 不加[ < 在包内的话返回true。
+    // 检查要不要加interface,不是在包内就要加的。
     boolean checkName(String name) {
-        if (name.contains("[")) {
-            name = name.substring(0,name.indexOf("["));
-        }
-
-        if (name.contains("<")) {
-            name = name.substring(0,name.indexOf("<"));
-        }
+        removeBrackets(name);
 
         if (name == null) {
             return false;
@@ -352,7 +387,7 @@ public abstract class AbstractGenerator{
                 this.extraExports.add(name);
             }
 
-            if (name.contains("annotation")) {
+            if (EIASet.contains(name)) {
                 this.importList.add(name);
                 return false;
             }
@@ -393,36 +428,45 @@ public abstract class AbstractGenerator{
     protected abstract void dealInnerClass(JavaClass javaClass);
     protected abstract void dealAnnotation(JavaClass javaClass);
     protected abstract void dealEnum(JavaClass javaClass);
+    protected abstract void dealPublicClass(JavaClass javaClass);
+    protected abstract void dealPublicInterface(JavaClass javaClass);
 
-    private void dealClass(JavaClass javaClass) {
+    private void dealJavaClass(JavaClass javaClass) {
+        // first
         if (javaClass.isInner()) {
             dealInnerClass(javaClass);
             return;
         }
 
+        // second
         if (javaClass.isEnum()) {
             dealEnum(javaClass);
             return;
         }
 
+        // last
         if (javaClass.isAnnotation()) {
             dealAnnotation(javaClass);
             return;
         }
 
+        if (javaClass.isInterface() && javaClass.isPublic()) {
+            dealPublicInterface(javaClass);
+        }
 
         if (javaClass.isPublic()) {
-            CompilationUnit cu = interfaceGenerator.generateInterface(javaClass);
-            if (!javaClass.isInterface()) {
-                classGenerator.generateClass(javaClass,cu);
-            }
+            dealPublicClass(javaClass);
         }
+        this.importList.clear();
     }
 
+
+
+    // 要放在外边
     protected void directExport(JavaClass javaClass) {
         String path = this.name2path.get(javaClass.getBinaryName());
         File file = new File(path);
-        File outFile = new File(this.outputDir + javaClass.getFullyQualifiedName().replaceAll("\\.", "/") + ".java");
+        File outFile = new File(this.classOutPutDir + javaClass.getFullyQualifiedName().replaceAll("\\.", "/") + ".java");
 
         if (!outFile.exists()) {
             this.classGenerator.createDir(javaClass);
@@ -631,14 +675,33 @@ public abstract class AbstractGenerator{
 
 
     private void initEnvirenment() {
+        copySourceCode();
         initJavaProjectBuilder();
+        initNamePathMap();
+        initEIASet();
     }
 
+    // sourthcodepath outputbasepath
+    private void copySourceCode() {
+        try {
+            FileUtils.copyFolder(this.sourthCodePath,this.outputBaseDir);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initEIASet() {
+        for (JavaClass aClass : jpb.getClasses()) {
+            if (aClass.isEnum() || aClass.isInterface() || aClass.isAnnotation()) {
+                this.EIASet.add(aClass.getFullyQualifiedName());
+            }
+        }
+    }
 
 // 倒是可以作为一个算法题写一写
 
     private void initJavaProjectBuilder() {
-        inOrNot(new File(this.projectBasePath));
+        inOrNot(new File(this.outputBaseDir));
         for (File file : sourceFile) {
             jpb.addSourceTree(file);
         }
@@ -663,20 +726,6 @@ public abstract class AbstractGenerator{
             return;
         }
     }
-
-    public String getProjectBasePath() {
-        return projectBasePath;
-    }
-
-    public void setProjectBasePath(String projectBasePath) {
-        this.projectBasePath = projectBasePath;
-    }
-
-    public String getOutputDir() {
-        return outputDir;
-    }
-
-    public void setOutputDir(String outputDir) {
-        this.outputDir = outputDir;
-    }
 }
+
+//FileSystemServiceDiscovery.java

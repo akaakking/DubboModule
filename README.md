@@ -106,5 +106,46 @@ interface生成主要考虑以下方面
 >
 >JavaParser: VisitedAnalyse, transform and generate your Java code base。
 
+```java
+//FileSystemServiceDiscovery.java     这是个全空的文件，为什么会存在。
+```
+
+目前的话要做以下几个事情
+
+1.   annotation直接暴露前要分析一波依赖
+2.   provideclass不要为空了
+3.   对于接口的处理方案
+4.   innerclass的改动。
+5.   源码的改动。
+
+顺序是 1 3 2 5 4
+
+最后再考虑整合进maven
 
 
+
+// getInstance 的地方也得变。因为接口此时不以interface结尾了。但是又获取不到instance很难办。这个后期再看吧
+
+
+
+我们需要确定一个目录安排
+
+interface得和内部的东西一起编译。
+
+也就是说interface是得放在内部的
+
+而原有的interface就是做了一个覆盖。
+
+原有的东西留着就留着，反正就是安装包大一点而已
+
+那interface放在哪里，做成变量，变量暂时指向common包下吧。
+
+那外部的东西放在哪里。
+
+那生成的外部东西放在哪里，做成变量，变量暂时指向compile包下吧。
+
+输出信息放在哪， 放在common的resource/metainfo里边吧
+
+
+
+将来肯定先编译interface

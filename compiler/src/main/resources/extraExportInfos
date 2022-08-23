@@ -3,7 +3,6 @@ org.apache.dubbo.common.lang.Prioritized
 org.apache.dubbo.common.extension.ExtensionScope
 org.apache.dubbo.common.config.PropertiesConfiguration
 org.apache.dubbo.rpc.model.ServiceModel
-org.apache.dubbo.Interface.RegistryConfigInterface
 org.apache.dubbo.common.extension.ExtensionInjector
 org.apache.dubbo.rpc.model.ScopeModelInitializer
 org.apache.dubbo.common.url.component.URLParam
@@ -12,11 +11,9 @@ org.apache.dubbo.common.URL
 org.apache.dubbo.common.deploy.Deployer
 org.apache.dubbo.rpc.model.MethodDescriptor
 org.apache.dubbo.common.extension.ExtensionDirector
-org.apache.dubbo.Interface.MetadataReportConfigInterface
 org.apache.dubbo.metadata.definition.model.FullServiceDefinition
 org.apache.dubbo.rpc.model.ModuleModel
 org.apache.dubbo.common.config.InmemoryConfiguration
-org.apache.dubbo.Interface.ApplicationConfigInterface
 org.apache.dubbo.common.beans.factory.ScopeBeanFactory
 org.apache.dubbo.rpc.model.ServiceMetadata
 org.apache.dubbo.registry.client.ServiceInstanceCustomizer
@@ -71,7 +68,6 @@ org.apache.dubbo.metadata.InstanceMetadataChangedListener
 org.apache.dubbo.metadata.definition.model.TypeDefinition
 org.apache.dubbo.common.context.ModuleExt
 org.apache.dubbo.registry.client.ServiceInstance
-org.apache.dubbo.Interface.ServiceConfigInterface
 org.apache.dubbo.common.threadpool.manager.ExecutorRepository
 org.apache.dubbo.rpc.model.ScopeModel
 org.apache.dubbo.rpc.model.ConsumerModel
