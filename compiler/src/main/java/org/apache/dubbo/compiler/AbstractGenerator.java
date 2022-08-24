@@ -44,7 +44,7 @@ public abstract class AbstractGenerator{
     protected final List<String> importList = new ArrayList<>();
     protected InterfaceGenerator interfaceGenerator;
     protected ClassGenerator classGenerator;
-
+    protected SourthCodeChanger sourthCodeChanger;
     /**
      * sourthCodeBasePath /x/x/x/dubbo
      * classOutPutDir     /x/x/x/src/main/java/
@@ -71,7 +71,32 @@ public abstract class AbstractGenerator{
 
         // 额外暴露和直接暴露都应该被记录，将来做过滤。
         dealExtraExport();
+
+        changeSourthCode();
+
         saveDirectExportInfo();
+    }
+
+    public Map<String, String> getName2path() {
+        return name2path;
+    }
+
+    public SourthCodeChanger getSourthCodeChanger() {
+        return sourthCodeChanger;
+    }
+
+    private void changeSourthCode() {
+        Set<String> allExportClasses = Sets.union(this.exportClasses,this.extraExports);
+
+        /**
+         * 主要是change以下几个部分
+         * 1. 类定义部分得让他继承一个接口
+         * 2. 含有暴露参数的函数在其内部得做一个强转
+         */
+        for (String className : allExportClasses) {
+            JavaClass javaClass = jpb.getClassByName(className);
+
+        }
     }
 
     private void dealClassesExport(Set<String> exportClasses) {
@@ -709,7 +734,7 @@ public abstract class AbstractGenerator{
 
     private void inOrNot(File file) {
         // 过滤一部分
-        if (file.isFile()) {
+        if (file.isFile() || file.getName().equals("dubbo-compiler")) {
             return;
         }
 

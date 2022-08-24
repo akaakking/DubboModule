@@ -40,11 +40,7 @@ public class ClassGenerator {
         this.baseDir = generator.getClassOutPutDir();
     }
 
-    void generateClass(JavaClass javaClass,CompilationUnit cu) {
-        if (javaClass.isInterface()) {
-            return;
-        }
-
+    ClassOrInterfaceDeclaration generateClass(JavaClass javaClass,CompilationUnit cu) {
         ClassOrInterfaceDeclaration coid = interface2Class(javaClass,cu);
 
         methodGenerator.visit(cu,null);
@@ -58,6 +54,7 @@ public class ClassGenerator {
         this.generator.addImports(cu);
 
         saveClass(javaClass,cu);
+        return coid;
     }
 
     public void addGetInstanceMethod(JavaClass javaClass,ClassOrInterfaceDeclaration coid) {
@@ -104,6 +101,7 @@ public class ClassGenerator {
                 if (method.getReturns().isVoid()) {
                     invokeNameExpr.setName("method");
                     MethodCallExpr invokeCall = new MethodCallExpr(invokeNameExpr,"invoke");
+                    invokeCall.addArgument("null");
                     for (JavaParameter parameter : method.getParameters()) {
                         invokeCall.addArgument(parameter.getName());
                     }
@@ -119,6 +117,7 @@ public class ClassGenerator {
                 } else {
                     invokeNameExpr.setName("(" + methodDeclaration.getType().toString() + ")method");
                     MethodCallExpr invokeCall = new MethodCallExpr(invokeNameExpr,"invoke");
+                    invokeCall.addArgument("null");
                     for (JavaParameter parameter : method.getParameters()) {
                         invokeCall.addArgument(parameter.getName());
                     }
@@ -139,6 +138,8 @@ public class ClassGenerator {
                 }
 
                 this.generator.addMethodGeneric(methodDeclaration,method);
+
+                this.generator.getSourthCodeChanger().addMethod(method,methodDeclaration);
             }
         }
     }

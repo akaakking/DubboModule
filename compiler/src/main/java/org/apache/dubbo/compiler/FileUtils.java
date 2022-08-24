@@ -1,6 +1,8 @@
 package org.apache.dubbo.compiler;
 
 import java.io.*;
+import java.lang.reflect.Parameter;
+import java.nio.charset.StandardCharsets;
 
 /**
  * //TODO add class commment here
@@ -9,6 +11,29 @@ import java.io.*;
  * @Date 2022/8/23 下午3:53
  */
 public class FileUtils {
+
+    public static void saveContent(String content,String path) {
+        Writer writer = null;
+        try {
+            File file = new File(path);
+            file.createNewFile();
+            writer = new OutputStreamWriter(new FileOutputStream(path));
+            writer.write(content);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
     public static void copyFolder(String sourcePath,String targetPath) throws Exception{
         //源文件夹路径

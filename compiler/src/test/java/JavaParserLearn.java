@@ -1,19 +1,15 @@
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.DataKey;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
-import com.github.javaparser.ast.stmt.ReturnStmt;
 import com.github.javaparser.ast.stmt.Statement;
-import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import com.github.javaparser.ast.type.TypeParameter;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
-import com.github.javaparser.ast.visitor.Visitable;
 import com.google.common.collect.Sets;
+import com.sun.org.apache.xerces.internal.dom.ChildNode;
 import com.thoughtworks.qdox.JavaProjectBuilder;
 import com.thoughtworks.qdox.model.*;
 import org.junit.Test;
@@ -284,13 +280,37 @@ public class JavaParserLearn {
 
     @Test
     public void fsd() {
-        CompilationUnit cu = StaticJavaParser.parse("public class A{ public void eat() {}}");
+//        CompilationUnit cu = StaticJavaParser.parse("public class A{ public void eat(String name,List<String> ertt) {int i = 0; int c = i++;}}");
+//        ClassOrInterfaceDeclaration coid =  cu.getClassByName("A").get();
+//
+//        MethodDeclaration methodDeclaration = coid.getMethodsBySignature("eat","String","List").get(0);
+//
+//        System.out.println(methodDeclaration);
+
+        String a = "fsdfdsf";
+        System.out.println(a.replace("sd", "d"));
+
+    }
+
+
+
+    @Test
+    public void fsdgfg() {
+        CompilationUnit cu = StaticJavaParser.parse("public class A{ public void eat(String name,String ertt) {int i = 0;}}");
         ClassOrInterfaceDeclaration coid =  cu.getClassByName("A").get();
-        for (MethodDeclaration method : coid.getMethods()) {
-            method.setType("java.util.List<java.util.Map<? extends java.lang.String,java.lang.String>>");
-            System.out.println(method.getType().asClassOrInterfaceType().getTypeArguments().get());
-        }
-        System.out.println(cu);
+
+//        CompilationUnit cu1 = StaticJavaParser.parse("public class B{ public void eat(String name) {int i = 0;}}");
+//        ClassOrInterfaceDeclaration coid1 = cu.getClassByName("B").get();
+
+        MethodDeclaration  methodDeclaration = coid.getMethodsBySignature("eat","String").get(0);
+        CallableDeclaration.Signature si = methodDeclaration.getSignature();
+        methodDeclaration.setType("");
+        methodDeclaration.getTypeParameters();
+        System.out.println(coid.getMethodsBySignature(String.valueOf(si)));
+
+//        System.out.println(methodDeclaration);
+
+//        System.out.println(cu);
     }
 
     @Test
@@ -361,6 +381,10 @@ public class JavaParserLearn {
         classDeclaration.addAnnotation("AnyAnnotation");
         compilationUnit.addClass("Wang").setPublic(true);
         System.out.println(compilationUnit);
+    }
+
+    public class Mod extends ModifierVisitor {
+
     }
 }
 

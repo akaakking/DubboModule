@@ -6,6 +6,8 @@ import com.github.javaparser.ast.type.TypeParameter;
 import com.thoughtworks.qdox.model.*;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * //TODO add class commment here
@@ -85,6 +87,8 @@ public class InterfaceGenerator {
             for (JavaParameter parameter : method.getParameters()) {
                 this.generator.addParams(parserMethodDeclaration,parameter);
             }
+
+            this.generator.getSourthCodeChanger().addMethod(method,parserMethodDeclaration);
         }
     }
 

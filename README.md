@@ -149,3 +149,32 @@ interface得和内部的东西一起编译。
 
 
 将来肯定先编译interface
+
+```
+<dependency>
+    <groupId>org.apache.dubbo</groupId>
+    <artifactId>dubbo-common</artifactId>
+    <version>3.0.11-SNAPSHOT</version>
+</dependency>
+<dependency>
+    <groupId>org.apache</groupId>
+    <artifactId>DubboPro</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+```
+
+
+
+
+
+类签名
+
+方法签名
+
+函数体转换
+
+实现接口
+
+
+
+我们只change 那些接口有的方法

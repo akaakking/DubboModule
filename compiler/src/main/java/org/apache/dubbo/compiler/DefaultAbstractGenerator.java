@@ -3,6 +3,7 @@ package org.apache.dubbo.compiler;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaMethod;
 
 import java.io.*;
 import java.util.HashSet;
@@ -15,11 +16,11 @@ import java.util.Set;
  * @Date 2022/8/19 下午12:30
  */
 public class DefaultAbstractGenerator extends AbstractGenerator {
-
     private String exportPackageInfoPath;
 
     public DefaultAbstractGenerator() {
         this.exportPackageInfoPath = exportPackageInfoPath;
+        this.sourthCodeChanger = new SourthCodeChanger(this);
     }
 
     // 提供不方便用包表示的javaclasses
@@ -50,8 +51,11 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
     @Override
     protected void dealPublicClass(JavaClass javaClass) {
         CompilationUnit cu = interfaceGenerator.generateInterface(javaClass);
-        classGenerator.generateClass(javaClass,cu);
+        ClassOrInterfaceDeclaration newClass = classGenerator.generateClass(javaClass,cu);
+        this.sourthCodeChanger.setNewClass(newClass);
+        this.sourthCodeChanger.changeSourceCode(javaClass);
     }
+
 
     // class和interface的生成策略不同在class会先生成一个interface。在生成class，而interface不会
     // directexport主要存将来DubboclassLoad要委托给appclassLoad加载的Dubbo内部的类。、
