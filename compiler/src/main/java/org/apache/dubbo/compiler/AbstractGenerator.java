@@ -477,6 +477,7 @@ public abstract class AbstractGenerator{
 
         if (javaClass.isInterface() && javaClass.isPublic()) {
             dealPublicInterface(javaClass);
+            return;
         }
 
         if (javaClass.isPublic()) {

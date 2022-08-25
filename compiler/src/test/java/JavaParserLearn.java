@@ -7,6 +7,8 @@ import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.Statement;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.google.common.collect.Sets;
 import com.sun.org.apache.xerces.internal.dom.ChildNode;
@@ -23,7 +25,9 @@ import java.util.*;
  * @Author wfh
  * @Date 2022/8/14 下午2:43
  */
-public class JavaParserLearn {
+public class JavaParserLearn{
+
+
 
     @Test
     public void tesgg() {
@@ -286,9 +290,26 @@ public class JavaParserLearn {
 //        MethodDeclaration methodDeclaration = coid.getMethodsBySignature("eat","String","List").get(0);
 //
 //        System.out.println(methodDeclaration);
+        JavaProjectBuilder javaProjectBuilder = new JavaProjectBuilder();
+//        try {
+//            javaProjectBuilder.addSource(new File("/home/wfh/tem/dubboTem/dubbo-config/dubbo-config-spring/src/main/java/org/apache/dubbo/config/spring/reference/ReferenceBeanBuilder.java"));
+//            for (JavaClass aClass : javaProjectBuilder.getClasses()) {
+//                for (JavaMethod method : aClass.getMethods()) {
+//                    for (JavaParameter parameter : method.getParameters()) {
+//                        System.out.println(parameter.getType().getGenericValue());
+//                    }
+//                }
+//            }
 
-        String a = "fsdfdsf";
-        System.out.println(a.replace("sd", "d"));
+            Parameter parameter = new Parameter();
+            parameter.setName("name");
+        System.out.println(StaticJavaParser.parseType("Map<String,String>"));;
+            parameter.setType("Map<String,String>");
+        System.out.println(parameter);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
 
     }
 
@@ -382,6 +403,8 @@ public class JavaParserLearn {
         compilationUnit.addClass("Wang").setPublic(true);
         System.out.println(compilationUnit);
     }
+
+
 
     public class Mod extends ModifierVisitor {
 

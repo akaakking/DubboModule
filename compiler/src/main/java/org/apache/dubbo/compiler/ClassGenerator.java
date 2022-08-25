@@ -139,7 +139,9 @@ public class ClassGenerator {
 
                 this.generator.addMethodGeneric(methodDeclaration,method);
 
-                this.generator.getSourthCodeChanger().addMethod(method,methodDeclaration);
+                if (!javaClass.isInterface()) {
+                    this.generator.getSourthCodeChanger().addMethod(method,methodDeclaration);
+                }
             }
         }
     }

@@ -91,7 +91,7 @@ public class SourthCodeChanger {
                 sourthMethod = sourthCoid.getMethodsBySignature(javaMethod.getName(),oldTypes).get(0);
 
                 if (!changedNames.isEmpty()) {
-                    BlockStmt blockStmt = methodDeclaration.getBody().get();
+                    BlockStmt blockStmt = sourthMethod.getBody().get();
                     changeBlock(blockStmt,changedNames);
                 }
             } else {
@@ -120,9 +120,10 @@ public class SourthCodeChanger {
         for (int i = 0; i < oldTypes.length; i++) {
             JavaParameter javaParameter = javaParameters.get(i);
             Parameter parameter = parameters.get(i);
-            String oldType = javaParameter.getType().getGenericValue();
+            String oldType = StaticJavaParser.parseType(javaParameter.getType().getGenericValue()).toString();
             oldTypes[i] = oldType;
             if (!oldType.equals(parameter.getTypeAsString())) {
+                // todo 缩小粒度 判断所调用方法的返回值。，判断所调用方法的权限。
                 changedNames.add(new String[]{javaParameter.getName(),"((" + oldType +  ")" + javaParameter.getName() + ")"});
             }
         }

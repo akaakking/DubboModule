@@ -88,7 +88,10 @@ public class InterfaceGenerator {
                 this.generator.addParams(parserMethodDeclaration,parameter);
             }
 
-            this.generator.getSourthCodeChanger().addMethod(method,parserMethodDeclaration);
+            if (!javaClass.isInterface()) {
+                this.generator.getSourthCodeChanger().addMethod(method,parserMethodDeclaration);
+
+            }
         }
     }
 
