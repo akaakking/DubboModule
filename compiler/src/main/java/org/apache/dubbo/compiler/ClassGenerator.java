@@ -24,7 +24,7 @@ import java.io.File;
 import java.util.*;
 
 /**
- * //TODO add class commment here
+ *
  *
  * @Author wfh
  * @Date 2022/8/16 上午11:08
@@ -95,7 +95,6 @@ public class ClassGenerator {
                     }
                 }
                 blockStmt.addStatement(getMethodnameCallExpr);
-
 
                 NameExpr invokeNameExpr = new NameExpr();
                 if (method.getReturns().isVoid()) {
@@ -264,7 +263,7 @@ public class ClassGenerator {
     private ClassOrInterfaceDeclaration interface2Class(JavaClass  javaClass,CompilationUnit cu) {
         cu.setPackageDeclaration(javaClass.getPackageName());
         cu.addImport("org.apache.dubbo.DubboClassLoader");
-        cu.addImport("org.apache.dubbo.Interface.*");
+        cu.addImport("org.apache.dubbo.Interface." + javaClass.getName() + "Interface");
         ClassOrInterfaceDeclaration coid = cu.getInterfaceByName(javaClass.getName() + "Interface").get();
 
         coid.setName(javaClass.getName());
@@ -320,6 +319,7 @@ public class ClassGenerator {
         public Visitable visit(MethodDeclaration n, Object arg) {
             super.visit(n, arg);
             n.setPublic(true);
+            n.addAnnotation(Override.class);
             BlockStmt  blockStmt = new BlockStmt();
 
             NameExpr nameExpr = new NameExpr("instance");

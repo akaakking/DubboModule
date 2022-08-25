@@ -1,5 +1,6 @@
 package org.apache.dubbo.compiler;
 
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.thoughtworks.qdox.model.JavaClass;
@@ -66,16 +67,23 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
     // 4. 间接直接暴露的Interface
     @Override
     protected void dealPublicInterface(JavaClass javaClass) {
-        CompilationUnit cu = new CompilationUnit();
+        String classPath = getName2path().get(javaClass.getFullyQualifiedName());
+        CompilationUnit cu = null;
+        try {
+            cu = StaticJavaParser.parse(new File(classPath));
+            ClassOrInterfaceDeclaration coid = cu.getInterfaceByName(javaClass.getName()).get();
 
+            coid.getMethods().stream().forEach(m -> m.remove());
 
-        ClassOrInterfaceDeclaration coid = this.interfaceGenerator.addInterface(cu,javaClass,"org.apache.dubbo.Interface",javaClass.getName() + "Interface");
+            this.interfaceGenerator.addMethods(coid,javaClass);
 
-        this.interfaceGenerator.addMethods(coid,javaClass);
+            this.addImports(cu);
 
-        this.addImports(cu);
+            saveInterface(cu,classPath,javaClass.getFullyQualifiedName());
 
-        overrideinterface(cu);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -89,8 +97,9 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
      *
      * @param cu
      */
-    private void overrideinterface(CompilationUnit cu) {
-        // todo cu save
+    private void saveInterface(CompilationUnit cu,String classPath,String className) {
+        this.directExportclasses.add(className);
+        FileUtils.saveContent(cu.toString(),classPath);
     }
 
     public void setExportPackageInfoPath(String exportPackageInfoPath) {

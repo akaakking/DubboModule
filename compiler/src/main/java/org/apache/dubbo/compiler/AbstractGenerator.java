@@ -40,7 +40,7 @@ public abstract class AbstractGenerator{
     private final Set<String> extraExports = new HashSet<>();
     private final Set<File> sourceFile = new HashSet<>();
     private final Map<String,String> name2path = new HashMap<>();
-    private final Set<String> directExportclasses = new HashSet<>();
+    protected final Set<String> directExportclasses = new HashSet<>();
     protected final List<String> importList = new ArrayList<>();
     protected InterfaceGenerator interfaceGenerator;
     protected ClassGenerator classGenerator;
@@ -413,9 +413,12 @@ public abstract class AbstractGenerator{
             }
 
             if (EIASet.contains(name)) {
+                // EIASet代表直接暴露不改变名字
                 this.importList.add(name);
                 return false;
             }
+
+            this.importList.add("org.apache.dubbo.Interface." + name.substring(name.lastIndexOf(".") + 1) + "Interface");
 
             return true;
         }

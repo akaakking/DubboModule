@@ -284,32 +284,13 @@ public class JavaParserLearn{
 
     @Test
     public void fsd() {
-//        CompilationUnit cu = StaticJavaParser.parse("public class A{ public void eat(String name,List<String> ertt) {int i = 0; int c = i++;}}");
-//        ClassOrInterfaceDeclaration coid =  cu.getClassByName("A").get();
-//
-//        MethodDeclaration methodDeclaration = coid.getMethodsBySignature("eat","String","List").get(0);
-//
-//        System.out.println(methodDeclaration);
-        JavaProjectBuilder javaProjectBuilder = new JavaProjectBuilder();
-//        try {
-//            javaProjectBuilder.addSource(new File("/home/wfh/tem/dubboTem/dubbo-config/dubbo-config-spring/src/main/java/org/apache/dubbo/config/spring/reference/ReferenceBeanBuilder.java"));
-//            for (JavaClass aClass : javaProjectBuilder.getClasses()) {
-//                for (JavaMethod method : aClass.getMethods()) {
-//                    for (JavaParameter parameter : method.getParameters()) {
-//                        System.out.println(parameter.getType().getGenericValue());
-//                    }
-//                }
-//            }
+        CompilationUnit cu = StaticJavaParser.parse("public class A{ public void eat(String name,List<String> ertt) {int i = 0; int c = i++;}}");
+        ClassOrInterfaceDeclaration coid =  cu.getClassByName("A").get();
 
-            Parameter parameter = new Parameter();
-            parameter.setName("name");
-        System.out.println(StaticJavaParser.parseType("Map<String,String>"));;
-            parameter.setType("Map<String,String>");
-        System.out.println(parameter);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
+        coid.getMethods().stream().forEach(m ->m.remove());
+
+        System.out.println(coid);
 
     }
 
