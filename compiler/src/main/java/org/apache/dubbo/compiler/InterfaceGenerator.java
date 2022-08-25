@@ -78,6 +78,9 @@ public class InterfaceGenerator {
             }
 
             MethodDeclaration parserMethodDeclaration = coid.addMethod(method.getName());
+            if (method.isDefault()) {
+                parserMethodDeclaration.setDefault(true);
+            }
             parserMethodDeclaration.removeBody();
 
             this.generator.addReturnType(parserMethodDeclaration,method);
@@ -90,11 +93,12 @@ public class InterfaceGenerator {
 
             if (!javaClass.isInterface()) {
                 this.generator.getSourthCodeChanger().addMethod(method,parserMethodDeclaration);
-
+            } else {
+                this.generator.copyAnnotationToMethod(method,parserMethodDeclaration);
+                this.generator.checkClassAnnotation(javaClass);
             }
         }
     }
-
 
     void saveInterface(CompilationUnit cu,JavaClass javaClass) {
         this.generator.saveContent(cu.toString(),this.interfaceDir + javaClass.getName() + "Interface.java");

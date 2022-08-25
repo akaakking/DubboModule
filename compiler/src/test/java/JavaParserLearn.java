@@ -284,16 +284,26 @@ public class JavaParserLearn{
 
     @Test
     public void fsd() {
-        CompilationUnit cu = StaticJavaParser.parse("public class A{ public void eat(String name,List<String> ertt) {int i = 0; int c = i++;}}");
-        ClassOrInterfaceDeclaration coid =  cu.getClassByName("A").get();
-
-
-        coid.getMethods().stream().forEach(m ->m.remove());
-
-        System.out.println(coid);
-
+        JavaProjectBuilder jpb = new JavaProjectBuilder();
+        try {
+            jpb.addSource(new File("/home/wfh/tem/dubbo/dubbo-cluster/src/main/java/org/apache/dubbo/rpc/cluster/LoadBalance.java"));
+            for (JavaClass aClass : jpb.getClasses()) {
+                if (isSPIExtensionPoint(aClass)) {
+                    System.out.println("fsdf");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
+    public boolean isSPIExtensionPoint(JavaClass javaClass) {
+        for (JavaAnnotation annotation : javaClass.getAnnotations()) {
+            if (annotation.getType().toString().equals("org.apache.dubbo.common.extension.SPI")) {
+                return true;
+            }
+        }
+        return  false;
+    }
 
 
     @Test

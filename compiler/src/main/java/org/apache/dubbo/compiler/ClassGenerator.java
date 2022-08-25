@@ -40,7 +40,11 @@ public class ClassGenerator {
         this.baseDir = generator.getClassOutPutDir();
     }
 
-    ClassOrInterfaceDeclaration generateClass(JavaClass javaClass,CompilationUnit cu) {
+    public Set<String> getExistsDirs() {
+        return existsDirs;
+    }
+
+    ClassOrInterfaceDeclaration generateClass(JavaClass javaClass, CompilationUnit cu) {
         ClassOrInterfaceDeclaration coid = interface2Class(javaClass,cu);
 
         methodGenerator.visit(cu,null);
@@ -297,15 +301,21 @@ public class ClassGenerator {
     }
 
     void saveClass(JavaClass javaClass,CompilationUnit cu) {
-        if (!this.existsDirs.contains(javaClass.getPackageName())) {
-            createDir(javaClass);
-            this.existsDirs.add(javaClass.getPackageName());
-        }
+        checkDirExists(javaClass);
 
         String path = this.baseDir + javaClass.getFullyQualifiedName().replaceAll("\\.", "/") + ".java";
 
         this.generator.saveContent(cu.toString(),path);
     }
+
+    void checkDirExists(JavaClass javaClass) {
+        if (!this.existsDirs.contains(javaClass.getPackageName())) {
+            createDir(javaClass);
+            this.existsDirs.add(javaClass.getPackageName());
+        }
+
+    }
+
 
     void createDir(JavaClass javaClass) {
         File dir  = new File(this.baseDir + javaClass.getPackageName().replaceAll("\\.","/"));

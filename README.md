@@ -110,45 +110,7 @@ interface生成主要考虑以下方面
 //FileSystemServiceDiscovery.java     这是个全空的文件，为什么会存在。
 ```
 
-目前的话要做以下几个事情
 
-1.   annotation直接暴露前要分析一波依赖
-2.   provideclass不要为空了
-3.   对于接口的处理方案
-4.   innerclass的改动。
-5.   源码的改动。
-
-顺序是 1 3 2 5 4
-
-最后再考虑整合进maven
-
-
-
-// getInstance 的地方也得变。因为接口此时不以interface结尾了。但是又获取不到instance很难办。这个后期再看吧
-
-
-
-我们需要确定一个目录安排
-
-interface得和内部的东西一起编译。
-
-也就是说interface是得放在内部的
-
-而原有的interface就是做了一个覆盖。
-
-原有的东西留着就留着，反正就是安装包大一点而已
-
-那interface放在哪里，做成变量，变量暂时指向common包下吧。
-
-那外部的东西放在哪里。
-
-那生成的外部东西放在哪里，做成变量，变量暂时指向compile包下吧。
-
-输出信息放在哪， 放在common的resource/metainfo里边吧
-
-
-
-将来肯定先编译interface
 
 ```
 <dependency>
@@ -165,23 +127,32 @@ interface得和内部的东西一起编译。
 
 
 
+我们已经做了哪些工作
+
+1.   生成接口
+
+     改变interface的方法签名，覆盖原有类，挪出来
+
+2.   生成类
+
+3.   注解处理
+
+     直接暴露，挪出来
+
+4.   枚举处理
+
+     直接暴露，挪出来
+
+5.   改变原有类
 
 
-类签名
 
-方法签名
-
-函数体转换
-
-实现接口
+MessageEncoding
 
 
 
-我们只change 那些接口有的方法
-
-现在先不考虑给construct加的问题先把接口的问题已解决
-
-接口问题已解决
+todo 接口 static，未处理
 
 
 
+在哪里做了权限访问控制

@@ -58,6 +58,7 @@ public abstract class AbstractGenerator{
     public void generate() {
         initEnvirenment();
 
+        // get all need to export class
         Set<String> exportPackages = provideExportPackages();
         addExportPackages(exportPackages);
         Set<String> exportClasses = provideExportClasses();
@@ -66,8 +67,7 @@ public abstract class AbstractGenerator{
         classGenerator = new ClassGenerator(this);
         interfaceGenerator = new InterfaceGenerator(this);
 
-        dealPackageExport(exportPackages);
-        dealClassesExport(exportClasses);
+        dealExportClasses();
 
         // 额外暴露和直接暴露都应该被记录，将来做过滤。
         dealExtraExport();
@@ -99,7 +99,7 @@ public abstract class AbstractGenerator{
         }
     }
 
-    private void dealClassesExport(Set<String> exportClasses) {
+    private void dealExportClasses() {
         if (exportClasses == null) {
             return;
         }
@@ -107,26 +107,6 @@ public abstract class AbstractGenerator{
         for (String exportClass : exportClasses) {
             JavaClass javaClass = jpb.getClassByName(exportClass);
             dealJavaClass(javaClass);
-            this.importList.clear();
-        }
-    }
-
-    private void dealPackageExport(Set<String> exportPackages) {
-        for (String exportPackage : exportPackages) {
-            JavaPackage javaPackage = jpb.getPackageByName(exportPackage);
-
-            if (javaPackage == null) {
-                continue;
-            }
-
-            Collection<JavaClass> javaClasses0 = javaPackage.getClasses();
-
-            List<JavaClass> javaClasses = new LinkedList<>(javaClasses0);
-
-            for (JavaClass javaClass : javaClasses) {
-                dealJavaClass(javaClass);
-                this.importList.clear();
-            }
         }
     }
 
@@ -187,7 +167,7 @@ public abstract class AbstractGenerator{
     }
 
     void addParams(MethodDeclaration parserMethodDeclaration,JavaParameter javaParameter) {
-        if (!isPrimitive(javaParameter.getFullyQualifiedName())) {
+        if (!isPrimitive(removeBrackets(javaParameter.getFullyQualifiedName()))) {
             this.importList.add(removeBrackets(javaParameter.getFullyQualifiedName()));
         }
         Parameter parameter = new Parameter();
@@ -328,8 +308,6 @@ public abstract class AbstractGenerator{
         return oldName.substring(oldName.lastIndexOf(".") + 1);
     }
 
-
-
     // 对外边的类做注解有没有意义？，我觉得直接暴露的是有意义的，但是直接暴露的基本没有。
     // 总的来讲又回到了那个问题，接口暴露怎么设计。
     // 接口的话可不可以这样，内外都一样，即参数都是Interface
@@ -343,6 +321,12 @@ public abstract class AbstractGenerator{
             NormalAnnotationExpr normalAnnotationExpr =  new NormalAnnotationExpr();
             copyAnnotation(annotation,normalAnnotationExpr);
             methodDeclaration.addAnnotation(normalAnnotationExpr);
+        }
+    }
+
+    void checkClassAnnotation(JavaClass javaClass) {
+        for (JavaAnnotation annotation : javaClass.getAnnotations()) {
+            checkName(annotation.getType().toString());
         }
     }
 
@@ -493,17 +477,15 @@ public abstract class AbstractGenerator{
 
     // 要放在外边
     protected void directExport(JavaClass javaClass) {
+        this.classGenerator.checkDirExists(javaClass);
         String path = this.name2path.get(javaClass.getBinaryName());
         File file = new File(path);
         File outFile = new File(this.classOutPutDir + javaClass.getFullyQualifiedName().replaceAll("\\.", "/") + ".java");
 
-        if (!outFile.exists()) {
-            this.classGenerator.createDir(javaClass);
-            try {
-                outFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            outFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         InputStream is = null;
@@ -682,9 +664,7 @@ public abstract class AbstractGenerator{
         if (exportClasses == null) {
             return;
         }
-        for (String exportClass : exportClasses) {
-            this.exportClasses.add(exportClass);
-        }
+        this.exportClasses.addAll(exportClasses);
     }
 
     private String getPackageName(File file) {

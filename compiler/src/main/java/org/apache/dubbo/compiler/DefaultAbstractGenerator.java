@@ -3,6 +3,7 @@ package org.apache.dubbo.compiler;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.thoughtworks.qdox.model.JavaAnnotation;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 
@@ -20,14 +21,22 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
     private String exportPackageInfoPath;
 
     public DefaultAbstractGenerator() {
-        this.exportPackageInfoPath = exportPackageInfoPath;
         this.sourthCodeChanger = new SourthCodeChanger(this);
     }
 
     // 提供不方便用包表示的javaclasses
     @Override
     protected Set<String> provideExportClasses() {
-        return null;
+        Set<String> classNames = new HashSet<>();
+        for (JavaClass aClass : jpb.getClasses()) {
+            if (aClass.isInterface()) {
+                if (isSPIExtensionPoint(aClass)) {
+                    classNames.add(aClass.getFullyQualifiedName());
+                }
+            }
+        }
+
+        return classNames;
     }
 
     @Override
@@ -37,6 +46,7 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
 
     @Override
     protected void dealInnerClass(JavaClass javaClass) {
+        System.out.println(javaClass);
     }
 
     @Override
@@ -56,7 +66,6 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
         this.sourthCodeChanger.setNewClass(newClass);
         this.sourthCodeChanger.changeSourceCode(javaClass);
     }
-
 
     // class和interface的生成策略不同在class会先生成一个interface。在生成class，而interface不会
     // directexport主要存将来DubboclassLoad要委托给appclassLoad加载的Dubbo内部的类。、
@@ -79,7 +88,7 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
 
             this.addImports(cu);
 
-            saveInterface(cu,classPath,javaClass.getFullyQualifiedName());
+            saveInterface(cu,javaClass.getFullyQualifiedName(),javaClass);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -95,14 +104,28 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
      * 这就牵扯到对源码的修改部分。要不先把那个功能一做？
      * ok 开干
      *
+     * direct的意思是直接挪出来
+     *
      * @param cu
      */
-    private void saveInterface(CompilationUnit cu,String classPath,String className) {
+    private void saveInterface(CompilationUnit cu,String className,JavaClass javaClass) {
+        this.classGenerator.checkDirExists(javaClass);
+
+        String path = this.classOutPutDir + className.replaceAll("\\.","/") + ".java";
         this.directExportclasses.add(className);
-        FileUtils.saveContent(cu.toString(),classPath);
+        FileUtils.saveContent(cu.toString(),path);
     }
 
     public void setExportPackageInfoPath(String exportPackageInfoPath) {
         this.exportPackageInfoPath = exportPackageInfoPath;
+    }
+
+    public boolean isSPIExtensionPoint(JavaClass javaClass) {
+        for (JavaAnnotation annotation : javaClass.getAnnotations()) {
+            if (annotation.getType().toString().equals("org.apache.dubbo.common.extension.SPI")) {
+                return true;
+            }
+        }
+        return  false;
     }
 }
