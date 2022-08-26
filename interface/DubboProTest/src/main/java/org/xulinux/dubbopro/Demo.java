@@ -15,17 +15,21 @@ import java.util.concurrent.CountDownLatch;
  * @Date 2022/8/9 下午6:25
  */
 public class Demo {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         ServiceConfig<DemoServiceImpl> serviceConfig = new ServiceConfig();
+
         serviceConfig.setInterface(DemoService.class);
         serviceConfig.setRef(new DemoServiceImpl());
-        System.out.println(ApplicationConfig.class.getClassLoader());
         serviceConfig.setApplication(new ApplicationConfig("dubbo-demo-api-provider"));
         serviceConfig.setRegistry(new RegistryConfig("zookeeper://127.0.0.1:2181"));
         serviceConfig.setMetadataReportConfig(new MetadataReportConfig("zookeeper://127.0.0.1:2181"));
         serviceConfig.export();
 
         System.out.println("服务已开启");
-        new CountDownLatch(1).await();
+        try {
+            new CountDownLatch(1).await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

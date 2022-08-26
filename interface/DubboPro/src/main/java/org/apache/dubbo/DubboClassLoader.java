@@ -169,7 +169,7 @@ public class DubboClassLoader {
                             && (name.startsWith("org.apache.dubbo") || name.startsWith("com.alibaba.dubbo"))) {
                         c = findClass(name);
                     } else {
-                        c = super.loadClass(name);
+                        c = getParent().loadClass(name);
                     }
                 }
 
@@ -178,3 +178,4 @@ public class DubboClassLoader {
         }
     }
 }
+// import list o不ok
