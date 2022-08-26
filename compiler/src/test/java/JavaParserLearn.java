@@ -282,19 +282,19 @@ public class JavaParserLearn{
     }
 
 
+    // 那么现在就是确定了就是key不对那为什么有的就可以呢，比如说
     @Test
     public void fsd() {
         JavaProjectBuilder jpb = new JavaProjectBuilder();
         try {
-            jpb.addSource(new File("/home/wfh/tem/dubbo/dubbo-cluster/src/main/java/org/apache/dubbo/rpc/cluster/LoadBalance.java"));
+            jpb.addSource(new File("/home/wfh/tem/dubbo/dubbo-common/src/main/java/org/apache/dubbo/config/nested/PrometheusConfig.java"));
             for (JavaClass aClass : jpb.getClasses()) {
-                if (isSPIExtensionPoint(aClass)) {
-                    System.out.println("fsdf");
-                }
+                System.out.println(aClass.getBinaryName());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
     public boolean isSPIExtensionPoint(JavaClass javaClass) {
         for (JavaAnnotation annotation : javaClass.getAnnotations()) {

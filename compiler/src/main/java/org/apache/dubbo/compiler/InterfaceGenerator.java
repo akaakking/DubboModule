@@ -69,8 +69,6 @@ public class InterfaceGenerator {
         }
     }
 
-
-
     public void addMethods(ClassOrInterfaceDeclaration coid,JavaClass javaClass) {
         for (JavaMethod method : javaClass.getMethods()) {
             if (method.isStatic() || !method.isPublic()) {

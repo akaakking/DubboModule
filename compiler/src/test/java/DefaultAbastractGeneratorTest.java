@@ -32,5 +32,4 @@ public class DefaultAbastractGeneratorTest {
         defaultAbstractGenerator.generate();
     }
 
-    // option<Referengce<Applia>>
 }

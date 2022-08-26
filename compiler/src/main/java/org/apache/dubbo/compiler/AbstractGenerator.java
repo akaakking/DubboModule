@@ -72,9 +72,9 @@ public abstract class AbstractGenerator{
         // 额外暴露和直接暴露都应该被记录，将来做过滤。
         dealExtraExport();
 
-        changeSourthCode();
-
         saveDirectExportInfo();
+
+        System.out.println(this.extraExports.size());
     }
 
     public Map<String, String> getName2path() {
@@ -85,19 +85,7 @@ public abstract class AbstractGenerator{
         return sourthCodeChanger;
     }
 
-    private void changeSourthCode() {
-        Set<String> allExportClasses = Sets.union(this.exportClasses,this.extraExports);
 
-        /**
-         * 主要是change以下几个部分
-         * 1. 类定义部分得让他继承一个接口
-         * 2. 含有暴露参数的函数在其内部得做一个强转
-         */
-        for (String className : allExportClasses) {
-            JavaClass javaClass = jpb.getClassByName(className);
-
-        }
-    }
 
     private void dealExportClasses() {
         if (exportClasses == null) {
@@ -647,14 +635,13 @@ public abstract class AbstractGenerator{
         return min;
     }
 
-
     private void addExportPackages(Set<String> exportPackages) {
         for (String exportPackage : exportPackages) {
             JavaPackage javaPackage = jpb.getPackageByName(exportPackage);
 
             if (javaPackage != null) {
                 for (JavaClass aClass : javaPackage.getClasses()) {
-                    this.exportClasses.add(aClass.getFullyQualifiedName());
+                    this.exportClasses.add(aClass.getBinaryName());
                 }
             }
         }

@@ -31,7 +31,7 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
         for (JavaClass aClass : jpb.getClasses()) {
             if (aClass.isInterface()) {
                 if (isSPIExtensionPoint(aClass)) {
-                    classNames.add(aClass.getFullyQualifiedName());
+                    classNames.add(aClass.getBinaryName());
                 }
             }
         }
@@ -46,7 +46,7 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
 
     @Override
     protected void dealInnerClass(JavaClass javaClass) {
-        System.out.println(javaClass);
+        // TODO
     }
 
     @Override

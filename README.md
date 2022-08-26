@@ -156,3 +156,68 @@ todo 接口 static，未处理
 
 
 在哪里做了权限访问控制
+
+```java
+ class org.apache.dubbo.config.spring.beans.factory.annotation.ServiceAnnotationPostProcessor.ScanExcludeFilter
+ class org.apache.dubbo.config.metadata.MetadataServiceDelegation.URLComparator
+ class org.apache.dubbo.config.spring.beans.factory.annotation.AbstractAnnotationBeanPostProcessor.AnnotatedInjectElement
+ class org.apache.dubbo.config.spring.beans.factory.annotation.AbstractAnnotationBeanPostProcessor.AnnotatedFieldElement
+ class org.apache.dubbo.config.spring.ReferenceBean.DubboReferenceLazyInitTargetSource
+ interface org.apache.dubbo.config.utils.SimpleReferenceCache.KeyGenerator
+ class org.apache.dubbo.config.nested.PrometheusConfig.Exporter
+ class org.apache.dubbo.config.spring.context.annotation.DubboConfigConfiguration.Single
+ class org.apache.dubbo.config.bootstrap.DubboBootstrap.Module
+ class org.apache.dubbo.config.spring.context.annotation.DubboConfigConfiguration.Multiple
+ class org.apache.dubbo.config.spring.beans.factory.annotation.AbstractAnnotationBeanPostProcessor.AnnotatedMethodElement
+ class  org.dubbo.config.nested.PrometheusConfig.Pushgateway
+ class org.apache.dubbo.config.spring.beans.factory.annotation.AbstractAnnotationBeanPostProcessor.AnnotatedInjectionMetadata
+ class org.apache.dubbo.common.status.Status.Level
+ class org.apache.dubbo.remoting.api.ProtocolDetector.Result
+ class org.apache.dubbo.metadata.MetadataInfo.ServiceInfo
+ class org.apache.dubbo.rpc.model.ProviderModel.RegisterStatedURL
+ class org.apache.dubbo.rpc.model.MethodDescriptor.RpcType
+```
+
+
+
+1.   single mutiple 似乎可以直接挪出来，因为那个比较简单什么都没牵扯，但是有几个class很难办。
+
+
+
+```java
+// 似乎可以直接将DubboConfigConfiguration挪出来 
+class org.apache.dubbo.config.spring.context.annotation.DubboConfigConfiguration.Single
+class org.apache.dubbo.config.spring.context.annotation.DubboConfigConfiguration.Multiple
+// private不用管
+class org.apache.dubbo.config.spring.beans.factory.annotation.ServiceAnnotationPostProcessor.ScanExcludeFilter
+ class org.apache.dubbo.config.spring.ReferenceBean.DubboReferenceLazyInitTargetSource
+    
+// package权限外边无引用
+ class org.apache.dubbo.config.metadata.MetadataServiceDelegation.URLComparator
+
+// 是个接口可以挪出去
+ interface org.apache.dubbo.config.utils.SimpleReferenceCache.KeyGenerator
+     
+// 类中的枚举
+ class org.apache.dubbo.common.status.Status.Level
+
+// 接口中的枚举
+ class org.apache.dubbo.remoting.api.ProtocolDetector.Result
+ class org.apache.dubbo.rpc.model.MethodDescriptor.RpcType
+
+ // 需要处理
+ class org.apache.dubbo.config.spring.beans.factory.annotation.AbstractAnnotationBeanPostProcessor.AnnotatedFieldElement
+ class org.apache.dubbo.config.spring.beans.factory.annotation.AbstractAnnotationBeanPostProcessor.AnnotatedInjectionMetadata
+ class org.apache.dubbo.config.spring.beans.factory.annotation.AbstractAnnotationBeanPostProcessor.AnnotatedMethodElement
+ class org.apache.dubbo.config.spring.beans.factory.annotation.AbstractAnnotationBeanPostProcessor.AnnotatedInjectElement
+     
+     
+ class org.apache.dubbo.config.nested.PrometheusConfig.Exporter
+ class  org.dubbo.config.nested.PrometheusConfig.Pushgateway
+     
+ class org.apache.dubbo.config.bootstrap.DubboBootstrap.Module
+
+ class org.apache.dubbo.metadata.MetadataInfo.ServiceInfo
+ class org.apache.dubbo.rpc.model.ProviderModel.RegisterStatedURL
+```
+
