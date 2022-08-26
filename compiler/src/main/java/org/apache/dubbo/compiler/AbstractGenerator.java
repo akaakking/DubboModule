@@ -432,6 +432,10 @@ public abstract class AbstractGenerator{
     protected abstract void dealPublicInterface(JavaClass javaClass);
 
     private void dealJavaClass(JavaClass javaClass) {
+        if (isHide(javaClass)) {
+            return;
+        }
+
         // first
         if (javaClass.isInner()) {
             dealInnerClass(javaClass);
@@ -459,6 +463,21 @@ public abstract class AbstractGenerator{
             dealPublicClass(javaClass);
         }
         this.importList.clear();
+    }
+
+    boolean isHide(JavaClass javaClass) {
+        List<JavaAnnotation> javaAnnotations = javaClass.getAnnotations();
+        if (javaAnnotations == null || javaAnnotations.isEmpty()) {
+            return false;
+        }
+
+        for (JavaAnnotation javaAnnotation : javaAnnotations) {
+            if (javaAnnotation.getType().toString().equals("org.apache.dubbo.compiler.Hide")) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 

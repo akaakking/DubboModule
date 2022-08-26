@@ -19,7 +19,7 @@ java提供了四种访问修饰符，让我们对容器中的数据功能单元�
 
 是不能的，因为包的概念还不够大，我们在现实世界中为一组数据和功能的集合找到类作为封装依据的边界，虽然可以以一个包作为一些类的集合，来提供一组服务，依据包我们也可以根据现有修饰符确定一个边界，但是包的概念还是太小了，我们不可能将一个模块的所有类放在同一个包下这是一个现实问题毕竟dubbo的包结构是这样，其中每个包点开还有无数复杂结构。
 
-![image-20220821161339760](/home/wfh/.config/Typora/typora-user-images/image-20220821161339760.png)
+![image-20220821161339760](./pic/image-20220821161339760.png)
 
 
 
@@ -29,9 +29,66 @@ java提供了四种访问修饰符，让我们对容器中的数据功能单元�
 
 现在给出了两种方案，利用java9带来的模块化特性，和jar嵌套迷惑类加载器。
 
+
+
 ## 2. Java9 Module方案
 
-// todo 巨坑，不能实现，最近比较忙，留着待更。
+
+
+```java
+|- Dubbo
+    |-org
+    	|-apache
+    		|-dubbo
+    			|-config
+    				|-A.java
+                       |.......
+    			|-common
+                        |B.java
+                        |.....
+```
+
+这是一个java9之前一个jar包的目录结构，与此不同的是java9 jar包的根目录下多了一个模块描述化描述符module-info.java
+
+```java
+|- Dubbo
+    |-org
+    	|-apache
+    		|-dubbo
+    			|-config
+    				|-A.java
+                       |.......
+    			|-common
+                        |B.java
+                        |.....
+    |-module-info.java
+```
+
+在这个描述符中我们可以声明对其他包的依赖，还可以选择要导出哪些包。类似于这样
+
+```java
+module dubbo {
+    exports org.apache.dubbo.config
+}
+```
+
+这样我们就导出了config包，可以看到的是我们并没有导出common包。那么对于common包中public的类，其他包就无法访问到。
+
+那么按理来说，我们只需要遵循这种规则做一个模块化描述符就行了，但事情往往不是那么简单的。
+
+我们最初是想要做到像jdk9的那种效果，就是严格按照模块化来做，jdk9确实也达到了封装的效果，就是我们去访问一个未导出的包时会编译报错。
+
+但后来发现，我们的包做了模块化后，外边还是能够访问到，并没有达到预想的效果。。。。。
+
+后来查阅大量资料，我发现原来是这样的。
+
+ 为了保证原来的
+
+
+
+
+
+
 
 ## 3. jar嵌套迷惑类加载器
 
@@ -221,3 +278,29 @@ class org.apache.dubbo.config.spring.beans.factory.annotation.ServiceAnnotationP
  class org.apache.dubbo.rpc.model.ProviderModel.RegisterStatedURL
 ```
 
+
+
+总结一下目前做了哪些工作
+
+1.   对于Annotation和Enum
+
+     直接暴露，挪到外边来
+
+2.   对于interface
+
+     修改方法签名，和类签名后挪出来。同时copyAnnotation
+
+3.   对class
+
+     先生成interface
+
+     在生成class
+
+     再修改源码。
+
+现在还需要做哪些事情
+
+1.   修改源码
+2.   内部类
+3.   集成入maven
+4.   异常处理没关

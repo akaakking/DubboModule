@@ -71,7 +71,7 @@ public class InterfaceGenerator {
 
     public void addMethods(ClassOrInterfaceDeclaration coid,JavaClass javaClass) {
         for (JavaMethod method : javaClass.getMethods()) {
-            if (method.isStatic() || !method.isPublic()) {
+            if (method.isStatic() || !method.isPublic() || isHide(method)) {
                 continue;
             }
 
@@ -96,6 +96,19 @@ public class InterfaceGenerator {
                 this.generator.checkClassAnnotation(javaClass);
             }
         }
+    }
+
+    boolean isHide(JavaMethod javaMethod) {
+        if (javaMethod.getAnnotations() == null || javaMethod.getAnnotations().isEmpty()) {
+            return false;
+        }
+
+        for (JavaAnnotation annotation : javaMethod.getAnnotations()) {
+            if (annotation.getType().toString().equals("org.apache.dubbo.compiler.Hide")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     void saveInterface(CompilationUnit cu,JavaClass javaClass) {
