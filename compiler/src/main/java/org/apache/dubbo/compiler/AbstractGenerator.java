@@ -52,9 +52,6 @@ public abstract class AbstractGenerator{
     public AbstractGenerator() {
     }
 
-    protected abstract Set<String> provideExportClasses();
-    protected abstract Set<String> provideExportPackages();
-
     public void generate() {
         initEnvirenment();
 
@@ -75,6 +72,48 @@ public abstract class AbstractGenerator{
         saveDirectExportInfo();
 
         System.out.println(this.extraExports.size());
+    }
+
+    protected abstract Set<String> provideExportClasses();
+    protected abstract Set<String> provideExportPackages();
+    protected abstract void dealInnerClass(JavaClass javaClass);
+    protected abstract void dealAnnotation(JavaClass javaClass);
+    protected abstract void dealEnum(JavaClass javaClass);
+    protected abstract void dealPublicClass(JavaClass javaClass);
+    protected abstract void dealPublicInterface(JavaClass javaClass);
+
+    private void dealJavaClass(JavaClass javaClass) {
+        if (isHide(javaClass)) {
+            return;
+        }
+
+        // first
+        if (javaClass.isInner()) {
+            dealInnerClass(javaClass);
+            return;
+        }
+
+        // second
+        if (javaClass.isEnum()) {
+            dealEnum(javaClass);
+            return;
+        }
+
+        // last
+        if (javaClass.isAnnotation()) {
+            dealAnnotation(javaClass);
+            return;
+        }
+
+        if (javaClass.isInterface() && javaClass.isPublic()) {
+            dealPublicInterface(javaClass);
+            return;
+        }
+
+        if (javaClass.isPublic()) {
+            dealPublicClass(javaClass);
+        }
+        this.importList.clear();
     }
 
     public Map<String, String> getName2path() {
@@ -425,45 +464,6 @@ public abstract class AbstractGenerator{
         saveSet(this.directExportclasses,this.directExportClassPath);
     }
 
-    protected abstract void dealInnerClass(JavaClass javaClass);
-    protected abstract void dealAnnotation(JavaClass javaClass);
-    protected abstract void dealEnum(JavaClass javaClass);
-    protected abstract void dealPublicClass(JavaClass javaClass);
-    protected abstract void dealPublicInterface(JavaClass javaClass);
-
-    private void dealJavaClass(JavaClass javaClass) {
-        if (isHide(javaClass)) {
-            return;
-        }
-
-        // first
-        if (javaClass.isInner()) {
-            dealInnerClass(javaClass);
-            return;
-        }
-
-        // second
-        if (javaClass.isEnum()) {
-            dealEnum(javaClass);
-            return;
-        }
-
-        // last
-        if (javaClass.isAnnotation()) {
-            dealAnnotation(javaClass);
-            return;
-        }
-
-        if (javaClass.isInterface() && javaClass.isPublic()) {
-            dealPublicInterface(javaClass);
-            return;
-        }
-
-        if (javaClass.isPublic()) {
-            dealPublicClass(javaClass);
-        }
-        this.importList.clear();
-    }
 
     boolean isHide(JavaClass javaClass) {
         List<JavaAnnotation> javaAnnotations = javaClass.getAnnotations();

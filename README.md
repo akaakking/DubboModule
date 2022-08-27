@@ -94,9 +94,7 @@ module dubbo {
 
 ### 3.1 理论依据
 
-// todo 介绍类加载机制
-
-我们利用AppClassLoader不能加载标准目录格式的jar包的特点来向AppClassLoader隐藏我们的类，就是我们可以将我们的jar包做成这样
+我们利用AppClassLoader只能加载标准目录格式的jar包的特点来向AppClassLoader隐藏我们的类，就是我们可以将我们的jar包做成这样
 
 ```java
 |- dubbo.jar
@@ -286,7 +284,7 @@ public class Demo {
 
      我们让他继承了URLClassLoader并覆盖了他的loadclass方法,加载之前对其做判断，如果包名以org,apache.dubbo或com.alibaba.dubbo开头那么用DubboClassLoader从内部加载否则让AppClassLoader从classpath上加载。
 
-     从而打破双亲委派机制
+     也就是说打破了原有的双亲委派
 
      ```java
              @Override
@@ -324,7 +322,6 @@ public class Demo {
 假如说我们要暴露ServiceConfig这个类
 
 ```java
-
 public class ServiceConfig<T> extends ServiceConfigBase<T> {
 	......
     public void export() {
@@ -356,6 +353,59 @@ public class ServiceConfig<T> extends ServiceConfigBase<T> implments ServiceConf
 
 ![image-20220826204959955](/home/wfh/.config/Typora/typora-user-images/image-20220826204959955.png)
 
+ServiceConfig和ApplicationConfig这些依旧是代理空类
+
+```java
+public class MetadataReportConfig implements MetadataReportConfigInterface {
+    private MetadataReportConfigInterface instance;
+
+    public MetadataReportConfig(String arg) {
+        instance = (MetadataReportConfigInterface) DubboClassLoader.getInstance(MetadataReportConfig.class,arg);
+    }
+
+    MetadataReportConfigInterface getInstance() {
+        republic class ServiceConfig<T> implements ServiceConfigInterface<T> {
+    private ServiceConfigInterface instance = (ServiceConfigInterface) DubboClassLoader.getInstance(ServiceConfig.class);
+
+
+    @Override
+    public void setInterface(Class<?> klass) {
+        instance.setInterface(klass);
+    }
+
+    @Override
+    public void setRef(T ref) {
+        instance.setRef(ref);
+    }
+
+    @Override
+    public void setApplication(ApplicationConfigInterface application) {
+        instance.setApplication(((ApplicationConfig)application).getInstance());
+    }
+
+    @Override
+    public void setRegistry(RegistryConfigInterface registry) {
+        instance.setRegistry(((RegistryConfig) registry).getInstance());
+    }
+
+    @Override
+    public void setMetadataReportConfig(MetadataReportConfigInterface metadataReportConfig) {
+        instance.setMetadataReportConfig(((MetadataReportConfig) metadataReportConfig).getInstance());
+    }
+
+    @Override
+    public void export() {
+        instance.export();
+    }
+}turn instance;
+    }
+}
+```
+
+
+
+
+
 那么我们要做的事情实际上就很清晰了。
 
 1.   编译前期代码生成 interface
@@ -371,19 +421,244 @@ public class ServiceConfig<T> extends ServiceConfigBase<T> implments ServiceConf
 
 使用javaparser对源码进行修改，这个方案写一半也及时放弃了，因为javaparser说实话代码生成方面自然是没得说,但在源码分析方面不如qdox,他没有得到一个类型的全限定名，没有办法得到全限定名，我就没有办法对其做修改。因为要根据全限定名确定是否要加interface是否要将此依赖额外暴露等等，除了全限定名，javaparser还有很多存在局限的地方。
 
-因此又换到了第三个方案，使用Qdox作为数据制成，用javaparser修改源码。也就是现在的方案
+因此又换到了第三个方案，使用Qdox作为数据支撑，用javaparser生成源码。也就是现在的方案。
 
-#### 1. 生成Interface
+#### 1. 暴露哪些类
 
-interface生成主要考虑以下方面
+导师说前期先搞的粗粒度一些，先暴露config包下的和带有spi注解的接口。
 
-1.   
+考虑到以后暴露的范围可能会有所调整，于是本着对修改关闭，对扩展开放的原则，我没有绑定目前的具体的要暴露一些类。而是给出了这样的接口
 
-#### 2. 生成类
+AbstractGenerator是一个抽象类。他有以下两个抽象方法
+
+```java
+/**
+	这个方法返回要暴露哪些包
+*/
+protected abstract Set<String> provideExportPackages();
+/**
+	考虑到有些类无法用包表示，比如说带有spi注解的接口，于是我们又给了这个方法
+*/
+protected abstract Set<String> provideExportClasses();
+```
+
+那将来我们继承了AbstractGenerator之后，实现这个两个方法，就可以拓展出一个暴露的范围。
+
+比如说目前的这个DefaultAbstractGenerator。
+
+```java
+    @Override
+    protected Set<String> provideExportPackages() {
+        return readConfig(this.exportPackageInfoPath);
+    }
+
+    @Override
+    protected Set<String> provideExportClasses() {
+        Set<String> classNames = new HashSet<>();
+        for (JavaClass aClass : jpb.getClasses()) {
+            if (aClass.isInterface()) {
+                if (isSPIExtensionPoint(aClass)) {
+                    classNames.add(aClass.getBinaryName());
+                }
+            }
+        }
+
+        return classNames;
+    }
+```
+
+还有一个注意的点就是，做了一个这个注解，这个注解可以放在方法，也可以放在类上，放在类上的时候，直接不暴露这个类，放在方法上的时候不暴露这个方法，简单点说就是在生成的interface中不包含这个方法。那么代理类也不包含这个方法。
+
+这样的话我们对于暴露的控制的一个粒度就已经达到了方法级别。而java9 module只能达到包级别
+
+```java
+@Target({ElementType.METHOD,ElementType.TYPE})
+@Retention(RetentionPolicy.SOURCE)
+public @interface Hide {
+}
+```
+
+而在AbstactGenerator中实际上是这样工作的。
+
+```java
+    public void generate() {
+        initEnvirenment();
+
+        // get all need to export class
+        Set<String> exportPackages = provideExportPackages();
+        addExportPackages(exportPackages);
+        Set<String> exportClasses = provideExportClasses();
+        addExportClasses(exportClasses);
+
+        classGenerator = new ClassGenerator(this);
+        interfaceGenerator = new InterfaceGenerator(this);
+
+        dealExportClasses();
+
+        // 额外暴露和直接暴露都应该被记录，将来做过滤。
+        dealExtraExport();
+
+        saveDirectExportInfo();
+
+        System.out.println(this.extraExports.size());
+    }
+```
+
+还有一个重要的点是，对于extraExport的处理，因为尽管我们在外边做了代理类减少了其他非目标暴露范围的类的暴露，但是在方法签名（包括像方法参数，方法返回值，方法泛型），类的泛型，类实现的接口，类继承的类，还是会牵扯着暴露很多类，那么对于这些类（extraExport），我们也会做相应的处理。
+
+处理方法是相同的也是为其生成相应的接口之后在生成相应的类放在外边做代理。
+
+```java
+public interface ApplicationModelInterface extends ScopeModelInterface {
+
+    FrameworkModelInterface getFrameworkModel();
+
+    ModuleModelInterface newModule();
+
+    EnvironmentInterface getModelEnvironment();
+
+    ConfigManagerInterface getApplicationConfigManager();
+
+    ServiceRepositoryInterface getApplicationServiceRepository();
+
+    ExecutorRepository getApplicationExecutorRepository();
+
+    ApplicationConfigInterface getCurrentConfig();
+
+    String getApplicationName();
+
+    String tryGetApplicationName();
+
+    void removeModule(ModuleModelInterface moduleModel);
+
+    List<ModuleModelInterface> getModuleModels();
+
+    List<ModuleModelInterface> getPubModuleModels();
+
+    ModuleModelInterface getDefaultModule();
+
+    ModuleModelInterface getInternalModule();
+
+    void setEnvironment(EnvironmentInterface environment);
+
+    void setConfigManager(ConfigManagerInterface configManager);
+
+    void setServiceRepository(ServiceRepositoryInterface serviceRepository);
+
+    void addClassLoader(ClassLoader classLoader);
+
+    void removeClassLoader(ClassLoader classLoader);
+
+    ApplicationDeployer getDeployer();
+
+    void setDeployer(ApplicationDeployer deployer);
+}
+
+```
+
+#### 2. 生成接口
+
+有了暴露范围之后就根据暴露范围生成接口
+
+这里一下几点值得一提
+
+1.   首先我们让生成的接口之间，也遵循内部的父子类关系，这样减少了冗余方法的生成。
+2.   在interface中只暴露public 非 static的方法，对于static的方法，我们不能通过接口去掉，而是在生成的类中通过反射去掉。
+3.   生成的接口全在org.apache.dubbo.Interface包下，而没有放在对应类的包下
+4.   对于内部接口interface我们不再外边为其生成interface和class,而是对其签名做一个修改之后挪到外部，这里主要是考虑一方面，这样spi才能起作用，另一方面，也减少了interface和class的产生。对于枚举和注解是直接暴露的，对于直接暴露的类，最会会输出一个txt文件，供DubboClassLoader将来做过滤。
+
+#### 3. 生成类
+
+这个主要是利用JavaParser去拼凑。
+
+1.   拼凑非static方法
+
+     ```java
+         @Override()
+         public void setVersion(String version) {
+             instance.setVersion(version);
+         }
+     ```
+
+     
+
+2.   拼凑构造方法
+
+     ```java
+         protected AbstractServiceConfig() {
+             this.instance = (AbstractServiceConfigInterface) DubboClassLoader.getInstance(AbstractServiceConfig.class.getName());
+             super.instance = this.instance;
+         }
+     ```
+
+     
+
+3.   拼凑域
+
+     ```java
+     protected AbstractServiceConfigInterface instance;
+     ```
+
+4.   凭凑类头部
+
+     ```java
+     public class AbstractServiceConfig extends AbstractInterfaceConfig implements AbstractServiceConfigInterface {
+        ........
+     }
+     ```
+
+5.   ### 拼凑static方法
+
+     ```java
+         public static List<MethodConfigInterface> constructMethodConfig(MethodInterface[] methods) {
+             try { 
+               Class klass = DubboClassLoader.getKlass(MethodConfig.class.getName());
+             Method method = klass.getMethod("constructMethodConfig", Method[].class);
+             return (List<MethodConfigInterface>)method.invoke(null, methods);
+                     } catch (NoSuchMethodException e) {
+                 e.printStackTrace();
+             } catch (InvocationTargetException e) {
+                 e.printStackTrace();
+             } catch (IllegalAccessException e) {
+                 e.printStackTrace();
+             };
+             return null;
+         }
+     ```
 
 ### 3.6 设计修改源码代码
 
+#### 1. 修改类的声明
+
+这个主要是让他们implments相应的接口，这个目前已经实现了
+
+#### 2. 修改方法签名
+
+这个比较的麻烦，主要是考虑到javaparser没办法得到类型的全限定名，所以我得根据Qdox做好Method签名与javaParser相应方法的匹配，这样才能去修改方法签名。这个目前也做好了。
+
+#### 3. 修改方法块
+
+这个是个大工程，也是对dubbo内部修改最多的地方就是他得对每一处的方法块进行扫描，看是否需要强转
+
+比如说,下边这个表达式
+
+```java
+ApplictionConfig app = getApplicationConfig();
+```
+
+原本getApplicationConfig返回的是ApplictionConfig类型，但由于我们更改了方法签名，现在他返回的是ApplucationConfigInterface类型，也就是他得父类类型，那么这个时候就需要去做一个强制类型装换
+
+```java
+ApplictionConfig app = （ApplicationConfigInterface）getApplicationConfig();
+```
+
+那么目前就是在这一阶段。
+
 ### 3.7 maven集成
+
+
+
+
 
 
 
