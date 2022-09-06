@@ -9,3 +9,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 public @interface Hide {
 }
+
+/*
+总结一下现在是什么情况
+1. 想着将要暴露的东西挪出去的
+ */

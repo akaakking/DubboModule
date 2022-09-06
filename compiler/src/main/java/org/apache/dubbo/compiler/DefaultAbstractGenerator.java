@@ -5,7 +5,6 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.thoughtworks.qdox.model.JavaAnnotation;
 import com.thoughtworks.qdox.model.JavaClass;
-import com.thoughtworks.qdox.model.JavaMethod;
 
 import java.io.*;
 import java.util.HashSet;
@@ -77,7 +76,7 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
     @Override
     protected void dealPublicInterface(JavaClass javaClass) {
         String classPath = getName2path().get(javaClass.getFullyQualifiedName());
-        CompilationUnit cu = null;
+        CompilationUnit cu;
         try {
             cu = StaticJavaParser.parse(new File(classPath));
             ClassOrInterfaceDeclaration coid = cu.getInterfaceByName(javaClass.getName()).get();
@@ -95,19 +94,6 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
         }
     }
 
-    /**
-     * 需要区分的是将来是有两个输出目录的。
-     * 首先我们得将原来的代码copy一份这是内部的。将来嵌套在jar里   inner OutPutDir
-     * 还有一份是外部的 outwardoutputdir
-     * 可以就是说都做成tem的但是，这样不方便我查看。
-     * 可以将direct的暴露都理解为覆盖。但其实这种内外都有一份也行。
-     * 这就牵扯到对源码的修改部分。要不先把那个功能一做？
-     * ok 开干
-     *
-     * direct的意思是直接挪出来
-     *
-     * @param cu
-     */
     private void saveInterface(CompilationUnit cu,String className,JavaClass javaClass) {
         this.classGenerator.checkDirExists(javaClass);
 

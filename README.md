@@ -82,7 +82,7 @@ module dubbo {
 
 后来查阅大量资料，我发现原来是这样的。
 
- 为了保证原来的
+ // todo
 
 
 
@@ -576,7 +576,7 @@ public interface ApplicationModelInterface extends ScopeModelInterface {
      ```java
          @Override()
          public void setVersion(String version) {
-             instance.setVersion(version);
+             instance.setVersion(version.getInstance);
          }
      ```
 
@@ -643,7 +643,7 @@ public interface ApplicationModelInterface extends ScopeModelInterface {
 比如说,下边这个表达式
 
 ```java
-ApplictionConfig app = getApplicationConfig();
+ApplictionConfig app = (AppInterf)getApplicationConfig();
 ```
 
 原本getApplicationConfig返回的是ApplictionConfig类型，但由于我们更改了方法签名，现在他返回的是ApplucationConfigInterface类型，也就是他得父类类型，那么这个时候就需要去做一个强制类型装换
@@ -658,13 +658,17 @@ ApplictionConfig app = （ApplicationConfigInterface）getApplicationConfig();
 
 
 
+统计：
+
+在config包下 || 带有spi注解     247个类
+
+采用方案一 extra 200 
+
+采用方案二 extra 560 
 
 
 
-
-
-
-
+​                                                                                                                                                                                                             
 
 ## 引用
 

@@ -2,7 +2,9 @@ package org.apache.dubbo.compiler;
 
 
 
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
@@ -16,6 +18,7 @@ import com.thoughtworks.qdox.model.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * //TODO add class commment here
@@ -61,18 +64,69 @@ public abstract class AbstractGenerator{
         Set<String> exportClasses = provideExportClasses();
         addExportClasses(exportClasses);
 
-        classGenerator = new ClassGenerator(this);
-        interfaceGenerator = new InterfaceGenerator(this);
+        // 如果不在extra也不在export那就添加到extra.
+        int size;
+        do {
+            this.extraExports.clear();
+            size = this.exportClasses.size();
+            for (String exportClass : this.exportClasses) {
+                try {
+                    String path = name2path.get(exportClass);
+                    if (path == null) {
+                        continue;
+                    }
 
-        dealExportClasses();
+                    CompilationUnit cu = StaticJavaParser.parse(new File(path));
+                    for (ImportDeclaration anImport : cu.getImports()) {
+                        String packageName = anImport.getNameAsString();
+                        String[] strs = packageName.split("\\.");
+                        if (startsWithDigitOrUpper(strs[strs.length - 2])) {
+                            continue;
+                        }
+                        if (!this.extraExports.contains(packageName) && !this.exportClasses.contains(packageName) && packageName.startsWith("org.apache.dubbo")) {
+                            this.extraExports.add(packageName);
+                        }
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+            this.exportClasses.addAll(this.extraExports);
+        } while (size != this.exportClasses.size());
 
-        // 额外暴露和直接暴露都应该被记录，将来做过滤。
-        dealExtraExport();
+        this.extraExports.clear();
+        for (String exportClass : this.exportClasses) {
+            String path = name2path.get(exportClass);
+            if (path == null) {
+                this.extraExports.add(exportClass);
+            }
+        }
 
-        saveDirectExportInfo();
+        this.exportClasses.removeAll(extraExports);
 
-        System.out.println(this.extraExports.size());
+        System.out.println(this.exportClasses.size());
+
+
+//        classGenerator = new ClassGenerator(this);
+//        interfaceGenerator = new InterfaceGenerator(this);
+//
+//        dealExportClasses();
+//
+//        // 额外暴露和直接暴露都应该被记录，将来做过滤。
+//        dealExtraExport();
+//
+//        saveDirectExportInfo();
+//
+//        System.out.println(this.extraExports.size());
     }
+
+    boolean startsWithDigitOrUpper(String s) {
+        return Pattern.compile("^[A-Z]").matcher(s).find();
+    }
+
+
+
+
 
     protected abstract Set<String> provideExportClasses();
     protected abstract Set<String> provideExportPackages();

@@ -3,6 +3,8 @@ package org.apache.dubbo.compiler;
 import java.io.*;
 import java.lang.reflect.Parameter;
 import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * //TODO add class commment here
@@ -11,6 +13,46 @@ import java.nio.charset.StandardCharsets;
  * @Date 2022/8/23 下午3:53
  */
 public class FileUtils {
+
+    public static void copyFile(String source,String target) {
+        File sourceFile = new File(source);
+        File targetFile = new File(target);
+
+        if (!sourceFile.exists()) {
+            // todo
+        }
+
+        if (!targetFile.exists()) {
+            try {
+                targetFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            InputStream is = new FileInputStream(sourceFile);
+            OutputStream output = new FileOutputStream(targetFile);
+
+            transfer(is,output);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void transfer(InputStream is,OutputStream output) throws IOException {
+        int read;
+        byte[] buffer = new byte[1 << 10];
+        while ((read = is.read(buffer)) >= 0) {
+            output.write(buffer,0,read);
+        }
+    }
+
+
 
     public static void saveContent(String content,String path) {
         Writer writer = null;
@@ -32,6 +74,36 @@ public class FileUtils {
                 }
             }
         }
+    }
+
+    public static Set<String> readConfig(String configPath) {
+        Set<String> configSet = new HashSet<>();
+
+        File file = new File(configPath);
+
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String config;
+            while ((config = bufferedReader.readLine()) != null) {
+                // 为什么当初要判断是否在包内来着？
+                configSet.add(config);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fileReader != null) {
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return configSet;
     }
 
 
@@ -80,5 +152,4 @@ public class FileUtils {
             }
         }
     }
-
 }
