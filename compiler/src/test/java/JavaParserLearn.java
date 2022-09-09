@@ -5,6 +5,8 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.CastExpr;
 import com.github.javaparser.ast.expr.MethodCallExpr;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.resolution.types.ResolvedType;
 import com.github.javaparser.symbolsolver.JavaSymbolSolver;
 import com.github.javaparser.symbolsolver.model.resolution.TypeSolver;
@@ -18,7 +20,9 @@ import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * //TODO add class commment here
@@ -142,10 +146,24 @@ public class JavaParserLearn {
         }
     }
 
+
+
+    @Test
+    public void min() {
+        String ste = "fsdfdsfdsf";
+        ste = ste.substring(0,4);
+        Re(ste);
+        System.out.println(ste);
+    }
+
+    public void Re(String str) {
+        str = str.substring(0,3);
+    }
+
     @Test
     public void importTest() {
         String src = group("/home/wfh/tem/dubbo");
-        String path = "/home/wfh/tem/dubbo/dubbo-config/dubbo-config-api/src/main/java/org/apache/dubbo/config/ReferenceConfig.java";
+        String path = "/home/wfh/tem/dubboTem/dubbo-common/src/main/java/org/apache/dubbo/config/ApplicationConfig.java";
         TypeSolver solver = new JavaParserTypeSolver(src);
         TypeSolver typeSolver = new ReflectionTypeSolver();
         TypeSolver combine = new CombinedTypeSolver(solver,typeSolver);
@@ -160,28 +178,39 @@ public class JavaParserLearn {
             e.printStackTrace();
         }
 
-        cu.findAll(MethodCallExpr.class).stream().forEach(mc -> {
-            // 首先获取调用的类。 org.apache.dubbo.common.logger.LoggerFactory.getErrorTypeAwareLogger
-            String callMethod  = mc.resolve().getQualifiedName();
+        cu.findAll(MethodDeclaration.class).forEach(md -> {
+            Type type = md.getType().getElementType();
+            type.resolve();
 
-            // 判断这个类的调用的这个方法是不是暴露的
-            String sig = mc.resolve().getSignature();
-
-            // 如果是的话，做出做强制类型转换
+            System.out.println(md.getType().resolve().describe());
         });
 
+//   todo     cu.findAll(FieldDeclaration.class).forEach(fd -> {
+//            System.out.println(fd.getElementType().resolve().describe());
+//        });
 
-        cu.findAll(FieldDeclaration.class).stream().forEach(fd -> {
-            fd.remove();
-        });
-
-        // 对于method要完成这些东西，含有dubbo的要能辨别出来。
-        cu.findAll(MethodDeclaration.class).stream().forEach(md -> {
-            if (md.isPrivate()) {
-                md.remove();
-            }
-            md.removeBody();
-        });
+//        cu.findAll(MethodCallExpr.class).stream().forEach(mc -> {
+//            // 首先获取调用的类。 org.apache.dubbo.common.logger.LoggerFactory.getErrorTypeAwareLogger
+//            String callMethod  = mc.resolve().getQualifiedName();
+//
+//            // 判断这个类的调用的这个方法是不是暴露的
+//            String sig = mc.resolve().getSignature();
+//
+//            // 如果是的话，做出做强制类型转换
+//        });
+//
+//
+//        cu.findAll(FieldDeclaration.class).stream().forEach(fd -> {
+//            fd.remove();
+//        });
+//
+//        // 对于method要完成这些东西，含有dubbo的要能辨别出来。
+//        cu.findAll(MethodDeclaration.class).stream().forEach(md -> {
+//            if (md.isPrivate()) {
+//                md.remove();
+//            }
+//            md.removeBody();
+//        });
     }
 }
 //  todo the most nice               System.out.println(md.getType().resolve().describe());
