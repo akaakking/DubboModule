@@ -41,7 +41,6 @@ public class SourthCodeChanger {
         this.constructorDeclarations = new LinkedList<>();
         this.javaConstructors = new LinkedList<>();
         this.generator = generator;
-        this.name2path = generator.getName2path();
     }
 
     public void setNewClass(ClassOrInterfaceDeclaration newClass) {

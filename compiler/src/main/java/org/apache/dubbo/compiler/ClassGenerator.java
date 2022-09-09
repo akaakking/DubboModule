@@ -313,7 +313,6 @@ public class ClassGenerator {
             createDir(javaClass);
             this.existsDirs.add(javaClass.getPackageName());
         }
-
     }
 
 

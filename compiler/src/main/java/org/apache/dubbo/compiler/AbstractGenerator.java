@@ -2,9 +2,7 @@ package org.apache.dubbo.compiler;
 
 
 
-import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
@@ -26,7 +24,7 @@ import java.util.regex.Pattern;
  * @Author wfh
  * @Date 2022/8/16 下午2:56
  */
-public abstract class AbstractGenerator{
+public abstract class AbstractGenerator {
     protected final static JavaProjectBuilder jpb = new JavaProjectBuilder();
 
     protected String sourthCodePath;
@@ -42,7 +40,6 @@ public abstract class AbstractGenerator{
     protected final Set<String> exportClasses = new HashSet<>();
     private final Set<String> extraExports = new HashSet<>();
     private final Set<File> sourceFile = new HashSet<>();
-    private final Map<String,String> name2path = new HashMap<>();
     protected final Set<String> directExportclasses = new HashSet<>();
     protected final List<String> importList = new ArrayList<>();
     protected InterfaceGenerator interfaceGenerator;
@@ -64,49 +61,6 @@ public abstract class AbstractGenerator{
         Set<String> exportClasses = provideExportClasses();
         addExportClasses(exportClasses);
 
-        // 如果不在extra也不在export那就添加到extra.
-        int size;
-        do {
-            this.extraExports.clear();
-            size = this.exportClasses.size();
-            for (String exportClass : this.exportClasses) {
-                try {
-                    String path = name2path.get(exportClass);
-                    if (path == null) {
-                        continue;
-                    }
-
-                    CompilationUnit cu = StaticJavaParser.parse(new File(path));
-                    for (ImportDeclaration anImport : cu.getImports()) {
-                        String packageName = anImport.getNameAsString();
-                        String[] strs = packageName.split("\\.");
-                        if (startsWithDigitOrUpper(strs[strs.length - 2])) {
-                            continue;
-                        }
-                        if (!this.extraExports.contains(packageName) && !this.exportClasses.contains(packageName) && packageName.startsWith("org.apache.dubbo")) {
-                            this.extraExports.add(packageName);
-                        }
-                    }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-            this.exportClasses.addAll(this.extraExports);
-        } while (size != this.exportClasses.size());
-
-        this.extraExports.clear();
-        for (String exportClass : this.exportClasses) {
-            String path = name2path.get(exportClass);
-            if (path == null) {
-                this.extraExports.add(exportClass);
-            }
-        }
-
-        this.exportClasses.removeAll(extraExports);
-
-        System.out.println(this.exportClasses.size());
-
-
 //        classGenerator = new ClassGenerator(this);
 //        interfaceGenerator = new InterfaceGenerator(this);
 //
@@ -119,14 +73,6 @@ public abstract class AbstractGenerator{
 //
 //        System.out.println(this.extraExports.size());
     }
-
-    boolean startsWithDigitOrUpper(String s) {
-        return Pattern.compile("^[A-Z]").matcher(s).find();
-    }
-
-
-
-
 
     protected abstract Set<String> provideExportClasses();
     protected abstract Set<String> provideExportPackages();
@@ -170,21 +116,11 @@ public abstract class AbstractGenerator{
         this.importList.clear();
     }
 
-    public Map<String, String> getName2path() {
-        return name2path;
-    }
-
     public SourthCodeChanger getSourthCodeChanger() {
         return sourthCodeChanger;
     }
 
-
-
-    private void dealExportClasses() {
-        if (exportClasses == null) {
-            return;
-        }
-
+    protected void dealExportClasses() {
         for (String exportClass : exportClasses) {
             JavaClass javaClass = jpb.getClassByName(exportClass);
             dealJavaClass(javaClass);
@@ -198,9 +134,11 @@ public abstract class AbstractGenerator{
         }
     }
 
+    boolean startsWithDigitOrUpper(String s) {
+        return Pattern.compile("^[A-Z]").matcher(s).find();
+    }
 
-    // todo xiangyinggaibian
-    private void dealExtraExport() {
+    protected void dealExtraExport() {
         Set<String> s1;
         Set<String> s2 = new HashSet<>();
 
@@ -510,11 +448,11 @@ public abstract class AbstractGenerator{
                 || "double".equals( name );
     }
 
-    private void saveExtraExportInfo() {
+    protected void saveExtraExportInfo() {
         saveSet(this.extraExports,this.extraExportInfoPath);
     }
 
-    private void saveDirectExportInfo() {
+    protected void saveDirectExportInfo() {
         saveSet(this.directExportclasses,this.directExportClassPath);
     }
 
@@ -534,13 +472,11 @@ public abstract class AbstractGenerator{
         return false;
     }
 
-
-
     // 要放在外边
     protected void directExport(JavaClass javaClass) {
         this.classGenerator.checkDirExists(javaClass);
-        String path = this.name2path.get(javaClass.getBinaryName());
-        File file = new File(path);
+        String path = javaClass.getSource().getURL().getPath();
+        File file  = new File(path);
         File outFile = new File(this.classOutPutDir + javaClass.getFullyQualifiedName().replaceAll("\\.", "/") + ".java");
 
         try {
@@ -579,28 +515,11 @@ public abstract class AbstractGenerator{
         }
     }
 
-    private void transfer(InputStream is, OutputStream out) throws IOException {
+    protected void transfer(InputStream is, OutputStream out) throws IOException {
         int read;
         byte[] buffer = new byte[1 << 13];
         while ((read = is.read(buffer)) >= 0) {
             out.write(buffer,0,read);
-        }
-    }
-
-    private void initNamePathMap() {
-        for (File file : sourceFile) {
-            memory(file);
-        }
-    }
-
-    private void memory(File file) {
-        if (file.isFile()) {
-            name2path.put(getPackageName(file),file.getAbsolutePath());
-            return;
-        }
-
-        for (File f : file.listFiles()) {
-            memory(f);
         }
     }
 
@@ -697,7 +616,7 @@ public abstract class AbstractGenerator{
     }
 
     // 求出最小非负
-    private int min(int... nums) {
+    protected int min(int... nums) {
         int min = Integer.MAX_VALUE;
         for (int i = 0; i<nums.length; i++) {
             if (nums[i] >= 0  && nums[i] < min) {
@@ -708,7 +627,7 @@ public abstract class AbstractGenerator{
         return min;
     }
 
-    private void addExportPackages(Set<String> exportPackages) {
+    protected void addExportPackages(Set<String> exportPackages) {
         for (String exportPackage : exportPackages) {
             JavaPackage javaPackage = jpb.getPackageByName(exportPackage);
 
@@ -720,18 +639,14 @@ public abstract class AbstractGenerator{
         }
     }
 
-    private void addExportClasses(Set<String> exportClasses) {
+    protected void addExportClasses(Set<String> exportClasses) {
         if (exportClasses == null) {
             return;
         }
         this.exportClasses.addAll(exportClasses);
     }
 
-    private String getPackageName(File file) {
-        String fileName = file.getAbsolutePath();
-        return fileName.substring(fileName.lastIndexOf("java/") + "java/".length(),fileName.lastIndexOf(".java"))
-                .replaceAll("/",".");
-    }
+
 
     public Set<String> getExportClasses() {
         return exportClasses;
@@ -743,15 +658,14 @@ public abstract class AbstractGenerator{
 
 
 
-    private void initEnvirenment() {
+    protected void initEnvirenment() {
         copySourceCode();
         initJavaProjectBuilder();
-        initNamePathMap();
         initEIASet();
     }
 
     // sourthcodepath outputbasepath
-    private void copySourceCode() {
+    protected void copySourceCode() {
         try {
             FileUtils.copyFolder(this.sourthCodePath,this.outputBaseDir);
         } catch (Exception e) {
@@ -759,7 +673,7 @@ public abstract class AbstractGenerator{
         }
     }
 
-    private void initEIASet() {
+    protected void initEIASet() {
         for (JavaClass aClass : jpb.getClasses()) {
             if (aClass.isEnum() || aClass.isInterface() || aClass.isAnnotation()) {
                 this.EIASet.add(aClass.getFullyQualifiedName());
@@ -769,14 +683,14 @@ public abstract class AbstractGenerator{
 
 // 倒是可以作为一个算法题写一写
 
-    private void initJavaProjectBuilder() {
+    protected void initJavaProjectBuilder() {
         inOrNot(new File(this.outputBaseDir));
         for (File file : sourceFile) {
             jpb.addSourceTree(file);
         }
     }
 
-    private void inOrNot(File file) {
+    protected void inOrNot(File file) {
         // 过滤一部分
         if (file.isFile() || file.getName().equals("dubbo-compiler")) {
             return;
@@ -798,3 +712,4 @@ public abstract class AbstractGenerator{
 }
 
 //FileSystemServiceDiscovery.java
+

@@ -22,7 +22,6 @@ public class InterfaceGenerator {
     public InterfaceGenerator(AbstractGenerator generator) {
         this.generator = generator;
         createInterfaceDir();
-
     }
 
     CompilationUnit generateInterface(JavaClass javaClass) {

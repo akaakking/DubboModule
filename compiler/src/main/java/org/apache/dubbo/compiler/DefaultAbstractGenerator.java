@@ -45,7 +45,7 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
 
     @Override
     protected void dealInnerClass(JavaClass javaClass) {
-        // TODO
+        directExport(javaClass);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
     // 4. 间接直接暴露的Interface
     @Override
     protected void dealPublicInterface(JavaClass javaClass) {
-        String classPath = getName2path().get(javaClass.getFullyQualifiedName());
+        String classPath = javaClass.getSource().getURL().getPath();
         CompilationUnit cu;
         try {
             cu = StaticJavaParser.parse(new File(classPath));
