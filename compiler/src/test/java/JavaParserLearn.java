@@ -165,6 +165,7 @@ public class JavaParserLearn {
         String src = group("/home/wfh/tem/dubbo");
         String path = "/home/wfh/tem/dubboTem/dubbo-common/src/main/java/org/apache/dubbo/config/ApplicationConfig.java";
         TypeSolver solver = new JavaParserTypeSolver(src);
+        TypeSolver typeSolvers = new CombinedTypeSolver();
         TypeSolver typeSolver = new ReflectionTypeSolver();
         TypeSolver combine = new CombinedTypeSolver(solver,typeSolver);
 

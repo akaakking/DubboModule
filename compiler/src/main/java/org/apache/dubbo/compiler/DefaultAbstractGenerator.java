@@ -26,16 +26,17 @@ public class DefaultAbstractGenerator extends AbstractGenerator {
     // 提供不方便用包表示的javaclasses
     @Override
     protected Set<String> provideExportClasses() {
-        Set<String> classNames = new HashSet<>();
-        for (JavaClass aClass : jpb.getClasses()) {
-            if (aClass.isInterface()) {
-                if (isSPIExtensionPoint(aClass)) {
-                    classNames.add(aClass.getBinaryName());
-                }
-            }
-        }
-
-        return classNames;
+        return null;
+//        Set<String> classNames = new HashSet<>();
+//        for (JavaClass aClass : jpb.getClasses()) {
+//            if (aClass.isInterface()) {
+//                if (isSPIExtensionPoint(aClass)) {
+//                    classNames.add(aClass.getBinaryName());
+//                }
+//            }
+//        }
+//
+//        return classNames;
     }
 
     @Override

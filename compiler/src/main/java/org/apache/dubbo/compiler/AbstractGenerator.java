@@ -16,6 +16,7 @@ import com.thoughtworks.qdox.model.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Pattern;
 
 /**
@@ -622,7 +623,7 @@ public abstract class AbstractGenerator {
             if (nums[i] >= 0  && nums[i] < min) {
                 min = nums[i];
             }
-        }
+        };
 
         return min;
     }
@@ -632,7 +633,8 @@ public abstract class AbstractGenerator {
             JavaPackage javaPackage = jpb.getPackageByName(exportPackage);
 
             if (javaPackage != null) {
-                for (JavaClass aClass : javaPackage.getClasses()) {
+                for (JavaClass aClass : new HashSet<>(javaPackage.getClasses())) {
+
                     this.exportClasses.add(aClass.getBinaryName());
                 }
             }
